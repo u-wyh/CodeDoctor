@@ -1013,3 +1013,171 @@ Phase 1-4 基线 commit 成功。第一次 push 在 GnuTLS 握手处异常终止
 - 研究 repair test augmentation/selection，重点增加不同执行路径和 PASS 对照，直接缩小 coverage equivalence classes。
 - 为 non-executable textual diff fault 设计预注册的 executable-neighbor 映射，并与严格行匹配并列报告，不能按成绩事后选择。
 - 在进入 LLM Repair 前，将 fault candidate 接口设计为保留 line score、branch score、tie interval 和 equivalence-class context，而不是只返回确定性的单行排名。
+
+## 2026-08-15 - Phase 6: Independent Fault Localization Evaluation
+
+### 1. 本次目标
+
+- 在选择独立 Evaluation Set 前冻结 Phase 5 方法为 `fl-v1`，禁止使用 Evaluation 结果调参。
+- 从未进入 50-case Pilot 的 Codeflaws valid cases 中，以固定种子 `20260816` 分层选择并动态验证 300 个独立 case。
+- 只比较 Original line-level Ochiai 与冻结的 branch-aware FL-v1，完成 tie-aware、paired、bootstrap、McNemar、子组、coverage equivalence、0-PASS、non-executable fault、straight-line ambiguity 和 leakage 分析。
+- 生成结构化结果、至少 6 个源码级案例研究和独立评估报告，并运行全部旧测试。
+
+### 2. 实际完成内容
+
+- 在选择 Evaluation Set 前创建 `benchmark/metadata/fl_method_v1.json`，记录公式、branch max aggregation、lexicographic ranking、tie 规则、允许/禁止输入及 9 个核心实现文件的 SHA-256；运行时和测试均会验证冻结哈希。
+- 使用 seed `20260816` 在排除 Pilot 后按 39 个 defect class 轮转抽样。静态排除 20 个无测试 case；动态验证 322 个候选，得到 300 个合格 case，与 Pilot overlap 为 0。
+- 每个候选重新验证 buggy/reference 编译、reference repair/validation tests、buggy 至少一个 failing repair test。动态排除 22 个：reference repair test 失败 14、reference validation test 失败 4、buggy repair tests 全通过 4；42 条静态/动态排除均保留原因。
+- 在 LXD 内的真实 Docker 环境对 300 个 Evaluation case 完成 line/branch coverage 采集和 FL-v1 排名：300/300 localizable、0 coverage error。只保存 `ochiai` 与 `ochiai_branch_tiebreak` 两种排名，所有 ranking artifact 标记 `method_version=fl-v1`。
+- ground truth 在排名生成后单独写入 evaluation-only 文件。扫描 600 份 localization artifacts，没有发现 reference、validation、heldout、ground truth 或 fault line 字段泄漏。
+- 实现标准库配对 case-level bootstrap（10,000 samples，seed `20260816`）、精确双侧 McNemar、paired change counts 和预先固定边界的四类子组分析。
+- 生成 `evaluation.json` 和独立实验报告。报告包含完整指标、绝对/相对提升、置信区间、Top-K 显著性、tie/equivalence 机制、失败边界、RQ1-RQ4，以及 2 个改善、2 个不变、2 个回退的源码级案例。
+- 复用原 300 份 coverage 重新生成全部排名；重建前后 coverage/ranking 组合 SHA-256 均为 `5966489c561b72306d48cbd2943df092757d7e298f80c32d14d08faff1be42aa`。
+- 逐例 coverage/ranking 共约 12MB，因可由脚本重建而保持 Git ignore；提交范围只包含 581KB 汇总 JSON、ground truth 元数据、报告、代码和测试，不包含 Codeflaws raw/archive。
+
+### 3. 新增、修改、删除的文件
+
+新增：
+
+- `benchmark/metadata/fl_method_v1.json`
+- `benchmark/datasets/codeflaws/metadata/fl_evaluation.jsonl`
+- `benchmark/datasets/codeflaws/metadata/fl_evaluation_excluded.jsonl`
+- `benchmark/datasets/codeflaws/metadata/fl_evaluation_results.jsonl`
+- `benchmark/datasets/codeflaws/metadata/fl_evaluation_summary.json`
+- `benchmark/metadata/fl_evaluation_ground_truth.jsonl`
+- `benchmark/evaluation_set.py`
+- `benchmark/scripts/build_fl_evaluation_set.py`
+- `benchmark/scripts/run_fault_localization_evaluation.py`
+- `benchmark/scripts/generate_independent_fault_localization_report.py`
+- `benchmark/results/fault_localization_independent/evaluation.json`
+- `benchmark/reports/fault_localization_independent_evaluation.md`
+- `benchmark/tests/test_evaluation_set.py`
+- `fault_localization/method_freeze.py`
+- `fault_localization/statistics.py`
+- `fault_localization/independent_evaluation.py`
+- `fault_localization/independent_reporting.py`
+- `fault_localization/tests/test_evaluation_runner.py`
+- `fault_localization/tests/test_independent_evaluation.py`
+- `fault_localization/tests/test_statistics.py`
+
+修改：
+
+- `.gitignore`
+- `benchmark/config.py`
+- `fault_localization/tests/test_method_freeze.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+本地生成但忽略：
+
+- `benchmark/results/fault_localization_independent/coverage/*.json`（300 份）
+- `benchmark/results/fault_localization_independent/rankings/*.json`（300 份）
+
+### 4. 执行过的重要命令
+
+```bash
+git status
+git log --oneline -5
+git remote -v
+git push -u origin main
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- docker info --format '{{.ServerVersion}}'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/build_fl_evaluation_set.py'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_fault_localization_evaluation.py --force'
+python3 benchmark/scripts/generate_independent_fault_localization_report.py
+
+python3 -m unittest fault_localization.tests.test_statistics fault_localization.tests.test_independent_evaluation -v
+python3 -m unittest discover -v
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_fault_localization_evaluation.py --reuse-coverage'
+
+find benchmark/results/fault_localization_independent/coverage benchmark/results/fault_localization_independent/rankings -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum
+git check-ignore -v benchmark/datasets/codeflaws/downloads/codeflaws.tar.gz benchmark/datasets/codeflaws/raw/codeflaws/674-E-bug-17842470-17842486.tar.gz benchmark/results/fault_localization_independent/coverage/490-C-bug-9623374-9623441.json benchmark/results/fault_localization_independent/rankings/490-C-bug-9623374-9623441.json
+git diff --check
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行了内联 Python 审计：验证 300 coverage、300 ranking、300 ground truth 数量一致；Evaluation/Pilot 无重叠；所有 ranking 只含两个预注册方法且版本为 `fl-v1`；300 个 reference repair/validation 均通过且 buggy repair 至少一项失败；抽样顺序与固定 seed 的分层候选顺序一致。
+
+### 5. 实际测试与实验结果
+
+- Evaluation 动态资格验证首次完整运行耗时 542.967 秒；322 个候选中 300 个入选、22 个动态排除。后续 resume 审计没有重复执行已记录 case。
+- 300-case FL 强制重采集：300 case、1,194 repair tests、708 PASS、486 FAIL、0 coverage error。复用 coverage 的 300-case 重建耗时 0.935 秒且 artifact 哈希完全一致。
+- 新增统计/边界单元测试最终 7/7 PASS；方法冻结、split、eligibility、runner、paired metrics、bootstrap、McNemar、subgroup、non-executable ground truth 和 leakage 均有测试覆盖。
+- 宿主 `python3 -m unittest discover -v` 共运行 75 项：56 PASS、17 FAIL、2 SKIP。17 个失败与 2 个 skip 都来自宿主没有 Docker CLI/daemon；同一完整测试集随后在 LXD Docker 环境实际运行，75/75 PASS，耗时 12.151 秒，无 skip。
+- Original Ochiai deterministic：Top-1/3/5/10 为 37/91/132/206，即 12.33%/30.33%/44.00%/68.67%，MRR `0.2773`。
+- Branch-aware FL-v1 deterministic：Top-1/3/5/10 为 55/120/157/217，即 18.33%/40.00%/52.33%/72.33%，MRR `0.3475`。
+- Average-rank MRR 从 `0.2552` 提高到 `0.3456`，差值 `+0.0904`；pessimistic MRR 从 `0.1880` 提高到 `0.3004`。
+- deterministic MRR paired bootstrap difference `+0.0702`，95% CI `[+0.0432, +0.0986]`；average-rank MRR difference `+0.0904`，95% CI `[+0.0671, +0.1156]`。
+- exact McNemar：Top-1 `p=0.000277`、Top-3 `p=0.000204`、Top-5 `p=0.001264`；Top-10 `p=0.117275`，后者没有达到常用 0.05 阈值。
+- primary average-rank reciprocal outcome：99 case 改善、79 不变、122 回退。deterministic reciprocal outcome：84 改善、140 不变、76 回退。总体均值提升来自部分大幅改善，不能解释为每个 case 都受益。
+- top-score tie cases 从 231 降到 157；fault-tie cases 从 256 降到 205；平均最大 tie size 从 15.87 降到 11.84；平均 fault tie size 从 12.05 降到 6.44。
+- 6,531 个 executable line records 只有 959 个 unique coverage vectors，coverage equivalence ratio 为 85.32%；625 个原始 tie groups 中 510 个完全属于单一 line-coverage class。
+- 52/300 case 为 0-PASS：average-rank MRR 增益仅 `+0.0310`，8/10/34 改善/不变/回退；有 PASS 的 248 case 增益 `+0.1028`，91/69/88 改善/不变/回退。
+- 20/300（6.67%）case 的 ground-truth fault 完全不可执行；205/300（68.33%）存在最终 straight-line ambiguity。
+- 最大子组增益出现在 fault equivalence class size 6-10（`+0.1503`）和 medium coverage diversity（`+0.1231`）。这些边界在运行前固定，仅用于解释，没有反向修改 `fl-v1`。
+- leakage scan PASS；敏感信息扫描无匹配；raw/archive、coverage/ranking 中间产物均被 `.gitignore` 命中；Docker 无 `codedoctor-*` 残留容器，LXD 最终为 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 Evaluation summary 的静态排除数被 list alias 污染
+
+首次动态选择后，`excluded = static_excluded` 使后续追加动态排除时同时修改了静态列表，summary 一度把 static exclusions 错写为 42；逐例 selection/exclusion records 本身正确。
+
+#### 6.2 首次完整性审计错误地把静态无效候选纳入顺序
+
+审计脚本直接重算全部非 Pilot 候选，未先应用 `validate_case` 的静态过滤，因此第一次顺序断言失败。
+
+#### 6.3 non-executable/straight-line 单元测试夹具字段不完整
+
+新增测试第一次构造 `RankedLine` 时遗漏 `ef/ep/nf/np/source_snippet`，测试报 `TypeError`。
+
+#### 6.4 宿主环境不能运行 Docker 集成测试
+
+宿主全量测试中的 Runner/Sanitizer 用例返回 `internal_error`，collector integration 被 skip，因为 Docker daemon 只在专用 LXD 内可用。
+
+#### 6.5 第一次 LXD 全量测试使用了错误目录
+
+命令进入 `/workspace` 后 unittest 发现 0 项并以 exit code 5 退出；实际仓库挂载点是 `/workspace/CodeDoctor`。
+
+#### 6.6 独立结果不是逐例统一改善
+
+average-rank 口径下回退 case（122）多于改善 case（99），尤其 0-PASS 和大于 10 行的 fault equivalence class 中回退较多。这是实际实验结果，不是实现错误。
+
+### 7. 问题的解决方式
+
+- 将 `excluded` 改为 `list(static_excluded)`，以已保存 results resume 后重新生成 summary，恢复 static=20、dynamic=22；未改变已选 300 case。
+- 完整性审计先按生产代码相同的 `validate_case` 规则过滤静态无效项，再验证固定 seed、分层顺序、300 个资格条件和 Pilot overlap，最终通过。
+- 为测试夹具补齐 `RankedLine` 全部必填字段后重跑，新增 7 项统计/边界测试全部通过。
+- 保留宿主失败记录，并在 Docker 29.1.3 正常运行的 LXD 中执行同一完整 discovery，75/75 全部通过。
+- 将工作目录改为 `/workspace/CodeDoctor` 后重跑；0-test 命令不计为测试通过。
+- 没有按 Evaluation 结果修改 branch aggregation、ranking 或任何算法。报告同时保留 paired 回退数量、0-PASS 弱表现、回退案例和置信区间。
+
+### 8. 设计取舍
+
+- `fl-v1` 冻结元数据先于 Evaluation split 提交；Evaluation runner 调用原 `localize` 实现并只筛出两个预注册方法，不复制或改写核心算法。
+- 逐例 coverage/ranking 是可复现中间产物，不进入 Git；结构化 aggregate 和 ground truth 元数据进入 Git，支持论文数字审计且控制仓库体积。
+- primary paired outcome 使用 tie-aware average-rank reciprocal rank，减少 deterministic line-number 顺序造成的偶然收益；同时完整保留 deterministic 与 pessimistic 指标。
+- bootstrap 对 case pair 重采样而不是分别重采样两个方法，保留同一 case 的配对结构；McNemar 只使用 discordant Top-K pair 并实现 exact binomial two-sided p-value。
+- 子组边界在读取结果前固定，只有 repair test 数、PASS 有无、coverage diversity 和 fault equivalence class size 四个机制相关维度，没有按成绩添加分组。
+- straight-line ambiguity 采用严格可复现定义：可执行 fault 在最终 branch-aware tie 中仍有非 fault line，且两者 line coverage vector 相同。它量化当前证据边界，不声称完成语义等价证明。
+
+### 9. 当前已知不足
+
+- 结论仍限于 Codeflaws、GCC/gcov 12.2、现有 repair tests 和一次固定 300-case split；尚未跨数据集或跨编译器复验。
+- 52 个 0-PASS case 缺少成功路径对照，branch-aware 平均增益明显较小且逐例回退更多。
+- 20 个 non-executable textual diff fault 无法进入 line/branch ranking；205 个 case 仍存在 straight-line ambiguity。
+- branch evidence 是相关性证据而非因果/语义证据，可能优先提升非 fault 控制行；122 个 average-rank 回退 case 必须在使用端保留不确定性。
+- Top-10 的 paired improvement 在本样本上不显著；不能把 Top-1/3/5 结论外推到所有 K。
+- `fl_evaluation_summary.json` 的 `elapsed_seconds_this_run` 表示最近一次 resume 调用，resume 无待处理候选时为 0，未累计首次动态验证的 542.967 秒；完整耗时保留在本日志。
+- 逐例 coverage/ranking 未提交，需要原 Codeflaws raw 数据、LXD Docker 环境和 sandbox image 才能从脚本重建。
+
+### 10. 下一步计划
+
+- 下一阶段优先研究 repair-test augmentation/selection，重点为 0-PASS case 增加成功路径对照并提升 coverage/branch diversity；必须使用新的开发 split，不能再用本 Evaluation Set 调参。
+- 预注册 executable-neighbor ground-truth 辅助口径，单独处理 non-executable diff line，同时继续保留严格原始行指标。
+- 在另一数据集或编译器版本复现实验，验证 `fl-v1` 的外部有效性以及 gcov branch mapping 的稳定性。
+- 后续接口应输出候选列表、line/branch score、tie interval、equivalence class 和不确定性，而不是把 branch-aware rank 1 当作确定诊断。
+- 本轮不开始 LLM Repair、Agent、RAG、AST/CFG、Sanitizer 新功能或参数调优。
