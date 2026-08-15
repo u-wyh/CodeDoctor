@@ -193,9 +193,16 @@ def main() -> int:
         "dynamic_exclusions": sum(dynamic_reasons.values()),
         "elapsed_seconds_this_run": round(elapsed, 3),
         "fl_evaluation_overlap": len(selected_ids & evaluation_ids),
+        "fl_performance_filtering": False,
         "fl_pilot_overlap": len(selected_ids & pilot_ids),
         "repair_pilot_size": len(selected),
         "seed": args.seed,
+        "selection_inputs": [
+            "static benchmark validity",
+            "reference compile and repair/validation success",
+            "buggy compile and at least one failing repair test",
+            "disjointness from FL Pilot and FL Evaluation",
+        ],
         "static_exclusions": len(static_excluded),
         "target_size": args.target_size,
     }

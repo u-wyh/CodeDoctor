@@ -1,0 +1,67 @@
+{
+  "amendment": "Phase 7 Experimental Protocol Addendum",
+  "attempts_per_case_group": 1,
+  "bulk_online_guard": {
+    "explicit_confirmation_flag": "--confirm-bulk",
+    "maximum_unconfirmed_online_calls": 9,
+    "transport_retries": 0
+  },
+  "cache_key_fields": [
+    "case_id",
+    "group",
+    "prompt_hash",
+    "prompt_template_version",
+    "provider",
+    "base_url",
+    "model",
+    "temperature",
+    "max_tokens",
+    "timeout_seconds",
+    "seed"
+  ],
+  "common_repair_time_oracle": {
+    "identical_for_groups": [
+      "A",
+      "B",
+      "C"
+    ],
+    "source": "existing Codeflaws repair-test input and expected-output pairs",
+    "version": "codeflaws-repair-tests-v1"
+  },
+  "evidence_groups": {
+    "A": "buggy source plus common repair-time oracle",
+    "B": "A plus frozen FL-v1 Top-10 locations",
+    "C": "B plus runtime-only verdict, actual stdout/stderr, exit code, and timeout"
+  },
+  "fl_availability_rule": {
+    "inputs": "FL-v1 ranking only; no ground truth or reference data",
+    "no_reliable_message": "No reliable suspicious location is available from FL-v1.",
+    "reliable": "ranking is non-empty and maximum line suspiciousness is positive"
+  },
+  "fl_method_version": "fl-v1",
+  "fl_performance_may_filter_repair_pilot": false,
+  "fl_top_k": 10,
+  "frozen_implementation": {
+    "repair/context.py": "bb8730e0e5ac24b2c296fcf4fb8d985513fe5f7dae7170b702dc684cee837866",
+    "repair/evaluator.py": "bd5ccd2a3b51065a89d2f1ef6d6fcbfc918330830d14d950e6c358f99ffa79c0",
+    "repair/extraction.py": "a5227ee8045aed2bb621e2704b8d805fff5ade5339fdfede92da00f3adc5f368",
+    "repair/pipeline.py": "93336aa994bf9c468ff34d6c49dd1ce66826342e8d12e4e763b0313a8cedee24",
+    "repair/prompting.py": "816d8a5b4e13e4d13efcabf9ad15aaa272af5e8c3d15a3887fb94e6d326673e0",
+    "repair/provider.py": "4f1ad5dde9032b28219c6185eedc92d2a5bb74862423720b397eddec7944c552"
+  },
+  "generation_output": "complete source code",
+  "model_defaults": {
+    "max_tokens": 4096,
+    "seed": null,
+    "temperature": 0.0,
+    "timeout_seconds": 120.0
+  },
+  "patch_classification": {
+    "plausible_patch": "compile success and all repair tests pass",
+    "validated_patch": "plausible and all hidden validation tests pass"
+  },
+  "prompt_template_version": "repair-evidence-v2",
+  "protocol_version": "repair-v2",
+  "repair_pilot_seed": 20260817,
+  "source_commit": "898bb42b2a26fbb9e832f63c1727e77b319e9d78"
+}

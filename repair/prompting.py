@@ -5,7 +5,7 @@ import hashlib
 from .models import EvidenceGroup, PromptDocument, RepairContext
 
 
-PROMPT_TEMPLATE_VERSION = "repair-evidence-v1"
+PROMPT_TEMPLATE_VERSION = "repair-evidence-v2"
 SYSTEM_PROMPT = (
     "You repair buggy C or C++ programs. Return only the complete repaired source "
     "code. Do not return an explanation."
@@ -21,10 +21,29 @@ Requirements:
 ## Buggy source
 ```{language}
 {source}
-```"""
+```
+
+## Common repair-time oracle
+The following input/output examples are the same task-semantics information for every experiment group.
+{task_examples}"""
+
+
+def _task_examples(context: RepairContext) -> str:
+    sections = []
+    for item in context.task_examples:
+        sections.append(
+            f"### {item.test_id}\nInput:\n```text\n{item.input_text}\n```\n"
+            f"Expected output:\n```text\n{item.expected_output}\n```"
+        )
+    return "\n".join(sections)
 
 
 def _fl_section(context: RepairContext) -> str:
+    if not context.suspicious_locations:
+        return (
+            "## CodeDoctor FL-v1 suspicious locations\n"
+            "No reliable suspicious location is available from FL-v1."
+        )
     rows = []
     for item in context.suspicious_locations:
         tie = (
@@ -46,8 +65,6 @@ def _execution_section(context: RepairContext) -> str:
         sections.extend(
             (
                 f"### {item.test_id}: {item.verdict}",
-                f"Input:\n```text\n{item.input_text}\n```",
-                f"Expected output:\n```text\n{item.expected_output}\n```",
                 f"Actual stdout:\n```text\n{item.actual_stdout}\n```",
                 f"stderr:\n```text\n{item.stderr}\n```",
                 f"Exit code: {item.exit_code}; timed out: {str(item.timed_out).lower()}",
@@ -57,19 +74,22 @@ def _execution_section(context: RepairContext) -> str:
 
 
 def render_prompt(context: RepairContext, group: EvidenceGroup) -> PromptDocument:
+    if not context.task_examples:
+        raise ValueError("all groups require the common repair-time oracle")
     if group is EvidenceGroup.SOURCE_ONLY:
-        if context.suspicious_locations or context.execution_evidence:
+        if context.fl_status is not None or context.suspicious_locations or context.execution_evidence:
             raise ValueError("Group A context must contain source only")
     elif group is EvidenceGroup.SOURCE_FL:
-        if not context.suspicious_locations or context.execution_evidence:
+        if context.fl_status is None or context.execution_evidence:
             raise ValueError("Group B requires FL and forbids execution evidence")
     elif group is EvidenceGroup.SOURCE_FL_EXECUTION:
-        if not context.suspicious_locations or not context.execution_evidence:
+        if context.fl_status is None or not context.execution_evidence:
             raise ValueError("Group C requires FL and execution evidence")
 
     user = BASE_INSTRUCTION.format(
         language="cpp" if "++" in context.language else "c",
         source=context.buggy_source.rstrip(),
+        task_examples=_task_examples(context),
     )
     if group in {EvidenceGroup.SOURCE_FL, EvidenceGroup.SOURCE_FL_EXECUTION}:
         user += "\n\n" + _fl_section(context)

@@ -88,13 +88,19 @@ FAULT_LOCALIZATION_INDEPENDENT_REPORT = (
     CODEFLAWS_REPORT_ROOT / "fault_localization_independent_evaluation.md"
 )
 REPAIR_METADATA_ROOT = BENCHMARK_METADATA_ROOT / "repair"
-REPAIR_PROTOCOL = REPAIR_METADATA_ROOT / "repair_protocol_v1.json"
+REPAIR_PROTOCOL = REPAIR_METADATA_ROOT / "repair_protocol_v2.json"
 REPAIR_PILOT_FL = REPAIR_METADATA_ROOT / "repair_pilot_fl.jsonl"
 REPAIR_PILOT_ATTRIBUTES = REPAIR_METADATA_ROOT / "repair_pilot_attributes.jsonl"
 REPAIR_ARTIFACT_ROOT = BENCHMARK_ROOT / "artifacts" / "repair"
 REPAIR_RESULT_ROOT = BENCHMARK_ROOT / "results" / "repair"
 REPAIR_EVALUATION = REPAIR_RESULT_ROOT / "evidence_ablation.json"
 REPAIR_REPORT = CODEFLAWS_REPORT_ROOT / "llm_repair_evidence_ablation.md"
+REPAIR_PRE_EXPERIMENT_ESTIMATE = (
+    REPAIR_METADATA_ROOT / "pre_experiment_estimate.json"
+)
+REPAIR_PRE_EXPERIMENT_REPORT = (
+    CODEFLAWS_REPORT_ROOT / "llm_repair_pre_experiment.md"
+)
 
 PILOT_RANDOM_SEED = 20260815
 PILOT_TARGET_SIZE = 50

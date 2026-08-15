@@ -32,11 +32,16 @@ class SuspiciousLocation:
 
 
 @dataclass(frozen=True)
+class TaskExample:
+    test_id: str
+    input_text: str
+    expected_output: str
+
+
+@dataclass(frozen=True)
 class RepairTestEvidence:
     test_id: str
     verdict: str
-    input_text: str
-    expected_output: str
     actual_stdout: str
     stderr: str
     exit_code: int | None
@@ -50,6 +55,8 @@ class RepairContext:
     case_id: str
     language: str
     buggy_source: str
+    task_examples: tuple[TaskExample, ...]
+    fl_status: str | None = None
     suspicious_locations: tuple[SuspiciousLocation, ...] = ()
     execution_evidence: tuple[RepairTestEvidence, ...] = ()
 

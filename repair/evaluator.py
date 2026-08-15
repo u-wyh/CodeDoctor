@@ -189,26 +189,10 @@ def repair_execution_evidence(
     evidence = []
     for test in case.tests.repair_tests:
         result = by_id[test.test_id]
-        input_text = (
-            _project_path(test.input_path).read_text(
-                encoding="utf-8", errors="replace"
-            )
-            if test.input_path
-            else ""
-        )
-        expected = (
-            _project_path(test.expected_output_path).read_text(
-                encoding="utf-8", errors="replace"
-            )
-            if test.expected_output_path
-            else ""
-        )
         evidence.append(
             RepairTestEvidence(
                 test_id=test.test_id,
                 verdict="PASS" if result.passed else "FAIL",
-                input_text=input_text,
-                expected_output=expected,
                 actual_stdout=result.stdout,
                 stderr=result.stderr,
                 exit_code=result.exit_code,

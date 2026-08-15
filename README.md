@@ -130,7 +130,7 @@ python3 -m benchmark.scripts.run_fault_localization_pilot --reuse-coverage
 
 ## LLM Repair Evidence Ablation
 
-Phase 7 固定比较单次修复的三组输入：A 为 buggy source，B 追加冻结的 FL-v1 Top-10，C 再追加 repair-test execution evidence。先构建与两个 FL 数据集都不重叠的 Repair Pilot，并生成 FL 输入：
+Phase 7 使用 `repair-v2` 固定比较单次修复的三组输入。当前 Codeflaws 快照没有可靠的逐题题面，因此 A/B/C 都使用完全相同的 buggy source 与 repair-test 输入/期望输出作为共同 repair-time oracle；B 仅追加冻结的 FL-v1 Top-10，C 再追加 verdict、实际 stdout/stderr、exit code 和 timeout 等运行观察。Repair Pilot 的选择不使用 FL 命中表现，无可靠 FL 位置的样例仍保留。先构建与两个 FL 数据集都不重叠的 Repair Pilot，并生成 FL 输入：
 
 ```bash
 python3 benchmark/scripts/build_repair_pilot.py --force
@@ -146,13 +146,19 @@ export CODEDOCTOR_MODEL='fixed-model-version'
 python3 benchmark/scripts/run_repair_ablation.py --limit 3 --resume
 ```
 
-支持 `--cases`、`--group`、`--model`、`--limit` 和 `--resume`。完整 50-case A/B/C 运行前必须先人工审查真实在线 smoke artifacts。生成结构化统计和报告：
+支持 `--cases`、`--group`、`--model`、`--limit` 和 `--resume`。真实在线 smoke 最多运行 3 cases × 3 groups（9 次调用）；完整 50-case A/B/C 运行前必须人工审查 prompts 和 smoke artifacts，并生成调用量、token、计费与泄漏边界预实验报告：
+
+```bash
+python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed
+```
+
+超过 9 次在线调用会被 CLI 拒绝。只有在预实验报告完成且用户明确批准后，才可使用 `--confirm-bulk`；该标志本身不代表自动获得批准。生成结构化统计和消融报告：
 
 ```bash
 python3 benchmark/scripts/generate_repair_ablation_report.py
 ```
 
-原始 prompts、模型响应和 patches 位于 `benchmark/artifacts/repair/`，默认不进入 Git；报告见 [`benchmark/reports/llm_repair_evidence_ablation.md`](benchmark/reports/llm_repair_evidence_ablation.md)。
+原始 prompts、模型响应和 patches 位于 `benchmark/artifacts/repair/`，默认不进入 Git；预实验报告见 [`benchmark/reports/llm_repair_pre_experiment.md`](benchmark/reports/llm_repair_pre_experiment.md)，消融报告见 [`benchmark/reports/llm_repair_evidence_ablation.md`](benchmark/reports/llm_repair_evidence_ablation.md)。
 
 ## 当前边界
 

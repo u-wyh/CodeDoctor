@@ -1,0 +1,21 @@
+{
+  "audit_result": "no_reliable_per_case_problem_specification",
+  "codeflaws_archive_sha256": "2673fc16fa05590c5c1171f5b633594713ae9207346a3d0ba4c4d8b2eea82b11",
+  "dataset_root_readme_sha256": "18156e9ca42cda0fff19acddf939134e70c8067bf775e598424971cb26f2f087",
+  "fallback": {
+    "name": "Common Repair-Time Oracle",
+    "source": "existing Codeflaws repair-test input and expected-output pairs",
+    "version": "codeflaws-repair-tests-v1"
+  },
+  "findings": {
+    "manual_problem_statements_added": 0,
+    "per_case_problem_statement_files": 0,
+    "reference_used_to_infer_specification": false,
+    "root_readme_describes_dataset_layout_only": true
+  },
+  "information_boundary": {
+    "A": "buggy source + common repair-time oracle",
+    "B": "A + frozen FL-v1 evidence",
+    "C": "B + runtime-only observations"
+  }
+}

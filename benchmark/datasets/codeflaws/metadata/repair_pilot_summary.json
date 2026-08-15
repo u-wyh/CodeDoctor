@@ -40,9 +40,16 @@
   "dynamic_exclusions": 11,
   "elapsed_seconds_this_run": 111.027,
   "fl_evaluation_overlap": 0,
+  "fl_performance_filtering": false,
   "fl_pilot_overlap": 0,
   "repair_pilot_size": 50,
   "seed": 20260817,
+  "selection_inputs": [
+    "static benchmark validity",
+    "reference compile and repair/validation success",
+    "buggy compile and at least one failing repair test",
+    "disjointness from FL Pilot and FL Evaluation"
+  ],
   "static_exclusions": 20,
   "target_size": 50
 }

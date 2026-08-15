@@ -15,17 +15,17 @@ This report preregisters and implements the experiment, but the current environm
 
 ## 3. Experimental Setup
 
-- Protocol: `repair-v1`; prompt: `repair-evidence-v1`; one attempt per case/group.
-- Group A: complete buggy source and the common repair instruction only.
-- Group B: Group A plus frozen CodeDoctor FL-v1 Top-10 locations.
-- Group C: Group B plus repair-test PASS/FAIL, input, expected output, actual stdout/stderr, exit code, and timeout state.
+- Protocol: `repair-v2`; prompt: `repair-evidence-v2`; one attempt per case/group.
+- Group A: complete buggy source plus the common repair-time input/expected-output oracle.
+- Group B: Group A plus frozen CodeDoctor FL-v1 Top-10 locations, or the uniform no-reliable-location message when FL-v1 itself produces no positive-score location.
+- Group C: Group B plus runtime-only repair-test verdict, actual stdout/stderr, exit code, and timeout state. Input and expected output remain exclusively in the shared base context.
 - Registered defaults: temperature 0.0, maximum output tokens 4096, request timeout 120 seconds. A seed is sent only when explicitly configured and supported; determinism is not assumed.
 - Model/version: not configured; online calls: 0.
 - Patch protocol: complete source extraction, Docker compilation, repair tests, then hidden validation for plausible patches. A validated patch means that all available repair and hidden validation tests pass; it is not formal correctness.
 
 ## 4. Leakage Boundary
 
-`RepairContext` can contain only case ID, language, buggy source, registered FL-v1 locations, and repair-test execution evidence. Reference source, ground-truth diff/lines, and hidden validation tests are held in a separate evaluation-only boundary and are not accepted by prompt rendering. Prompt canary tests and artifact scans cover `REFERENCE_SECRET_TOKEN` and `VALIDATION_SECRET_TOKEN`. API keys are neither serialized nor cached. Artifact boundary scan: `passed` over 9 artifacts.
+`RepairContext` can contain only case ID, language, buggy source, the common repair-time oracle, registered FL-v1 locations/status, and runtime execution evidence. Reference source, ground-truth diff/lines, and hidden validation tests are held in a separate evaluation-only boundary and are not accepted by prompt rendering. The Codeflaws distribution has no per-case problem statements, so existing repair-test input/expected-output pairs serve as a versioned common oracle and are identical in A/B/C. Prompt canary tests and artifact scans cover `REFERENCE_SECRET_TOKEN` and `VALIDATION_SECRET_TOKEN`. API keys are neither serialized nor cached. Artifact boundary scan: `passed` over 9 artifacts.
 
 ## 5. Results
 
@@ -47,6 +47,8 @@ Online experiment status: `not_run_no_credentials`. These N/A cells are intentio
 
 No online model failures are available for scientific analysis. The local fake-provider smoke ran 9 artifacts over 3 cases across A/B/C; classifications were {'repair_test_failed': 9}. The fake returned the buggy source unchanged, so this confirms context, extraction, Docker compilation, repair-test classification, artifact writing, and resume boundaries without estimating repair ability. A separate non-artifact evaluator check ran one reference source through repair plus hidden validation and reached `validated_patch`.
 
+FL-v1 produced no reliable positive-score suspicious location for 1 of 50 Repair Pilot cases: ['103-A-bug-18288288-18288294']. These cases remain in A/B/C and receive the uniform no-reliable-location message in B/C.
+
 The implemented online analysis distinguishes invalid output, compile error, still failing original failing tests, regression on previously passing repair tests, and validation overfitting. It also records line-diff size, whether an FL Top-10 line was modified, FL Top-1/5/10 hit strata, 0-PASS, non-executable fault, equivalence-class size, and coverage diversity.
 
 ## 7. Threats to Validity
@@ -61,4 +63,4 @@ The implemented online analysis distinguishes invalid output, compile error, sti
 
 ## 8. Conclusion
 
-Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because no genuine online model call was possible. The next valid operation is to configure one fixed OpenAI-compatible model and run a small genuine smoke before the full 50-case A/B/C experiment without changing this protocol after observing outcomes.
+Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts with identical task semantics, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because no genuine online model call was possible. Bulk online execution is guarded and requires explicit approval. The next valid operation is to configure one fixed OpenAI-compatible model, verify pricing, and run a small genuine smoke before pausing again for approval of the full 50-case A/B/C experiment.

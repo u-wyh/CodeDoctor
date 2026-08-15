@@ -53,9 +53,16 @@ def _write_jsonl(path: Path, values: list[dict[str, object]]) -> None:
 
 def _fl_record(case: object, ranking: dict[str, object]) -> dict[str, object]:
     entries = ranking["rankings"]["ochiai_branch_tiebreak"][:10]
+    reliable = bool(entries) and max(float(item["score"]) for item in entries) > 0.0
     return {
+        "availability_message": (
+            "Frozen FL-v1 Top-10 locations are available."
+            if reliable
+            else "No reliable suspicious location is available from FL-v1."
+        ),
         "case_id": case.case_id,
         "method_version": "fl-v1",
+        "reliable_locations_available": reliable,
         "top_k": 10,
         "locations": [
             {
@@ -67,7 +74,7 @@ def _fl_record(case: object, ranking: dict[str, object]) -> dict[str, object]:
                 "tie_end_rank": item["tie_end_rank"],
                 "tie_start_rank": item["tie_start_rank"],
             }
-            for item in entries
+            for item in entries if reliable
         ],
     }
 

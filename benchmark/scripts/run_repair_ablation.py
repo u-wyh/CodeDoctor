@@ -19,7 +19,10 @@ from repair.context import load_fl_records  # noqa: E402
 from repair.evaluator import evaluate_source  # noqa: E402
 from repair.models import EvidenceGroup, ModelParameters  # noqa: E402
 from repair.pipeline import run_repair_attempt  # noqa: E402
-from repair.protocol import validate_repair_protocol  # noqa: E402
+from repair.protocol import (  # noqa: E402
+    bulk_confirmation_required,
+    validate_repair_protocol,
+)
 from repair.provider import (  # noqa: E402
     FakeEchoRepairModel,
     OpenAICompatibleProvider,
@@ -45,6 +48,11 @@ def main() -> int:
     parser.add_argument("--seed", type=int)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument(
+        "--confirm-bulk",
+        action="store_true",
+        help="confirm explicit user approval for more than 9 online calls",
+    )
     args = parser.parse_args()
     validate_repair_protocol()
 
@@ -87,13 +95,23 @@ def main() -> int:
     if args.limit is not None:
         cases = cases[: args.limit]
 
+    groups = _selected_groups(args.group)
+    expected_calls = len(cases) * len(groups)
+    if bulk_confirmation_required(
+        args.provider, expected_calls, args.confirm_bulk
+    ):
+        parser.error(
+            f"bulk online run would make {expected_calls} calls; explicit user approval "
+            "and --confirm-bulk are required"
+        )
+
     fl_records = load_fl_records(REPAIR_PILOT_FL)
     store = ArtifactStore(REPAIR_ARTIFACT_ROOT)
     completed = 0
     for index, case in enumerate(cases, start=1):
         print(f"[{index}/{len(cases)}] baseline {case.case_id}", flush=True)
         baseline = evaluate_source(case, case.get_buggy_source(), include_validation=False)
-        for group in _selected_groups(args.group):
+        for group in groups:
             result = run_repair_attempt(
                 case,
                 group,

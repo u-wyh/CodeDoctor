@@ -10,6 +10,7 @@ from benchmark.config import (
     REPAIR_ARTIFACT_ROOT,
     REPAIR_EVALUATION,
     REPAIR_PILOT_ATTRIBUTES,
+    REPAIR_PILOT_FL,
     REPAIR_PROTOCOL,
     REPAIR_REPORT,
 )
@@ -54,6 +55,8 @@ def _signature(record: dict[str, Any]) -> str:
 
 def validate_artifact_boundaries(records: list[dict[str, Any]]) -> dict[str, Any]:
     violations = []
+    bases_by_case: dict[str, set[str]] = {}
+    fl_sections_by_case: dict[str, set[str]] = {}
     for item in records:
         prompt = item.get("prompt", {})
         text = str(prompt.get("system", "")) + str(prompt.get("user", ""))
@@ -62,12 +65,29 @@ def validate_artifact_boundaries(records: list[dict[str, Any]]) -> dict[str, Any
             violations.append(f"{item.get('case_id')}/{group}: evaluation canary")
         has_fl = "## CodeDoctor FL-v1 suspicious locations" in text
         has_execution = "## Repair-test execution evidence" in text
+        has_oracle = "## Common repair-time oracle" in text
+        if not has_oracle:
+            violations.append(f"{item.get('case_id')}/{group}: missing common oracle")
         if group == "A" and (has_fl or has_execution):
             violations.append(f"{item.get('case_id')}/A: extra evidence")
         elif group == "B" and (not has_fl or has_execution):
             violations.append(f"{item.get('case_id')}/B: evidence boundary")
         elif group == "C" and (not has_fl or not has_execution):
             violations.append(f"{item.get('case_id')}/C: evidence boundary")
+        user = str(prompt.get("user", ""))
+        base = user.split("\n\n## CodeDoctor FL-v1 suspicious locations", 1)[0]
+        bases_by_case.setdefault(str(item.get("case_id")), set()).add(base)
+        if group in {"B", "C"}:
+            before_runtime = user.split("\n\n## Repair-test execution evidence", 1)[0]
+            fl_sections_by_case.setdefault(str(item.get("case_id")), set()).add(
+                before_runtime
+            )
+        if group == "C":
+            runtime = user.split("## Repair-test execution evidence", 1)[-1]
+            if "Expected output:" in runtime or "Input:" in runtime:
+                violations.append(
+                    f"{item.get('case_id')}/C: runtime section adds task semantics"
+                )
         forbidden_parameter_keys = {
             key
             for key in item.get("model_parameters", {})
@@ -85,6 +105,12 @@ def validate_artifact_boundaries(records: list[dict[str, Any]]) -> dict[str, Any
                 f"{item.get('case_id')}/{group}: secret parameter keys "
                 f"{sorted(forbidden_parameter_keys)}"
             )
+    for case_id, bases in bases_by_case.items():
+        if len(bases) != 1:
+            violations.append(f"{case_id}: A/B/C base contexts differ")
+    for case_id, sections in fl_sections_by_case.items():
+        if len(sections) != 1:
+            violations.append(f"{case_id}: B/C FL contexts differ")
     if violations:
         raise ValueError(f"repair artifact leakage detected: {violations}")
     return {"artifacts_checked": len(records), "status": "passed"}
@@ -165,6 +191,12 @@ def build_repair_evaluation() -> dict[str, Any]:
             )
         groups[item["group"]] = item
     attributes = {item["case_id"]: item for item in _read_jsonl(REPAIR_PILOT_ATTRIBUTES)}
+    fl_records = _read_jsonl(REPAIR_PILOT_FL)
+    no_reliable_fl = sorted(
+        item["case_id"]
+        for item in fl_records
+        if not item.get("reliable_locations_available", False)
+    )
     failures = Counter(
         mode for item in online for mode in item.get("failure_modes", [])
     )
@@ -181,7 +213,11 @@ def build_repair_evaluation() -> dict[str, Any]:
             "online_artifacts": len(online),
             "online_experiment_status": "completed" if online else "not_run_no_credentials",
         },
-        "failure_analysis": dict(sorted(failures.items())),
+        "failure_analysis": {
+            "model_failure_modes": dict(sorted(failures.items())),
+            "no_reliable_fl_evidence_case_ids": no_reliable_fl,
+            "no_reliable_fl_evidence_cases": len(no_reliable_fl),
+        },
         "fl_relationship": {},
         "groups": {
             group: _group_metrics(
@@ -265,6 +301,9 @@ def render_report(evaluation: dict[str, Any]) -> str:
         for key, value in dataset["dynamic_exclusion_reasons"].items()
     )
     smoke = evaluation["smoke_test"]
+    no_reliable_fl = evaluation["failure_analysis"][
+        "no_reliable_fl_evidence_case_ids"
+    ]
     return f"""# LLM Repair Evidence Ablation
 
 ## 1. Research Question
@@ -282,17 +321,17 @@ This report preregisters and implements the experiment, but the current environm
 
 ## 3. Experimental Setup
 
-- Protocol: `repair-v1`; prompt: `repair-evidence-v1`; one attempt per case/group.
-- Group A: complete buggy source and the common repair instruction only.
-- Group B: Group A plus frozen CodeDoctor FL-v1 Top-10 locations.
-- Group C: Group B plus repair-test PASS/FAIL, input, expected output, actual stdout/stderr, exit code, and timeout state.
+- Protocol: `repair-v2`; prompt: `repair-evidence-v2`; one attempt per case/group.
+- Group A: complete buggy source plus the common repair-time input/expected-output oracle.
+- Group B: Group A plus frozen CodeDoctor FL-v1 Top-10 locations, or the uniform no-reliable-location message when FL-v1 itself produces no positive-score location.
+- Group C: Group B plus runtime-only repair-test verdict, actual stdout/stderr, exit code, and timeout state. Input and expected output remain exclusively in the shared base context.
 - Registered defaults: temperature 0.0, maximum output tokens 4096, request timeout 120 seconds. A seed is sent only when explicitly configured and supported; determinism is not assumed.
 - Model/version: not configured; online calls: {experiment['online_artifacts']}.
 - Patch protocol: complete source extraction, Docker compilation, repair tests, then hidden validation for plausible patches. A validated patch means that all available repair and hidden validation tests pass; it is not formal correctness.
 
 ## 4. Leakage Boundary
 
-`RepairContext` can contain only case ID, language, buggy source, registered FL-v1 locations, and repair-test execution evidence. Reference source, ground-truth diff/lines, and hidden validation tests are held in a separate evaluation-only boundary and are not accepted by prompt rendering. Prompt canary tests and artifact scans cover `REFERENCE_SECRET_TOKEN` and `VALIDATION_SECRET_TOKEN`. API keys are neither serialized nor cached. Artifact boundary scan: `{evaluation['leakage_scan']['status']}` over {evaluation['leakage_scan']['artifacts_checked']} artifacts.
+`RepairContext` can contain only case ID, language, buggy source, the common repair-time oracle, registered FL-v1 locations/status, and runtime execution evidence. Reference source, ground-truth diff/lines, and hidden validation tests are held in a separate evaluation-only boundary and are not accepted by prompt rendering. The Codeflaws distribution has no per-case problem statements, so existing repair-test input/expected-output pairs serve as a versioned common oracle and are identical in A/B/C. Prompt canary tests and artifact scans cover `REFERENCE_SECRET_TOKEN` and `VALIDATION_SECRET_TOKEN`. API keys are neither serialized nor cached. Artifact boundary scan: `{evaluation['leakage_scan']['status']}` over {evaluation['leakage_scan']['artifacts_checked']} artifacts.
 
 ## 5. Results
 
@@ -310,6 +349,8 @@ Online experiment status: `{experiment['online_experiment_status']}`. These N/A 
 
 No online model failures are available for scientific analysis. The local fake-provider smoke ran {smoke['artifacts']} artifacts over {smoke['cases']} cases across A/B/C; classifications were {smoke['classifications']}. The fake returned the buggy source unchanged, so this confirms context, extraction, Docker compilation, repair-test classification, artifact writing, and resume boundaries without estimating repair ability. A separate non-artifact evaluator check ran one reference source through repair plus hidden validation and reached `validated_patch`.
 
+FL-v1 produced no reliable positive-score suspicious location for {len(no_reliable_fl)} of {dataset['repair_pilot_size']} Repair Pilot cases: {no_reliable_fl or 'none'}. These cases remain in A/B/C and receive the uniform no-reliable-location message in B/C.
+
 The implemented online analysis distinguishes invalid output, compile error, still failing original failing tests, regression on previously passing repair tests, and validation overfitting. It also records line-diff size, whether an FL Top-10 line was modified, FL Top-1/5/10 hit strata, 0-PASS, non-executable fault, equivalence-class size, and coverage diversity.
 
 ## 7. Threats to Validity
@@ -324,7 +365,7 @@ The implemented online analysis distinguishes invalid output, compile error, sti
 
 ## 8. Conclusion
 
-Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because no genuine online model call was possible. The next valid operation is to configure one fixed OpenAI-compatible model and run a small genuine smoke before the full 50-case A/B/C experiment without changing this protocol after observing outcomes.
+Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts with identical task semantics, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because no genuine online model call was possible. Bulk online execution is guarded and requires explicit approval. The next valid operation is to configure one fixed OpenAI-compatible model, verify pricing, and run a small genuine smoke before pausing again for approval of the full 50-case A/B/C experiment.
 """
 
 

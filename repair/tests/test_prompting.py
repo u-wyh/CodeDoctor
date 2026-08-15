@@ -8,23 +8,39 @@ from repair.models import (
     RepairContext,
     RepairTestEvidence,
     SuspiciousLocation,
+    TaskExample,
 )
 from repair.prompting import render_prompt
 
 
 SOURCE = "#include <stdio.h>\nint main(){return 0;}\n"
 LOCATION = SuspiciousLocation(1, 2, "int main(){return 0;}", 1.0, 0.5, 1, 1)
-EVIDENCE = RepairTestEvidence("n1", "FAIL", "1\n", "2\n", "3\n", "", 0, False)
+EXAMPLE = TaskExample("n1", "1\n", "2\n")
+EVIDENCE = RepairTestEvidence("n1", "FAIL", "3\n", "", 0, False)
 
 
 class PromptingTests(unittest.TestCase):
     def test_groups_only_add_their_registered_evidence(self) -> None:
-        a = render_prompt(RepairContext("case", "c", SOURCE), EvidenceGroup.SOURCE_ONLY)
+        a = render_prompt(
+            RepairContext("case", "c", SOURCE, (EXAMPLE,)),
+            EvidenceGroup.SOURCE_ONLY,
+        )
         b = render_prompt(
-            RepairContext("case", "c", SOURCE, (LOCATION,)), EvidenceGroup.SOURCE_FL
+            RepairContext(
+                "case", "c", SOURCE, (EXAMPLE,), "available", (LOCATION,)
+            ),
+            EvidenceGroup.SOURCE_FL,
         )
         c = render_prompt(
-            RepairContext("case", "c", SOURCE, (LOCATION,), (EVIDENCE,)),
+            RepairContext(
+                "case",
+                "c",
+                SOURCE,
+                (EXAMPLE,),
+                "available",
+                (LOCATION,),
+                (EVIDENCE,),
+            ),
             EvidenceGroup.SOURCE_FL_EXECUTION,
         )
         self.assertNotIn("FL-v1", a.user)
@@ -33,6 +49,14 @@ class PromptingTests(unittest.TestCase):
         self.assertNotIn("execution evidence", b.user)
         self.assertIn("FL-v1", c.user)
         self.assertIn("execution evidence", c.user)
+        self.assertIn("Common repair-time oracle", a.user)
+        self.assertIn("Expected output", a.user)
+        self.assertEqual(
+            a.user.count("Expected output"), b.user.count("Expected output")
+        )
+        self.assertEqual(
+            b.user.count("Expected output"), c.user.count("Expected output")
+        )
         self.assertTrue(b.user.startswith(a.user))
         self.assertTrue(c.user.startswith(b.user))
         self.assertEqual(a.system, b.system)
@@ -46,7 +70,10 @@ class PromptingTests(unittest.TestCase):
             (7,),
         )
         prompt = render_prompt(
-            RepairContext("case", "c", SOURCE, (LOCATION,)), EvidenceGroup.SOURCE_FL
+            RepairContext(
+                "case", "c", SOURCE, (EXAMPLE,), "available", (LOCATION,)
+            ),
+            EvidenceGroup.SOURCE_FL,
         )
         serialized = prompt.system + prompt.user
         self.assertNotIn(evaluation.reference_source_path, serialized)
@@ -57,13 +84,32 @@ class PromptingTests(unittest.TestCase):
     def test_group_validation_rejects_mixed_contexts(self) -> None:
         with self.assertRaises(ValueError):
             render_prompt(
-                RepairContext("case", "c", SOURCE, (LOCATION,)),
+                RepairContext(
+                    "case", "c", SOURCE, (EXAMPLE,), "available", (LOCATION,)
+                ),
                 EvidenceGroup.SOURCE_ONLY,
             )
         with self.assertRaises(ValueError):
             render_prompt(
-                RepairContext("case", "c", SOURCE), EvidenceGroup.SOURCE_FL
+                RepairContext("case", "c", SOURCE, (EXAMPLE,)),
+                EvidenceGroup.SOURCE_FL,
             )
+
+    def test_no_reliable_fl_uses_uniform_message(self) -> None:
+        prompt = render_prompt(
+            RepairContext(
+                "case",
+                "c",
+                SOURCE,
+                (EXAMPLE,),
+                "No reliable suspicious location is available from FL-v1.",
+            ),
+            EvidenceGroup.SOURCE_FL,
+        )
+        self.assertIn(
+            "No reliable suspicious location is available from FL-v1.",
+            prompt.user,
+        )
 
 
 if __name__ == "__main__":

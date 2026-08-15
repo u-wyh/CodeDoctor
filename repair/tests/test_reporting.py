@@ -23,9 +23,9 @@ def record(case_id: str, group: str, validated: bool) -> dict[str, object]:
         "prompt": {
             "system": "system",
             "user": (
-                "source"
-                + ("\n## CodeDoctor FL-v1 suspicious locations" if group in "BC" else "")
-                + ("\n## Repair-test execution evidence" if group == "C" else "")
+                "source\n## Common repair-time oracle\nExpected output:\nvalue"
+                + ("\n\n## CodeDoctor FL-v1 suspicious locations" if group in "BC" else "")
+                + ("\n\n## Repair-test execution evidence" if group == "C" else "")
             ),
         },
     }

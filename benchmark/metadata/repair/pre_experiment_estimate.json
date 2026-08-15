@@ -1,0 +1,833 @@
+{
+  "billing": {
+    "estimated_api_cost": null,
+    "path": "not selected",
+    "pricing_status": "not_verified",
+    "subscription_warning": "ChatGPT Plus/Codex subscription and API billing are separate; no shared quota is assumed."
+  },
+  "calls": {
+    "attempts_per_case_group": 1,
+    "groups": 3,
+    "primary": 150,
+    "repair_pilot_cases": 50,
+    "smoke_maximum": 9,
+    "transport_retries_configured": 0
+  },
+  "credential": {
+    "available": false,
+    "environment_variables": [
+      "CODEDOCTOR_API_KEY",
+      "OPENAI_API_KEY"
+    ]
+  },
+  "leakage_readiness": {
+    "evaluation_only_metadata_absent": "passed",
+    "ground_truth_diff_absent": "passed",
+    "hidden_validation_absent": "passed",
+    "manual_prompt_inspection": "passed",
+    "reference_leakage_regression": "passed",
+    "reference_source_absent": "passed",
+    "validation_leakage_regression": "passed"
+  },
+  "model": {
+    "base_url_configured": false,
+    "name": null,
+    "provider": "OpenAI-compatible Chat Completions (actual service not selected)"
+  },
+  "online_smoke_artifacts": 0,
+  "prompt_hashes": [
+    {
+      "case_id": "259-B-bug-13083263-13083279",
+      "group": "A",
+      "prompt_hash": "6d55e6fe53938d960ba7d70ea47f9565ef092dd029574741d484c79fe33de782"
+    },
+    {
+      "case_id": "259-B-bug-13083263-13083279",
+      "group": "B",
+      "prompt_hash": "6f3f4aecc6377c58023d51a0a79f007ed1800659203b4a4e06da9e7080802059"
+    },
+    {
+      "case_id": "259-B-bug-13083263-13083279",
+      "group": "C",
+      "prompt_hash": "ebfd8e5ce38afffd5c2975f837bd21fb41499794ffeda36620c7d4d1063cba26"
+    },
+    {
+      "case_id": "158-C-bug-9815086-9815194",
+      "group": "A",
+      "prompt_hash": "45ecde9f3afbb38bc3c7145dd33068f9035500404d9d673f5a4b7d096ea59187"
+    },
+    {
+      "case_id": "158-C-bug-9815086-9815194",
+      "group": "B",
+      "prompt_hash": "21798439865a303eb83088bf46b7690e9bccb112f2370d4b3e977d23946b5c81"
+    },
+    {
+      "case_id": "158-C-bug-9815086-9815194",
+      "group": "C",
+      "prompt_hash": "7382c4e8ff4d759a963f5b0e4e9752e191616e9782085d15cc1c189f4d8e2a9b"
+    },
+    {
+      "case_id": "40-B-bug-179453-179470",
+      "group": "A",
+      "prompt_hash": "2e6d5d12ca1cbb4ae877caf37b11c14ffcfa40ac2897e362029b2a0b63a117a2"
+    },
+    {
+      "case_id": "40-B-bug-179453-179470",
+      "group": "B",
+      "prompt_hash": "7aa3469543fd042d33a1634e6685c88c12fe9e9262ada518238329ef0cd938ff"
+    },
+    {
+      "case_id": "40-B-bug-179453-179470",
+      "group": "C",
+      "prompt_hash": "70b8d51d6643966697306317eb7cc2e544d2ce3378ca5f2a29a8f72849f38fd7"
+    },
+    {
+      "case_id": "234-A-bug-2425047-2425051",
+      "group": "A",
+      "prompt_hash": "2bca335f021ef9700e2593cc429dd949c2e58838241c93474ffb56c2a699bd51"
+    },
+    {
+      "case_id": "234-A-bug-2425047-2425051",
+      "group": "B",
+      "prompt_hash": "e18d9242d3d73499671c1c06f87b6352a600299587faaaa08f0a9e778d55b622"
+    },
+    {
+      "case_id": "234-A-bug-2425047-2425051",
+      "group": "C",
+      "prompt_hash": "53b6207e9d72931da3da24c09323d01229c8585a603c881961a66f4b70f1f118"
+    },
+    {
+      "case_id": "149-B-bug-1170226-1170231",
+      "group": "A",
+      "prompt_hash": "aaafee8e804e5f99fc29d6cabef9921bf596605ab5427411d02d7c6bf1fdf59a"
+    },
+    {
+      "case_id": "149-B-bug-1170226-1170231",
+      "group": "B",
+      "prompt_hash": "7c9bb99ca522b085640f7f3c969816a2a919b5a588e26b58b0255819041cecbb"
+    },
+    {
+      "case_id": "149-B-bug-1170226-1170231",
+      "group": "C",
+      "prompt_hash": "ff54f3ff901165cb0a13e4be6a26befa531005e508ab9a832ea9219135b84401"
+    },
+    {
+      "case_id": "545-D-bug-17326520-17326553",
+      "group": "A",
+      "prompt_hash": "9b8eae6849fd9826eb182f26b15e702bdb3cba892624c2e88c005351769257a3"
+    },
+    {
+      "case_id": "545-D-bug-17326520-17326553",
+      "group": "B",
+      "prompt_hash": "e7787c53c60c33dfb469b638a301819cfa5ccfb4b69a813defd8c2eafd55838e"
+    },
+    {
+      "case_id": "545-D-bug-17326520-17326553",
+      "group": "C",
+      "prompt_hash": "ef9fa74ba5ae3ca1f1c4623ada79fb2d9f540886a6dc71ab1a119ba1aea526ea"
+    },
+    {
+      "case_id": "492-A-bug-17190485-17190512",
+      "group": "A",
+      "prompt_hash": "21067d8b53728f06b8bff2cf48ae0b6836134de2b4e969094a7c7fcf310190ed"
+    },
+    {
+      "case_id": "492-A-bug-17190485-17190512",
+      "group": "B",
+      "prompt_hash": "9712ab48236d46f55c8d4c60e152dbda4efa581d5e8718a28f039012cde07ec6"
+    },
+    {
+      "case_id": "492-A-bug-17190485-17190512",
+      "group": "C",
+      "prompt_hash": "a3b089d6a932b847de013c32aa119dd7c4dd0fdcc5f31a7b4f0b78e89cb1bf1c"
+    },
+    {
+      "case_id": "282-C-bug-15737668-15737873",
+      "group": "A",
+      "prompt_hash": "3f7591a5922a38789527d0c777c744db98a0d8df07cd988adbf9495c09953a96"
+    },
+    {
+      "case_id": "282-C-bug-15737668-15737873",
+      "group": "B",
+      "prompt_hash": "592dc29c8e8ba69761ffde3638f3119edfb22d40637a473b3b1b443a731c0d25"
+    },
+    {
+      "case_id": "282-C-bug-15737668-15737873",
+      "group": "C",
+      "prompt_hash": "8219bf63b64a2fc0da599e91facddc69784fd7a2eb8d573ab72fd6aaf5f2b52a"
+    },
+    {
+      "case_id": "328-B-bug-4567715-4567729",
+      "group": "A",
+      "prompt_hash": "6689419712f53e63c31bdd15e62c87f375e79df3f671aadefb58f21fac1e08df"
+    },
+    {
+      "case_id": "328-B-bug-4567715-4567729",
+      "group": "B",
+      "prompt_hash": "40d0f4b7b190526b62a64c1a43258f149795d3be4dea1462fa49300ab9987613"
+    },
+    {
+      "case_id": "328-B-bug-4567715-4567729",
+      "group": "C",
+      "prompt_hash": "b5e8dccb38d1b0e06e7d7e4da5fd8f8f17fa00a4d837a7a83e867e864aa02ee6"
+    },
+    {
+      "case_id": "580-A-bug-18107163-18107188",
+      "group": "A",
+      "prompt_hash": "19699e5996db817e26e2b53b7fbc3909050d438cfef00532a8e73211c6e0e6d3"
+    },
+    {
+      "case_id": "580-A-bug-18107163-18107188",
+      "group": "B",
+      "prompt_hash": "6c2dd0718f2c1578b116c18678f6f2ea2add8ba4dce028ff7d02d8a888c22d60"
+    },
+    {
+      "case_id": "580-A-bug-18107163-18107188",
+      "group": "C",
+      "prompt_hash": "46a0ca770326c81a0f226ab800756ad62a7658ba99924ccae87149367ca54ed3"
+    },
+    {
+      "case_id": "31-A-bug-17852743-17861117",
+      "group": "A",
+      "prompt_hash": "3b9fb8fa5dae22b8157dac78674c3e2fa2440a4d6806e4633680b8747c09d599"
+    },
+    {
+      "case_id": "31-A-bug-17852743-17861117",
+      "group": "B",
+      "prompt_hash": "46db19a6c72abd51309a91c88c4f8a5ea0e6193ff60c89f3cfb00052b5b2cd91"
+    },
+    {
+      "case_id": "31-A-bug-17852743-17861117",
+      "group": "C",
+      "prompt_hash": "9ead8a13d4f0f05daea482b36ad9ae1bbdae3bce04f0ee01456a05c9da7d5538"
+    },
+    {
+      "case_id": "99-A-bug-6985349-6985355",
+      "group": "A",
+      "prompt_hash": "4dd338b5dd896ae31da86e1b1595aca198d4628e0ca0f0ecd33e1792cad9e215"
+    },
+    {
+      "case_id": "99-A-bug-6985349-6985355",
+      "group": "B",
+      "prompt_hash": "d5555009a4beab5f7cec78d6a7606abe00f9fb29d6b85f02983da0559f3ea5ae"
+    },
+    {
+      "case_id": "99-A-bug-6985349-6985355",
+      "group": "C",
+      "prompt_hash": "063e40347d1311470f43527bfbf6c15d9688559ff5a76b99e967669a6ade8974"
+    },
+    {
+      "case_id": "611-A-bug-18197396-18197911",
+      "group": "A",
+      "prompt_hash": "85cced9138dd37b89b1337617ca1ae5323cf0ba33be99b97c66de18d1f15b034"
+    },
+    {
+      "case_id": "611-A-bug-18197396-18197911",
+      "group": "B",
+      "prompt_hash": "1cb5cc8e89957004f32fc38313f70480420d68a31fe0a1b09c8c6fcb605f162f"
+    },
+    {
+      "case_id": "611-A-bug-18197396-18197911",
+      "group": "C",
+      "prompt_hash": "7a3a09d7acf6de41d0e2b8a3066d70374643293b1425663c0a3456cd3ae3427c"
+    },
+    {
+      "case_id": "567-A-bug-15485089-15485103",
+      "group": "A",
+      "prompt_hash": "355645e0f8eb768138c87c68f31c84e943d42f9f1fecd63b31bb6f945f5b02b1"
+    },
+    {
+      "case_id": "567-A-bug-15485089-15485103",
+      "group": "B",
+      "prompt_hash": "8579ace8bc80b54179879d2d3cbdddfa857486110c70b3ee7e0485d66fd13362"
+    },
+    {
+      "case_id": "567-A-bug-15485089-15485103",
+      "group": "C",
+      "prompt_hash": "b01f2cbeee3fd91c52f995bef60da2a677515d2a403f8d60636d2a39fe8250c2"
+    },
+    {
+      "case_id": "417-C-bug-6586834-6586850",
+      "group": "A",
+      "prompt_hash": "3162c0811be9566fe067f23d2ea6356ad036d0018cfadfa7e0ba3c44518f6cc0"
+    },
+    {
+      "case_id": "417-C-bug-6586834-6586850",
+      "group": "B",
+      "prompt_hash": "89345a657977df4faa34f0fcea9f5201cf1dd758003cb91f35e5de624ad3bd41"
+    },
+    {
+      "case_id": "417-C-bug-6586834-6586850",
+      "group": "C",
+      "prompt_hash": "fbdf73c40ed56f8a245bdef7dfda8d9f2d06519d019638a6187aa598191bb416"
+    },
+    {
+      "case_id": "616-B-bug-15683583-15683683",
+      "group": "A",
+      "prompt_hash": "b1b7331029c1dd41017c557fab5d79bf889d4efc0b695ef74b958e02adaa1f5b"
+    },
+    {
+      "case_id": "616-B-bug-15683583-15683683",
+      "group": "B",
+      "prompt_hash": "de60b5220cc6c59e3668f271aa394202bd52893461c72ab6ab081206f91e0ef0"
+    },
+    {
+      "case_id": "616-B-bug-15683583-15683683",
+      "group": "C",
+      "prompt_hash": "afca7454f32138d5036c4ba15f271ce2cdefba95f8ce5a26011ecf1ea93d7270"
+    },
+    {
+      "case_id": "322-B-bug-12162423-12162461",
+      "group": "A",
+      "prompt_hash": "700c0a08da7aec879a472dfdafe279d46fe0ee7370a61e38baa2cf1f607b6c21"
+    },
+    {
+      "case_id": "322-B-bug-12162423-12162461",
+      "group": "B",
+      "prompt_hash": "98bcbeeba6b36350f1486748bcb126fe62fc9d97f48de131e2bead42b5e35d2c"
+    },
+    {
+      "case_id": "322-B-bug-12162423-12162461",
+      "group": "C",
+      "prompt_hash": "ee9032ce01146551e329015ab22d039075f7e0f06b36df8e471f8075b905a99e"
+    },
+    {
+      "case_id": "89-A-bug-685910-685915",
+      "group": "A",
+      "prompt_hash": "8b4bfb1b757413aacc1d232dc8e37a90a6dab29a34631b3a45848a0032c1ec56"
+    },
+    {
+      "case_id": "89-A-bug-685910-685915",
+      "group": "B",
+      "prompt_hash": "4d79d8ed7021537e8206e7c1cf4385abc2cdd809b4a9e780f8e34f3aa649116c"
+    },
+    {
+      "case_id": "89-A-bug-685910-685915",
+      "group": "C",
+      "prompt_hash": "ab1a3538aff49a85a3971fa07dd753ab09b1d66edf24cbe8c8e0124fddbda1e2"
+    },
+    {
+      "case_id": "413-A-bug-6604635-6604651",
+      "group": "A",
+      "prompt_hash": "cfb3a5293250845a7d29565e388959b19722e4c8b8f3fbb3543a179586d6cbaa"
+    },
+    {
+      "case_id": "413-A-bug-6604635-6604651",
+      "group": "B",
+      "prompt_hash": "e6d97559d82764ca08971b2facba3b2c9a6835967becf96fcda345f8e64d9ac3"
+    },
+    {
+      "case_id": "413-A-bug-6604635-6604651",
+      "group": "C",
+      "prompt_hash": "742c461ae9180aef72f2c82cb5f20d2a35196fc70cdbe68df04f67b869a6a043"
+    },
+    {
+      "case_id": "160-B-bug-14660992-14661027",
+      "group": "A",
+      "prompt_hash": "28a11180d6e23e0143814c3b9f619658ceaaefae76f3cf6dbfc2b7334119091c"
+    },
+    {
+      "case_id": "160-B-bug-14660992-14661027",
+      "group": "B",
+      "prompt_hash": "6f66ad33fe4360f97fff86ba5a0ea8d20641aaa0929b83675279d6309562d16d"
+    },
+    {
+      "case_id": "160-B-bug-14660992-14661027",
+      "group": "C",
+      "prompt_hash": "f065511bd02e9eb88002487e4b9de84361fc204c0d2502a8fb6a887b23f4b76d"
+    },
+    {
+      "case_id": "325-A-bug-4069075-4069088",
+      "group": "A",
+      "prompt_hash": "42423ef7896902ba81eba2a3acc02fbc4b5c083d3b3495ccd9b3c49e47fe983e"
+    },
+    {
+      "case_id": "325-A-bug-4069075-4069088",
+      "group": "B",
+      "prompt_hash": "783a53e6bc70f0f04141b7945556f7e9406f50eb4c18f5553fbece49642c2b6a"
+    },
+    {
+      "case_id": "325-A-bug-4069075-4069088",
+      "group": "C",
+      "prompt_hash": "3e6d8902a367ffce1e249da1a2fb24de34875d5ca3b0928a3349a86e8f441c5a"
+    },
+    {
+      "case_id": "16-B-bug-3929377-3929378",
+      "group": "A",
+      "prompt_hash": "a363bb730a0860e08d02f3ca8951878fda695896ee6bf0af7abc310c436b3a40"
+    },
+    {
+      "case_id": "16-B-bug-3929377-3929378",
+      "group": "B",
+      "prompt_hash": "2ef8ea5e142df86bdfa987d52d8cab49d8390701d8d41d09975f746dc560b1b9"
+    },
+    {
+      "case_id": "16-B-bug-3929377-3929378",
+      "group": "C",
+      "prompt_hash": "04e83b975f8667d5b2ffb3fff9f2c7081b0f1de246ac9aa6edad55dd969a707a"
+    },
+    {
+      "case_id": "514-C-bug-10224933-10224936",
+      "group": "A",
+      "prompt_hash": "2f107768000de9e2fce44a962a9ba764209b6344424c3294d24a0e23179e965a"
+    },
+    {
+      "case_id": "514-C-bug-10224933-10224936",
+      "group": "B",
+      "prompt_hash": "14cbe75a91edcdbc22c95faf261c33e41e2bec97c8d172961b847020af1a4911"
+    },
+    {
+      "case_id": "514-C-bug-10224933-10224936",
+      "group": "C",
+      "prompt_hash": "dc79e977f2c76fc84a34ee5e0e2ea253c9406aa0539265246994405a0b097a0b"
+    },
+    {
+      "case_id": "665-C-bug-17762752-17762802",
+      "group": "A",
+      "prompt_hash": "ce89bc115b0a125e620fce2ae770feca6db8a1272d75e5fe61c7ab9e9335819d"
+    },
+    {
+      "case_id": "665-C-bug-17762752-17762802",
+      "group": "B",
+      "prompt_hash": "c98aca5ac0ee4ff228c82103a1b3fd2310b8ef36538d3a16ca5fa37c3aaa7b33"
+    },
+    {
+      "case_id": "665-C-bug-17762752-17762802",
+      "group": "C",
+      "prompt_hash": "95d587458fa8e967aa53a5087af41c6c9e5ec5ae6de00292fef029bebb014d17"
+    },
+    {
+      "case_id": "586-B-bug-13581699-13581787",
+      "group": "A",
+      "prompt_hash": "adc0c16cbe10b1d084c669e19f09f568bb5b9b323a24ed52b6bb3b0c06989476"
+    },
+    {
+      "case_id": "586-B-bug-13581699-13581787",
+      "group": "B",
+      "prompt_hash": "59e6df2fd8018809ca64eb1745eb355627b3bf3cd3665416e2e7b4178f484ddf"
+    },
+    {
+      "case_id": "586-B-bug-13581699-13581787",
+      "group": "C",
+      "prompt_hash": "e27adbb836d25e255305d0bc3874117cc6e9c93c79929dd257f1ce120ccb8910"
+    },
+    {
+      "case_id": "149-A-bug-16617896-16617908",
+      "group": "A",
+      "prompt_hash": "1081bd3bb82d7c4509d91add94084dfb34c3844ad4b3fcc2e169d6819bcf153f"
+    },
+    {
+      "case_id": "149-A-bug-16617896-16617908",
+      "group": "B",
+      "prompt_hash": "25972c4444b278d6e8cb54e9cff1a4ced4cb855b9461eff19a796f9e763cb28c"
+    },
+    {
+      "case_id": "149-A-bug-16617896-16617908",
+      "group": "C",
+      "prompt_hash": "4b4dec25bc5afcc180c9f4a3943dd0f3583cfa9b3e416cf4d16d37a0040eaa69"
+    },
+    {
+      "case_id": "515-A-bug-16019620-16019646",
+      "group": "A",
+      "prompt_hash": "cfeb1e730e5b8e65c10d2f085fb58f3b11152d7a2b8426490f2e818fa2642b0d"
+    },
+    {
+      "case_id": "515-A-bug-16019620-16019646",
+      "group": "B",
+      "prompt_hash": "78a024bbb510e76c7c78d5e6be9c5b5cdf2875daf359b0f2a8cff7ed6f8d7a60"
+    },
+    {
+      "case_id": "515-A-bug-16019620-16019646",
+      "group": "C",
+      "prompt_hash": "97cd5c414acd4201bb65bb14e432f086fc834be0ee9fd8b2ae2dc1493093b2e4"
+    },
+    {
+      "case_id": "659-D-bug-18135109-18135261",
+      "group": "A",
+      "prompt_hash": "330d92e25d5c428879a338a563cdf2fce8bbbf97b18a65b928036c6a7180f7ac"
+    },
+    {
+      "case_id": "659-D-bug-18135109-18135261",
+      "group": "B",
+      "prompt_hash": "20337c8bdca77b244ec501c105d75c0b5286ff6d45c4950d25eccafd77e31df6"
+    },
+    {
+      "case_id": "659-D-bug-18135109-18135261",
+      "group": "C",
+      "prompt_hash": "ae67c948b8121efa5b63ff2302c380af60165682c54518a53f3e82854686390a"
+    },
+    {
+      "case_id": "408-B-bug-6612687-6612709",
+      "group": "A",
+      "prompt_hash": "b5d9f9fcd7019cbb23872b5ce79ab5e7ea2f5a6a754e3f00e5a4cbd0e33441c8"
+    },
+    {
+      "case_id": "408-B-bug-6612687-6612709",
+      "group": "B",
+      "prompt_hash": "834b7fe6f15cd7af6004707e74193f2a2f2cba716d0695808e5d4473d71cef60"
+    },
+    {
+      "case_id": "408-B-bug-6612687-6612709",
+      "group": "C",
+      "prompt_hash": "a564024f618e1ae09511213cfc90c0672072f32eea07149a3fa3fa9f520d5434"
+    },
+    {
+      "case_id": "433-A-bug-14776196-14776225",
+      "group": "A",
+      "prompt_hash": "b50cb0a2a0f81b8ed52addadbf6908f7cc18715c536d4adc0110656f81312093"
+    },
+    {
+      "case_id": "433-A-bug-14776196-14776225",
+      "group": "B",
+      "prompt_hash": "64454c3988486cf8ea33712ff1b51a5977d0edf641bd5e486e37e79ad7703f3c"
+    },
+    {
+      "case_id": "433-A-bug-14776196-14776225",
+      "group": "C",
+      "prompt_hash": "681077e49520789e1b3a3e2b0390f4df1a11ec8a3fe80a78b19ed57bb95c68e0"
+    },
+    {
+      "case_id": "557-B-bug-17172272-17172312",
+      "group": "A",
+      "prompt_hash": "080b6946a49a1769311fa649b36b984ea8647e0b815e608fe329cf91eec0df8f"
+    },
+    {
+      "case_id": "557-B-bug-17172272-17172312",
+      "group": "B",
+      "prompt_hash": "3e68de43c048273cd70e6cf4163c9950d777eadb24c691e47be28eb750583ff9"
+    },
+    {
+      "case_id": "557-B-bug-17172272-17172312",
+      "group": "C",
+      "prompt_hash": "c0b77c3ac332d698c5ece4c1f32560c5c445ff5317e87ee4bfaa79fc1a000590"
+    },
+    {
+      "case_id": "527-B-bug-11093666-11093671",
+      "group": "A",
+      "prompt_hash": "5ad8cd66698abeccafe6a74bee64c4267d32b73cd23c3db3a2b9b81191193248"
+    },
+    {
+      "case_id": "527-B-bug-11093666-11093671",
+      "group": "B",
+      "prompt_hash": "62c9fa8fa817bc4dc26114eac8ba47a058a973195eb8fa5f24d41e290a9f578f"
+    },
+    {
+      "case_id": "527-B-bug-11093666-11093671",
+      "group": "C",
+      "prompt_hash": "0dd902befba719befa1c42a4d40ab84eaac7a2b6d0092744f5708fbc1091f3ba"
+    },
+    {
+      "case_id": "306-A-bug-4028440-4028451",
+      "group": "A",
+      "prompt_hash": "0fb46ba5639f77773d875f38d0707f486726441e4d55587e3048d0b31023c7d1"
+    },
+    {
+      "case_id": "306-A-bug-4028440-4028451",
+      "group": "B",
+      "prompt_hash": "f8ee1d394d5e607bd666f6f0d8beddbdb62034eeb06260d27b4b57fc2417455a"
+    },
+    {
+      "case_id": "306-A-bug-4028440-4028451",
+      "group": "C",
+      "prompt_hash": "34ec2fc6ef8ed6aeab6b20e7566a4775bddd4fcbf514dffe9f8206a8169a32a3"
+    },
+    {
+      "case_id": "598-B-bug-15587975-15587993",
+      "group": "A",
+      "prompt_hash": "17b341770356e7170c5a9c4843b417f496b79cf2e51d6facb3a73eda41b35cd6"
+    },
+    {
+      "case_id": "598-B-bug-15587975-15587993",
+      "group": "B",
+      "prompt_hash": "0740360be962a89f6d837e70a3f1e36e00ae6e2f93d5c418adb972b9258d2ff7"
+    },
+    {
+      "case_id": "598-B-bug-15587975-15587993",
+      "group": "C",
+      "prompt_hash": "8852fc8989fa2d47b2e2284ef5803dcbe234365d9ac58345c7c78f5f0ee4cf1b"
+    },
+    {
+      "case_id": "450-B-bug-15950152-15950193",
+      "group": "A",
+      "prompt_hash": "0285a1143878348565e04ee13373accf2cb7bf655a2baf97a6920913f8142fff"
+    },
+    {
+      "case_id": "450-B-bug-15950152-15950193",
+      "group": "B",
+      "prompt_hash": "d3e2b55491a22bf16d89f76c40e2539220fbb0072e684ebef18a726ed24a07b7"
+    },
+    {
+      "case_id": "450-B-bug-15950152-15950193",
+      "group": "C",
+      "prompt_hash": "f1152ab89f75e59e66826a16de15bf928b1540cbcf9cda4748a0694291c81f8f"
+    },
+    {
+      "case_id": "141-B-bug-9726688-9726780",
+      "group": "A",
+      "prompt_hash": "00fce0644c5bc283a8567d34dd477d6add910b4470a3b5babd145fbd46c22cc7"
+    },
+    {
+      "case_id": "141-B-bug-9726688-9726780",
+      "group": "B",
+      "prompt_hash": "113d7b6c87a96a07d80b4fb79d8d5c0217fd135d1a0b3934f983ee44f9fd8954"
+    },
+    {
+      "case_id": "141-B-bug-9726688-9726780",
+      "group": "C",
+      "prompt_hash": "cfe2967357abd434a61c84a32333aa2e7a19a8d319168253e1695af2e1931243"
+    },
+    {
+      "case_id": "515-B-bug-12615092-12615121",
+      "group": "A",
+      "prompt_hash": "aa519a0898fabb992e072c8dfd10e43ee299ae83b50619060336f6353d3eaac1"
+    },
+    {
+      "case_id": "515-B-bug-12615092-12615121",
+      "group": "B",
+      "prompt_hash": "b57190119a3024234f4dedc179e04cff50063336ba246b0e6f63205923a55174"
+    },
+    {
+      "case_id": "515-B-bug-12615092-12615121",
+      "group": "C",
+      "prompt_hash": "18405601ca3171e0daf6390d34de6bd2e007beeb31aa9b671a1b75936d87e0cb"
+    },
+    {
+      "case_id": "603-A-bug-14677732-14677817",
+      "group": "A",
+      "prompt_hash": "3afb65cabe2dab6506de8986d986c01b480134761e174f2e73ae62b5bf418c9b"
+    },
+    {
+      "case_id": "603-A-bug-14677732-14677817",
+      "group": "B",
+      "prompt_hash": "c8d569461ebd3beea067ddbe2fc1b831cd7ff8cd7abfe6ad75f55336e2218aa0"
+    },
+    {
+      "case_id": "603-A-bug-14677732-14677817",
+      "group": "C",
+      "prompt_hash": "bce8ab4d5f01812e3c909338f712a296335e1902e1996f54786fa10ab99d61d1"
+    },
+    {
+      "case_id": "628-A-bug-16337935-16338043",
+      "group": "A",
+      "prompt_hash": "076810546e4116be555fdea36dd5239b29350397b853f5683f8456b9988be3b4"
+    },
+    {
+      "case_id": "628-A-bug-16337935-16338043",
+      "group": "B",
+      "prompt_hash": "5b111e4784240166feb5a443c7a26f64cdc7877a2b166b7096b73245c9ea414b"
+    },
+    {
+      "case_id": "628-A-bug-16337935-16338043",
+      "group": "C",
+      "prompt_hash": "5577299adbdb1020b559c71c06cfc943a2fd63ba54a23c94e83e39cc7d22489f"
+    },
+    {
+      "case_id": "166-A-bug-11517296-11517321",
+      "group": "A",
+      "prompt_hash": "843ac346c3dae31443579e146dd9707fb4b4b3fceaf4d2362c82605eba52d564"
+    },
+    {
+      "case_id": "166-A-bug-11517296-11517321",
+      "group": "B",
+      "prompt_hash": "02ee312374f72a393b576f625802b015ded3d37ce948b6d0ae180a5e5fba6bd2"
+    },
+    {
+      "case_id": "166-A-bug-11517296-11517321",
+      "group": "C",
+      "prompt_hash": "9554cf791583a51c3c912634fea4fd01339a3996ceb7abf9798ace3aaa1fadf4"
+    },
+    {
+      "case_id": "373-B-bug-5440932-5440937",
+      "group": "A",
+      "prompt_hash": "90ed27905d863b26935e8c7cdf79abeab27efe347f64468f223c4ff1a363fd3d"
+    },
+    {
+      "case_id": "373-B-bug-5440932-5440937",
+      "group": "B",
+      "prompt_hash": "75e453d16405842e150462c34523d25a51e0a3cd984000ad28e6265552ad7689"
+    },
+    {
+      "case_id": "373-B-bug-5440932-5440937",
+      "group": "C",
+      "prompt_hash": "224b8cd3b39e265fa745daebca19ed1a8eef5c9294da70dffb64d6c3ac9f5088"
+    },
+    {
+      "case_id": "478-A-bug-17555253-17555286",
+      "group": "A",
+      "prompt_hash": "21d2746104a8d56fafadc5c2c4535407b680efc596ca300351f8e36e01086566"
+    },
+    {
+      "case_id": "478-A-bug-17555253-17555286",
+      "group": "B",
+      "prompt_hash": "ac4693d0b688f9fe8837243d08b6dabfb7f2de84e9b0f4e6553ed7504aa2dacb"
+    },
+    {
+      "case_id": "478-A-bug-17555253-17555286",
+      "group": "C",
+      "prompt_hash": "c8323dbdebab21b246ebb8ecc7b7041467efd0703c0685e322f1fc5742d3b09b"
+    },
+    {
+      "case_id": "34-A-bug-11354973-11354982",
+      "group": "A",
+      "prompt_hash": "0d089632bf396f8cc23c22bbade2a3a8dc83492a3d1100aa121a4464563518c8"
+    },
+    {
+      "case_id": "34-A-bug-11354973-11354982",
+      "group": "B",
+      "prompt_hash": "e3d52a04f60d819937a57df936404bc12b9332ef6839100274f03e3b3c7f19f4"
+    },
+    {
+      "case_id": "34-A-bug-11354973-11354982",
+      "group": "C",
+      "prompt_hash": "cc8557c80de4a5b73f13ba8c140b43c9f9d4cf7767ac26204f6979c2f451ce90"
+    },
+    {
+      "case_id": "336-A-bug-6863058-6863063",
+      "group": "A",
+      "prompt_hash": "97c70044bf9ab788bf23702df1f1e03c3286d8190f5397f628e8c0ce9452fed5"
+    },
+    {
+      "case_id": "336-A-bug-6863058-6863063",
+      "group": "B",
+      "prompt_hash": "dab215e25e7d6a6431408a503ffff8db82672af8886d9ef8e47f4031f4476890"
+    },
+    {
+      "case_id": "336-A-bug-6863058-6863063",
+      "group": "C",
+      "prompt_hash": "54d413d90d724e6c376e24d430b427a67ed7033c7592c2dae078c618e2b949da"
+    },
+    {
+      "case_id": "606-B-bug-14733385-14733456",
+      "group": "A",
+      "prompt_hash": "8141a54e5a549a71bef5413c2c46fa731cf3b4c729d84c0cb65b6cd8c42fad2f"
+    },
+    {
+      "case_id": "606-B-bug-14733385-14733456",
+      "group": "B",
+      "prompt_hash": "16f129688ab1edd277bbe15dc705b6fa6a22d1bc3d1dfa68286076b7e7d654b0"
+    },
+    {
+      "case_id": "606-B-bug-14733385-14733456",
+      "group": "C",
+      "prompt_hash": "b6c4fe526fd8157d7c45c2ad477ee17503e164f008b12294b88d311cc675a5e8"
+    },
+    {
+      "case_id": "467-A-bug-17691358-17691499",
+      "group": "A",
+      "prompt_hash": "9765e1be2efd58dcd1cdde8a038afd0c349d05839b08f66fe9a7ae4239df9b19"
+    },
+    {
+      "case_id": "467-A-bug-17691358-17691499",
+      "group": "B",
+      "prompt_hash": "e6b444248163bf99a11d4e398ea1e627237cf0a2623da0775e17939f9d918996"
+    },
+    {
+      "case_id": "467-A-bug-17691358-17691499",
+      "group": "C",
+      "prompt_hash": "73d081b4fb2be54170555fa677250dcee74be23d45d18ef25aa46f18d4ea3aad"
+    },
+    {
+      "case_id": "87-A-bug-7652942-7652952",
+      "group": "A",
+      "prompt_hash": "ca142fc3a5c801880bf663aea9b5c2b2251615b741865c251977599830e6d632"
+    },
+    {
+      "case_id": "87-A-bug-7652942-7652952",
+      "group": "B",
+      "prompt_hash": "f96c782d887efdb7b032afaeb6276512d1eabcd00801fe791809f69886c8042b"
+    },
+    {
+      "case_id": "87-A-bug-7652942-7652952",
+      "group": "C",
+      "prompt_hash": "dbb24f941f503395ff37ebfcaaaf87f3cad6f60d535f5e9379cb4f6c64ea979d"
+    },
+    {
+      "case_id": "103-A-bug-18288288-18288294",
+      "group": "A",
+      "prompt_hash": "b2e90d18bff256f1b7fcc183bc02169aaa6f571623b3e6f4985e30079472aaf8"
+    },
+    {
+      "case_id": "103-A-bug-18288288-18288294",
+      "group": "B",
+      "prompt_hash": "d593d9740d9d6eff452fa5ac1a87ac3b787c8a65a4169d99aaaa590d761acbb6"
+    },
+    {
+      "case_id": "103-A-bug-18288288-18288294",
+      "group": "C",
+      "prompt_hash": "ad43723d0b3d3f655d306a7b52d0d9ac8b10fbc31669c7f881bd422b082ae99e"
+    },
+    {
+      "case_id": "546-B-bug-13932383-13932411",
+      "group": "A",
+      "prompt_hash": "61792cd263a05805a022cfad1c8111ee1005f27079b0e6a59719a7063ff85dca"
+    },
+    {
+      "case_id": "546-B-bug-13932383-13932411",
+      "group": "B",
+      "prompt_hash": "218aa3cec94751d78b770c77fd33f09a32252327b128e94c564151ac3113eeab"
+    },
+    {
+      "case_id": "546-B-bug-13932383-13932411",
+      "group": "C",
+      "prompt_hash": "5da3e9e17704d6bb0477f4edc22c024208643b724f6b840684e3e809a2fc43db"
+    },
+    {
+      "case_id": "202-C-bug-1847611-1847612",
+      "group": "A",
+      "prompt_hash": "cadc16a2ceacc52b9279e0ea68c1ceec10f6cf986671f5498ebc9301696cef69"
+    },
+    {
+      "case_id": "202-C-bug-1847611-1847612",
+      "group": "B",
+      "prompt_hash": "5f2248423985ab49199c21847e7353611ff7f1f29b5a1ad6c2959f7b6f2e52e4"
+    },
+    {
+      "case_id": "202-C-bug-1847611-1847612",
+      "group": "C",
+      "prompt_hash": "3a6c60fe8003cdad97ed1b57d02a6f0f83e933f56e3d27834e2417f680434432"
+    }
+  ],
+  "protocol_version": "repair-v2",
+  "readiness": {
+    "blocking_reasons": [
+      "model/version not selected",
+      "provider/base URL not selected",
+      "independent API credential not configured",
+      "genuine online smoke not run",
+      "provider pricing not verified",
+      "explicit user approval for bulk calls not granted"
+    ],
+    "bulk_online_ready": false,
+    "explicit_bulk_user_approval": false,
+    "mandatory_stop": true,
+    "pricing_verified": false
+  },
+  "token_estimate": {
+    "approximate_average_output_tokens_per_call": 160,
+    "approximate_total_output_tokens": 24600,
+    "groups": {
+      "A": {
+        "approximate_average_input_tokens": 380,
+        "approximate_total_input_tokens": 18800,
+        "calls": 50,
+        "maximum_input_tokens": 732,
+        "minimum_input_tokens": 237
+      },
+      "B": {
+        "approximate_average_input_tokens": 590,
+        "approximate_total_input_tokens": 29700,
+        "calls": 50,
+        "maximum_input_tokens": 956,
+        "minimum_input_tokens": 264
+      },
+      "C": {
+        "approximate_average_input_tokens": 690,
+        "approximate_total_input_tokens": 34400,
+        "calls": 50,
+        "maximum_input_tokens": 1016,
+        "minimum_input_tokens": 368
+      }
+    },
+    "method": "ceil(UTF-8-decoded character count / 4) per prompt/source; averages rounded to 10 tokens and totals to 100 tokens; buggy-source length is the expected complete-source output proxy"
+  }
+}
