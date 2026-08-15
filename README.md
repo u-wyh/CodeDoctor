@@ -128,6 +128,32 @@ python3 -m benchmark.scripts.run_fault_localization_pilot --reuse-coverage
 
 理论、数据流、ground truth 规则和指标定义见 [`docs/fault_localization/sbfl.md`](docs/fault_localization/sbfl.md)，实际 Pilot 结果见 [`benchmark/reports/fault_localization_pilot_report.md`](benchmark/reports/fault_localization_pilot_report.md)。
 
+## LLM Repair Evidence Ablation
+
+Phase 7 固定比较单次修复的三组输入：A 为 buggy source，B 追加冻结的 FL-v1 Top-10，C 再追加 repair-test execution evidence。先构建与两个 FL 数据集都不重叠的 Repair Pilot，并生成 FL 输入：
+
+```bash
+python3 benchmark/scripts/build_repair_pilot.py --force
+python3 benchmark/scripts/run_repair_pilot_fl.py --force
+```
+
+使用 OpenAI-compatible provider 时，凭据只从环境变量读取：
+
+```bash
+export CODEDOCTOR_API_KEY='...'
+export CODEDOCTOR_BASE_URL='https://provider.example/v1'
+export CODEDOCTOR_MODEL='fixed-model-version'
+python3 benchmark/scripts/run_repair_ablation.py --limit 3 --resume
+```
+
+支持 `--cases`、`--group`、`--model`、`--limit` 和 `--resume`。完整 50-case A/B/C 运行前必须先人工审查真实在线 smoke artifacts。生成结构化统计和报告：
+
+```bash
+python3 benchmark/scripts/generate_repair_ablation_report.py
+```
+
+原始 prompts、模型响应和 patches 位于 `benchmark/artifacts/repair/`，默认不进入 Git；报告见 [`benchmark/reports/llm_repair_evidence_ablation.md`](benchmark/reports/llm_repair_evidence_ablation.md)。
+
 ## 当前边界
 
 Docker 后端显著缩小了程序权限，但仍不等同于针对敌意代码的完整强隔离。当前没有限制输出大小和磁盘写入量，没有自定义 seccomp/AppArmor 策略，也没有使用 gVisor、Kata Containers 或独立虚拟机。静态/动态分析工具将在后续阶段加入。

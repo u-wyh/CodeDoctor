@@ -1181,3 +1181,189 @@ average-rank 口径下回退 case（122）多于改善 case（99），尤其 0-P
 - 在另一数据集或编译器版本复现实验，验证 `fl-v1` 的外部有效性以及 gcov branch mapping 的稳定性。
 - 后续接口应输出候选列表、line/branch score、tie interval、equivalence class 和不确定性，而不是把 branch-aware rank 1 当作确定诊断。
 - 本轮不开始 LLM Repair、Agent、RAG、AST/CFG、Sanitizer 新功能或参数调优。
+
+## 2026-08-15 - Phase 7: LLM Repair Baseline & Evidence Ablation
+
+### 1. 本次目标
+
+- 冻结 Fault Localization 为 CodeDoctor FL-v1，不修改 line Ochiai、branch max aggregation 或 tie-breaking。
+- 建立一个与 50-case FL Pilot、300-case独立 FL Evaluation 都不重叠的 50-case Repair Pilot Set，固定 seed `20260817`。
+- 固定单轮、单次尝试的 A/B/C evidence ablation：A 仅 source，B 追加 FL-v1 Top-10，C 再追加 repair-test execution evidence。
+- 实现可审查的 repair/evaluation 数据边界、OpenAI-compatible provider、完整源码提取、Docker patch validation、artifact cache/resume、配对 bootstrap/McNemar、失败分析与报告。
+- 有真实 API credential 时先运行 2-3 case 在线 smoke，再运行完整 Pilot；没有 credential 时禁止伪造在线结果。
+
+### 2. 实际完成内容
+
+- 开始时确认工作区干净，HEAD 为 Phase 6 commit `76b57e049a57fe691859c79685febc025daf6e61`，`origin` 为 `git@github.com:u-wyh/CodeDoctor.git` 且 main 同步。
+- 新建独立 Repair Pilot selector，复用既有 static validation、Docker `verify_case` 和 stratified candidate order。先排除 50-case Pilot 与 300-case Evaluation，再以 seed `20260817` 动态验证 61 个候选并得到 50 个合格 case。
+- 50 个 case 全部满足 buggy/reference compile、reference repair/validation 全通过、buggy 至少一个 failing repair test；与两个冻结数据集的 overlap 均为 0。11 个动态排除全部保留：reference repair 失败 5、reference validation 失败 6。
+- 对 Repair Pilot 真实采集 50/50 份 line/branch coverage，调用冻结 FL-v1 输出固定 Top-10；0 error。repair-time FL 文件只含行号、源码行、line/branch score、rank 和 tie interval。ground-truth fault 与 FL failure-boundary attributes 保存到独立 evaluation-only 文件。
+- 创建 `repair-v1` protocol，固定 prompt `repair-evidence-v1`、Top-K=10、attempt=1、完整源码输出、extraction、model defaults、validation 定义、cache key 字段，并记录 6 个核心 repair 文件 SHA-256。每次运行在线 pipeline 前验证这些哈希。
+- 用 `RepairContext` 与 `EvaluationContext` 分开可进入 LLM 的字段和 reference/hidden-validation/ground-truth 字段。prompt renderer 的输入类型只接受 RepairContext；Group A/B/C 基础提示完全相同，仅按组追加 evidence section。
+- 实现标准库 OpenAI-compatible Chat Completions provider，配置包括 base URL、环境变量 API key、model、temperature、max tokens、timeout 和可选 seed；API key 不进入参数对象、cache 或 artifact。
+- 实现 C/C++ fenced/plain full-source extraction、模型 timeout/API/malformed response 错误、内容寻址 cache、`--cases/--group/--model/--limit/--resume` CLI、单次 attempt 和 prompt/response hash 元数据。
+- 生成 patch 使用现有受限 Docker sandbox 编译，先运行 repair tests；全部通过才运行 hidden validation。严格区分 invalid output、compile error、repair failure、plausible patch 与 validated patch，并记录 original-fail 未修复、previously-pass regression、validation overfitting、line diff 和是否修改 FL Top-10。
+- 实现 A/B/C valid output、compile、plausible、validated 指标，B-A/C-B/C-A 的 paired bootstrap 95% CI 和 exact McNemar，失败模式计数及 FL hit/0-PASS 分层。当前无在线 artifact 时这些指标明确为 N/A。
+- 当前环境的 `OPENAI_*` 与 `CODEDOCTOR_*` API key/base URL/model 均未设置，因此真实在线 LLM 调用为 0。实际运行 3 case × A/B/C 的 fake echo smoke 共 9 条，fake 仅返回 buggy source，9 条均真实编译并分类为 `repair_test_failed`；所有 fake artifact 标记 `experimental=false`，不进入实验指标。
+- 单独以 evaluation-only reference 对一个 case 运行不落 artifact 的 Docker evaluator 自检，得到 `validated_patch`，3 个 repair tests 与 24 个 hidden validation tests 全通过；reference 从未进入 prompt。
+- 最终报告明确保留在线 A/B/C 为 0 case/N/A，不把 fake smoke 写成模型修复实验，不回答尚未测量的 evidence effectiveness。
+
+### 3. 新增、修改、删除的文件
+
+新增：
+
+- `benchmark/datasets/codeflaws/metadata/repair_pilot.jsonl`
+- `benchmark/datasets/codeflaws/metadata/repair_pilot_excluded.jsonl`
+- `benchmark/datasets/codeflaws/metadata/repair_pilot_results.jsonl`
+- `benchmark/datasets/codeflaws/metadata/repair_pilot_summary.json`
+- `benchmark/metadata/repair/repair_protocol_v1.json`
+- `benchmark/metadata/repair/repair_pilot_fl.jsonl`
+- `benchmark/metadata/repair/repair_pilot_attributes.jsonl`
+- `benchmark/repair_set.py`
+- `benchmark/scripts/build_repair_pilot.py`
+- `benchmark/scripts/run_repair_pilot_fl.py`
+- `benchmark/scripts/run_repair_ablation.py`
+- `benchmark/scripts/generate_repair_ablation_report.py`
+- `benchmark/results/repair/evidence_ablation.json`
+- `benchmark/reports/llm_repair_evidence_ablation.md`
+- `benchmark/tests/test_repair_set.py`
+- `repair/__init__.py`
+- `repair/models.py`
+- `repair/context.py`
+- `repair/prompting.py`
+- `repair/provider.py`
+- `repair/extraction.py`
+- `repair/evaluator.py`
+- `repair/artifacts.py`
+- `repair/pipeline.py`
+- `repair/protocol.py`
+- `repair/reporting.py`
+- `repair/tests/__init__.py`
+- `repair/tests/test_artifacts.py`
+- `repair/tests/test_evaluator.py`
+- `repair/tests/test_extraction.py`
+- `repair/tests/test_pipeline.py`
+- `repair/tests/test_prompting.py`
+- `repair/tests/test_protocol.py`
+- `repair/tests/test_provider.py`
+- `repair/tests/test_reporting.py`
+
+修改：
+
+- `.gitignore`
+- `README.md`
+- `benchmark/config.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+本地生成但忽略：
+
+- `benchmark/results/repair/coverage/*.json`（50 份，约 696KB）
+- `benchmark/artifacts/repair/<case>/<group>/*.json`（9 份 fake smoke，约 132KB）
+
+### 4. 执行过的重要命令
+
+```bash
+git status
+git remote -v
+git log -1 --oneline
+
+python3 -m unittest discover -s repair/tests -v
+python3 -m unittest benchmark.tests.test_repair_set -v
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- docker info --format '{{.ServerVersion}}'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/build_repair_pilot.py --force'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_pilot_fl.py --force'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider fake --limit 3 --resume'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_pilot_fl.py --reuse-coverage'
+python3 benchmark/scripts/generate_repair_ablation_report.py
+python3 benchmark/scripts/run_repair_ablation.py --limit 1
+
+find benchmark/results/repair/coverage -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum
+find benchmark/artifacts/repair -type f -name '*.json' -print0 | sort -z | xargs -0 sha256sum | sha256sum
+sha256sum benchmark/metadata/repair/repair_pilot_fl.jsonl benchmark/metadata/repair/repair_pilot_attributes.jsonl
+git check-ignore -v benchmark/artifacts/repair/259-B-bug-13083263-13083279/A/*.json benchmark/results/repair/coverage/259-B-bug-13083263-13083279.json benchmark/datasets/codeflaws/raw/codeflaws/259-B-bug-13083263-13083279 benchmark/datasets/codeflaws/downloads/codeflaws.tar.gz
+git diff --check
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行了内联 Python 审计：验证 Repair Pilot 50 case 唯一、两个 overlap 为 0、入选顺序等于前 50 个动态 eligible records、reference suites 全通过、buggy repair 至少一项失败；扫描 9 个 fake prompts 的 canary/section/secret 边界；以一个 reference source 验证完整 hidden validation 路径；统计 Repair Pilot FL attributes。
+
+### 5. 实际测试与实验结果
+
+- Repair Pilot selection：候选池 3,534，动态验证 61，入选 50，动态排除 11，耗时 111.027 秒，seed `20260817`，FL Pilot/Evaluation overlap 均为 0。
+- Repair Pilot FL-v1：50/50 case、0 error；13 个 0-PASS、4 个 non-executable fault、36 个 straight-line ambiguity；FL Top-1/5/10 hit 分别为 8/25/38。
+- FL coverage 重建前后组合 SHA-256 均为 `0871e5f6262a4be0458fda5d74127052610e35a37c75df55f0d92cb2aca7d03b`；FL JSONL hash 为 `99a41e38223c755b9c974aa37ccfd136d766ed260bd081ed4045b46c2d887af0`，attributes hash 为 `9f0b4287436dcc9b590c8177e304ee53d63eb43908bba03564e97991fddd378f`，复用 coverage 后完全一致。
+- fake smoke：3 case × A/B/C = 9 artifacts，首次耗时 12.629 秒；全部 valid output、compile success，但 unchanged buggy source 仍失败 repair tests，分类 9 个 `repair_test_failed`。`--resume` 重跑未改 artifact，组合 hash 前后均为 `dc6d35db3251a64dbfe706380c008f808c54a624cff8c19ec86bc996d448d092`。
+- reference evaluator 自检：`259-B-bug-13083263-13083279` 得到 `validated_patch`，3 repair + 24 validation tests 全通过；该调用不是模型实验且未保存模型 artifact。
+- Repair 单元测试开发中最终为 21/21 PASS，Repair Set 为 2/2 PASS。
+- LXD Docker 环境最终全仓库 `98/98 PASS`，耗时 12.113 秒，无 skip；包括真实 Runner、Sanitizer、coverage collector 与所有旧回归。
+- leakage scan：9/9 artifacts PASS；A 无 FL/execution，B 有 FL 无 execution，C 两者都有；canary 不存在；model parameters 无 credential 字段；prompt/cache/artifact 不含 API key。
+- 在线 OpenAI-compatible provider CLI 在无 model/base URL/API key 时实际返回 exit code 2 和清晰错误。真实在线 LLM calls=0；A/B/C online compile/plausible/validated、paired comparison、bootstrap CI、McNemar 均为 N/A。
+- credential/raw/build audit 无敏感信息匹配；无 `.env`；Codeflaws raw/archive、repair coverage、prompt/raw response/patch artifacts 均被 `.gitignore` 命中；Docker 无 `codedoctor-*` 残留容器；LXD 最终 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 Resume 首跑与 cache 命中的结构类型不同
+
+首次 pipeline 返回内存 dataclass 中的 tuple，resume 从 JSON 读取 list，内容相同但测试比较失败。
+
+#### 6.2 首次 Repair Pilot 审计读取了不存在的 `success` 字段
+
+`SuiteVerification.success` 是 Python property，`asdict` 后 JSON 只有 total/passed/failed 等字段，首次内联审计报 `KeyError: success`。
+
+#### 6.3 LXD 创建的输出目录在宿主不可写
+
+`benchmark/metadata/repair` 和 `benchmark/results/repair` 首次由 LXD root 创建，宿主 apply/report 写入分别报 permission denied。
+
+#### 6.4 Artifact secret 扫描误报 `max_tokens`
+
+初版扫描用包含匹配 `token` 判断敏感字段，把合法生成参数 `max_tokens` 当作 credential，报告生成被主动阻止。
+
+#### 6.5 当前环境没有在线模型凭据
+
+`OPENAI_API_KEY/BASE_URL/MODEL` 与 `CODEDOCTOR_API_KEY/BASE_URL/MODEL` 全部 unset，不能执行真实在线 smoke 或 50-case A/B/C Pilot。
+
+#### 6.6 Staged diff 检查发现两个空包文件多余空行
+
+`git diff --cached --check` 指出 `repair/__init__.py` 与 `repair/tests/__init__.py` 的 new blank line at EOF。
+
+### 7. 问题的解决方式
+
+- artifact 写入后统一从 JSON 重新读取并返回，使首跑和 resume 的公开结构完全相同；cache test 验证同配置只调用模型一次，参数变化产生新 key。
+- 审计改为按 `total > 0 and passed == total` 判断 suite success，重新核验 50 个 case 后全部通过。
+- 在 LXD 内只调整两个生成目录的写权限，随后宿主成功写入 protocol、summary 和 report；未改变 sandbox 容器安全配置。
+- secret scan 改为明确禁止 `api_key/access_token/authorization/password/secret`，保留合法 `max_tokens`；重新扫描 9 个 artifacts 全部通过。
+- 不创建假 credential、不调用未知端点、不把 fake 结果伪装成 LLM 指标。provider、mock、pipeline、报告均完成，在线指标明确 N/A。
+- 删除两个 `__init__.py` 的多余空行并重新暂存，最终 staged diff check 通过。
+
+### 8. 设计取舍
+
+- 基础 prompt 只要求最小修改、保留 I/O、不硬编码测试、返回完整源码；不做多轮反馈、自反思、ensemble、Agent 或 prompt sweep。A/B/C 通过 append-only sections 控制变量。
+- 允许 Group C 使用 repair tests 的 expected output，因为它属于既有 repair-time benchmark information；hidden validation expected behavior 和 reference 永远不进入 RepairContext。
+- provider 采用小型标准库 HTTP 实现而不是引入大型 SDK/Agent framework；当前只实现 OpenAI-compatible Chat Completions 所需最小接口。
+- patch extraction 只支持 fenced C/C++ block 或看起来像完整程序的 plain source；不为异常模型输出扩张复杂 parser。
+- patch 先通过全部 repair tests 才运行 hidden validation，避免不必要的 evaluation-only 执行；hidden validation result 不回灌模型，attempt 固定为 1。
+- raw prompts/responses/patches 默认全部忽略，仅提交小型 selection metadata、FL Top-10、evaluation-only attributes、空在线 summary 和诚实报告。
+- fake provider 只验证 plumbing，所有 artifact 强制 `experimental=false`；统计器只读取 `experimental=true`，并拒绝混合多个在线 model/prompt configuration。
+- `validated_patch` 只表示现有 repair + hidden validation suites 全通过，不使用 `correct_patch` 术语，也不声称形式正确性。
+
+### 9. 当前已知不足
+
+- 核心研究问题尚未被真实模型数据回答；A/B/C 在线样本均为 0，所有 effectiveness 指标、CI 和 McNemar 结果为 N/A。
+- Chat Completions compatibility 依赖后续实际 provider；不同 OpenAI-compatible 服务可能在 `max_tokens`、seed 或返回 schema 上有差异，需要真实 smoke 验证，但不能根据修复率改协议。
+- Repair Pilot 仅 50 个 Codeflaws case，单模型单次尝试的 CI 可能很宽；Codeflaws 与测试套件也不代表大型真实 C/C++ 系统。
+- temperature 0 和 provider seed 不保证确定性；当前 cache 保证同一已完成调用不重复付费，但不证明模型本身 deterministic。
+- 13 个 0-PASS、4 个 non-executable fault、36 个 straight-line ambiguity 可能限制 FL evidence；目前只有 descriptive attributes，没有在线 repair outcome 可关联。
+- 普通 line diff 对 insertion/deletion 只做近邻行映射，足够低成本分析，但不是 AST 级 patch attribution。
+- `--resume` 仍会重新计算 buggy baseline execution，虽然不会重复模型调用或付费；后续可独立缓存 baseline evidence而不改变 prompt protocol。
+
+### 10. 下一步计划
+
+- 等人工配置一个固定的 OpenAI-compatible base URL、API key 和精确 model version 后，保持 `repair-v1` 哈希不变，先真实运行 2-3 case × A/B/C smoke。
+- 人工审查 smoke prompts、raw responses、patch extraction、hidden validation boundary 和 artifact cache；若是基础设施 bug，显式修复并升级 protocol version，不根据修复率调 prompt。
+- smoke 通过后运行完整 50-case × 3 groups = 150 次单轮在线调用，使用 `--resume` 避免中断重复付费，再生成真实 paired bootstrap/McNemar 与 failure analysis。
+- 完成真实 Phase 7 实验并经人工审查前，不进入 Phase 8，不加入多轮反馈、test augmentation、sanitizer feedback、Agent 或 ensemble。

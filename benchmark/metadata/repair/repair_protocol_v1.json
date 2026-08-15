@@ -1,0 +1,46 @@
+{
+  "attempts_per_case_group": 1,
+  "cache_key_fields": [
+    "case_id",
+    "group",
+    "prompt_hash",
+    "prompt_template_version",
+    "provider",
+    "base_url",
+    "model",
+    "temperature",
+    "max_tokens",
+    "timeout_seconds",
+    "seed"
+  ],
+  "evidence_groups": {
+    "A": "buggy source and common instruction",
+    "B": "A plus frozen FL-v1 Top-10 locations",
+    "C": "B plus repair-test execution evidence"
+  },
+  "fl_method_version": "fl-v1",
+  "fl_top_k": 10,
+  "frozen_implementation": {
+    "repair/context.py": "46e8ddca1e508b13f92bc1c9282d38cf9a18dfd43e73aa8a0e928a31e69c7227",
+    "repair/evaluator.py": "3212bcc77d52733bd4ca3abb534bc12837190325f2a7e8b25870beadc87055a6",
+    "repair/extraction.py": "a5227ee8045aed2bb621e2704b8d805fff5ade5339fdfede92da00f3adc5f368",
+    "repair/pipeline.py": "93336aa994bf9c468ff34d6c49dd1ce66826342e8d12e4e763b0313a8cedee24",
+    "repair/prompting.py": "06df04dda16aa2a74825f913a03469338bba4eea601026c220f8ebca70e86067",
+    "repair/provider.py": "4f1ad5dde9032b28219c6185eedc92d2a5bb74862423720b397eddec7944c552"
+  },
+  "generation_output": "complete source code",
+  "model_defaults": {
+    "max_tokens": 4096,
+    "seed": null,
+    "temperature": 0.0,
+    "timeout_seconds": 120.0
+  },
+  "patch_classification": {
+    "plausible_patch": "compile success and all repair tests pass",
+    "validated_patch": "plausible and all hidden validation tests pass"
+  },
+  "prompt_template_version": "repair-evidence-v1",
+  "protocol_version": "repair-v1",
+  "repair_pilot_seed": 20260817,
+  "source_commit": "76b57e049a57fe691859c79685febc025daf6e61"
+}
