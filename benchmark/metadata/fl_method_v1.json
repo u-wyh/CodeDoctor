@@ -1,0 +1,71 @@
+{
+  "frozen_before_evaluation_selection": true,
+  "frozen_date": "2026-08-15",
+  "implementation": {
+    "fault_localization/algorithms.py": "40013c899abb017e6c374d013323c32bb47f6950035e96751fdcf48045e178aa",
+    "fault_localization/collector.py": "58799a8a3a0a2352e7993746d230cc39605b4040a42d1fee875ee0df092e5134",
+    "fault_localization/evaluation.py": "513bcb05e5c736e54b52b94024618f1cb214a6c0f53b052df024796495c9bfa1",
+    "fault_localization/gcov_parser.py": "d7647bdf20ae1362bf274f84e4d3811c8b1733bc1966084ff4fc453dd136e13b",
+    "fault_localization/models.py": "a881fdeb2942233796936b49fcf7599503327a151f879971d4bb4d317cdf7879",
+    "fault_localization/pipeline.py": "b51ac41625f01b14202ffb02100c2201a450e9681e73f7645c6e083f91a54108",
+    "fault_localization/ranking.py": "d5594d57e45ac73a5c058d606dd64d96869c882ea39f9908ed3c41a18c294afa",
+    "fault_localization/spectrum.py": "016bdd5eece57e90d8c229a63f5d60b64c04592aa4712849487de43dab783007",
+    "fault_localization/tie_analysis.py": "5898c93ab41c505db5f1072daa70ab01052640cd16b465ec2a5012d6d0dc4dd5"
+  },
+  "method_version": "fl-v1",
+  "methods": {
+    "baseline": {
+      "formula": "ef / sqrt((ef + nf) * (ef + ep)); zero denominator maps to 0.0",
+      "name": "line_ochiai",
+      "ranking_key": [
+        "line_score_descending",
+        "source_line_ascending"
+      ]
+    },
+    "codedoctor_fl_v1": {
+      "branch_outcome": "one GCC/gcov branch arc identified by source line and line-local branch index; taken iff count > 0",
+      "branch_spectrum": "ef/ep count failing/passing repair tests taking the outcome; nf/np count failing/passing repair tests not taking it",
+      "branch_to_line": "maximum branch Ochiai on the source line; 0.0 when the line has no branch outcome",
+      "formula": "the same Ochiai formula is applied independently to line and branch spectra",
+      "name": "line_ochiai_with_branch_tiebreak",
+      "ranking_key": [
+        "line_score_descending",
+        "max_branch_score_descending",
+        "source_line_ascending"
+      ],
+      "restriction": "branch evidence only breaks exact line-score ties and cannot reverse distinct line-score groups"
+    }
+  },
+  "protocol": {
+    "compile_flags": "gcc -g -O0 --coverage with the frozen signal-dump header",
+    "coverage_command": "gcov --json-format --branch-probabilities --branch-counts",
+    "coverage_isolation": "fresh executable, gcno workspace, and Docker container per repair test",
+    "localization_inputs": [
+      "buggy source",
+      "repair test inputs",
+      "repair expected outputs",
+      "repair verdicts",
+      "repair runtime coverage"
+    ],
+    "prohibited_localization_inputs": [
+      "reference source",
+      "validation tests",
+      "buggy-reference diff",
+      "ground-truth fault lines"
+    ],
+    "run_timeout_seconds": 5.0
+  },
+  "source_commit": "768bd26e92de45c22d4652e31afc04ce8caa6632",
+  "tie_evaluation": {
+    "average_rank": "(tie_start_rank + tie_end_rank) / 2",
+    "best_rank": "tie_start_rank",
+    "deterministic_rank": "position after the frozen ranking key",
+    "tie_size": "tie_end_rank - tie_start_rank + 1",
+    "worst_rank": "tie_end_rank"
+  },
+  "tuning": {
+    "alpha": null,
+    "evaluation_set_may_change_method": false,
+    "parameters_selected_on_evaluation_set": false
+  }
+}
