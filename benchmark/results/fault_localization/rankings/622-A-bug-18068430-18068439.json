@@ -1,0 +1,405 @@
+{
+  "case_id": "622-A-bug-18068430-18068439",
+  "executable_lines": 9,
+  "failed_tests": 1,
+  "passed_tests": 5,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.2,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.2,
+        "source_snippet": "long long n,i=1,k;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.2,
+        "source_snippet": "scanf(\"%lld\",&n);",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.2,
+        "source_snippet": "n=n-i;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.2,
+        "source_snippet": "if(n<=0) break;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 14,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.2,
+        "source_snippet": "printf(\"%lld\",k);",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.2,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 5,
+        "line": 11,
+        "nf": 1,
+        "np": 0,
+        "rank": 8,
+        "score": 0.0,
+        "source_snippet": "i++;",
+        "tie_end_rank": 9,
+        "tie_start_rank": 8
+      },
+      {
+        "ef": 0,
+        "ep": 5,
+        "line": 12,
+        "nf": 1,
+        "np": 0,
+        "rank": 9,
+        "score": 0.0,
+        "source_snippet": "k=n;",
+        "tie_end_rank": 9,
+        "tie_start_rank": 8
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.4082482904638631,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.4082482904638631,
+        "source_snippet": "long long n,i=1,k;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.4082482904638631,
+        "source_snippet": "scanf(\"%lld\",&n);",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.4082482904638631,
+        "source_snippet": "n=n-i;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.4082482904638631,
+        "source_snippet": "if(n<=0) break;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 14,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.4082482904638631,
+        "source_snippet": "printf(\"%lld\",k);",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.4082482904638631,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 5,
+        "line": 11,
+        "nf": 1,
+        "np": 0,
+        "rank": 8,
+        "score": 0.0,
+        "source_snippet": "i++;",
+        "tie_end_rank": 9,
+        "tie_start_rank": 8
+      },
+      {
+        "ef": 0,
+        "ep": 5,
+        "line": 12,
+        "nf": 1,
+        "np": 0,
+        "rank": 9,
+        "score": 0.0,
+        "source_snippet": "k=n;",
+        "tie_end_rank": 9,
+        "tie_start_rank": 8
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.5,
+        "source_snippet": "long long n,i=1,k;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%lld\",&n);",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "n=n-i;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5,
+        "source_snippet": "if(n<=0) break;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 14,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5,
+        "source_snippet": "printf(\"%lld\",k);",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 5,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 7,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 5,
+        "line": 11,
+        "nf": 1,
+        "np": 0,
+        "rank": 8,
+        "score": 0.0,
+        "source_snippet": "i++;",
+        "tie_end_rank": 9,
+        "tie_start_rank": 8
+      },
+      {
+        "ef": 0,
+        "ep": 5,
+        "line": 12,
+        "nf": 1,
+        "np": 0,
+        "rank": 9,
+        "score": 0.0,
+        "source_snippet": "k=n;",
+        "tie_end_rank": 9,
+        "tie_start_rank": 8
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 2,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 4,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 5,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 9,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 10,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 5,
+      "line": 11,
+      "nf": 1,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 5,
+      "line": 12,
+      "nf": 1,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 14,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 5,
+      "line": 15,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": []
+}

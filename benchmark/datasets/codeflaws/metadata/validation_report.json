@@ -1,0 +1,133 @@
+{
+  "duplicate_ids": 0,
+  "invalid": 20,
+  "invalid_cases": [
+    {
+      "case_id": "1-C-bug-15203581-15203678",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "120-A-bug-3755986-3755994",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "120-A-bug-3756299-3756385",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "120-B-bug-3752196-3752201",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "120-B-bug-3754178-3754181",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "120-E-bug-3535976-3536067",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "120-E-bug-7236446-7236513",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "234-A-bug-17608639-17608751",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "234-A-bug-17608640-17608751",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "234-A-bug-2519091-2519130",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "234-B-bug-15831884-15832068",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "234-B-bug-2494175-2494181",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "234-C-bug-3793024-3793031",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "254-A-bug-3232299-3232307",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "254-B-bug-2772031-2772034",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "35-A-bug-14752871-14752907",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "35-A-bug-2853912-2853922",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "364-C-bug-5274751-5274860",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "435-C-bug-6755082-6755089",
+      "reasons": [
+        "missing_tests"
+      ]
+    },
+    {
+      "case_id": "518-D-bug-10002685-10002791",
+      "reasons": [
+        "missing_tests"
+      ]
+    }
+  ],
+  "missing_buggy": 0,
+  "missing_makefile": 0,
+  "missing_reference": 0,
+  "missing_tests": 20,
+  "total": 3904,
+  "unreadable_sources": 0,
+  "valid": 3884
+}

@@ -1,0 +1,577 @@
+{
+  "case_id": "66-A-bug-13987166-13987365",
+  "executable_lines": 13,
+  "failed_tests": 2,
+  "passed_tests": 2,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 2,
+        "ep": 1,
+        "line": 30,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 4.0,
+        "source_snippet": "printf(\"%s\",rango[i].tipo);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 1,
+        "line": 31,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 4.0,
+        "source_snippet": "break;",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 2.0,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 2.0,
+        "source_snippet": "CARACTERISTICAS rango[4] = {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 2.0,
+        "source_snippet": "scanf(\"%s\",valor);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 23,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 2.0,
+        "source_snippet": "tamanio=strlen(valor);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 2.0,
+        "source_snippet": "while (valor[0]=='0' || tamanio>100) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 28,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 2.0,
+        "source_snippet": "for (i=0; i<4; i++){",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 29,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 2.0,
+        "source_snippet": "if( tamanio<rango[i].tope || (tamanio==rango[i].tope && strcmp(valor,rango[i].sup)<=0) ) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 38,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 2.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 25,
+        "nf": 2,
+        "np": 2,
+        "rank": 11,
+        "score": 0.0,
+        "source_snippet": "scanf(\"%s\",valor);",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 12,
+        "score": 0.0,
+        "source_snippet": "if (i==3){",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 34,
+        "nf": 2,
+        "np": 1,
+        "rank": 13,
+        "score": 0.0,
+        "source_snippet": "printf(\"BigInteger\");",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 2,
+        "ep": 1,
+        "line": 30,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.8164965809277261,
+        "source_snippet": "printf(\"%s\",rango[i].tipo);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 1,
+        "line": 31,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.8164965809277261,
+        "source_snippet": "break;",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.7071067811865475,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.7071067811865475,
+        "source_snippet": "CARACTERISTICAS rango[4] = {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.7071067811865475,
+        "source_snippet": "scanf(\"%s\",valor);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 23,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.7071067811865475,
+        "source_snippet": "tamanio=strlen(valor);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.7071067811865475,
+        "source_snippet": "while (valor[0]=='0' || tamanio>100) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 28,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.7071067811865475,
+        "source_snippet": "for (i=0; i<4; i++){",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 29,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.7071067811865475,
+        "source_snippet": "if( tamanio<rango[i].tope || (tamanio==rango[i].tope && strcmp(valor,rango[i].sup)<=0) ) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 38,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.7071067811865475,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 25,
+        "nf": 2,
+        "np": 2,
+        "rank": 11,
+        "score": 0.0,
+        "source_snippet": "scanf(\"%s\",valor);",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 12,
+        "score": 0.0,
+        "source_snippet": "if (i==3){",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 34,
+        "nf": 2,
+        "np": 1,
+        "rank": 13,
+        "score": 0.0,
+        "source_snippet": "printf(\"BigInteger\");",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 2,
+        "ep": 1,
+        "line": 30,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.6666666666666666,
+        "source_snippet": "printf(\"%s\",rango[i].tipo);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 1,
+        "line": 31,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.6666666666666666,
+        "source_snippet": "break;",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "CARACTERISTICAS rango[4] = {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%s\",valor);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 23,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5,
+        "source_snippet": "tamanio=strlen(valor);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "while (valor[0]=='0' || tamanio>100) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 28,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5,
+        "source_snippet": "for (i=0; i<4; i++){",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 29,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5,
+        "source_snippet": "if( tamanio<rango[i].tope || (tamanio==rango[i].tope && strcmp(valor,rango[i].sup)<=0) ) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 38,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 25,
+        "nf": 2,
+        "np": 2,
+        "rank": 11,
+        "score": 0.0,
+        "source_snippet": "scanf(\"%s\",valor);",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 12,
+        "score": 0.0,
+        "source_snippet": "if (i==3){",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 34,
+        "nf": 2,
+        "np": 1,
+        "rank": 13,
+        "score": 0.0,
+        "source_snippet": "printf(\"BigInteger\");",
+        "tie_end_rank": 13,
+        "tie_start_rank": 11
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 6,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 13,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 22,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 23,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 24,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 0,
+      "line": 25,
+      "nf": 2,
+      "np": 2
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 28,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 29,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 1,
+      "line": 30,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 2,
+      "ep": 1,
+      "line": 31,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 0,
+      "ep": 2,
+      "line": 33,
+      "nf": 2,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 1,
+      "line": 34,
+      "nf": 2,
+      "np": 1
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 38,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": []
+}

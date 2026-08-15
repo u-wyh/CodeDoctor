@@ -1,0 +1,620 @@
+{
+  "case_id": "424-B-bug-10539205-10539214",
+  "executable_lines": 14,
+  "failed_tests": 2,
+  "passed_tests": 2,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 2.0,
+        "source_snippet": "int cmp(const void *a, const void *b)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 14,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 2.0,
+        "source_snippet": "return (*(Node_t*)a).dis - (*(Node_t*)b).dis;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 17,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 2.0,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 20,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 2.0,
+        "source_snippet": "scanf(\"%d %d\", &N, &S);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 21,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 2.0,
+        "source_snippet": "for(i = 0; i < N; ++i)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 2.0,
+        "source_snippet": "scanf(\"%d %d %d\", &x, &y, &A[i].k);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 25,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 2.0,
+        "source_snippet": "A[i].dis = x * x + y * y;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 27,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 2.0,
+        "source_snippet": "qsort(A, N, sizeof(Node_t), cmp);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 28,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 2.0,
+        "source_snippet": "for(i = 0; i < N; ++i)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 30,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 2.0,
+        "source_snippet": "S += A[i].k;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 31,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 2.0,
+        "source_snippet": "if(S >= 1000000)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 37,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 2.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 13,
+        "score": 0.0,
+        "source_snippet": "printf(\"%.6lf\\n\", sqrt(A[i].dis));",
+        "tie_end_rank": 14,
+        "tie_start_rank": 13
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 34,
+        "nf": 2,
+        "np": 0,
+        "rank": 14,
+        "score": 0.0,
+        "source_snippet": "break;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 13
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.7071067811865475,
+        "source_snippet": "int cmp(const void *a, const void *b)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 14,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.7071067811865475,
+        "source_snippet": "return (*(Node_t*)a).dis - (*(Node_t*)b).dis;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 17,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.7071067811865475,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 20,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.7071067811865475,
+        "source_snippet": "scanf(\"%d %d\", &N, &S);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 21,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.7071067811865475,
+        "source_snippet": "for(i = 0; i < N; ++i)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.7071067811865475,
+        "source_snippet": "scanf(\"%d %d %d\", &x, &y, &A[i].k);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 25,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.7071067811865475,
+        "source_snippet": "A[i].dis = x * x + y * y;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 27,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.7071067811865475,
+        "source_snippet": "qsort(A, N, sizeof(Node_t), cmp);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 28,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.7071067811865475,
+        "source_snippet": "for(i = 0; i < N; ++i)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 30,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.7071067811865475,
+        "source_snippet": "S += A[i].k;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 31,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.7071067811865475,
+        "source_snippet": "if(S >= 1000000)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 37,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.7071067811865475,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 13,
+        "score": 0.0,
+        "source_snippet": "printf(\"%.6lf\\n\", sqrt(A[i].dis));",
+        "tie_end_rank": 14,
+        "tie_start_rank": 13
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 34,
+        "nf": 2,
+        "np": 0,
+        "rank": 14,
+        "score": 0.0,
+        "source_snippet": "break;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 13
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.5,
+        "source_snippet": "int cmp(const void *a, const void *b)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 14,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.5,
+        "source_snippet": "return (*(Node_t*)a).dis - (*(Node_t*)b).dis;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 17,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 20,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%d %d\", &N, &S);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 21,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5,
+        "source_snippet": "for(i = 0; i < N; ++i)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%d %d %d\", &x, &y, &A[i].k);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 25,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "A[i].dis = x * x + y * y;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 27,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5,
+        "source_snippet": "qsort(A, N, sizeof(Node_t), cmp);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 28,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5,
+        "source_snippet": "for(i = 0; i < N; ++i)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 30,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5,
+        "source_snippet": "S += A[i].k;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 31,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.5,
+        "source_snippet": "if(S >= 1000000)",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 2,
+        "ep": 2,
+        "line": 37,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 13,
+        "score": 0.0,
+        "source_snippet": "printf(\"%.6lf\\n\", sqrt(A[i].dis));",
+        "tie_end_rank": 14,
+        "tie_start_rank": 13
+      },
+      {
+        "ef": 0,
+        "ep": 2,
+        "line": 34,
+        "nf": 2,
+        "np": 0,
+        "rank": 14,
+        "score": 0.0,
+        "source_snippet": "break;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 13
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 12,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 14,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 17,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 20,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 21,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 24,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 25,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 27,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 28,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 30,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 31,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 2,
+      "line": 33,
+      "nf": 2,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 2,
+      "line": 34,
+      "nf": 2,
+      "np": 0
+    },
+    {
+      "ef": 2,
+      "ep": 2,
+      "line": 37,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": []
+}

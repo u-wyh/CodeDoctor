@@ -1,0 +1,235 @@
+{
+  "case_id": "16-C-bug-73707-73718",
+  "executable_lines": 5,
+  "failed_tests": 4,
+  "passed_tests": 0,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 1,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "scanf(\"%d%d%d%d\",&a,&b,&x,&y);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "d=(a/=x)<(b/=y)?a:b;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "printf(\"%d %d\\n\",a,b);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 1,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf(\"%d%d%d%d\",&a,&b,&x,&y);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.0,
+        "source_snippet": "d=(a/=x)<(b/=y)?a:b;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.0,
+        "source_snippet": "printf(\"%d %d\\n\",a,b);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 1,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf(\"%d%d%d%d\",&a,&b,&x,&y);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.0,
+        "source_snippet": "d=(a/=x)<(b/=y)?a:b;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.0,
+        "source_snippet": "printf(\"%d %d\\n\",a,b);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 4,
+        "ep": 0,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 1
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 4,
+      "ep": 0,
+      "line": 1,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 4,
+      "ep": 0,
+      "line": 3,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 4,
+      "ep": 0,
+      "line": 4,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 4,
+      "ep": 0,
+      "line": 5,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 4,
+      "ep": 0,
+      "line": 6,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": [
+    "no_passing_repair_test"
+  ]
+}

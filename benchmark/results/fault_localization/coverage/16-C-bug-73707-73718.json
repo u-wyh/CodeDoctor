@@ -1,0 +1,98 @@
+{
+  "case_id": "16-C-bug-73707-73718",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=16-C-73707",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "16-C-73707.c: In function 'main':\n16-C-73707.c:3:9: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]\n    3 |         scanf(\"%d%d%d%d\",&a,&b,&x,&y);\n      |         ^~~~~\n16-C-73707.c:1:1: note: include '<stdio.h>' or provide a declaration of 'scanf'\n  +++ |+#include <stdio.h>\n    1 | int main(int argc, char *argv[]){\n16-C-73707.c:3:9: warning: incompatible implicit declaration of built-in function 'scanf' [-Wbuiltin-declaration-mismatch]\n    3 |         scanf(\"%d%d%d%d\",&a,&b,&x,&y);\n      |         ^~~~~\n16-C-73707.c:3:9: note: include '<stdio.h>' or provide a declaration of 'scanf'\n16-C-73707.c:5:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]\n    5 |         printf(\"%d %d\\n\",a,b);\n      |         ^~~~~~\n16-C-73707.c:5:9: note: include '<stdio.h>' or provide a declaration of 'printf'\n16-C-73707.c:5:9: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]\n16-C-73707.c:5:9: note: include '<stdio.h>' or provide a declaration of 'printf'\n",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 16-C-73707.c -o 16-C-73707.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 16-C-73707.o -o 16-C-73707 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/16-C-bug-73707-73718/16-C-73707.c",
+  "tests": [
+    {
+      "covered_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "executable_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n2",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "covered_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "executable_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n3",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "covered_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "executable_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n4",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "covered_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "executable_lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    }
+  ]
+}

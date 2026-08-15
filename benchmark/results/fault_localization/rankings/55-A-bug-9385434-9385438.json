@@ -1,0 +1,192 @@
+{
+  "case_id": "55-A-bug-9385434-9385438",
+  "executable_lines": 4,
+  "failed_tests": 3,
+  "passed_tests": 0,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "scanf(\"%d\",a);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 6,
+        "nf": 3,
+        "np": 0,
+        "rank": 3,
+        "score": 0.0,
+        "source_snippet": "(a & a-1)?printf(\"NO\"):printf(\"YES\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 7,
+        "nf": 3,
+        "np": 0,
+        "rank": 4,
+        "score": 0.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf(\"%d\",a);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 6,
+        "nf": 3,
+        "np": 0,
+        "rank": 3,
+        "score": 0.0,
+        "source_snippet": "(a & a-1)?printf(\"NO\"):printf(\"YES\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 7,
+        "nf": 3,
+        "np": 0,
+        "rank": 4,
+        "score": 0.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf(\"%d\",a);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 6,
+        "nf": 3,
+        "np": 0,
+        "rank": 3,
+        "score": 0.0,
+        "source_snippet": "(a & a-1)?printf(\"NO\"):printf(\"YES\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      },
+      {
+        "ef": 0,
+        "ep": 0,
+        "line": 7,
+        "nf": 3,
+        "np": 0,
+        "rank": 4,
+        "score": 0.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 2,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 5,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 0,
+      "line": 6,
+      "nf": 3,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 0,
+      "line": 7,
+      "nf": 3,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": [
+    "no_passing_repair_test"
+  ]
+}

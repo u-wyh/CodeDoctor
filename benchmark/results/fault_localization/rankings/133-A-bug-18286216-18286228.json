@@ -1,0 +1,491 @@
+{
+  "case_id": "133-A-bug-18286216-18286228",
+  "executable_lines": 11,
+  "failed_tests": 1,
+  "passed_tests": 2,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 13,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "string[i] == '9' || string[i] == '+') {",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 14,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "flag = 1;",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 15,
+        "nf": 0,
+        "np": 1,
+        "rank": 3,
+        "score": 1.0,
+        "source_snippet": "break;",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[]) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5,
+        "source_snippet": "int i, flag = 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%s\", string);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "for (i = 0; i < strlen(string); i++) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5,
+        "source_snippet": "if (string[i] == 'H' || string[i] == 'Q' ||",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 19,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5,
+        "source_snippet": "if (flag) printf(\"YES\\n\");",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 20,
+        "nf": 1,
+        "np": 1,
+        "rank": 11,
+        "score": 0.0,
+        "source_snippet": "else \t  printf(\"NO\\n\");",
+        "tie_end_rank": 11,
+        "tie_start_rank": 11
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 13,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.7071067811865475,
+        "source_snippet": "string[i] == '9' || string[i] == '+') {",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 14,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.7071067811865475,
+        "source_snippet": "flag = 1;",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 15,
+        "nf": 0,
+        "np": 1,
+        "rank": 3,
+        "score": 0.7071067811865475,
+        "source_snippet": "break;",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5773502691896258,
+        "source_snippet": "int main(int argc, char *argv[]) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5773502691896258,
+        "source_snippet": "int i, flag = 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5773502691896258,
+        "source_snippet": "scanf(\"%s\", string);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5773502691896258,
+        "source_snippet": "for (i = 0; i < strlen(string); i++) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5773502691896258,
+        "source_snippet": "if (string[i] == 'H' || string[i] == 'Q' ||",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 19,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5773502691896258,
+        "source_snippet": "if (flag) printf(\"YES\\n\");",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5773502691896258,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 20,
+        "nf": 1,
+        "np": 1,
+        "rank": 11,
+        "score": 0.0,
+        "source_snippet": "else \t  printf(\"NO\\n\");",
+        "tie_end_rank": 11,
+        "tie_start_rank": 11
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 13,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.6666666666666666,
+        "source_snippet": "string[i] == '9' || string[i] == '+') {",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 14,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.6666666666666666,
+        "source_snippet": "flag = 1;",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 1,
+        "line": 15,
+        "nf": 0,
+        "np": 1,
+        "rank": 3,
+        "score": 0.6666666666666666,
+        "source_snippet": "break;",
+        "tie_end_rank": 3,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[]) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5,
+        "source_snippet": "int i, flag = 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%s\", string);",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "for (i = 0; i < strlen(string); i++) {",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5,
+        "source_snippet": "if (string[i] == 'H' || string[i] == 'Q' ||",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 19,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5,
+        "source_snippet": "if (flag) printf(\"YES\\n\");",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 10,
+        "tie_start_rank": 4
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 20,
+        "nf": 1,
+        "np": 1,
+        "rank": 11,
+        "score": 0.0,
+        "source_snippet": "else \t  printf(\"NO\\n\");",
+        "tie_end_rank": 11,
+        "tie_start_rank": 11
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 6,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 7,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 9,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 11,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 12,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 1,
+      "line": 13,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 1,
+      "line": 14,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 1,
+      "line": 15,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 19,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 0,
+      "ep": 1,
+      "line": 20,
+      "nf": 1,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 22,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": []
+}

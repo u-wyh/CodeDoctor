@@ -1,0 +1,190 @@
+{
+  "case_id": "451-A-bug-17961145-17961228",
+  "executable_lines": 4,
+  "failed_tests": 1,
+  "passed_tests": 3,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.3333333333333333,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.3333333333333333,
+        "source_snippet": "while(scanf(\"%d %d\",&a,&b)==2)",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.3333333333333333,
+        "source_snippet": "((a*b)%2==0) ? printf(\"Malvika\\n\") : printf(\"Akshat\\n\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.3333333333333333,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.5,
+        "source_snippet": "while(scanf(\"%d %d\",&a,&b)==2)",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.5,
+        "source_snippet": "((a*b)%2==0) ? printf(\"Malvika\\n\") : printf(\"Akshat\\n\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.5,
+        "source_snippet": "while(scanf(\"%d %d\",&a,&b)==2)",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.5,
+        "source_snippet": "((a*b)%2==0) ? printf(\"Malvika\\n\") : printf(\"Akshat\\n\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 1
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 3,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 6,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 7,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 8,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": []
+}

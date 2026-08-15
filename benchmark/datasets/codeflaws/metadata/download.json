@@ -1,0 +1,19 @@
+{
+  "archive": {
+    "archive_path": "codeflaws.tar.gz",
+    "downloaded_at": "2026-08-15T13:17:43.267664+00:00",
+    "resumed": false,
+    "reused_existing_archive": false,
+    "sha256": "2673fc16fa05590c5c1171f5b633594713ae9207346a3d0ba4c4d8b2eea82b11",
+    "size_bytes": 265695532,
+    "source_url": "https://www.comp.nus.edu.sg/~release/codeflaws/codeflaws.tar.gz"
+  },
+  "classification": {
+    "case_count": 4085,
+    "sha256": "b0bcb5dd59e23a110084de0805aaae4aa0343623a81b4115491955488909739d",
+    "size_bytes": 1251508,
+    "source_url": "https://codeflaws.github.io/defect-table.html"
+  },
+  "dataset": "codeflaws",
+  "extracted_this_run": true
+}

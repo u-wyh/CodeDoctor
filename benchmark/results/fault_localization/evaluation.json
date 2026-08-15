@@ -1,0 +1,5777 @@
+{
+  "cases_without_passing_repair_test": 10,
+  "executable_lines_per_case": {
+    "max": 59,
+    "mean": 20.66,
+    "median": 17.0,
+    "min": 4
+  },
+  "fail_tests_per_case": {
+    "max": 4,
+    "mean": 1.76,
+    "median": 1.0,
+    "min": 1
+  },
+  "metrics": {
+    "dstar2": {
+      "evaluated_cases": 50,
+      "mrr": 0.2601458424616319,
+      "top_10_accuracy": 0.62,
+      "top_10_hits": 31,
+      "top_1_accuracy": 0.1,
+      "top_1_hits": 5,
+      "top_3_accuracy": 0.32,
+      "top_3_hits": 16,
+      "top_5_accuracy": 0.46,
+      "top_5_hits": 23
+    },
+    "ochiai": {
+      "evaluated_cases": 50,
+      "mrr": 0.2601458424616319,
+      "top_10_accuracy": 0.62,
+      "top_10_hits": 31,
+      "top_1_accuracy": 0.1,
+      "top_1_hits": 5,
+      "top_3_accuracy": 0.32,
+      "top_3_hits": 16,
+      "top_5_accuracy": 0.46,
+      "top_5_hits": 23
+    },
+    "tarantula": {
+      "evaluated_cases": 50,
+      "mrr": 0.2594614281551375,
+      "top_10_accuracy": 0.62,
+      "top_10_hits": 31,
+      "top_1_accuracy": 0.1,
+      "top_1_hits": 5,
+      "top_3_accuracy": 0.32,
+      "top_3_hits": 16,
+      "top_5_accuracy": 0.46,
+      "top_5_hits": 23
+    }
+  },
+  "not_localizable_cases": 0,
+  "not_localizable_reasons": {},
+  "participating_cases": 50,
+  "pass_tests_per_case": {
+    "max": 10,
+    "mean": 1.84,
+    "median": 2.0,
+    "min": 0
+  },
+  "per_case": [
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "printf(\"%d \",a = n+1 / 36);",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 4,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 1.0,
+            "source_snippet": "printf(\"%d \",a = n+1 / 36);",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 4,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 1.0,
+            "source_snippet": "printf(\"%d \",a = n+1 / 36);",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 4,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "125-A-bug-917277-917278",
+      "executable_lines": 8,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        8
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "string[i] == '9' || string[i] == '+') {",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "string[i] == '9' || string[i] == '+') {",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "string[i] == '9' || string[i] == '+') {",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "string[i] == '9' || string[i] == '+') {",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "string[i] == '9' || string[i] == '+') {",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "string[i] == '9' || string[i] == '+') {",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "133-A-bug-18286216-18286228",
+      "executable_lines": 11,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        13
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 3,
+            "score": 9.0,
+            "source_snippet": "if(c<1||c>9||c==a||c==b||x!=b)continue;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 9.0,
+            "source_snippet": "c=c1-a;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 3,
+            "score": 0.8660254037844387,
+            "source_snippet": "if(c<1||c>9||c==a||c==b||x!=b)continue;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.8660254037844387,
+            "source_snippet": "c=c1-a;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 3,
+            "score": 0.6666666666666666,
+            "source_snippet": "if(c<1||c>9||c==a||c==b||x!=b)continue;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "c=c1-a;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "143-A-bug-13245338-13245361",
+      "executable_lines": 18,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        13
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 94,
+            "nf": 0,
+            "np": 1,
+            "rank": 19,
+            "score": 4.0,
+            "source_snippet": "if (y>24 || z>59)",
+            "tie_end_rank": 20,
+            "tie_start_rank": 5
+          },
+          "first_fault_rank": 19,
+          "reciprocal_rank": 0.05263157894736842,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 48,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "x = y;",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 94,
+            "nf": 0,
+            "np": 1,
+            "rank": 19,
+            "score": 0.8164965809277261,
+            "source_snippet": "if (y>24 || z>59)",
+            "tie_end_rank": 20,
+            "tie_start_rank": 5
+          },
+          "first_fault_rank": 19,
+          "reciprocal_rank": 0.05263157894736842,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 48,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "x = y;",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 94,
+            "nf": 0,
+            "np": 1,
+            "rank": 19,
+            "score": 0.6666666666666666,
+            "source_snippet": "if (y>24 || z>59)",
+            "tie_end_rank": 20,
+            "tie_start_rank": 5
+          },
+          "first_fault_rank": 19,
+          "reciprocal_rank": 0.05263157894736842,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 48,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "x = y;",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "149-B-bug-9212927-9212935",
+      "executable_lines": 59,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        94
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 30,
+            "nf": 0,
+            "np": 0,
+            "rank": 14,
+            "score": 0.5,
+            "source_snippet": "if(d==47) d=getchar();",
+            "tie_end_rank": 44,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 14,
+          "reciprocal_rank": 0.07142857142857142,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 44,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 30,
+            "nf": 0,
+            "np": 0,
+            "rank": 14,
+            "score": 0.5773502691896258,
+            "source_snippet": "if(d==47) d=getchar();",
+            "tie_end_rank": 44,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 14,
+          "reciprocal_rank": 0.07142857142857142,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 44,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 30,
+            "nf": 0,
+            "np": 0,
+            "rank": 14,
+            "score": 0.5,
+            "source_snippet": "if(d==47) d=getchar();",
+            "tie_end_rank": 44,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 14,
+          "reciprocal_rank": 0.07142857142857142,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 44,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "158-C-bug-9967801-9967822",
+      "executable_lines": 50,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        30
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 1,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 1,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 1,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 1,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 1,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 1,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "16-C-bug-73707-73718",
+      "executable_lines": 5,
+      "failed_tests": 4,
+      "ground_truth_fault_lines": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 63,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 0.3333333333333333,
+            "source_snippet": "return (lengthsqr[0]+lengthsqr[1]) == lengthsqr[2];",
+            "tie_end_rank": 16,
+            "tie_start_rank": 6
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 23,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "printf(\"ALMOST\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 63,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 0.5,
+            "source_snippet": "return (lengthsqr[0]+lengthsqr[1]) == lengthsqr[2];",
+            "tie_end_rank": 16,
+            "tie_start_rank": 6
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 23,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "printf(\"ALMOST\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 63,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 0.5,
+            "source_snippet": "return (lengthsqr[0]+lengthsqr[1]) == lengthsqr[2];",
+            "tie_end_rank": 16,
+            "tie_start_rank": 6
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 23,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 0.75,
+            "source_snippet": "printf(\"ALMOST\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "18-A-bug-15987401-15987453",
+      "executable_lines": 37,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        63
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 19,
+            "nf": 0,
+            "np": 2,
+            "rank": 2,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "break;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 18,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "printf(\"NO\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 19,
+            "nf": 0,
+            "np": 2,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 18,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "printf(\"NO\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 19,
+            "nf": 0,
+            "np": 2,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 18,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "printf(\"NO\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "192-A-bug-18022160-18022194",
+      "executable_lines": 16,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        17,
+        19
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 31,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 4.0,
+            "source_snippet": "t=x/i;",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 4.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 31,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 0.8164965809277261,
+            "source_snippet": "t=x/i;",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.8164965809277261,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 31,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 0.5,
+            "source_snippet": "t=x/i;",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "221-B-bug-3805733-3805812",
+      "executable_lines": 23,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        31
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 0,
+            "rank": 24,
+            "score": 4.0,
+            "source_snippet": "printf(\"%d\",fol[i]);",
+            "tie_end_rank": 25,
+            "tie_start_rank": 4
+          },
+          "first_fault_rank": 24,
+          "reciprocal_rank": 0.041666666666666664,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 18,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "j++;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 0,
+            "rank": 24,
+            "score": 0.8164965809277261,
+            "source_snippet": "printf(\"%d\",fol[i]);",
+            "tie_end_rank": 25,
+            "tie_start_rank": 4
+          },
+          "first_fault_rank": 24,
+          "reciprocal_rank": 0.041666666666666664,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 18,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "j++;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 0,
+            "rank": 24,
+            "score": 0.5,
+            "source_snippet": "printf(\"%d\",fol[i]);",
+            "tie_end_rank": 25,
+            "tie_start_rank": 4
+          },
+          "first_fault_rank": 24,
+          "reciprocal_rank": 0.041666666666666664,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 18,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "j++;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "250-A-bug-4602258-4602263",
+      "executable_lines": 25,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        39
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.5,
+            "source_snippet": "for(i=2;i*i<=MAX_PRIME;i++)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.5773502691896258,
+            "source_snippet": "for(i=2;i*i<=MAX_PRIME;i++)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.5,
+            "source_snippet": "for(i=2;i*i<=MAX_PRIME;i++)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "26-A-bug-17016643-17016759",
+      "executable_lines": 13,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        11
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 14,
+            "nf": 0,
+            "np": 1,
+            "rank": 2,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "s[i + 1] = 'B';",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "s[i] = 'G';",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 14,
+            "nf": 0,
+            "np": 1,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "s[i + 1] = 'B';",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "s[i] = 'G';",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 14,
+            "nf": 0,
+            "np": 1,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "s[i + 1] = 'B';",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 13,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "s[i] = 'G';",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "266-B-bug-18175541-18175550",
+      "executable_lines": 14,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        14
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 6,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.5,
+            "source_snippet": "for (int i=n;i<9000;i++)",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 6,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.5773502691896258,
+            "source_snippet": "for (int i=n;i<9000;i++)",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 6,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.5,
+            "source_snippet": "for (int i=n;i<9000;i++)",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "271-A-bug-18178942-18178961",
+      "executable_lines": 12,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        6
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 17,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "a[g]=h;",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 17,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 1.0,
+            "source_snippet": "a[g]=h;",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 17,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 1.0,
+            "source_snippet": "a[g]=h;",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "315-B-bug-10035506-10035539",
+      "executable_lines": 17,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        17
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 15,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 0.5,
+            "source_snippet": "else if('A'<=s[i]&&s[i]<='J'){if(cnt[s[i]]==0){cnt[s[i]]++;if(k==0){q++;}else{ans*=(10-k);k++;}",
+            "tie_end_rank": 12,
+            "tie_start_rank": 3
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 9,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "ans=9;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 15,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 0.5773502691896258,
+            "source_snippet": "else if('A'<=s[i]&&s[i]<='J'){if(cnt[s[i]]==0){cnt[s[i]]++;if(k==0){q++;}else{ans*=(10-k);k++;}",
+            "tie_end_rank": 12,
+            "tie_start_rank": 3
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 9,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "ans=9;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 15,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 0.5,
+            "source_snippet": "else if('A'<=s[i]&&s[i]<='J'){if(cnt[s[i]]==0){cnt[s[i]]++;if(k==0){q++;}else{ans*=(10-k);k++;}",
+            "tie_end_rank": 12,
+            "tie_start_rank": 3
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 9,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "ans=9;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "316-A2-bug-3876995-3877003",
+      "executable_lines": 12,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        15
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 0,
+            "rank": 11,
+            "score": 0.5,
+            "source_snippet": "if(j==0 || j==n-1)",
+            "tie_end_rank": 11,
+            "tie_start_rank": 3
+          },
+          "first_fault_rank": 11,
+          "reciprocal_rank": 0.09090909090909091,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 29,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "printf(\"4\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 0,
+            "rank": 11,
+            "score": 0.5773502691896258,
+            "source_snippet": "if(j==0 || j==n-1)",
+            "tie_end_rank": 11,
+            "tie_start_rank": 3
+          },
+          "first_fault_rank": 11,
+          "reciprocal_rank": 0.09090909090909091,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 29,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "printf(\"4\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 0,
+            "rank": 11,
+            "score": 0.5,
+            "source_snippet": "if(j==0 || j==n-1)",
+            "tie_end_rank": 11,
+            "tie_start_rank": 3
+          },
+          "first_fault_rank": 11,
+          "reciprocal_rank": 0.09090909090909091,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 29,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "printf(\"4\");",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "359-A-bug-17945891-17946129",
+      "executable_lines": 15,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        15,
+        21
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 38,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "if(abs(r1-r2)%2==0&&abs(c1-c2)%2==0)",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 38,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "if(abs(r1-r2)%2==0&&abs(c1-c2)%2==0)",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 38,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "if(abs(r1-r2)%2==0&&abs(c1-c2)%2==0)",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 38,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "if(abs(r1-r2)%2==0&&abs(c1-c2)%2==0)",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 38,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "if(abs(r1-r2)%2==0&&abs(c1-c2)%2==0)",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 38,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "if(abs(r1-r2)%2==0&&abs(c1-c2)%2==0)",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "370-A-bug-15330051-15330091",
+      "executable_lines": 35,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        38
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 10,
+            "line": 58,
+            "nf": 0,
+            "np": 0,
+            "rank": 19,
+            "score": 0.1,
+            "source_snippet": "for (i = 1; i <= n; i++) {",
+            "tie_end_rank": 28,
+            "tie_start_rank": 5
+          },
+          "first_fault_rank": 19,
+          "reciprocal_rank": 0.05263157894736842,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 7,
+            "line": 41,
+            "nf": 0,
+            "np": 3,
+            "rank": 1,
+            "score": 0.14285714285714285,
+            "source_snippet": "max[i][j] = 1 + max[i][j + 1];",
+            "tie_end_rank": 1,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 10,
+            "line": 58,
+            "nf": 0,
+            "np": 0,
+            "rank": 19,
+            "score": 0.30151134457776363,
+            "source_snippet": "for (i = 1; i <= n; i++) {",
+            "tie_end_rank": 28,
+            "tie_start_rank": 5
+          },
+          "first_fault_rank": 19,
+          "reciprocal_rank": 0.05263157894736842,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 7,
+            "line": 41,
+            "nf": 0,
+            "np": 3,
+            "rank": 1,
+            "score": 0.35355339059327373,
+            "source_snippet": "max[i][j] = 1 + max[i][j + 1];",
+            "tie_end_rank": 1,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 10,
+            "line": 58,
+            "nf": 0,
+            "np": 0,
+            "rank": 19,
+            "score": 0.5,
+            "source_snippet": "for (i = 1; i <= n; i++) {",
+            "tie_end_rank": 28,
+            "tie_start_rank": 5
+          },
+          "first_fault_rank": 19,
+          "reciprocal_rank": 0.05263157894736842,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 7,
+            "line": 41,
+            "nf": 0,
+            "np": 3,
+            "rank": 1,
+            "score": 0.5882352941176471,
+            "source_snippet": "max[i][j] = 1 + max[i][j + 1];",
+            "tie_end_rank": 1,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "376-D-bug-5511525-5511569",
+      "executable_lines": 29,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        58
+      ],
+      "passed_tests": 10,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 28,
+            "nf": 0,
+            "np": 3,
+            "rank": 4,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "for(k=0;k<(left-right);k++) printf(\"%c\",added[k+j+i]);",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 24,
+            "nf": 0,
+            "np": 3,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "for(i=0;i<(strlen(added)-left+right)/2;i++) printf(\"%c\",added[i]);",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 28,
+            "nf": 0,
+            "np": 3,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "for(k=0;k<(left-right);k++) printf(\"%c\",added[k+j+i]);",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 24,
+            "nf": 0,
+            "np": 3,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "for(i=0;i<(strlen(added)-left+right)/2;i++) printf(\"%c\",added[i]);",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 28,
+            "nf": 0,
+            "np": 3,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "for(k=0;k<(left-right);k++) printf(\"%c\",added[k+j+i]);",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 0,
+            "line": 24,
+            "nf": 0,
+            "np": 3,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "for(i=0;i<(strlen(added)-left+right)/2;i++) printf(\"%c\",added[i]);",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "382-A-bug-15682317-15682478",
+      "executable_lines": 20,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        28
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 12,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 4.0,
+            "source_snippet": "printf( \"%d %d\\n\", i, j );",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 4.0,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 12,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.8164965809277261,
+            "source_snippet": "printf( \"%d %d\\n\", i, j );",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.8164965809277261,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 12,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.5,
+            "source_snippet": "printf( \"%d %d\\n\", i, j );",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "384-B-bug-5760795-5760797",
+      "executable_lines": 7,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        12
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 22,
+            "nf": 0,
+            "np": 4,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "c--;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 22,
+            "nf": 0,
+            "np": 4,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "c--;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 22,
+            "nf": 0,
+            "np": 4,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "c--;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 22,
+            "nf": 0,
+            "np": 4,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "c--;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 22,
+            "nf": 0,
+            "np": 4,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "c--;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 22,
+            "nf": 0,
+            "np": 4,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "c--;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "394-A-bug-5992854-5992862",
+      "executable_lines": 30,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        22
+      ],
+      "passed_tests": 4,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 4.0,
+            "source_snippet": "if(n>sum2 && n<sum1)",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 4.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 0.8164965809277261,
+            "source_snippet": "if(n>sum2 && n<sum1)",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.8164965809277261,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 13,
+            "nf": 0,
+            "np": 0,
+            "rank": 10,
+            "score": 0.5,
+            "source_snippet": "if(n>sum2 && n<sum1)",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 10,
+          "reciprocal_rank": 0.1,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "4-B-bug-12979060-12979073",
+      "executable_lines": 29,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        13
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 41,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "for(i=0;i<n;i++)",
+            "tie_end_rank": 18,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 18,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 41,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 1.0,
+            "source_snippet": "for(i=0;i<n;i++)",
+            "tie_end_rank": 18,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 18,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 41,
+            "nf": 0,
+            "np": 0,
+            "rank": 31,
+            "score": 1.0,
+            "source_snippet": "for(i=0;i<n;i++)",
+            "tie_end_rank": 33,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 31,
+          "reciprocal_rank": 0.03225806451612903,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 33,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "400-B-bug-5969807-5969814",
+      "executable_lines": 33,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        41,
+        42
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 17,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.3333333333333333,
+            "source_snippet": "b[i]=(2*b[i-1]-b[a[i]-1]+1)% MOD;",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 9,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.3333333333333333,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 17,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.5,
+            "source_snippet": "b[i]=(2*b[i-1]-b[a[i]-1]+1)% MOD;",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 9,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 17,
+            "nf": 0,
+            "np": 0,
+            "rank": 6,
+            "score": 0.5,
+            "source_snippet": "b[i]=(2*b[i-1]-b[a[i]-1]+1)% MOD;",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 6,
+          "reciprocal_rank": 0.16666666666666666,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 9,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 8,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "407-B-bug-6204767-6204831",
+      "executable_lines": 8,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        17
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 0,
+            "ep": 2,
+            "line": 34,
+            "nf": 2,
+            "np": 0,
+            "rank": 14,
+            "score": 0.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 14,
+            "tie_start_rank": 13
+          },
+          "first_fault_rank": 14,
+          "reciprocal_rank": 0.07142857142857142,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 2,
+            "line": 12,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 2.0,
+            "source_snippet": "int cmp(const void *a, const void *b)",
+            "tie_end_rank": 12,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 0,
+            "ep": 2,
+            "line": 34,
+            "nf": 2,
+            "np": 0,
+            "rank": 14,
+            "score": 0.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 14,
+            "tie_start_rank": 13
+          },
+          "first_fault_rank": 14,
+          "reciprocal_rank": 0.07142857142857142,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 2,
+            "line": 12,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "int cmp(const void *a, const void *b)",
+            "tie_end_rank": 12,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 0,
+            "ep": 2,
+            "line": 34,
+            "nf": 2,
+            "np": 0,
+            "rank": 14,
+            "score": 0.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 14,
+            "tie_start_rank": 13
+          },
+          "first_fault_rank": 14,
+          "reciprocal_rank": 0.07142857142857142,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 2,
+            "line": 12,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int cmp(const void *a, const void *b)",
+            "tie_end_rank": 12,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "424-B-bug-10539205-10539214",
+      "executable_lines": 14,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        34,
+        36
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 9,
+            "score": 0.5,
+            "source_snippet": "if (n % 2 != 0 && m % 2 != 0 || n == 1 || m == 1) {",
+            "tie_end_rank": 10,
+            "tie_start_rank": 7
+          },
+          "first_fault_rank": 9,
+          "reciprocal_rank": 0.1111111111111111,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 8,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "printf(\"%d\\n%d %d %d %d\\n\", 1, n, m, 1, 1);",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 9,
+            "score": 0.5773502691896258,
+            "source_snippet": "if (n % 2 != 0 && m % 2 != 0 || n == 1 || m == 1) {",
+            "tie_end_rank": 10,
+            "tie_start_rank": 7
+          },
+          "first_fault_rank": 9,
+          "reciprocal_rank": 0.1111111111111111,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 8,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "printf(\"%d\\n%d %d %d %d\\n\", 1, n, m, 1, 1);",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 9,
+            "score": 0.5,
+            "source_snippet": "if (n % 2 != 0 && m % 2 != 0 || n == 1 || m == 1) {",
+            "tie_end_rank": 10,
+            "tie_start_rank": 7
+          },
+          "first_fault_rank": 9,
+          "reciprocal_rank": 0.1111111111111111,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 8,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "printf(\"%d\\n%d %d %d %d\\n\", 1, n, m, 1, 1);",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "43-D-bug-1129070-1129073",
+      "executable_lines": 36,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        7
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 29,
+            "nf": 0,
+            "np": 0,
+            "rank": 21,
+            "score": 0.3333333333333333,
+            "source_snippet": "if(a<=0 && s1>0)",
+            "tie_end_rank": 21,
+            "tie_start_rank": 8
+          },
+          "first_fault_rank": 21,
+          "reciprocal_rank": 0.047619047619047616,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 23,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "cnt=0;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 29,
+            "nf": 0,
+            "np": 0,
+            "rank": 21,
+            "score": 0.5,
+            "source_snippet": "if(a<=0 && s1>0)",
+            "tie_end_rank": 21,
+            "tie_start_rank": 8
+          },
+          "first_fault_rank": 21,
+          "reciprocal_rank": 0.047619047619047616,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 23,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "cnt=0;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 29,
+            "nf": 0,
+            "np": 0,
+            "rank": 21,
+            "score": 0.5,
+            "source_snippet": "if(a<=0 && s1>0)",
+            "tie_end_rank": 21,
+            "tie_start_rank": 8
+          },
+          "first_fault_rank": 21,
+          "reciprocal_rank": 0.047619047619047616,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 23,
+            "nf": 0,
+            "np": 2,
+            "rank": 1,
+            "score": 0.75,
+            "source_snippet": "cnt=0;",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "448-A-bug-16090142-16090184",
+      "executable_lines": 34,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        29
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 31,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "if(counter=n-1){",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 31,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 1.0,
+            "source_snippet": "if(counter=n-1){",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 31,
+            "nf": 0,
+            "np": 0,
+            "rank": 16,
+            "score": 1.0,
+            "source_snippet": "if(counter=n-1){",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 16,
+          "reciprocal_rank": 0.0625,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 22,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "450-A-bug-12286209-12286212",
+      "executable_lines": 27,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        31
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.3333333333333333,
+            "source_snippet": "((a*b)%2==0) ? printf(\"Malvika\\n\") : printf(\"Akshat\\n\");",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.3333333333333333,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.5,
+            "source_snippet": "((a*b)%2==0) ? printf(\"Malvika\\n\") : printf(\"Akshat\\n\");",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.5,
+            "source_snippet": "((a*b)%2==0) ? printf(\"Malvika\\n\") : printf(\"Akshat\\n\");",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "451-A-bug-17961145-17961228",
+      "executable_lines": 4,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        1,
+        7
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 0,
+            "rank": 13,
+            "score": 0.5,
+            "source_snippet": "if(a[k][0]>= min && a[k][0]<= max   || a[k][1]>= min && a[k][1]<= max){",
+            "tie_end_rank": 20,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 13,
+          "reciprocal_rank": 0.07692307692307693,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 20,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 0,
+            "rank": 13,
+            "score": 0.5773502691896258,
+            "source_snippet": "if(a[k][0]>= min && a[k][0]<= max   || a[k][1]>= min && a[k][1]<= max){",
+            "tie_end_rank": 20,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 13,
+          "reciprocal_rank": 0.07692307692307693,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 20,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 0,
+            "rank": 13,
+            "score": 0.5,
+            "source_snippet": "if(a[k][0]>= min && a[k][0]<= max   || a[k][1]>= min && a[k][1]<= max){",
+            "tie_end_rank": 20,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 13,
+          "reciprocal_rank": 0.07692307692307693,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 20,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "469-B-bug-14541678-14542042",
+      "executable_lines": 20,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        21
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "a=0;",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "a=0;",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 21,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6000000000000001,
+            "source_snippet": "a=0;",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "471-A-bug-18116605-18116641",
+      "executable_lines": 15,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        4,
+        20
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 1,
+            "rank": 3,
+            "score": 4.0,
+            "source_snippet": "rep(i,n)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 30,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 4.0,
+            "source_snippet": "a[m]=1;",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 1,
+            "rank": 3,
+            "score": 0.8164965809277261,
+            "source_snippet": "rep(i,n)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 30,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.8164965809277261,
+            "source_snippet": "a[m]=1;",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 1,
+            "rank": 3,
+            "score": 0.6666666666666666,
+            "source_snippet": "rep(i,n)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 30,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "a[m]=1;",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "483-C-bug-9388366-9388407",
+      "executable_lines": 17,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        39
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 1,
+            "rank": 5,
+            "score": 1.0,
+            "source_snippet": "if(arr[k][1]<5){",
+            "tie_end_rank": 9,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 5,
+          "reciprocal_rank": 0.2,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "long long int func(long long int a,long long int b){",
+            "tie_end_rank": 9,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 1,
+            "rank": 5,
+            "score": 0.7071067811865475,
+            "source_snippet": "if(arr[k][1]<5){",
+            "tie_end_rank": 9,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 5,
+          "reciprocal_rank": 0.2,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "long long int func(long long int a,long long int b){",
+            "tie_end_rank": 9,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 39,
+            "nf": 0,
+            "np": 1,
+            "rank": 5,
+            "score": 0.6666666666666666,
+            "source_snippet": "if(arr[k][1]<5){",
+            "tie_end_rank": 9,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 5,
+          "reciprocal_rank": 0.2,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "long long int func(long long int a,long long int b){",
+            "tie_end_rank": 9,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "492-C-bug-16026643-16026665",
+      "executable_lines": 24,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        39
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 23,
+            "nf": 0,
+            "np": 0,
+            "rank": 8,
+            "score": 0.3333333333333333,
+            "source_snippet": "for (i = d * 2 - 1; i <= 30000; i++)",
+            "tie_end_rank": 19,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 8,
+          "reciprocal_rank": 0.125,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 9,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.3333333333333333,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 19,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 23,
+            "nf": 0,
+            "np": 0,
+            "rank": 8,
+            "score": 0.5,
+            "source_snippet": "for (i = d * 2 - 1; i <= 30000; i++)",
+            "tie_end_rank": 19,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 8,
+          "reciprocal_rank": 0.125,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 9,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 19,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 23,
+            "nf": 0,
+            "np": 0,
+            "rank": 8,
+            "score": 0.5,
+            "source_snippet": "for (i = d * 2 - 1; i <= 30000; i++)",
+            "tie_end_rank": 19,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 8,
+          "reciprocal_rank": 0.125,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 9,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 19,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "506-A-bug-9466644-9466667",
+      "executable_lines": 20,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        23
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "int x = 1 << ( n + 1 ) - 1;",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 6,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 0.7071067811865475,
+            "source_snippet": "int x = 1 << ( n + 1 ) - 1;",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 6,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.7071067811865475,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 0.5,
+            "source_snippet": "int x = 1 << ( n + 1 ) - 1;",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 1,
+            "line": 6,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "526-B-bug-10597230-10597317",
+      "executable_lines": 13,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        2,
+        11
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 58,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "vertexes -= 1;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 58,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "vertexes -= 1;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 58,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "vertexes -= 1;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 58,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "vertexes -= 1;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 58,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "vertexes -= 1;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 1,
+          "reciprocal_rank": 1.0,
+          "top_k": {
+            "1": true,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 0,
+            "line": 58,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "vertexes -= 1;",
+            "tie_end_rank": 3,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "527-D-bug-10997019-10997037",
+      "executable_lines": 37,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        58
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 26,
+            "nf": 0,
+            "np": 1,
+            "rank": 4,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "if(strcmp(c[i],b)>0)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 19,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "if(flag==0)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 26,
+            "nf": 0,
+            "np": 1,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "if(strcmp(c[i],b)>0)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 19,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "if(flag==0)",
+            "tie_end_rank": 4,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 26,
+            "nf": 0,
+            "np": 1,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "if(strcmp(c[i],b)>0)",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 19,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "if(flag==0)",
+            "tie_end_rank": 5,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "53-A-bug-7503835-7503845",
+      "executable_lines": 17,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        26
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "k=n-1;",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 1.0,
+            "source_snippet": "k=n-1;",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 1.0,
+            "source_snippet": "k=n-1;",
+            "tie_end_rank": 10,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 10,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "53-C-bug-10604859-10605014",
+      "executable_lines": 10,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 2,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "scanf(\"%d\",a);",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "scanf(\"%d\",a);",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "scanf(\"%d\",a);",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "55-A-bug-9385434-9385438",
+      "executable_lines": 4,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        5
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 70,
+            "nf": 0,
+            "np": 0,
+            "rank": 38,
+            "score": 9.0,
+            "source_snippet": "result= (A[SA[k]]< B[SB[nb-m+1]]);",
+            "tie_end_rank": 49,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 38,
+          "reciprocal_rank": 0.02631578947368421,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 14,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 9.0,
+            "source_snippet": "void _sort(int *x, int *s, int n) {",
+            "tie_end_rank": 49,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 70,
+            "nf": 0,
+            "np": 0,
+            "rank": 38,
+            "score": 0.8660254037844387,
+            "source_snippet": "result= (A[SA[k]]< B[SB[nb-m+1]]);",
+            "tie_end_rank": 49,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 38,
+          "reciprocal_rank": 0.02631578947368421,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 14,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.8660254037844387,
+            "source_snippet": "void _sort(int *x, int *s, int n) {",
+            "tie_end_rank": 49,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 70,
+            "nf": 0,
+            "np": 0,
+            "rank": 38,
+            "score": 0.5,
+            "source_snippet": "result= (A[SA[k]]< B[SB[nb-m+1]]);",
+            "tie_end_rank": 49,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 38,
+          "reciprocal_rank": 0.02631578947368421,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 1,
+            "line": 14,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "void _sort(int *x, int *s, int n) {",
+            "tie_end_rank": 49,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "572-A-bug-18014147-18014159",
+      "executable_lines": 58,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        70,
+        97
+      ],
+      "passed_tests": 1,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 5,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.2,
+            "source_snippet": "scanf(\"%lld\",&n);",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 5,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.2,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 5,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.4082482904638631,
+            "source_snippet": "scanf(\"%lld\",&n);",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 5,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.4082482904638631,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 5,
+            "line": 5,
+            "nf": 0,
+            "np": 0,
+            "rank": 3,
+            "score": 0.5,
+            "source_snippet": "scanf(\"%lld\",&n);",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 5,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 7,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "622-A-bug-18068430-18068439",
+      "executable_lines": 9,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        5
+      ],
+      "passed_tests": 5,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 30,
+            "nf": 0,
+            "np": 0,
+            "rank": 2,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "printf(\"Time: \");",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 27,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char **argv)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 30,
+            "nf": 0,
+            "np": 0,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "printf(\"Time: \");",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 27,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char **argv)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 30,
+            "nf": 0,
+            "np": 0,
+            "rank": 2,
+            "score": 1.0,
+            "source_snippet": "printf(\"Time: \");",
+            "tie_end_rank": 18,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 2,
+          "reciprocal_rank": 0.5,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": true,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 4,
+            "ep": 0,
+            "line": 27,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char **argv)",
+            "tie_end_rank": 18,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "622-B-bug-16220785-16220807",
+      "executable_lines": 20,
+      "failed_tests": 4,
+      "ground_truth_fault_lines": [
+        30,
+        32
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "dtime = (L*1.0 / (v1 + v2)*1.0);",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "dtime = (L*1.0 / (v1 + v2)*1.0);",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 1.0,
+            "source_snippet": "dtime = (L*1.0 / (v1 + v2)*1.0);",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 3,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 6,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "624-A-bug-16223174-16223213",
+      "executable_lines": 7,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        11
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 0.5,
+            "source_snippet": "if(a==0||b==0)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 0.5773502691896258,
+            "source_snippet": "if(a==0||b==0)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 4,
+            "score": 0.5,
+            "source_snippet": "if(a==0||b==0)",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 4,
+          "reciprocal_rank": 0.25,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 13,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "651-A-bug-18221346-18221404",
+      "executable_lines": 13,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        8
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 18,
+            "nf": 0,
+            "np": 0,
+            "rank": 11,
+            "score": 0.3333333333333333,
+            "source_snippet": "for(i=n-1;i>0;i--){",
+            "tie_end_rank": 13,
+            "tie_start_rank": 2
+          },
+          "first_fault_rank": 11,
+          "reciprocal_rank": 0.09090909090909091,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 25,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "pp((lima>rade) ? \"Limak\" : \"Radewoosh\");",
+            "tie_end_rank": 1,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 18,
+            "nf": 0,
+            "np": 0,
+            "rank": 11,
+            "score": 0.5,
+            "source_snippet": "for(i=n-1;i>0;i--){",
+            "tie_end_rank": 13,
+            "tie_start_rank": 2
+          },
+          "first_fault_rank": 11,
+          "reciprocal_rank": 0.09090909090909091,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 25,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "pp((lima>rade) ? \"Limak\" : \"Radewoosh\");",
+            "tie_end_rank": 1,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 3,
+            "line": 18,
+            "nf": 0,
+            "np": 0,
+            "rank": 11,
+            "score": 0.5,
+            "source_snippet": "for(i=n-1;i>0;i--){",
+            "tie_end_rank": 13,
+            "tie_start_rank": 2
+          },
+          "first_fault_rank": 11,
+          "reciprocal_rank": 0.09090909090909091,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 25,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6000000000000001,
+            "source_snippet": "pp((lima>rade) ? \"Limak\" : \"Radewoosh\");",
+            "tie_end_rank": 1,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "658-A-bug-17124240-17124253",
+      "executable_lines": 16,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        18
+      ],
+      "passed_tests": 3,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 45,
+            "nf": 0,
+            "np": 0,
+            "rank": 26,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "break;",
+            "tie_end_rank": 27,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 26,
+          "reciprocal_rank": 0.038461538461538464,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.7976931348623157e+308,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 27,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 45,
+            "nf": 0,
+            "np": 0,
+            "rank": 26,
+            "score": 1.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 27,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 26,
+          "reciprocal_rank": 0.038461538461538464,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 27,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 45,
+            "nf": 0,
+            "np": 0,
+            "rank": 29,
+            "score": 1.0,
+            "source_snippet": "break;",
+            "tie_end_rank": 30,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 29,
+          "reciprocal_rank": 0.034482758620689655,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 3,
+            "ep": 0,
+            "line": 8,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 1.0,
+            "source_snippet": "int main(int argc, char *argv[]){",
+            "tie_end_rank": 30,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "658-B-bug-17017536-17017553",
+      "executable_lines": 30,
+      "failed_tests": 3,
+      "ground_truth_fault_lines": [
+        45
+      ],
+      "passed_tests": 0,
+      "status": "localizable",
+      "warnings": [
+        "no_passing_repair_test"
+      ]
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 30,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 4.0,
+            "source_snippet": "printf(\"%s\",rango[i].tipo);",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 30,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.8164965809277261,
+            "source_snippet": "printf(\"%s\",rango[i].tipo);",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 2,
+            "ep": 1,
+            "line": 30,
+            "nf": 0,
+            "np": 1,
+            "rank": 1,
+            "score": 0.6666666666666666,
+            "source_snippet": "printf(\"%s\",rango[i].tipo);",
+            "tie_end_rank": 2,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "66-A-bug-13987166-13987365",
+      "executable_lines": 13,
+      "failed_tests": 2,
+      "ground_truth_fault_lines": [
+        14
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": null,
+          "first_fault_rank": null,
+          "reciprocal_rank": 0.0,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 11,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 17,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "670-D1-bug-17822855-17822888",
+      "executable_lines": 17,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        25
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 20,
+            "nf": 0,
+            "np": 0,
+            "rank": 13,
+            "score": 0.5,
+            "source_snippet": "printf(\"%d\",n*count);",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 13,
+          "reciprocal_rank": 0.07692307692307693,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 4,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 20,
+            "nf": 0,
+            "np": 0,
+            "rank": 13,
+            "score": 0.5773502691896258,
+            "source_snippet": "printf(\"%d\",n*count);",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 13,
+          "reciprocal_rank": 0.07692307692307693,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 4,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 20,
+            "nf": 0,
+            "np": 0,
+            "rank": 13,
+            "score": 0.5,
+            "source_snippet": "printf(\"%d\",n*count);",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 13,
+          "reciprocal_rank": 0.07692307692307693,
+          "top_k": {
+            "1": false,
+            "10": false,
+            "3": false,
+            "5": false
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 4,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[]) {",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "675-B-bug-18032265-18032487",
+      "executable_lines": 14,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        20
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    },
+    {
+      "algorithms": {
+        "dstar2": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 5,
+            "score": 0.5,
+            "source_snippet": "tt[i]=1000, cc[i]=1000;",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 5,
+          "reciprocal_rank": 0.2,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        },
+        "ochiai": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 5,
+            "score": 0.5773502691896258,
+            "source_snippet": "tt[i]=1000, cc[i]=1000;",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 5,
+          "reciprocal_rank": 0.2,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5773502691896258,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        },
+        "tarantula": {
+          "first_fault_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 7,
+            "nf": 0,
+            "np": 0,
+            "rank": 5,
+            "score": 0.5,
+            "source_snippet": "tt[i]=1000, cc[i]=1000;",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          },
+          "first_fault_rank": 5,
+          "reciprocal_rank": 0.2,
+          "top_k": {
+            "1": false,
+            "10": true,
+            "3": false,
+            "5": true
+          },
+          "top_ranked_entry": {
+            "ef": 1,
+            "ep": 2,
+            "line": 2,
+            "nf": 0,
+            "np": 0,
+            "rank": 1,
+            "score": 0.5,
+            "source_snippet": "int main(int argc, char *argv[])",
+            "tie_end_rank": 14,
+            "tie_start_rank": 1
+          }
+        }
+      },
+      "case_id": "69-B-bug-18294344-18294349",
+      "executable_lines": 18,
+      "failed_tests": 1,
+      "ground_truth_fault_lines": [
+        7
+      ],
+      "passed_tests": 2,
+      "status": "localizable",
+      "warnings": []
+    }
+  ],
+  "pilot_cases": 50,
+  "repair_test_totals": {
+    "failed": 88,
+    "failed_with_nonzero_exit": 3,
+    "failed_with_zero_exit": 85,
+    "passed": 92,
+    "timed_out": 0,
+    "total": 180
+  },
+  "tie_statistics": {
+    "dstar2": {
+      "cases_with_fault_line_tied": 47,
+      "cases_with_top_score_tie": 48
+    },
+    "ochiai": {
+      "cases_with_fault_line_tied": 47,
+      "cases_with_top_score_tie": 48
+    },
+    "tarantula": {
+      "cases_with_fault_line_tied": 47,
+      "cases_with_top_score_tie": 48
+    }
+  }
+}

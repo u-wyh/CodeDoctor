@@ -1,0 +1,88 @@
+{
+  "case_id": "526-B-bug-10597230-10597317",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=526-B-10597230",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 526-B-10597230.c -o 526-B-10597230.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 526-B-10597230.o -o 526-B-10597230 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/526-B-bug-10597230-10597317/526-B-10597230.c",
+  "tests": [
+    {
+      "covered_lines": [
+        6,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        24,
+        26
+      ],
+      "executable_lines": [
+        6,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        24,
+        26
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "p1",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "covered_lines": [
+        6,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        24,
+        26
+      ],
+      "executable_lines": [
+        6,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        24,
+        26
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    }
+  ]
+}

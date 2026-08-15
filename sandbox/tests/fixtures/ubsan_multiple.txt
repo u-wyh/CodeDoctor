@@ -1,0 +1,9 @@
+/workspace/main.cpp:6:11: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'
+    #0 0x55aa in overflow /workspace/main.cpp:6:11
+    #1 0x55bb in main /workspace/main.cpp:15:20
+    #2 0x7f00 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+
+/workspace/main.cpp:10:27: runtime error: shift exponent 32 is too large for 32-bit type 'unsigned int'
+    #0 0x55cc in invalid_shift /workspace/main.cpp:10:27
+    #1 0x55dd in main /workspace/main.cpp:16:25
+    #2 0x7f00 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58

@@ -1,0 +1,364 @@
+{
+  "case_id": "125-A-bug-917277-917278",
+  "executable_lines": 8,
+  "failed_tests": 3,
+  "passed_tests": 0,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "scanf (\"%d\", &n);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "printf(\"%d \",a = n+1 / 36);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "b = n - a * 36;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "c = b / 3;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "if (b - c * 3 > 1) c++;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "printf (\"%d\", c);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 1.7976931348623157e+308,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf (\"%d\", &n);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.0,
+        "source_snippet": "printf(\"%d \",a = n+1 / 36);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.0,
+        "source_snippet": "b = n - a * 36;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.0,
+        "source_snippet": "c = b / 3;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 1.0,
+        "source_snippet": "if (b - c * 3 > 1) c++;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 1.0,
+        "source_snippet": "printf (\"%d\", c);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 1.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf (\"%d\", &n);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.0,
+        "source_snippet": "printf(\"%d \",a = n+1 / 36);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.0,
+        "source_snippet": "b = n - a * 36;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.0,
+        "source_snippet": "c = b / 3;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 1.0,
+        "source_snippet": "if (b - c * 3 > 1) c++;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 1.0,
+        "source_snippet": "printf (\"%d\", c);",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 3,
+        "ep": 0,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 1.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 8,
+        "tie_start_rank": 1
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 4,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 7,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 8,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 9,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 10,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 11,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 12,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 3,
+      "ep": 0,
+      "line": 13,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": [
+    "no_passing_repair_test"
+  ]
+}

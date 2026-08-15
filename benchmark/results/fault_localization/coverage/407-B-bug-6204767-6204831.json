@@ -1,0 +1,122 @@
+{
+  "case_id": "407-B-bug-6204767-6204831",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=407-B-6204767",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 407-B-6204767.c -o 407-B-6204767.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 407-B-6204767.o -o 407-B-6204767 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/407-B-bug-6204767-6204831/407-B-6204767.c",
+  "tests": [
+    {
+      "covered_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "executable_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "p1",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "covered_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "executable_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "p2",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "covered_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "executable_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "p3",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "covered_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "executable_lines": [
+        9,
+        12,
+        13,
+        14,
+        15,
+        17,
+        20,
+        21
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    }
+  ]
+}

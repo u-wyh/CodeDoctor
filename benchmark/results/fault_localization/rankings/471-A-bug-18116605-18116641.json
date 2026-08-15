@@ -1,0 +1,663 @@
+{
+  "case_id": "471-A-bug-18116605-18116641",
+  "executable_lines": 15,
+  "failed_tests": 1,
+  "passed_tests": 3,
+  "rankings": {
+    "dstar2": [
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 21,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.5,
+        "source_snippet": "a=0;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.5,
+        "source_snippet": "b=0;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 1,
+        "rank": 3,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<9;i++)",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 26,
+        "nf": 0,
+        "np": 1,
+        "rank": 4,
+        "score": 0.5,
+        "source_snippet": "if(m[i]==1 && a==0) a=i;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 27,
+        "nf": 0,
+        "np": 1,
+        "rank": 5,
+        "score": 0.5,
+        "source_snippet": "else if(m[i]==1) b=i;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 30,
+        "nf": 0,
+        "np": 1,
+        "rank": 6,
+        "score": 0.5,
+        "source_snippet": "if(a==b) printf(\"Elephant\");",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.3333333333333333,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.3333333333333333,
+        "source_snippet": "for(i=0;i<9;i++) m[i]=0;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.3333333333333333,
+        "source_snippet": "for(i=0;i<6;i++)",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.3333333333333333,
+        "source_snippet": "scanf(\"%d\",&a);",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.3333333333333333,
+        "source_snippet": "m[a-1]++;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.3333333333333333,
+        "source_snippet": "for(i=0;i<9;i++) if(m[i]>=4) break;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 17,
+        "nf": 0,
+        "np": 0,
+        "rank": 13,
+        "score": 0.3333333333333333,
+        "source_snippet": "if(m[i]<4||m[i]>6) printf(\"Alien\");",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 34,
+        "nf": 0,
+        "np": 0,
+        "rank": 14,
+        "score": 0.3333333333333333,
+        "source_snippet": "return 0; //ADDED",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 31,
+        "nf": 1,
+        "np": 2,
+        "rank": 15,
+        "score": 0.0,
+        "source_snippet": "else printf(\"Bear\");",
+        "tie_end_rank": 15,
+        "tie_start_rank": 15
+      }
+    ],
+    "ochiai": [
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 21,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.5773502691896258,
+        "source_snippet": "a=0;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.5773502691896258,
+        "source_snippet": "b=0;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 1,
+        "rank": 3,
+        "score": 0.5773502691896258,
+        "source_snippet": "for(i=0;i<9;i++)",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 26,
+        "nf": 0,
+        "np": 1,
+        "rank": 4,
+        "score": 0.5773502691896258,
+        "source_snippet": "if(m[i]==1 && a==0) a=i;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 27,
+        "nf": 0,
+        "np": 1,
+        "rank": 5,
+        "score": 0.5773502691896258,
+        "source_snippet": "else if(m[i]==1) b=i;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 30,
+        "nf": 0,
+        "np": 1,
+        "rank": 6,
+        "score": 0.5773502691896258,
+        "source_snippet": "if(a==b) printf(\"Elephant\");",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<9;i++) m[i]=0;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<6;i++)",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%d\",&a);",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.5,
+        "source_snippet": "m[a-1]++;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<9;i++) if(m[i]>=4) break;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 17,
+        "nf": 0,
+        "np": 0,
+        "rank": 13,
+        "score": 0.5,
+        "source_snippet": "if(m[i]<4||m[i]>6) printf(\"Alien\");",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 34,
+        "nf": 0,
+        "np": 0,
+        "rank": 14,
+        "score": 0.5,
+        "source_snippet": "return 0; //ADDED",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 31,
+        "nf": 1,
+        "np": 2,
+        "rank": 15,
+        "score": 0.0,
+        "source_snippet": "else printf(\"Bear\");",
+        "tie_end_rank": 15,
+        "tie_start_rank": 15
+      }
+    ],
+    "tarantula": [
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 21,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.6000000000000001,
+        "source_snippet": "a=0;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 22,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.6000000000000001,
+        "source_snippet": "b=0;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 24,
+        "nf": 0,
+        "np": 1,
+        "rank": 3,
+        "score": 0.6000000000000001,
+        "source_snippet": "for(i=0;i<9;i++)",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 26,
+        "nf": 0,
+        "np": 1,
+        "rank": 4,
+        "score": 0.6000000000000001,
+        "source_snippet": "if(m[i]==1 && a==0) a=i;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 27,
+        "nf": 0,
+        "np": 1,
+        "rank": 5,
+        "score": 0.6000000000000001,
+        "source_snippet": "else if(m[i]==1) b=i;",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 2,
+        "line": 30,
+        "nf": 0,
+        "np": 1,
+        "rank": 6,
+        "score": 0.6000000000000001,
+        "source_snippet": "if(a==b) printf(\"Elephant\");",
+        "tie_end_rank": 6,
+        "tie_start_rank": 1
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<9;i++) m[i]=0;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<6;i++)",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5,
+        "source_snippet": "scanf(\"%d\",&a);",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.5,
+        "source_snippet": "m[a-1]++;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.5,
+        "source_snippet": "for(i=0;i<9;i++) if(m[i]>=4) break;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 17,
+        "nf": 0,
+        "np": 0,
+        "rank": 13,
+        "score": 0.5,
+        "source_snippet": "if(m[i]<4||m[i]>6) printf(\"Alien\");",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 1,
+        "ep": 3,
+        "line": 34,
+        "nf": 0,
+        "np": 0,
+        "rank": 14,
+        "score": 0.5,
+        "source_snippet": "return 0; //ADDED",
+        "tie_end_rank": 14,
+        "tie_start_rank": 7
+      },
+      {
+        "ef": 0,
+        "ep": 1,
+        "line": 31,
+        "nf": 1,
+        "np": 2,
+        "rank": 15,
+        "score": 0.0,
+        "source_snippet": "else printf(\"Bear\");",
+        "tie_end_rank": 15,
+        "tie_start_rank": 15
+      }
+    ]
+  },
+  "spectrum": [
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 3,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 7,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 9,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 11,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 12,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 15,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 17,
+      "nf": 0,
+      "np": 0
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 21,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 22,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 24,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 26,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 27,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 1,
+      "ep": 2,
+      "line": 30,
+      "nf": 0,
+      "np": 1
+    },
+    {
+      "ef": 0,
+      "ep": 1,
+      "line": 31,
+      "nf": 1,
+      "np": 2
+    },
+    {
+      "ef": 1,
+      "ep": 3,
+      "line": 34,
+      "nf": 0,
+      "np": 0
+    }
+  ],
+  "status": "localizable",
+  "warnings": []
+}

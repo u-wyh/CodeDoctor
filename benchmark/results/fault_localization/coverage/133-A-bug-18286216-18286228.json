@@ -1,0 +1,108 @@
+{
+  "case_id": "133-A-bug-18286216-18286228",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=133-A-18286216",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 133-A-18286216.c -o 133-A-18286216.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 133-A-18286216.o -o 133-A-18286216 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/133-A-bug-18286216-18286228/133-A-18286216.c",
+  "tests": [
+    {
+      "covered_lines": [
+        6,
+        7,
+        9,
+        11,
+        12,
+        14,
+        15,
+        19,
+        22
+      ],
+      "executable_lines": [
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        19,
+        20,
+        22
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "p1",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "covered_lines": [
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        19,
+        20,
+        22
+      ],
+      "executable_lines": [
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        19,
+        20,
+        22
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "p2",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "covered_lines": [
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        19,
+        22
+      ],
+      "executable_lines": [
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        19,
+        20,
+        22
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    }
+  ]
+}
