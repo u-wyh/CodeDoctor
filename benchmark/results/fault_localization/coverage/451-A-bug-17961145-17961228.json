@@ -11,6 +11,40 @@
   "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/451-A-bug-17961145-17961228/451-A-17961145.c",
   "tests": [
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": false,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 7,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 7,
+          "taken": false,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         6,
@@ -30,6 +64,40 @@
       "verdict": "PASS"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": false,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 7,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 7,
+          "taken": false,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         6,
@@ -49,6 +117,40 @@
       "verdict": "PASS"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": false,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 0,
+          "fallthrough": true,
+          "line": 7,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": false,
+          "line": 7,
+          "taken": true,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         6,
@@ -68,6 +170,40 @@
       "verdict": "PASS"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": false,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 6,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 7,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 7,
+          "taken": false,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         6,

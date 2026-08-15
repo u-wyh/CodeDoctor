@@ -11,6 +11,24 @@
   "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/55-A-bug-9385434-9385438/55-A-9385434.c",
   "tests": [
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 0,
+          "fallthrough": true,
+          "line": 6,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 6,
+          "taken": false,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         2,
         5
@@ -28,6 +46,24 @@
       "verdict": "FAIL"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 0,
+          "fallthrough": true,
+          "line": 6,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 6,
+          "taken": false,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         2,
         5
@@ -45,6 +81,24 @@
       "verdict": "FAIL"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 0,
+          "fallthrough": true,
+          "line": 6,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 6,
+          "taken": false,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         2,
         5

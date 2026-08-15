@@ -4,20 +4,21 @@ import math
 import sys
 from collections.abc import Callable
 
-from .models import SpectrumLine
+from .models import SpectrumBranch, SpectrumLine
 
 
-SuspiciousnessFormula = Callable[[SpectrumLine], float]
+SpectrumRecord = SpectrumLine | SpectrumBranch
+SuspiciousnessFormula = Callable[[SpectrumRecord], float]
 
 
-def ochiai(spectrum: SpectrumLine) -> float:
+def ochiai(spectrum: SpectrumRecord) -> float:
     denominator = math.sqrt(
         (spectrum.ef + spectrum.nf) * (spectrum.ef + spectrum.ep)
     )
     return spectrum.ef / denominator if denominator else 0.0
 
 
-def tarantula(spectrum: SpectrumLine) -> float:
+def tarantula(spectrum: SpectrumRecord) -> float:
     total_failed = spectrum.ef + spectrum.nf
     total_passed = spectrum.ep + spectrum.np
     failed_rate = spectrum.ef / total_failed if total_failed else 0.0
@@ -26,7 +27,7 @@ def tarantula(spectrum: SpectrumLine) -> float:
     return failed_rate / denominator if denominator else 0.0
 
 
-def dstar2(spectrum: SpectrumLine) -> float:
+def dstar2(spectrum: SpectrumRecord) -> float:
     denominator = spectrum.ep + spectrum.nf
     if denominator == 0:
         return sys.float_info.max if spectrum.ef > 0 else 0.0

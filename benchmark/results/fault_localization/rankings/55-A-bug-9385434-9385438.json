@@ -1,11 +1,60 @@
 {
+  "branch_line_scores": {
+    "6": 0.0
+  },
+  "branch_outcomes": 2,
+  "branch_spectrum": [
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 0,
+      "line": 6,
+      "nf": 3,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 0,
+      "line": 6,
+      "nf": 3,
+      "np": 0,
+      "score": 0.0
+    }
+  ],
   "case_id": "55-A-bug-9385434-9385438",
+  "coverage_equivalence_classes": [
+    {
+      "lines": [
+        2,
+        5
+      ],
+      "vector": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "lines": [
+        6,
+        7
+      ],
+      "vector": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
   "executable_lines": 4,
   "failed_tests": 3,
   "passed_tests": 0,
   "rankings": {
     "dstar2": [
       {
+        "branch_score": null,
         "ef": 3,
         "ep": 0,
         "line": 2,
@@ -18,6 +67,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 3,
         "ep": 0,
         "line": 5,
@@ -30,6 +80,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 6,
@@ -42,6 +93,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 7,
@@ -56,6 +108,7 @@
     ],
     "ochiai": [
       {
+        "branch_score": null,
         "ef": 3,
         "ep": 0,
         "line": 2,
@@ -68,6 +121,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 3,
         "ep": 0,
         "line": 5,
@@ -80,6 +134,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 6,
@@ -92,6 +147,61 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
+        "ef": 0,
+        "ep": 0,
+        "line": 7,
+        "nf": 3,
+        "np": 0,
+        "rank": 4,
+        "score": 0.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      }
+    ],
+    "ochiai_branch_tiebreak": [
+      {
+        "branch_score": 0.0,
+        "ef": 3,
+        "ep": 0,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 3,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "scanf(\"%d\",a);",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 6,
+        "nf": 3,
+        "np": 0,
+        "rank": 3,
+        "score": 0.0,
+        "source_snippet": "(a & a-1)?printf(\"NO\"):printf(\"YES\");",
+        "tie_end_rank": 4,
+        "tie_start_rank": 3
+      },
+      {
+        "branch_score": 0.0,
         "ef": 0,
         "ep": 0,
         "line": 7,
@@ -106,6 +216,7 @@
     ],
     "tarantula": [
       {
+        "branch_score": null,
         "ef": 3,
         "ep": 0,
         "line": 2,
@@ -118,6 +229,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 3,
         "ep": 0,
         "line": 5,
@@ -130,6 +242,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 6,
@@ -142,6 +255,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 7,

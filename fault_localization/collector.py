@@ -156,7 +156,8 @@ def collect_coverage(
                 f"timeout -k 1s {BENCHMARK_RUN_TIMEOUT_SECONDS}s "
                 f"./{source.stem} < input.txt > actual.out 2> program.err; "
                 'printf "%s\\n" "$?" > program.status; '
-                f"gcov --json-format {source.name} > gcov.out 2> gcov.err; "
+                "gcov --json-format --branch-probabilities --branch-counts "
+                f"{source.name} > gcov.out 2> gcov.err; "
                 'printf "%s\\n" "$?" > gcov.status; exit 0'
             )
             run = run_container(
@@ -185,7 +186,7 @@ def collect_coverage(
                     f"expected one gcov JSON for {localization_input.case_id}/"
                     f"{test.test_id}, found {len(gcov_files)}"
                 )
-            gcov_version, executable_lines, covered_lines = parse_gcov_json(
+            coverage = parse_gcov_json(
                 gcov_files[0], source.name
             )
             actual = (test_dir / "actual.out").read_bytes()
@@ -203,11 +204,12 @@ def collect_coverage(
                 TestCoverage(
                     test_id=test.test_id,
                     verdict=(TestVerdict.PASS if passed else TestVerdict.FAIL),
-                    covered_lines=covered_lines,
-                    executable_lines=executable_lines,
+                    covered_lines=coverage.covered_lines,
+                    executable_lines=coverage.executable_lines,
                     exit_code=status,
                     timed_out=timed_out,
-                    gcov_version=gcov_version,
+                    gcov_version=coverage.gcc_version,
+                    branches=coverage.branches,
                 )
             )
 

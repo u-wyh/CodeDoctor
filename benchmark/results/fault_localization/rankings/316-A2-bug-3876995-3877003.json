@@ -1,11 +1,271 @@
 {
+  "branch_line_scores": {
+    "10": 1.0,
+    "12": 0.5773502691896258,
+    "13": 0.7071067811865475,
+    "15": 0.7071067811865475,
+    "19": 0.7071067811865475,
+    "8": 1.0
+  },
+  "branch_outcomes": 24,
+  "branch_spectrum": [
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 2,
+      "line": 8,
+      "nf": 1,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 1,
+      "ep": 0,
+      "line": 8,
+      "nf": 0,
+      "np": 2,
+      "score": 1.0
+    },
+    {
+      "branch_index": 2,
+      "ef": 0,
+      "ep": 1,
+      "line": 8,
+      "nf": 1,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 3,
+      "ef": 0,
+      "ep": 1,
+      "line": 8,
+      "nf": 1,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 4,
+      "ef": 0,
+      "ep": 1,
+      "line": 8,
+      "nf": 1,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 5,
+      "ef": 0,
+      "ep": 0,
+      "line": 8,
+      "nf": 1,
+      "np": 2,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 1,
+      "line": 10,
+      "nf": 1,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 1,
+      "ep": 0,
+      "line": 10,
+      "nf": 0,
+      "np": 2,
+      "score": 1.0
+    },
+    {
+      "branch_index": 2,
+      "ef": 0,
+      "ep": 1,
+      "line": 10,
+      "nf": 1,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 3,
+      "ef": 0,
+      "ep": 0,
+      "line": 10,
+      "nf": 1,
+      "np": 2,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 1,
+      "ep": 2,
+      "line": 12,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    },
+    {
+      "branch_index": 1,
+      "ef": 1,
+      "ep": 2,
+      "line": 12,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    },
+    {
+      "branch_index": 0,
+      "ef": 1,
+      "ep": 1,
+      "line": 13,
+      "nf": 0,
+      "np": 1,
+      "score": 0.7071067811865475
+    },
+    {
+      "branch_index": 1,
+      "ef": 1,
+      "ep": 2,
+      "line": 13,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    },
+    {
+      "branch_index": 0,
+      "ef": 1,
+      "ep": 2,
+      "line": 15,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 0,
+      "line": 15,
+      "nf": 1,
+      "np": 2,
+      "score": 0.0
+    },
+    {
+      "branch_index": 2,
+      "ef": 1,
+      "ep": 2,
+      "line": 15,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    },
+    {
+      "branch_index": 3,
+      "ef": 0,
+      "ep": 0,
+      "line": 15,
+      "nf": 1,
+      "np": 2,
+      "score": 0.0
+    },
+    {
+      "branch_index": 4,
+      "ef": 1,
+      "ep": 2,
+      "line": 15,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    },
+    {
+      "branch_index": 5,
+      "ef": 1,
+      "ep": 1,
+      "line": 15,
+      "nf": 0,
+      "np": 1,
+      "score": 0.7071067811865475
+    },
+    {
+      "branch_index": 6,
+      "ef": 1,
+      "ep": 1,
+      "line": 15,
+      "nf": 0,
+      "np": 1,
+      "score": 0.7071067811865475
+    },
+    {
+      "branch_index": 7,
+      "ef": 0,
+      "ep": 1,
+      "line": 15,
+      "nf": 1,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 1,
+      "ep": 1,
+      "line": 19,
+      "nf": 0,
+      "np": 1,
+      "score": 0.7071067811865475
+    },
+    {
+      "branch_index": 1,
+      "ef": 1,
+      "ep": 2,
+      "line": 19,
+      "nf": 0,
+      "np": 0,
+      "score": 0.5773502691896258
+    }
+  ],
   "case_id": "316-A2-bug-3876995-3877003",
+  "coverage_equivalence_classes": [
+    {
+      "lines": [
+        4,
+        5,
+        7,
+        8,
+        11,
+        12,
+        13,
+        15,
+        19,
+        20
+      ],
+      "vector": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "lines": [
+        9,
+        10
+      ],
+      "vector": [
+        1,
+        0,
+        1
+      ]
+    }
+  ],
   "executable_lines": 12,
   "failed_tests": 1,
   "passed_tests": 2,
   "rankings": {
     "dstar2": [
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 1,
         "line": 9,
@@ -18,6 +278,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 1,
         "line": 10,
@@ -30,6 +291,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 4,
@@ -42,6 +304,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 5,
@@ -54,6 +317,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 7,
@@ -66,6 +330,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 8,
@@ -78,6 +343,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 11,
@@ -90,6 +356,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 12,
@@ -102,6 +369,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 13,
@@ -114,6 +382,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 15,
@@ -126,6 +395,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 19,
@@ -138,6 +408,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 20,
@@ -152,6 +423,7 @@
     ],
     "ochiai": [
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 1,
         "line": 9,
@@ -164,6 +436,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 1,
         "line": 10,
@@ -176,6 +449,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 4,
@@ -188,6 +462,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 5,
@@ -200,6 +475,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 7,
@@ -212,6 +488,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 8,
@@ -224,6 +501,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 11,
@@ -236,6 +514,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 12,
@@ -248,6 +527,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 13,
@@ -260,6 +540,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 15,
@@ -272,6 +553,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 19,
@@ -284,6 +566,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 20,
@@ -296,8 +579,167 @@
         "tie_start_rank": 3
       }
     ],
+    "ochiai_branch_tiebreak": [
+      {
+        "branch_score": 1.0,
+        "ef": 1,
+        "ep": 1,
+        "line": 10,
+        "nf": 0,
+        "np": 1,
+        "rank": 1,
+        "score": 0.7071067811865475,
+        "source_snippet": "if('A'<=s[0]&&s[0]<='J'){cnt[s[0]]++;k++;}}",
+        "tie_end_rank": 1,
+        "tie_start_rank": 1
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 1,
+        "ep": 1,
+        "line": 9,
+        "nf": 0,
+        "np": 1,
+        "rank": 2,
+        "score": 0.7071067811865475,
+        "source_snippet": "ans=9;",
+        "tie_end_rank": 2,
+        "tie_start_rank": 2
+      },
+      {
+        "branch_score": 1.0,
+        "ef": 1,
+        "ep": 2,
+        "line": 8,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.5773502691896258,
+        "source_snippet": "if(s[0]=='?'||('A'<=s[0]&&s[0]<='J')){//printf(\"%llu  %d\",ans,cnt[s[1]]);",
+        "tie_end_rank": 3,
+        "tie_start_rank": 3
+      },
+      {
+        "branch_score": 0.7071067811865475,
+        "ef": 1,
+        "ep": 2,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.5773502691896258,
+        "source_snippet": "if(s[i]=='?'){q++;//ans*=10;//printf(\"111 %llu  %d\",ans,cnt[s[1]]);",
+        "tie_end_rank": 6,
+        "tie_start_rank": 4
+      },
+      {
+        "branch_score": 0.7071067811865475,
+        "ef": 1,
+        "ep": 2,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.5773502691896258,
+        "source_snippet": "else if('A'<=s[i]&&s[i]<='J'){if(cnt[s[i]]==0){cnt[s[i]]++;if(k==0){q++;}else{ans*=(10-k);k++;}",
+        "tie_end_rank": 6,
+        "tie_start_rank": 4
+      },
+      {
+        "branch_score": 0.7071067811865475,
+        "ef": 1,
+        "ep": 2,
+        "line": 19,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.5773502691896258,
+        "source_snippet": "printf(\"%llu\",ans);for(i=0;i<q;i++){printf(\"0\");}",
+        "tie_end_rank": 6,
+        "tie_start_rank": 4
+      },
+      {
+        "branch_score": 0.5773502691896258,
+        "ef": 1,
+        "ep": 2,
+        "line": 12,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.5773502691896258,
+        "source_snippet": "for(i=1;i<n;i++){",
+        "tie_end_rank": 7,
+        "tie_start_rank": 7
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 1,
+        "ep": 2,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.5773502691896258,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 12,
+        "tie_start_rank": 8
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 1,
+        "ep": 2,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.5773502691896258,
+        "source_snippet": "int n,k=0,i,l,cnt[100]={0},q=0;long long ans=1;",
+        "tie_end_rank": 12,
+        "tie_start_rank": 8
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 1,
+        "ep": 2,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.5773502691896258,
+        "source_snippet": "gets(s);//if(s[0]=='B'){printf(\"%c\",s[1]);}",
+        "tie_end_rank": 12,
+        "tie_start_rank": 8
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 1,
+        "ep": 2,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.5773502691896258,
+        "source_snippet": "n=strlen(s);",
+        "tie_end_rank": 12,
+        "tie_start_rank": 8
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 1,
+        "ep": 2,
+        "line": 20,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.5773502691896258,
+        "source_snippet": "return 0;}",
+        "tie_end_rank": 12,
+        "tie_start_rank": 8
+      }
+    ],
     "tarantula": [
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 1,
         "line": 9,
@@ -310,6 +752,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 1,
         "line": 10,
@@ -322,6 +765,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 4,
@@ -334,6 +778,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 5,
@@ -346,6 +791,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 7,
@@ -358,6 +804,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 8,
@@ -370,6 +817,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 11,
@@ -382,6 +830,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 12,
@@ -394,6 +843,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 13,
@@ -406,6 +856,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 15,
@@ -418,6 +869,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 19,
@@ -430,6 +882,7 @@
         "tie_start_rank": 3
       },
       {
+        "branch_score": null,
         "ef": 1,
         "ep": 2,
         "line": 20,

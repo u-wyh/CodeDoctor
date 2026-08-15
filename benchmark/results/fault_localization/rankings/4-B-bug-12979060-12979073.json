@@ -1,11 +1,320 @@
 {
+  "branch_line_scores": {
+    "13": 1.0,
+    "15": 0.8164965809277261,
+    "18": 0.0,
+    "21": 0.8164965809277261,
+    "24": 0.0,
+    "27": 1.0,
+    "29": 0.0,
+    "31": 0.0,
+    "34": 0.0,
+    "36": 0.0,
+    "7": 0.8164965809277261
+  },
+  "branch_outcomes": 26,
+  "branch_spectrum": [
+    {
+      "branch_index": 0,
+      "ef": 2,
+      "ep": 1,
+      "line": 7,
+      "nf": 0,
+      "np": 0,
+      "score": 0.8164965809277261
+    },
+    {
+      "branch_index": 1,
+      "ef": 2,
+      "ep": 1,
+      "line": 7,
+      "nf": 0,
+      "np": 0,
+      "score": 0.8164965809277261
+    },
+    {
+      "branch_index": 0,
+      "ef": 2,
+      "ep": 0,
+      "line": 13,
+      "nf": 0,
+      "np": 1,
+      "score": 1.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 1,
+      "line": 13,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 2,
+      "ef": 0,
+      "ep": 0,
+      "line": 13,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 3,
+      "ef": 2,
+      "ep": 0,
+      "line": 13,
+      "nf": 0,
+      "np": 1,
+      "score": 1.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 0,
+      "line": 15,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 2,
+      "ep": 1,
+      "line": 15,
+      "nf": 0,
+      "np": 0,
+      "score": 0.8164965809277261
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 0,
+      "line": 18,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 0,
+      "line": 18,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 0,
+      "line": 21,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 2,
+      "ep": 1,
+      "line": 21,
+      "nf": 0,
+      "np": 0,
+      "score": 0.8164965809277261
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 0,
+      "line": 24,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 0,
+      "line": 24,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 2,
+      "ep": 1,
+      "line": 27,
+      "nf": 0,
+      "np": 0,
+      "score": 0.8164965809277261
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 0,
+      "line": 27,
+      "nf": 2,
+      "np": 1,
+      "score": 0.0
+    },
+    {
+      "branch_index": 2,
+      "ef": 0,
+      "ep": 1,
+      "line": 27,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 3,
+      "ef": 2,
+      "ep": 0,
+      "line": 27,
+      "nf": 0,
+      "np": 1,
+      "score": 1.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 1,
+      "line": 29,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 1,
+      "line": 29,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 1,
+      "line": 31,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 1,
+      "line": 31,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 1,
+      "line": 34,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 1,
+      "line": 34,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 0,
+      "ef": 0,
+      "ep": 1,
+      "line": 36,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    },
+    {
+      "branch_index": 1,
+      "ef": 0,
+      "ep": 1,
+      "line": 36,
+      "nf": 2,
+      "np": 0,
+      "score": 0.0
+    }
+  ],
   "case_id": "4-B-bug-12979060-12979073",
+  "coverage_equivalence_classes": [
+    {
+      "lines": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        13,
+        15,
+        21,
+        27,
+        42
+      ],
+      "vector": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "lines": [
+        14,
+        17,
+        18,
+        19,
+        23,
+        24,
+        25
+      ],
+      "vector": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "lines": [
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "vector": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
   "executable_lines": 29,
   "failed_tests": 2,
   "passed_tests": 1,
   "rankings": {
     "dstar2": [
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 2,
@@ -18,6 +327,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 3,
@@ -30,6 +340,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 4,
@@ -42,6 +353,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 5,
@@ -54,6 +366,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 6,
@@ -66,6 +379,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 7,
@@ -78,6 +392,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 9,
@@ -90,6 +405,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 10,
@@ -102,6 +418,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 11,
@@ -114,6 +431,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 13,
@@ -126,6 +444,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 15,
@@ -138,6 +457,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 21,
@@ -150,6 +470,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 27,
@@ -162,6 +483,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 42,
@@ -174,6 +496,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 14,
@@ -186,6 +509,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 17,
@@ -198,6 +522,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 18,
@@ -210,6 +535,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 19,
@@ -222,6 +548,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 23,
@@ -234,6 +561,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 24,
@@ -246,6 +574,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 25,
@@ -258,6 +587,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 29,
@@ -270,6 +600,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 31,
@@ -282,6 +613,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 32,
@@ -294,6 +626,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 33,
@@ -306,6 +639,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 34,
@@ -318,6 +652,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 35,
@@ -330,6 +665,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 36,
@@ -342,6 +678,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 37,
@@ -356,6 +693,7 @@
     ],
     "ochiai": [
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 2,
@@ -368,6 +706,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 3,
@@ -380,6 +719,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 4,
@@ -392,6 +732,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 5,
@@ -404,6 +745,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 6,
@@ -416,6 +758,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 7,
@@ -428,6 +771,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 9,
@@ -440,6 +784,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 10,
@@ -452,6 +797,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 11,
@@ -464,6 +810,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 13,
@@ -476,6 +823,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 15,
@@ -488,6 +836,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 21,
@@ -500,6 +849,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 27,
@@ -512,6 +862,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 42,
@@ -524,6 +875,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 14,
@@ -536,6 +888,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 17,
@@ -548,6 +901,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 18,
@@ -560,6 +914,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 19,
@@ -572,6 +927,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 23,
@@ -584,6 +940,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 24,
@@ -596,6 +953,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 25,
@@ -608,6 +966,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 29,
@@ -620,6 +979,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 31,
@@ -632,6 +992,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 32,
@@ -644,6 +1005,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 33,
@@ -656,6 +1018,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 34,
@@ -668,6 +1031,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 35,
@@ -680,6 +1044,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 36,
@@ -692,6 +1057,386 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
+        "ef": 0,
+        "ep": 1,
+        "line": 37,
+        "nf": 2,
+        "np": 0,
+        "rank": 29,
+        "score": 0.0,
+        "source_snippet": "printf(\"%d\\t\",a[j]); break;",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      }
+    ],
+    "ochiai_branch_tiebreak": [
+      {
+        "branch_score": 1.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 13,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 0.8164965809277261,
+        "source_snippet": "if(n>sum2 && n<sum1)",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "branch_score": 1.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 27,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 0.8164965809277261,
+        "source_snippet": "if(n>sum1 && n<sum2)",
+        "tie_end_rank": 2,
+        "tie_start_rank": 1
+      },
+      {
+        "branch_score": 0.8164965809277261,
+        "ef": 2,
+        "ep": 1,
+        "line": 7,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 0.8164965809277261,
+        "source_snippet": "for(i=0;i<d;i++)",
+        "tie_end_rank": 5,
+        "tie_start_rank": 3
+      },
+      {
+        "branch_score": 0.8164965809277261,
+        "ef": 2,
+        "ep": 1,
+        "line": 15,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 0.8164965809277261,
+        "source_snippet": "if(n==sum2)",
+        "tie_end_rank": 5,
+        "tie_start_rank": 3
+      },
+      {
+        "branch_score": 0.8164965809277261,
+        "ef": 2,
+        "ep": 1,
+        "line": 21,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 0.8164965809277261,
+        "source_snippet": "if(n==sum1)",
+        "tie_end_rank": 5,
+        "tie_start_rank": 3
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 2,
+        "nf": 0,
+        "np": 0,
+        "rank": 6,
+        "score": 0.8164965809277261,
+        "source_snippet": "int main(int argc, char *argv[])",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 7,
+        "score": 0.8164965809277261,
+        "source_snippet": "{",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 8,
+        "score": 0.8164965809277261,
+        "source_snippet": "int d,n,i,j,sum1=0,sum2=0;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 9,
+        "score": 0.8164965809277261,
+        "source_snippet": "scanf(\"%d%d\",&d,&n);",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 10,
+        "score": 0.8164965809277261,
+        "source_snippet": "int a[d],b[d];",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 9,
+        "nf": 0,
+        "np": 0,
+        "rank": 11,
+        "score": 0.8164965809277261,
+        "source_snippet": "scanf(\"%d%d\",&a[i],&b[i]);",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 10,
+        "nf": 0,
+        "np": 0,
+        "rank": 12,
+        "score": 0.8164965809277261,
+        "source_snippet": "sum1+=a[i];",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 11,
+        "nf": 0,
+        "np": 0,
+        "rank": 13,
+        "score": 0.8164965809277261,
+        "source_snippet": "sum2+=b[i];",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 2,
+        "ep": 1,
+        "line": 42,
+        "nf": 0,
+        "np": 0,
+        "rank": 14,
+        "score": 0.8164965809277261,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 14,
+        "tie_start_rank": 6
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 14,
+        "nf": 2,
+        "np": 1,
+        "rank": 15,
+        "score": 0.0,
+        "source_snippet": "{   printf(\"NO\"); return 0; }",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 17,
+        "nf": 2,
+        "np": 1,
+        "rank": 16,
+        "score": 0.0,
+        "source_snippet": "printf(\"YES\\n\");",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 18,
+        "nf": 2,
+        "np": 1,
+        "rank": 17,
+        "score": 0.0,
+        "source_snippet": "for(i=0;i<d;i++)",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 19,
+        "nf": 2,
+        "np": 1,
+        "rank": 18,
+        "score": 0.0,
+        "source_snippet": "printf(\"%d\\t\",b[i]); return 0;",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 23,
+        "nf": 2,
+        "np": 1,
+        "rank": 19,
+        "score": 0.0,
+        "source_snippet": "printf(\"YES\\n\");",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 24,
+        "nf": 2,
+        "np": 1,
+        "rank": 20,
+        "score": 0.0,
+        "source_snippet": "for(i=0;i<d;i++)",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 0,
+        "line": 25,
+        "nf": 2,
+        "np": 1,
+        "rank": 21,
+        "score": 0.0,
+        "source_snippet": "printf(\"%d\\t\",a[i]); return 0;",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 29,
+        "nf": 2,
+        "np": 0,
+        "rank": 22,
+        "score": 0.0,
+        "source_snippet": "for(i=0;i<d;i++)",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 31,
+        "nf": 2,
+        "np": 0,
+        "rank": 23,
+        "score": 0.0,
+        "source_snippet": "while(a[i]<b[i])",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 32,
+        "nf": 2,
+        "np": 0,
+        "rank": 24,
+        "score": 0.0,
+        "source_snippet": "{   a[i]++;",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 33,
+        "nf": 2,
+        "np": 0,
+        "rank": 25,
+        "score": 0.0,
+        "source_snippet": "sum1++;",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 34,
+        "nf": 2,
+        "np": 0,
+        "rank": 26,
+        "score": 0.0,
+        "source_snippet": "if(sum1==n)",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 35,
+        "nf": 2,
+        "np": 0,
+        "rank": 27,
+        "score": 0.0,
+        "source_snippet": "{   printf(\"YES\\n\");",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 0,
+        "ep": 1,
+        "line": 36,
+        "nf": 2,
+        "np": 0,
+        "rank": 28,
+        "score": 0.0,
+        "source_snippet": "for(j=0;j<d;j++)",
+        "tie_end_rank": 29,
+        "tie_start_rank": 15
+      },
+      {
+        "branch_score": 0.0,
         "ef": 0,
         "ep": 1,
         "line": 37,
@@ -706,6 +1451,7 @@
     ],
     "tarantula": [
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 2,
@@ -718,6 +1464,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 3,
@@ -730,6 +1477,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 4,
@@ -742,6 +1490,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 5,
@@ -754,6 +1503,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 6,
@@ -766,6 +1516,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 7,
@@ -778,6 +1529,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 9,
@@ -790,6 +1542,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 10,
@@ -802,6 +1555,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 11,
@@ -814,6 +1568,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 13,
@@ -826,6 +1581,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 15,
@@ -838,6 +1594,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 21,
@@ -850,6 +1607,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 27,
@@ -862,6 +1620,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 2,
         "ep": 1,
         "line": 42,
@@ -874,6 +1633,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 14,
@@ -886,6 +1646,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 17,
@@ -898,6 +1659,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 18,
@@ -910,6 +1672,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 19,
@@ -922,6 +1685,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 23,
@@ -934,6 +1698,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 24,
@@ -946,6 +1711,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 0,
         "line": 25,
@@ -958,6 +1724,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 29,
@@ -970,6 +1737,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 31,
@@ -982,6 +1750,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 32,
@@ -994,6 +1763,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 33,
@@ -1006,6 +1776,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 34,
@@ -1018,6 +1789,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 35,
@@ -1030,6 +1802,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 36,
@@ -1042,6 +1815,7 @@
         "tie_start_rank": 15
       },
       {
+        "branch_score": null,
         "ef": 0,
         "ep": 1,
         "line": 37,

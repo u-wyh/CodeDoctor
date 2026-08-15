@@ -6,12 +6,14 @@ import unittest
 
 from fault_localization.algorithms import dstar2, ochiai, tarantula
 from fault_localization.models import (
+    BranchCoverage,
     CoverageMatrix,
     SpectrumLine,
+    SpectrumBranch,
     TestCoverage,
     TestVerdict,
 )
-from fault_localization.spectrum import build_spectrum
+from fault_localization.spectrum import build_branch_spectrum, build_spectrum
 
 
 def _test(test_id: str, verdict: TestVerdict, covered: tuple[int, ...]) -> TestCoverage:
@@ -46,6 +48,30 @@ class SpectrumTests(unittest.TestCase):
                 SpectrumLine(12, ef=0, ep=0, nf=1, np=1),
             ),
             build_spectrum(matrix),
+        )
+
+    def test_builds_branch_spectrum_by_taken_outcome(self) -> None:
+        failed = _test("fail", TestVerdict.FAIL, (10,))
+        passed = _test("pass", TestVerdict.PASS, (10,))
+        failed = TestCoverage(
+            **{**failed.__dict__, "branches": (
+                BranchCoverage(10, 0, 3, True, True, False),
+                BranchCoverage(10, 1, 0, False, False, False),
+            )}
+        )
+        passed = TestCoverage(
+            **{**passed.__dict__, "branches": (
+                BranchCoverage(10, 0, 0, False, True, False),
+                BranchCoverage(10, 1, 1, True, False, False),
+            )}
+        )
+        matrix = CoverageMatrix("case", "bug.c", (), "", "", (failed, passed))
+        self.assertEqual(
+            (
+                SpectrumBranch(10, 0, ef=1, ep=0, nf=0, np=1),
+                SpectrumBranch(10, 1, ef=0, ep=1, nf=1, np=0),
+            ),
+            build_branch_spectrum(matrix),
         )
 
 

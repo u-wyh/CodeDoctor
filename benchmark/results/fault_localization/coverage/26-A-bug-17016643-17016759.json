@@ -11,6 +11,72 @@
   "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/26-A-bug-17016643-17016759/26-A-17016643.c",
   "tests": [
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 53,
+          "fallthrough": false,
+          "line": 11,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 11,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 16,
+          "fallthrough": true,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 37,
+          "fallthrough": false,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 5018,
+          "fallthrough": false,
+          "line": 13,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 16,
+          "fallthrough": true,
+          "line": 13,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 10,
+          "fallthrough": false,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         5,
@@ -48,6 +114,72 @@
       "verdict": "PASS"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 53,
+          "fallthrough": false,
+          "line": 11,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 11,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 16,
+          "fallthrough": true,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 37,
+          "fallthrough": false,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 5018,
+          "fallthrough": false,
+          "line": 13,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 16,
+          "fallthrough": true,
+          "line": 13,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 21,
+          "fallthrough": false,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         5,
@@ -85,6 +217,72 @@
       "verdict": "PASS"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 53,
+          "fallthrough": false,
+          "line": 11,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 11,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 16,
+          "fallthrough": true,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 37,
+          "fallthrough": false,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 5018,
+          "fallthrough": false,
+          "line": 13,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 16,
+          "fallthrough": true,
+          "line": 13,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 222,
+          "fallthrough": false,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         3,
         5,

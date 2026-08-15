@@ -91,6 +91,16 @@ class CoverageCollectorIntegrationTests(unittest.TestCase):
         self.assertIn(11, by_id["p1"].executable_lines)
         self.assertNotIn(11, by_id["p1"].covered_lines)
         self.assertNotIn(11, by_id["n1"].covered_lines)
+        pass_branches = {
+            (item.line, item.branch_index): item for item in by_id["p1"].branches
+        }
+        fail_branches = {
+            (item.line, item.branch_index): item for item in by_id["n1"].branches
+        }
+        self.assertTrue(pass_branches[(5, 0)].taken)
+        self.assertFalse(fail_branches[(5, 0)].taken)
+        self.assertFalse(pass_branches[(5, 1)].taken)
+        self.assertTrue(fail_branches[(5, 1)].taken)
         self.assertIn("-std=c99 -Wall", matrix.compile_stdout)
         self.assertIn("-g -O0 --coverage", matrix.compile_stdout)
 

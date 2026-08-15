@@ -1,6 +1,6 @@
 # CodeDoctor
 
-CodeDoctor 已具备 C/C++ Runner、Docker 沙箱、Codeflaws Benchmark 和基于 gcov 的 Spectrum-Based Fault Localization。当前可对 50-case Pilot 的 repair tests 逐测试采集覆盖，并生成 Ochiai、Tarantula、DStar2 可疑行排名及 evaluation-only 指标。
+CodeDoctor 已具备 C/C++ Runner、Docker 沙箱、Codeflaws Benchmark，以及基于 gcov line/branch evidence 的 Spectrum-Based Fault Localization。当前可对 50-case Pilot 的 repair tests 逐测试隔离采集覆盖，并生成原始 Ochiai 与保守 branch tie-breaking 的 tie-aware 对比。
 
 ## 构建沙箱镜像
 
@@ -69,6 +69,15 @@ Runner 会输出以下状态之一：
 ```bash
 python3 -m unittest discover -s sandbox/tests -v
 ```
+
+重新采集 50-case line/branch coverage 并生成 Phase 5 报告：
+
+```bash
+python3 benchmark/scripts/run_fault_localization_pilot.py --force
+python3 benchmark/scripts/generate_branch_fault_localization_report.py
+```
+
+报告输出到 `benchmark/reports/fault_localization_branch_report.md`，结构化指标输出到 `benchmark/results/fault_localization/branch_evaluation.json`。
 
 测试覆盖原 Runner 和 Docker 回归、Parser fixture，以及正常程序、heap/stack buffer overflow、use-after-free、double-free、memory leak、整数溢出、除零、非法移位和空指针访问的真实 Docker 集成分析。
 

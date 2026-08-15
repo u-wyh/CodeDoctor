@@ -11,6 +11,40 @@
   "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/526-B-bug-10597230-10597317/526-B-10597230.c",
   "tests": [
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 3,
+          "fallthrough": false,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 3,
+          "fallthrough": false,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         6,
         8,
@@ -48,6 +82,40 @@
       "verdict": "PASS"
     },
     {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 3,
+          "fallthrough": false,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 12,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 0,
+          "count": 3,
+          "fallthrough": false,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 1,
+          "fallthrough": true,
+          "line": 16,
+          "taken": true,
+          "throw": false
+        }
+      ],
       "covered_lines": [
         6,
         8,

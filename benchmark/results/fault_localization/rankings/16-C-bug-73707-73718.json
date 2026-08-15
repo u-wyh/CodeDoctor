@@ -1,11 +1,53 @@
 {
+  "branch_line_scores": {
+    "4": 0.8660254037844387
+  },
+  "branch_outcomes": 2,
+  "branch_spectrum": [
+    {
+      "branch_index": 0,
+      "ef": 1,
+      "ep": 0,
+      "line": 4,
+      "nf": 3,
+      "np": 0,
+      "score": 0.5
+    },
+    {
+      "branch_index": 1,
+      "ef": 3,
+      "ep": 0,
+      "line": 4,
+      "nf": 1,
+      "np": 0,
+      "score": 0.8660254037844387
+    }
+  ],
   "case_id": "16-C-bug-73707-73718",
+  "coverage_equivalence_classes": [
+    {
+      "lines": [
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "vector": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
   "executable_lines": 5,
   "failed_tests": 4,
   "passed_tests": 0,
   "rankings": {
     "dstar2": [
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 1,
@@ -18,6 +60,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 3,
@@ -30,6 +73,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 4,
@@ -42,6 +86,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 5,
@@ -54,6 +99,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 6,
@@ -68,6 +114,7 @@
     ],
     "ochiai": [
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 1,
@@ -80,6 +127,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 3,
@@ -92,6 +140,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 4,
@@ -104,6 +153,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 5,
@@ -116,6 +166,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 6,
@@ -128,8 +179,76 @@
         "tie_start_rank": 1
       }
     ],
+    "ochiai_branch_tiebreak": [
+      {
+        "branch_score": 0.8660254037844387,
+        "ef": 4,
+        "ep": 0,
+        "line": 4,
+        "nf": 0,
+        "np": 0,
+        "rank": 1,
+        "score": 1.0,
+        "source_snippet": "d=(a/=x)<(b/=y)?a:b;",
+        "tie_end_rank": 1,
+        "tie_start_rank": 1
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 4,
+        "ep": 0,
+        "line": 1,
+        "nf": 0,
+        "np": 0,
+        "rank": 2,
+        "score": 1.0,
+        "source_snippet": "int main(int argc, char *argv[]){",
+        "tie_end_rank": 5,
+        "tie_start_rank": 2
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 4,
+        "ep": 0,
+        "line": 3,
+        "nf": 0,
+        "np": 0,
+        "rank": 3,
+        "score": 1.0,
+        "source_snippet": "scanf(\"%d%d%d%d\",&a,&b,&x,&y);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 2
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 4,
+        "ep": 0,
+        "line": 5,
+        "nf": 0,
+        "np": 0,
+        "rank": 4,
+        "score": 1.0,
+        "source_snippet": "printf(\"%d %d\\n\",a,b);",
+        "tie_end_rank": 5,
+        "tie_start_rank": 2
+      },
+      {
+        "branch_score": 0.0,
+        "ef": 4,
+        "ep": 0,
+        "line": 6,
+        "nf": 0,
+        "np": 0,
+        "rank": 5,
+        "score": 1.0,
+        "source_snippet": "return 0;",
+        "tie_end_rank": 5,
+        "tie_start_rank": 2
+      }
+    ],
     "tarantula": [
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 1,
@@ -142,6 +261,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 3,
@@ -154,6 +274,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 4,
@@ -166,6 +287,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 5,
@@ -178,6 +300,7 @@
         "tie_start_rank": 1
       },
       {
+        "branch_score": null,
         "ef": 4,
         "ep": 0,
         "line": 6,

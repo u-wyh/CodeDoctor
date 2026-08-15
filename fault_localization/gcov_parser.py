@@ -2,10 +2,21 @@
 
 import gzip
 import json
+from dataclasses import dataclass
 from pathlib import Path
 
+from .models import BranchCoverage
 
-def parse_gcov_json(path: Path, source_name: str) -> tuple[str, tuple[int, ...], tuple[int, ...]]:
+
+@dataclass(frozen=True)
+class GcovCoverage:
+    gcc_version: str
+    executable_lines: tuple[int, ...]
+    covered_lines: tuple[int, ...]
+    branches: tuple[BranchCoverage, ...]
+
+
+def parse_gcov_json(path: Path, source_name: str) -> GcovCoverage:
     with gzip.open(path, mode="rt", encoding="utf-8") as source:
         document = json.load(source)
     matching = [
@@ -28,4 +39,21 @@ def parse_gcov_json(path: Path, source_name: str) -> tuple[str, tuple[int, ...],
             }
         )
     )
-    return str(document.get("gcc_version", "unknown")), executable, covered
+    branches = tuple(
+        BranchCoverage(
+            line=int(line["line_number"]),
+            branch_index=index,
+            count=int(branch.get("count", 0)),
+            taken=int(branch.get("count", 0)) > 0,
+            fallthrough=bool(branch.get("fallthrough", False)),
+            throw=bool(branch.get("throw", False)),
+        )
+        for line in lines
+        for index, branch in enumerate(line.get("branches", []))
+    )
+    return GcovCoverage(
+        gcc_version=str(document.get("gcc_version", "unknown")),
+        executable_lines=executable,
+        covered_lines=covered,
+        branches=branches,
+    )

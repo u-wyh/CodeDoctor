@@ -10,6 +10,7 @@ from benchmark.models import (
     TestSuites,
 )
 from fault_localization.models import (
+    BranchCoverage,
     CoverageMatrix,
     LocalizationInput,
     TestCoverage,
@@ -68,6 +69,20 @@ class PipelineTests(unittest.TestCase):
             _coverage("p1", TestVerdict.PASS),
             _coverage("n1", TestVerdict.FAIL),
         )
+        self.assertEqual(matrix, CoverageMatrix.from_dict(matrix.to_dict()))
+
+    def test_branch_coverage_json_round_trip(self) -> None:
+        coverage = _coverage("n1", TestVerdict.FAIL)
+        coverage = TestCoverage(
+            **{
+                **coverage.__dict__,
+                "branches": (
+                    BranchCoverage(2, 0, 4, True, True, False),
+                    BranchCoverage(2, 1, 0, False, False, False),
+                ),
+            }
+        )
+        matrix = _matrix(coverage)
         self.assertEqual(matrix, CoverageMatrix.from_dict(matrix.to_dict()))
 
 

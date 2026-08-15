@@ -37,6 +37,16 @@ class LocalizationInput:
 
 
 @dataclass(frozen=True)
+class BranchCoverage:
+    line: int
+    branch_index: int
+    count: int
+    taken: bool
+    fallthrough: bool
+    throw: bool
+
+
+@dataclass(frozen=True)
 class TestCoverage:
     test_id: str
     verdict: TestVerdict
@@ -45,6 +55,7 @@ class TestCoverage:
     exit_code: int | None
     timed_out: bool
     gcov_version: str
+    branches: tuple[BranchCoverage, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -73,6 +84,10 @@ class CoverageMatrix:
                     exit_code=item["exit_code"],
                     timed_out=item["timed_out"],
                     gcov_version=item["gcov_version"],
+                    branches=tuple(
+                        BranchCoverage(**branch)
+                        for branch in item.get("branches", [])
+                    ),
                 )
                 for item in value["tests"]
             ),
@@ -92,6 +107,18 @@ class CoverageMatrix:
     def failed_tests(self) -> int:
         return sum(test.verdict is TestVerdict.FAIL for test in self.tests)
 
+    @property
+    def executable_branches(self) -> tuple[tuple[int, int], ...]:
+        return tuple(
+            sorted(
+                {
+                    (branch.line, branch.branch_index)
+                    for test in self.tests
+                    for branch in test.branches
+                }
+            )
+        )
+
     def to_dict(self) -> dict[str, Any]:
         return json.loads(json.dumps(asdict(self)))
 
@@ -99,6 +126,16 @@ class CoverageMatrix:
 @dataclass(frozen=True)
 class SpectrumLine:
     line: int
+    ef: int
+    ep: int
+    nf: int
+    np: int
+
+
+@dataclass(frozen=True)
+class SpectrumBranch:
+    line: int
+    branch_index: int
     ef: int
     ep: int
     nf: int
@@ -117,6 +154,7 @@ class RankedLine:
     source_snippet: str
     tie_start_rank: int
     tie_end_rank: int
+    branch_score: float | None = None
 
 
 @dataclass(frozen=True)

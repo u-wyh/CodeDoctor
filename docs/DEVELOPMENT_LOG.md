@@ -839,3 +839,177 @@ gcov 冒烟使用 `--eval=override CFLAGS += ...` 时，实际编译行只剩 co
 - 扩充或选择更有区分力的 repair tests，重点改善 10 个 no-PASS case 和大规模 coverage ties。
 - 研究将不可执行 textual ground truth 映射到 executable statements 的预注册规则，并与当前严格行匹配指标并列报告，不能事后按成绩选择规则。
 - 下一阶段若进入 Fault Localization 增强，可研究动态切片、分支覆盖或语句级映射；本轮没有实现 AST/CFG、LLM 或自动修复。
+
+## 2026-08-15 Phase 5：Tie-Aware SBFL 与真实 Branch Evidence
+
+### 1. 本次目标
+
+- 将本地仓库绑定到 `https://github.com/u-wyh/CodeDoctor.git`，在进入 Phase 5 前安全保存 Phase 1-4 基线，并确保 3.2GB 本地工作区中的 Codeflaws raw/归档不进入 Git。
+- 重新审视 Phase 4 的大量 Ochiai ties，实现 best/worst/average rank、tie-aware Top-K/MRR 和 coverage equivalence class 分析。
+- 使用 GCC/gcov 的真实 branch arcs 逐 repair test 隔离采集 branch count/taken，构建 branch spectrum，并以 max branch Ochiai 对 line Ochiai 的精确并列做保守 lexicographic tie-breaking。
+- 在原 50-case/180-repair-test Pilot 上从头采集并比较 original line Ochiai 与 branch-aware Ochiai；完成 2 个改善案例和 2 个未改善案例分析，不使用 reference/validation evidence 参与定位。
+
+### 2. 实际完成内容
+
+- 检查到仓库位于 unborn `main` 且无 remote；添加 `origin`，远端 `ls-remote --heads` 为空。补强 `.gitignore` 后审计 staged 文件、敏感信息和大文件，创建 Phase 1-4 根提交 `f2a85a8`，提交信息为 `Initial CodeDoctor implementation through Phase 4`。
+- `.gitignore` 新增 `.env*`、私钥/证书、日志、Python 工具缓存、build/dist/tmp/temp 和 gcov 临时文件规则。实际 `git check-ignore -v` 继续命中 265MB 下载归档、raw case 归档及生成 JSON 报告；staged 文件中没有 raw/download 文件或 50MiB 以上文件。
+- `TestCoverage` 新增向后兼容的 `branches`；每条 `BranchCoverage` 保存 source line、line-local branch index、count、taken、fallthrough、throw。旧 Phase 4 JSON 缺少 `branches` 时仍可读取为空 tuple。
+- collector 改用 `gcov --json-format --branch-probabilities --branch-counts`。每个 repair test 仍复制干净 executable/`.gcno` 到独立临时目录并启动新受限 Docker 容器，测试间不共享 `.gcda`。
+- 增加 branch spectrum：每个 `(line, branch_index)` 按 taken/not-taken 和 PASS/FAIL 构造 `ef/ep/nf/np`，计算 Ochiai；同一 source line 取最大 branch score。
+- 增加 `ochiai_branch_tiebreak`：排序键为 line Ochiai 降序、max branch Ochiai 降序、line 升序。branch 只打破完全相同的 line score，不反转原 line-SBFL 分数组。
+- 实现 coverage equivalence class、branch coverage vector class、score-group size 统计。实现 tie-aware best/worst/average rank、tie size，以及 optimistic/pessimistic/average-rank Top-K 与 MRR；原确定 rank 指标继续保留。
+- 从头重采集 50 case、180 repair tests，生成 50 份含 branch records 的 coverage 和 50 份含 branch spectrum/tie-break ranking 的 ranking；0 coverage error，仍为 92 PASS/88 FAIL。
+- 新增结构化 `branch_evaluation.json` 和研究报告。报告展示 tie 成因、equivalence class、确定性与 tie-aware 指标、branch 方法、2 个改善案例 `158-C-bug-9967801-9967822`/`450-A-bug-12286209-12286212`，以及 2 个未改善案例 `471-A-bug-18116605-18116641`/`192-A-bug-18022160-18022194`。
+- `471-A` 的 diff fault lines 不属于 gcov executable records，因此 line/branch 都无法排名；`192-A` 的 fault L19 与 L18 同为 `001`，两行都无 branch outcome，tie 仍为 `[1,2]`。
+- 新增 branch-aware 方法文档并更新 README 的实验命令。未实现 weighted alpha sweep、LLM、Agent、RAG、Web、AST/CFG 或新数据集。
+
+### 3. 新增、修改、删除的文件
+
+新增：
+
+- `fault_localization/tie_analysis.py`
+- `fault_localization/branch_reporting.py`
+- `fault_localization/tests/test_tie_analysis.py`
+- `fault_localization/tests/fixtures/gcc12_branch.gcov.json`
+- `benchmark/scripts/generate_branch_fault_localization_report.py`
+- `benchmark/results/fault_localization/branch_evaluation.json`
+- `benchmark/reports/fault_localization_branch_report.md`
+- `docs/fault_localization/branch_aware_fl.md`
+
+修改：
+
+- `.gitignore`
+- `README.md`
+- `benchmark/config.py`
+- `fault_localization/__init__.py`
+- `fault_localization/algorithms.py`
+- `fault_localization/collector.py`
+- `fault_localization/evaluation.py`
+- `fault_localization/gcov_parser.py`
+- `fault_localization/models.py`
+- `fault_localization/pipeline.py`
+- `fault_localization/ranking.py`
+- `fault_localization/spectrum.py`
+- `fault_localization/tests/test_algorithms.py`
+- `fault_localization/tests/test_collector_integration.py`
+- `fault_localization/tests/test_gcov_parser.py`
+- `fault_localization/tests/test_pipeline.py`
+- `fault_localization/tests/test_ranking.py`
+- `benchmark/results/fault_localization/coverage/*.json`（50 份真实重采集产物）
+- `benchmark/results/fault_localization/rankings/*.json`（50 份真实重建产物）
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+### 4. 执行过的重要命令
+
+```bash
+git status --short --branch
+git remote -v
+git remote add origin https://github.com/u-wyh/CodeDoctor.git
+git ls-remote --heads origin
+git add .
+git diff --cached --stat
+git commit -m "Initial CodeDoctor implementation through Phase 4"
+git push -u origin main
+git push -u origin main
+gh auth status
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- su -s /bin/bash ubuntu -c 'docker info --format "{{.ServerVersion}}"'
+
+lxc exec codedoctor-docker-host -- su -s /bin/bash ubuntu -c 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests -v'
+lxc exec codedoctor-docker-host -- su -s /bin/bash ubuntu -c 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_fault_localization_pilot.py --force'
+lxc exec codedoctor-docker-host -- su -s /bin/bash ubuntu -c 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_branch_fault_localization_report.py'
+lxc exec codedoctor-docker-host -- su -s /bin/bash ubuntu -c 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_fault_localization_pilot.py --reuse-coverage'
+
+git diff --check
+rg -n 'reference|validation|heldout|ground_truth|fault_lines' benchmark/results/fault_localization/coverage benchmark/results/fault_localization/rankings
+git check-ignore -v benchmark/datasets/codeflaws/downloads/codeflaws.tar.gz benchmark/datasets/codeflaws/raw/codeflaws/674-E-bug-17842470-17842486.tar.gz benchmark/reports/codeflaws_pilot_report.json
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行内联 Python：验证 50 coverage/50 ranking 均有 branch 结构；每个 case 各测试拥有相同 branch universe；equivalence classes 完整分割 executable lines；branch-aware ranking 保留原 line score 且不反转 line-score 顺序；tie-aware rank 满足 `best <= average <= worst`；最终关键指标与 92/88 verdict totals 一致。对 100 份 coverage/ranking 在 `--reuse-coverage` 前后计算 SHA-256 并用 `cmp` 比较，输出 `ARTIFACT_HASHES_REPRODUCED`。
+
+### 5. 实际测试与实验结果
+
+- 开发中 Phase 5 Fault Localization 测试为 26/26 PASS；加入 branch JSON round-trip 后最终为 27/27 PASS，其中 2 个真实 Docker collector integration 均执行并通过。
+- Benchmark 回归 8/8 PASS。
+- Runner/Sanitizer 回归 29/29 PASS，耗时 10.593 秒。
+- 50-case `--force` 真实重采集：50 case、180 repair tests、92 PASS、88 FAIL、0 coverage error。
+- 50-case `--reuse-coverage` 重建：50 case、0 coverage error，100 份 coverage/ranking 哈希与重建前完全相同。
+- leakage scan：coverage/ranking 中没有 `reference`、`validation`、`heldout`、`ground_truth`、`fault_lines` 字段。
+- repository secret scan 无匹配；`git diff --check` 通过；Docker 无 `codedoctor-*` 残留容器，LXD 最终为 STOPPED。
+- Original deterministic Ochiai：Top-1 5/50（10%）、Top-3 16/50（32%）、Top-5 23/50（46%）、Top-10 31/50（62%）、MRR `0.2601458425`。
+- Branch tie-breaking deterministic：Top-1 11/50（22%）、Top-3 21/50（42%）、Top-5 28/50（56%）、Top-10 38/50（76%）、MRR `0.3836713097`。
+- Original tie-aware average-rank：Top-1/3/5/10 为 0%/26%/42%/70%，MRR `0.2183211561`；pessimistic MRR `0.1384969372`。
+- Branch tie-aware average-rank：Top-1/3/5/10 为 10%/36%/58%/76%，MRR `0.3468746856`；pessimistic MRR `0.2788235735`。
+- optimistic MRR 从 `0.7865622711` 降至 `0.5623321123`。这是大 tie 被拆分后不再假定 fault 总能位于并列首位，不应解释为方法整体退化。
+- top-score tie cases 从 48 降到 34；tied-fault cases 从 47 降到 41；平均最大 tie size 从 15.08 降到 10.94；平均 fault tie size 从 11.87 降到 5.77。
+- 1,033 个 per-case executable line records 只有 143 个 per-case unique line vectors；每 case 平均 2.86 个 vector、2.70 个 spectrum pattern。最大 equivalence class 每 case 平均 14.40 行，最大为 49 行；58 个 executable fault lines 的 class size 平均 10.90。
+- 原 Ochiai 共 106 个 tie groups，其中 92 个（86.79%）完全属于单一 coverage equivalence class；47 case 的整个 top tie 是单一 class。主要 tie 原因是 line coverage 本身相同，公式仅造成剩余少量合并。
+- 观测到 796 个 per-case branch outcomes、202 个 per-case unique branch vectors。branch evidence 使 average tie-aware fault rank 在 25 case 改善、17 case 回退，其余不变或 fault 不可执行。
+
+### 6. 遇到的问题
+
+#### 6.1 LXD 启动后 Docker daemon 未运行
+
+首次基线回归在 `docker info` 处失败：`/var/run/docker.sock` 不存在，三组测试尚未开始。
+
+#### 6.2 GitHub push 无可用认证
+
+Phase 1-4 基线 commit 成功。第一次 push 在 GnuTLS 握手处异常终止；第二次重试明确失败为 `could not read Username for 'https://github.com': No such device or address`。环境未安装 `gh`，`gh auth status` 返回 command not found。
+
+#### 6.3 仅使用 `--branch-counts` 时 JSON branches 为空
+
+真实 GCC 12.2 冒烟中，`gcov --json-format --branch-counts` 的 line records 没有 branch arcs。加入 `--branch-probabilities` 后才输出包含 count/fallthrough/throw 的 branch list。
+
+#### 6.4 宿主机没有 Docker CLI
+
+宿主执行 27 个 FL tests 时两个 collector integration 被 skip；同一测试集在 LXD Docker 环境中重新执行，27/27 全部通过。
+
+#### 6.5 Branch evidence 并非统一改善
+
+虽然整体 tie 与主要指标改善，仍有 17 case 的 average fault rank 回退。branch evidence 可能优先提升非 fault 控制行，straight-line fault 没有本地 branch outcome，非 executable diff line 更无法被 branch 方法补救。
+
+#### 6.6 生成报告中的源码空白使 staged diff check 失败
+
+最终提交前第一次 `git diff --cached --check` 报告 6 处 trailing whitespace，均来自案例源码代码块。第一次只对源码文本调用 `rstrip()` 后，空白源码行仍保留渲染前缀末尾的一个空格，检查继续报告 5 处；此时 commit 尚未执行。
+
+### 7. 问题解决方式
+
+- 使用 `systemctl start docker` 启动 LXD 内 daemon，确认 Docker Server `29.1.3` 后原样重跑基线和最终测试。
+- GitHub 认证失败后不写 token、不修改系统凭据、不 force push；保留正确 `origin` 和本地 commits，继续完成可验证开发，并将失败原因明确记录。
+- 以真实 gcov 输出确认参数组合，collector 固定同时使用 `--branch-probabilities --branch-counts`；将该 GCC 12.2 JSON 保存为小型 fixture。
+- 所有需要 Docker 的最终测试、50-case 重采集和重建均在 `codedoctor-docker-host` 内实际运行。
+- 不按结果调整规则或训练参数；保留 25 改善/17 回退的完整结果，并同时报告 optimistic、pessimistic 和 average-rank 指标。选择 lexicographic tie-break，不进行 Pilot ground-truth alpha 调参。
+- 将 `rstrip()` 应用于报告中完整的源码展示行并重新生成报告，随后 `git diff --cached --check` 输出 `STAGED_DIFF_CHECK_PASSED`。该修正只改变 Markdown 行尾，不改变 evaluation JSON 或任何指标。
+
+### 8. 设计取舍
+
+- 保留 Phase 4 的 line collector、三种旧排名和 JSON 读取兼容；在同一小型模块体系内增量加入 branch records、branch spectrum 和新 ranking，未为目录外观做大重构。
+- branch index 定义为 gcov 在每个 source line 的 branch list 顺序；taken 定义为 count > 0。保留 count 与 arc flags，避免把编译器 arc 误写成源码 predicate 真值。
+- 同行多个 branch 采用 max Ochiai，因为一个高可疑控制 outcome 不应被均值稀释；报告明确 max 也可能放大偶然 arc。
+- 主方法采用无参数 lexicographic tie-break。只在 line score 精确相等时使用 branch score，不允许其越过不同 line-score 组。
+- 结构化 branch evaluation 与 Phase 4 evaluation 分开保存，只比较 original Ochiai 和 branch tie-breaking；不继续扩张 Tarantula/DStar2 或算法数量。
+- deterministic 指标用于与 Phase 4 对齐，tie-aware average/pessimistic 用于判断提升是否超出 line-number 偶然顺序；optimistic 降低被如实保留。
+- ground truth 只在 `branch_reporting.py` 的 evaluation/report 阶段读取；coverage、spectrum、branch aggregation、ranking 均不知道 fault lines。
+
+### 9. 当前已知不足
+
+- 仅在固定 50-case Pilot、180 个小型 repair tests、GCC/gcov 12.2 上验证；同一 Pilot ground truth 只用于评价但仍不能代表跨数据集泛化。
+- 10 case 没有 PASS test，branch/line spectrum 都缺少成功路径对照；`450-A` 的改善主要是将全覆盖大 tie 分成 branch line 与 straight-line 两组。
+- 17 case average fault rank 回退；branch evidence 不是语义因果，也不保证控制行就是 fault。
+- 3 个 case 的 textual diff ground truth 完全不在 executable-line ranking；branch arcs 无法修复该表示不匹配。
+- straight-line fault、相同 branch vectors 和同一行内复杂表达式仍可能无法区分。
+- max branch aggregation 未与独立数据上的 mean/fixed weighted fusion 比较；本轮有意避免在 Pilot ground truth 上选择 alpha。
+- fatal-signal coverage、Docker 宿主内核共享、无磁盘配额/输出上限等 Phase 4 安全和 instrumentation 局限仍存在。
+- GitHub remote 已绑定，但 push 因当前环境缺少 GitHub HTTPS 凭据而失败；远端尚未获得本地 commits。
+
+### 10. 下一步计划
+
+- 优先在预注册、独立选择的 case split 或更大 Codeflaws 子集上复验 branch tie-breaking，避免把当前 Pilot 指标当作泛化结论。
+- 研究 repair test augmentation/selection，重点增加不同执行路径和 PASS 对照，直接缩小 coverage equivalence classes。
+- 为 non-executable textual diff fault 设计预注册的 executable-neighbor 映射，并与严格行匹配并列报告，不能按成绩事后选择。
+- 在进入 LLM Repair 前，将 fault candidate 接口设计为保留 line score、branch score、tie interval 和 equivalence-class context，而不是只返回确定性的单行排名。
