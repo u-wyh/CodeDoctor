@@ -137,7 +137,7 @@ python3 benchmark/scripts/build_repair_pilot.py --force
 python3 benchmark/scripts/run_repair_pilot_fl.py --force
 ```
 
-Phase 7 的候选 provider 已冻结为 DeepSeek Official API，继续使用 OpenAI-compatible Chat Completions。DeepSeek 配置固定为 `deepseek-v4-pro`、thinking enabled、reasoning effort high、stream false、max tokens 8192；thinking mode 不发送 temperature，也不声称 temperature determinism。凭据优先读取 `DEEPSEEK_API_KEY`，再读取 generic fallback `CODEDOCTOR_API_KEY`，不会使用 `OPENAI_API_KEY`：
+Phase 7 的候选 provider 已冻结为 DeepSeek Official API，继续使用 OpenAI-compatible Chat Completions。初始 `deepseek-v4-pro`、thinking high、max tokens 8192 的三次工程 smoke 全部耗尽 reasoning budget 且没有 final content，因此在正式实验开始前被标记为 superseded。最终候选配置固定为 `deepseek-v4-flash`、thinking enabled、reasoning effort low、stream false、max tokens 16384；这次预实验切换用于解决 output-budget compatibility failure，不是根据正式 repair 结果调参。Thinking mode 不发送 temperature，也不声称 temperature determinism。凭据优先读取 `DEEPSEEK_API_KEY`，再读取 generic fallback `CODEDOCTOR_API_KEY`，不会使用 `OPENAI_API_KEY`：
 
 ```bash
 export DEEPSEEK_API_KEY='...'
@@ -145,7 +145,7 @@ python3 benchmark/scripts/run_repair_ablation.py \
   --provider deepseek --limit 1 --resume
 ```
 
-真实 DeepSeek smoke 使用冻结 Repair Pilot manifest 的第一个 case，最多 1 case × 3 groups（3 次调用），transport retry 为 0。缺少凭据、配置漂移或 leakage audit 失败时不得联网。完整 50-case A/B/C 运行前必须人工审查 prompts 和 smoke artifacts，并生成调用量、真实 token usage、计费与泄漏边界预实验报告：
+真实 DeepSeek smoke 使用冻结 Repair Pilot manifest 的第一个 case，最多 1 case × 3 groups（3 次调用），transport retry 为 0。工程 smoke 会标记为 `pre_experiment_smoke` 并排除在正式 Evidence Ablation 指标之外；旧 Pro 与当前 Flash artifact 通过配置和 cache key 隔离。缺少凭据、配置漂移或 leakage audit 失败时不得联网。完整 50-case A/B/C 运行前必须人工审查 prompts 和 smoke artifacts，并生成调用量、真实 token usage、计费与泄漏边界预实验报告：
 
 ```bash
 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed

@@ -42,7 +42,7 @@ def _round_tokens(value: float, unit: int) -> int:
 def _artifact_records(root: Path) -> list[dict[str, Any]]:
     return [
         json.loads(path.read_text(encoding="utf-8"))
-        for path in sorted(root.glob("*/*/*.json"))
+        for path in sorted(root.rglob("*.json"))
     ]
 
 
@@ -98,6 +98,7 @@ def _usage_by_group(records: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
                 "total_tokens",
                 "prompt_cache_hit_tokens",
                 "prompt_cache_miss_tokens",
+                "final_answer_tokens",
             ):
                 value = usage.get(key)
                 if isinstance(value, int) and not isinstance(value, bool):
@@ -118,6 +119,21 @@ def _usage_by_group(records: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
             ),
         }
     return result
+
+
+def _current_smoke_records(
+    records: list[dict[str, Any]], configuration: dict[str, Any]
+) -> list[dict[str, Any]]:
+    return [
+        item
+        for item in records
+        if item.get("experimental") is True
+        and item.get("experiment_role") == "pre_experiment_smoke"
+        and item.get("model_parameters", {}).get("provider") == "deepseek"
+        and item.get("model_parameters", {}).get("model") == configuration["model"]
+        and item.get("model_parameters", {}).get("max_tokens")
+        == configuration["max_tokens"]
+    ]
 
 
 def _bulk_projection(
@@ -178,8 +194,9 @@ def _bulk_projection(
                     else None
                 ),
                 "output_basis": (
-                    "all three smoke completions reached max_tokens; this is an "
-                    "all-calls-hit-8192 conservative cap scenario, not expected usage"
+                    "at least one smoke completion reached the configured max_tokens; "
+                    "this is an all-calls-match-observed-usage cap scenario, not "
+                    "expected usage"
                     if smoke_truncated
                     else "one real completion per group multiplied by 50"
                 ),
@@ -307,14 +324,25 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
 
     all_artifacts = _artifact_records(REPAIR_ARTIFACT_ROOT)
     artifact_audit = validate_artifact_boundaries(all_artifacts)
-    online = [
+    deepseek_artifacts = [
         item
         for item in all_artifacts
         if item.get("experimental") is True
         and item.get("model_parameters", {}).get("provider") == "deepseek"
     ]
+    online = _current_smoke_records(deepseek_artifacts, deepseek)
+    superseded = [
+        item
+        for item in deepseek_artifacts
+        if item.get("model_parameters", {}).get("model") != deepseek["model"]
+    ]
+    formal = [
+        item
+        for item in deepseek_artifacts
+        if item.get("experiment_role") == "formal_evidence_ablation"
+    ]
     actual_usage = _usage_by_group(online)
-    smoke_truncated = bool(online) and all(
+    smoke_truncated = bool(online) and any(
         item.get("model_response", {}).get("finish_reason") == "length"
         for item in online
     )
@@ -345,7 +373,9 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
     has_key = credential_environment is not None
     complete_smoke = _complete_smoke(online, actual_usage)
     leakage_passed = manual_inspection == "passed"
-    bulk_online_ready = has_key and complete_smoke and leakage_passed
+    runtime_reproducibility_blocked = True
+    smoke_technical_ready = has_key and complete_smoke and leakage_passed
+    bulk_online_ready = smoke_technical_ready and not runtime_reproducibility_blocked
     observed_models = sorted(
         {
             str(item["provider_response_metadata"]["response_model"])
@@ -368,6 +398,8 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
             "groups": 3,
             "primary": len(cases) * 3,
             "real_smoke_calls": len(online),
+            "superseded_smoke_calls": len(superseded),
+            "formal_experiment_calls": len(formal),
             "repair_pilot_cases": len(cases),
             "smoke_maximum": 3,
             "transport_retries_configured": 0,
@@ -404,10 +436,35 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
             "temperature": deepseek["temperature"],
             "thinking": deepseek["thinking"],
         },
+        "candidate_selection": {
+            "decision_timing": "before the 150-call formal experiment",
+            "initial_candidate": {
+                "max_tokens": 8192,
+                "model": "deepseek-v4-pro",
+                "reasoning_effort": "high",
+                "smoke_calls": len(superseded),
+                "smoke_result": (
+                    "3/3 finish_reason=length with 8192 reasoning/completion "
+                    "tokens and empty final content"
+                ),
+                "status": "superseded pre-experiment smoke",
+            },
+            "reason": (
+                "pre-experiment output-budget compatibility failure, not "
+                "post-hoc repair-result optimization"
+            ),
+            "final_candidate": {
+                "max_tokens": deepseek["max_tokens"],
+                "model": deepseek["model"],
+                "reasoning_effort": deepseek["reasoning_effort"],
+                "status": "current pre-experiment candidate",
+            },
+        },
         "prompt_hashes": prompt_hashes,
         "protocol_version": protocol["protocol_version"],
         "readiness": {
             "bulk_online_ready": bulk_online_ready,
+            "smoke_technical_ready": smoke_technical_ready,
             "bulk_user_authorized": False,
             "blocking_reasons": [
                 reason
@@ -418,6 +475,10 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
                         "three-call genuine DeepSeek smoke with usage and final content not complete",
                     ),
                     (not leakage_passed, "manual prompt inspection not passed"),
+                    (
+                        runtime_reproducibility_blocked,
+                        "450-B runtime evidence reproducibility rule not frozen",
+                    ),
                 )
                 if condition
             ],
@@ -467,12 +528,30 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
                 )
                 for item in online
             },
+            "requested_model_by_group": {
+                item["group"]: item.get("provider_response_metadata", {}).get(
+                    "requested_model"
+                )
+                for item in online
+            },
+            "system_fingerprint_by_group": {
+                item["group"]: item.get("provider_response_metadata", {}).get(
+                    "system_fingerprint"
+                )
+                for item in online
+            },
             "selection_rule": "first case in the frozen Repair Pilot manifest",
             "truncation_detected": smoke_truncated,
             "validated_by_group": {
                 item["group"]: item.get("evaluation", {}).get("validated")
                 for item in online
             },
+        },
+        "remaining_bulk_reproducibility_blocker": {
+            "case_id": "450-B-bug-15950152-15950193",
+            "case_retained": True,
+            "status": "unresolved",
+            "issue": "Group C runtime actual output can change across baseline runs",
         },
         "token_estimate": {
             "approximate_average_output_tokens_per_call": average_output,
@@ -513,6 +592,7 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
         f"{_usage_cell(metric, 'prompt_tokens')} | "
         f"{_usage_cell(metric, 'completion_tokens')} | "
         f"{_usage_cell(metric, 'reasoning_tokens')} | "
+        f"{_usage_cell(metric, 'final_answer_tokens')} | "
         f"{_usage_cell(metric, 'prompt_cache_hit_tokens')} | "
         f"{_usage_cell(metric, 'prompt_cache_miss_tokens')} | "
         f"{_usage_cell(metric, 'total_tokens')} |"
@@ -529,8 +609,21 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
     cost = billing["bulk_cache_miss_cost_estimates"]
     projection = value["token_estimate"]["bulk_projection"]
     leakage = value["leakage_readiness"]
+    selection = value["candidate_selection"]
+    initial = selection["initial_candidate"]
+    final = selection["final_candidate"]
+    reproducibility = value["remaining_bulk_reproducibility_blocker"]
     observed = ", ".join(model["response_models_observed"]) or "not observed; no real response"
     return f"""# LLM Repair Pre-Experiment Report
+
+## Candidate Selection Timeline
+
+- Initial candidate: `{initial['model']}`, thinking enabled, reasoning effort `{initial['reasoning_effort']}`, max tokens {initial['max_tokens']}.
+- Pro smoke: {initial['smoke_result']}.
+- Decision: the Pro configuration was rejected before any formal bulk call and is marked `{initial['status']}`; its {initial['smoke_calls']} artifacts remain available only for engineering audit.
+- Final candidate: `{final['model']}`, thinking enabled, reasoning effort `{final['reasoning_effort']}`, max tokens {final['max_tokens']}.
+- Selection reason: {selection['reason']}.
+- Decision timing: {selection['decision_timing']}; neither Pro nor Flash smoke contributes to future formal repair rates.
 
 ## Model And Provider
 
@@ -542,7 +635,7 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 - Thinking: `{model['thinking']['type']}`; reasoning effort: `{model['reasoning_effort']}`; stream: `{str(model['stream']).lower()}`.
 - Temperature: not sent and not an effective sampling control in thinking mode. Temperature-based determinism is not claimed.
 - Maximum output tokens: {model['max_tokens']}; maximum repair attempts: {value['calls']['attempts_per_case_group']}.
-- `deepseek-v4-pro` is an API alias and may resolve differently over time; the response model and system fingerprint are recorded when available.
+- `{model['name']}` is an API alias and may resolve differently over time; the response model and system fingerprint are recorded when available.
 
 ## Credential And Billing
 
@@ -557,15 +650,19 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 - Repair Pilot: {value['calls']['repair_pilot_cases']} frozen cases; groups: {value['calls']['groups']}; attempts: {value['calls']['attempts_per_case_group']}.
 - Formal bulk size: {value['calls']['primary']} primary calls. This bulk has not been started.
 - Authorized smoke maximum: {value['calls']['smoke_maximum']} calls; actual real smoke calls: {value['calls']['real_smoke_calls']}.
+- Superseded Pro engineering smoke calls retained but excluded: {value['calls']['superseded_smoke_calls']}.
+- Formal experiment calls: {value['calls']['formal_experiment_calls']}.
 - Smoke selection: `{value['smoke']['case_id']}`, selected by `{value['smoke']['selection_rule']}`.
 - Automatic transport retries: {value['calls']['transport_retries_configured']}.
 
-| Group | Real calls | Prompt tokens | Completion tokens | Reasoning tokens | Cache hit | Cache miss | Total tokens |
-|---|---:|---:|---:|---:|---:|---:|---:|
+| Group | Real calls | Prompt tokens | Completion tokens | Reasoning tokens | Final-answer tokens | Cache hit | Cache miss | Total tokens |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
 {usage_rows}
 
 - Smoke classifications: `{value['smoke']['classification_by_group'] or 'N/A'}`.
+- Requested models: `{value['smoke']['requested_model_by_group'] or 'N/A'}`.
 - Response models: `{value['smoke']['response_model_by_group'] or 'N/A'}`.
+- System fingerprints: `{value['smoke']['system_fingerprint_by_group'] or 'N/A'}`.
 - Final content present: `{value['smoke']['content_present_by_group'] or 'N/A'}`; extraction: `{value['smoke']['extraction_status_by_group'] or 'N/A'}`.
 - Extracted source hashes: `{value['smoke']['extracted_source_hash_by_group'] or 'N/A'}`.
 - Compile success: `{value['smoke']['compile_success_by_group'] or 'N/A'}`; plausible: `{value['smoke']['plausible_by_group'] or 'N/A'}`; validated: `{value['smoke']['validated_by_group'] or 'N/A'}`.
@@ -624,8 +721,10 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 
 ## Mandatory Stop
 
+- `smoke_technical_ready = {str(value['readiness']['smoke_technical_ready']).lower()}`.
 - `bulk_online_ready = {str(value['readiness']['bulk_online_ready']).lower()}`.
 - `bulk_user_authorized = {str(value['readiness']['bulk_user_authorized']).lower()}`.
+- Remaining reproducibility blocker: `{reproducibility['case_id']}` is `{reproducibility['status']}`; {reproducibility['issue']}. The case remains in the Pilot.
 
 Blocking reasons:
 
@@ -635,7 +734,9 @@ DeepSeek Phase 7 bulk experiment is technically {'ready' if value['readiness']['
 
 No 150-call bulk experiment has been started.
 
-Awaiting explicit approval before using `--confirm-bulk`.
+Do not use `--confirm-bulk`.
+
+Awaiting explicit approval before the Phase 7 bulk experiment.
 """
 
 

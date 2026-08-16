@@ -41,7 +41,7 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
 def _artifact_records(root: Path) -> list[dict[str, Any]]:
     return [
         json.loads(path.read_text(encoding="utf-8"))
-        for path in sorted(root.glob("*/*/*.json"))
+        for path in sorted(root.rglob("*.json"))
     ]
 
 
@@ -51,6 +51,16 @@ def _signature(record: dict[str, Any]) -> str:
         "template_version": record["prompt"]["template_version"],
     }
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
+
+
+def _is_formal_artifact(record: dict[str, Any]) -> bool:
+    role = record.get("experiment_role")
+    if role is not None:
+        return role == "formal_evidence_ablation"
+    return (
+        record.get("experimental") is True
+        and record.get("model_parameters", {}).get("provider") != "deepseek"
+    )
 
 
 def validate_artifact_boundaries(records: list[dict[str, Any]]) -> dict[str, Any]:
@@ -178,7 +188,12 @@ def _paired_comparison(
 def build_repair_evaluation() -> dict[str, Any]:
     records = _artifact_records(REPAIR_ARTIFACT_ROOT)
     leakage_scan = validate_artifact_boundaries(records)
-    online = [item for item in records if item.get("experimental") is True]
+    online = [item for item in records if _is_formal_artifact(item)]
+    engineering_smoke = [
+        item
+        for item in records
+        if item.get("experimental") is True and not _is_formal_artifact(item)
+    ]
     signatures = {_signature(item) for item in online}
     if len(signatures) > 1:
         raise ValueError("multiple online experiment configurations found")
@@ -211,7 +226,7 @@ def build_repair_evaluation() -> dict[str, Any]:
                 json.loads(next(iter(signatures))) if signatures else None
             ),
             "online_artifacts": len(online),
-            "online_experiment_status": "completed" if online else "not_run_no_credentials",
+            "online_experiment_status": "completed" if online else "not_run",
         },
         "failure_analysis": {
             "model_failure_modes": dict(sorted(failures.items())),
@@ -237,6 +252,7 @@ def build_repair_evaluation() -> dict[str, Any]:
             "classifications": dict(
                 sorted(Counter(item["classification"] for item in fake).items())
             ),
+            "engineering_online_artifacts_excluded": len(engineering_smoke),
             "provider": "fake (excluded from experimental metrics)",
         },
     }
@@ -310,7 +326,7 @@ def render_report(evaluation: dict[str, Any]) -> str:
 
 **Does fault-localization and execution evidence improve single-attempt LLM program repair?**
 
-This report preregisters and implements the experiment, but the current environment had no API credential, base URL, or online model configured. Therefore no online A/B/C effectiveness result is claimed. Fake-provider smoke artifacts are explicitly excluded from all experimental metrics.
+This report preregisters and implements the experiment, but the 150-call formal A/B/C run has not started. Pre-experiment DeepSeek engineering smoke and fake-provider smoke artifacts are explicitly excluded from all effectiveness metrics.
 
 ## 2. Dataset
 
@@ -325,8 +341,8 @@ This report preregisters and implements the experiment, but the current environm
 - Group A: complete buggy source plus the common repair-time input/expected-output oracle.
 - Group B: Group A plus frozen CodeDoctor FL-v1 Top-10 locations, or the uniform no-reliable-location message when FL-v1 itself produces no positive-score location.
 - Group C: Group B plus runtime-only repair-test verdict, actual stdout/stderr, exit code, and timeout state. Input and expected output remain exclusively in the shared base context.
-- Registered defaults: temperature 0.0, maximum output tokens 4096, request timeout 120 seconds. A seed is sent only when explicitly configured and supported; determinism is not assumed.
-- Model/version: not configured; online calls: {experiment['online_artifacts']}.
+- Final candidate configuration: `deepseek-v4-flash`, thinking enabled, reasoning effort low, maximum output tokens 16384, stream false, request timeout 120 seconds, and no transport retry. Temperature and seed are not sent; determinism is not assumed.
+- Formal model artifacts: {experiment['online_artifacts']}; candidate selection and engineering smoke are documented separately in the pre-experiment report.
 - Patch protocol: complete source extraction, Docker compilation, repair tests, then hidden validation for plausible patches. A validated patch means that all available repair and hidden validation tests pass; it is not formal correctness.
 
 ## 4. Leakage Boundary
@@ -347,7 +363,7 @@ Online experiment status: `{experiment['online_experiment_status']}`. These N/A 
 
 ## 6. Failure Analysis
 
-No online model failures are available for scientific analysis. The local fake-provider smoke ran {smoke['artifacts']} artifacts over {smoke['cases']} cases across A/B/C; classifications were {smoke['classifications']}. The fake returned the buggy source unchanged, so this confirms context, extraction, Docker compilation, repair-test classification, artifact writing, and resume boundaries without estimating repair ability. A separate non-artifact evaluator check ran one reference source through repair plus hidden validation and reached `validated_patch`.
+No formal online model failures are available for scientific analysis. The local fake-provider smoke ran {smoke['artifacts']} artifacts over {smoke['cases']} cases across A/B/C; classifications were {smoke['classifications']}. In addition, {smoke['engineering_online_artifacts_excluded']} DeepSeek pre-experiment engineering smoke artifacts are excluded from all formal metrics. The fake returned the buggy source unchanged, so this confirms context, extraction, Docker compilation, repair-test classification, artifact writing, and resume boundaries without estimating repair ability. A separate non-artifact evaluator check ran one reference source through repair plus hidden validation and reached `validated_patch`.
 
 FL-v1 produced no reliable positive-score suspicious location for {len(no_reliable_fl)} of {dataset['repair_pilot_size']} Repair Pilot cases: {no_reliable_fl or 'none'}. These cases remain in A/B/C and receive the uniform no-reliable-location message in B/C.
 
@@ -361,11 +377,11 @@ The implemented online analysis distinguishes invalid output, compile error, sti
 - Codeflaws programs and tests may not represent larger real-world C/C++ systems.
 - Repair and hidden validation suites are incomplete; validated is not formally correct.
 - Findings may be prompt-sensitive even though the A/B/C base instruction is fixed.
-- No online credential was available in this run, so the core causal comparison remains unmeasured.
+- The formal bulk run has not been authorized or started, so the core causal comparison remains unmeasured.
 
 ## 8. Conclusion
 
-Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts with identical task semantics, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because no genuine online model call was possible. Bulk online execution is guarded and requires explicit approval. The next valid operation is to configure one fixed OpenAI-compatible model, verify pricing, and run a small genuine smoke before pausing again for approval of the full 50-case A/B/C experiment.
+Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts with identical task semantics, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because the formal 50-case A/B/C run has not started. Engineering smoke cannot estimate repair rates. Bulk online execution remains guarded and requires both resolved reproducibility blockers and explicit approval.
 """
 
 

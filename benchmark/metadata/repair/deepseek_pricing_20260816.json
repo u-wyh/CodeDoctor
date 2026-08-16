@@ -1,31 +1,31 @@
 {
   "currency": "USD",
-  "model": "deepseek-v4-pro",
+  "model": "deepseek-v4-flash",
   "official_source": "https://api-docs.deepseek.com/quick_start/pricing/",
   "price_unit_tokens": 1000000,
   "pricing_at_verification": {
-    "input_cache_hit": 0.003625,
-    "input_cache_miss": 0.435,
-    "output": 0.87,
+    "input_cache_hit": 0.0028,
+    "input_cache_miss": 0.14,
+    "output": 0.28,
     "schedule": "flat_pre_2026-08-16T16:00:00Z"
   },
   "scheduled_change": {
     "effective_at": "2026-08-16T16:00:00Z",
     "off_peak": {
-      "input_cache_hit": 0.022,
-      "input_cache_miss": 0.66,
-      "output": 1.98
+      "input_cache_hit": 0.007,
+      "input_cache_miss": 0.22,
+      "output": 0.66
     },
     "off_peak_window": "All UTC hours outside the peak windows",
     "peak": {
-      "input_cache_hit": 0.044,
-      "input_cache_miss": 1.32,
-      "output": 3.96
+      "input_cache_hit": 0.014,
+      "input_cache_miss": 0.44,
+      "output": 1.32
     },
     "peak_windows": [
       "01:00-04:00 UTC",
       "06:00-10:00 UTC"
     ]
   },
-  "verified_at": "2026-08-16T03:27:54Z"
+  "verified_at": "2026-08-16T03:52:47Z"
 }

@@ -12,6 +12,7 @@ from repair.artifacts import ArtifactStore
 from repair.deepseek import (
     DeepSeekProvider,
     attach_response_metadata,
+    artifact_root_for_role,
     model_parameters,
     resolve_api_key,
     validate_configuration,
@@ -47,11 +48,20 @@ class FakeHTTPResponse:
 
 
 class DeepSeekTests(unittest.TestCase):
+    def test_formal_artifacts_use_a_separate_cache_namespace(self) -> None:
+        root = Path("artifacts")
+        self.assertEqual(root, artifact_root_for_role(root, "pre_experiment_smoke"))
+        self.assertEqual(
+            root / "formal_evidence_ablation",
+            artifact_root_for_role(root, "formal_evidence_ablation"),
+        )
+
     def test_frozen_configuration(self) -> None:
         value = validate_configuration(DEEPSEEK_EXPERIMENT_CONFIG)
-        self.assertEqual("deepseek-v4-pro", value["model"])
-        self.assertEqual(8192, value["max_tokens"])
+        self.assertEqual("deepseek-v4-flash", value["model"])
+        self.assertEqual(16384, value["max_tokens"])
         self.assertEqual("enabled", value["thinking"]["type"])
+        self.assertEqual("low", value["reasoning_effort"])
 
     def test_key_priority_never_uses_openai_key(self) -> None:
         key, source = resolve_api_key(
@@ -78,7 +88,7 @@ class DeepSeekTests(unittest.TestCase):
     def test_request_and_response_boundaries(self) -> None:
         document = {
             "id": "response-1",
-            "model": "deepseek-v4-pro",
+            "model": "deepseek-v4-flash",
             "created": 123,
             "system_fingerprint": "fp-test",
             "choices": [
@@ -113,8 +123,8 @@ class DeepSeekTests(unittest.TestCase):
         self.assertNotIn("private reasoning", response.text)
         self.assertEqual(False, payload["stream"])
         self.assertEqual({"type": "enabled"}, payload["thinking"])
-        self.assertEqual("high", payload["reasoning_effort"])
-        self.assertEqual(8192, payload["max_tokens"])
+        self.assertEqual("low", payload["reasoning_effort"])
+        self.assertEqual(16384, payload["max_tokens"])
         self.assertNotIn("temperature", payload)
         self.assertNotIn("top_p", payload)
         metadata = provider.consume_response_metadata()
@@ -123,6 +133,8 @@ class DeepSeekTests(unittest.TestCase):
         self.assertNotIn("private reasoning", serialized)
         self.assertNotIn("test-secret", serialized)
         self.assertEqual(15, metadata["usage"]["completion_tokens_details"]["reasoning_tokens"])
+        self.assertEqual(5, metadata["usage"]["final_answer_tokens"])
+        self.assertEqual("low", metadata["request_configuration"]["reasoning_effort"])
 
     def test_artifact_metadata_contains_usage_but_no_secret_or_reasoning(self) -> None:
         metadata = {
@@ -142,11 +154,29 @@ class DeepSeekTests(unittest.TestCase):
         }
         with tempfile.TemporaryDirectory() as temporary:
             store = ArtifactStore(Path(temporary))
-            result = attach_response_metadata(store, record, metadata)
+            result = attach_response_metadata(
+                store, record, metadata, "pre_experiment_smoke"
+            )
         serialized = json.dumps(result)
+        self.assertEqual("pre_experiment_smoke", result["experiment_role"])
         self.assertIn("prompt_tokens", serialized)
         self.assertNotIn("reasoning text", serialized)
         self.assertNotIn("secret", serialized.lower())
+
+    def test_experiment_role_is_persisted_without_response_metadata(self) -> None:
+        record = {
+            "cache_key": "key",
+            "case_id": "case",
+            "group": "A",
+            "classification": "model_error",
+            "completed": True,
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            store = ArtifactStore(Path(temporary))
+            result = attach_response_metadata(
+                store, record, None, "pre_experiment_smoke"
+            )
+        self.assertEqual("pre_experiment_smoke", result["experiment_role"])
 
     def test_http_error_redacts_key_before_pipeline_storage(self) -> None:
         provider = DeepSeekProvider(

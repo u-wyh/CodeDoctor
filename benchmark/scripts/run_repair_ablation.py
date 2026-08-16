@@ -22,6 +22,7 @@ from repair.deepseek import (  # noqa: E402
     MAX_TOKENS as DEEPSEEK_MAX_TOKENS,
     MODEL as DEEPSEEK_MODEL,
     DeepSeekProvider,
+    artifact_root_for_role,
     attach_response_metadata,
     model_parameters as deepseek_model_parameters,
     resolve_api_key as resolve_deepseek_api_key,
@@ -159,7 +160,17 @@ def main() -> int:
         )
 
     fl_records = load_fl_records(REPAIR_PILOT_FL)
-    store = ArtifactStore(REPAIR_ARTIFACT_ROOT)
+    experiment_role = (
+        "formal_evidence_ablation"
+        if args.provider == "deepseek" and args.confirm_bulk
+        else "pre_experiment_smoke"
+    )
+    artifact_root = (
+        artifact_root_for_role(REPAIR_ARTIFACT_ROOT, experiment_role)
+        if args.provider == "deepseek"
+        else REPAIR_ARTIFACT_ROOT
+    )
+    store = ArtifactStore(artifact_root)
     completed = 0
     for index, case in enumerate(cases, start=1):
         print(f"[{index}/{len(cases)}] baseline {case.case_id}", flush=True)
@@ -177,7 +188,10 @@ def main() -> int:
             )
             if isinstance(model, DeepSeekProvider):
                 result = attach_response_metadata(
-                    store, result, model.consume_response_metadata()
+                    store,
+                    result,
+                    model.consume_response_metadata(),
+                    experiment_role,
                 )
             completed += 1
             print(f"  {group.value}: {result['classification']}", flush=True)

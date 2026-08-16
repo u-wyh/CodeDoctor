@@ -7,6 +7,7 @@ from repair.pre_experiment import (
     _bulk_projection,
     _cache_miss_cost,
     _complete_smoke,
+    _current_smoke_records,
     approximate_tokens,
 )
 
@@ -56,7 +57,25 @@ class PreExperimentTests(unittest.TestCase):
         self.assertEqual({"A": 100, "B": 100, "C": 100}, projection["input_by_group"])
         self.assertEqual(600, projection["output_total"])
         self.assertEqual(300, projection["reasoning_total"])
-        self.assertIn("conservative cap", projection["output_basis"])
+        self.assertIn("cap scenario", projection["output_basis"])
+
+    def test_current_smoke_excludes_superseded_and_formal_artifacts(self) -> None:
+        configuration = {"model": "flash", "max_tokens": 16}
+        base = {
+            "experimental": True,
+            "experiment_role": "pre_experiment_smoke",
+            "model_parameters": {
+                "provider": "deepseek",
+                "model": "flash",
+                "max_tokens": 16,
+            },
+        }
+        formal = dict(base, experiment_role="formal_evidence_ablation")
+        superseded = {
+            **base,
+            "model_parameters": {**base["model_parameters"], "model": "pro"},
+        }
+        self.assertEqual([base], _current_smoke_records([base, formal, superseded], configuration))
 
     def test_actual_smoke_cost_uses_cache_split(self) -> None:
         usage = {

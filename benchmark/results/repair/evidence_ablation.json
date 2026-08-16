@@ -58,7 +58,7 @@
     "complete_paired_cases": 0,
     "configuration": null,
     "online_artifacts": 0,
-    "online_experiment_status": "not_run_no_credentials"
+    "online_experiment_status": "not_run"
   },
   "failure_analysis": {
     "model_failure_modes": {},
@@ -104,7 +104,7 @@
     }
   },
   "leakage_scan": {
-    "artifacts_checked": 9,
+    "artifacts_checked": 15,
     "status": "passed"
   },
   "paired_comparisons": {
@@ -194,6 +194,7 @@
     "classifications": {
       "repair_test_failed": 9
     },
+    "engineering_online_artifacts_excluded": 6,
     "provider": "fake (excluded from experimental metrics)"
   }
 }

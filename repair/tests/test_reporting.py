@@ -4,6 +4,7 @@ import unittest
 
 from repair.reporting import (
     _group_metrics,
+    _is_formal_artifact,
     _paired_comparison,
     validate_artifact_boundaries,
 )
@@ -32,6 +33,21 @@ def record(case_id: str, group: str, validated: bool) -> dict[str, object]:
 
 
 class ReportingTests(unittest.TestCase):
+    def test_engineering_smoke_is_excluded_from_formal_metrics(self) -> None:
+        smoke = {
+            "experimental": True,
+            "experiment_role": "pre_experiment_smoke",
+            "model_parameters": {"provider": "deepseek"},
+        }
+        formal = dict(smoke, experiment_role="formal_evidence_ablation")
+        legacy_deepseek = {
+            "experimental": True,
+            "model_parameters": {"provider": "deepseek"},
+        }
+        self.assertFalse(_is_formal_artifact(smoke))
+        self.assertTrue(_is_formal_artifact(formal))
+        self.assertFalse(_is_formal_artifact(legacy_deepseek))
+
     def test_group_metrics_and_paired_validated_outcome(self) -> None:
         records = [record("x", "A", False), record("y", "A", True)]
         metric = _group_metrics(records)

@@ -22,13 +22,22 @@ from .provider import (
 
 PROVIDER = "deepseek"
 BASE_URL = "https://api.deepseek.com"
-MODEL = "deepseek-v4-pro"
+MODEL = "deepseek-v4-flash"
 THINKING_TYPE = "enabled"
-REASONING_EFFORT = "high"
-MAX_TOKENS = 8192
+REASONING_EFFORT = "low"
+MAX_TOKENS = 16384
 STREAM = False
 TRANSPORT_RETRIES = 0
-OFFICIAL_DOCUMENTED_MODEL_VERSION = "DeepSeek-V4-Pro-0813"
+OFFICIAL_DOCUMENTED_MODEL_VERSION = "DeepSeek-V4-Flash-0731"
+EXPERIMENT_ROLES = {"pre_experiment_smoke", "formal_evidence_ablation"}
+
+
+def artifact_root_for_role(root: Path, experiment_role: str) -> Path:
+    if experiment_role not in EXPERIMENT_ROLES:
+        raise ValueError(f"unsupported DeepSeek experiment role: {experiment_role}")
+    if experiment_role == "formal_evidence_ablation":
+        return root / experiment_role
+    return root
 
 
 def resolve_api_key(environ: Mapping[str, str]) -> tuple[str | None, str | None]:
@@ -98,6 +107,12 @@ def _usage_summary(value: object) -> dict[str, Any]:
             result["completion_tokens_details"] = {
                 "reasoning_tokens": reasoning_tokens
             }
+            completion_tokens = result.get("completion_tokens")
+            if (
+                isinstance(completion_tokens, int)
+                and completion_tokens >= reasoning_tokens
+            ):
+                result["final_answer_tokens"] = completion_tokens - reasoning_tokens
     return result
 
 
@@ -193,6 +208,12 @@ class DeepSeekProvider(OpenAICompatibleProvider):
             "credential_environment": self.credential_environment,
             "official_documented_model_version": OFFICIAL_DOCUMENTED_MODEL_VERSION,
             "requested_model": MODEL,
+            "request_configuration": {
+                "max_tokens": MAX_TOKENS,
+                "reasoning_effort": REASONING_EFFORT,
+                "stream": STREAM,
+                "thinking": {"type": THINKING_TYPE},
+            },
             "response_model": document.get("model"),
             "system_fingerprint": document.get("system_fingerprint"),
             "reasoning_content": reasoning_summary,
@@ -214,14 +235,16 @@ def attach_response_metadata(
     store: ArtifactStore,
     record: dict[str, Any],
     metadata: dict[str, Any] | None,
+    experiment_role: str,
 ) -> dict[str, Any]:
-    if metadata is None:
-        return record
-    response = record.get("model_response")
-    if not isinstance(response, dict) or response.get("id") is None:
-        raise ValueError("cannot attach DeepSeek metadata without a model response")
+    artifact_root_for_role(store.root, experiment_role)
     updated = copy.deepcopy(record)
-    updated["provider_response_metadata"] = metadata
+    updated["experiment_role"] = experiment_role
+    if metadata is not None:
+        response = record.get("model_response")
+        if not isinstance(response, dict) or response.get("id") is None:
+            raise ValueError("cannot attach DeepSeek metadata without a model response")
+        updated["provider_response_metadata"] = metadata
     group = EvidenceGroup(str(updated["group"]))
     store.write(str(updated["case_id"]), group, str(updated["cache_key"]), updated)
     persisted = store.load(str(updated["case_id"]), group, str(updated["cache_key"]))

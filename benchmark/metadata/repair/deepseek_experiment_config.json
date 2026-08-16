@@ -6,12 +6,12 @@
     "CODEDOCTOR_API_KEY"
   ],
   "maximum_repair_attempts": 1,
-  "max_tokens": 8192,
-  "model": "deepseek-v4-pro",
-  "official_documented_model_version": "DeepSeek-V4-Pro-0813",
+  "max_tokens": 16384,
+  "model": "deepseek-v4-flash",
+  "official_documented_model_version": "DeepSeek-V4-Flash-0731",
   "provider": "deepseek",
   "provider_name": "DeepSeek Official API",
-  "reasoning_effort": "high",
+  "reasoning_effort": "low",
   "stream": false,
   "temperature": "not_sent_ineffective_in_thinking_mode",
   "thinking": {

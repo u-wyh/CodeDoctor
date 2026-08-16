@@ -1,54 +1,74 @@
 {
   "billing": {
     "bulk_cache_miss_cost_estimates": {
-      "actual_smoke_at_verification_usd": 0.022041,
-      "at_verification_cache_miss_usd": 1.134567,
-      "scheduled_off_peak_cache_miss_usd": 2.53242,
-      "scheduled_peak_cache_miss_usd": 5.06484
+      "actual_smoke_at_verification_usd": 0.007884,
+      "at_verification_cache_miss_usd": 0.403788,
+      "scheduled_off_peak_cache_miss_usd": 0.936408,
+      "scheduled_peak_cache_miss_usd": 1.872816
     },
     "path": "DeepSeek Official API balance",
     "pricing": {
       "currency": "USD",
-      "model": "deepseek-v4-pro",
+      "model": "deepseek-v4-flash",
       "official_source": "https://api-docs.deepseek.com/quick_start/pricing/",
       "price_unit_tokens": 1000000,
       "pricing_at_verification": {
-        "input_cache_hit": 0.003625,
-        "input_cache_miss": 0.435,
-        "output": 0.87,
+        "input_cache_hit": 0.0028,
+        "input_cache_miss": 0.14,
+        "output": 0.28,
         "schedule": "flat_pre_2026-08-16T16:00:00Z"
       },
       "scheduled_change": {
         "effective_at": "2026-08-16T16:00:00Z",
         "off_peak": {
-          "input_cache_hit": 0.022,
-          "input_cache_miss": 0.66,
-          "output": 1.98
+          "input_cache_hit": 0.007,
+          "input_cache_miss": 0.22,
+          "output": 0.66
         },
         "off_peak_window": "All UTC hours outside the peak windows",
         "peak": {
-          "input_cache_hit": 0.044,
-          "input_cache_miss": 1.32,
-          "output": 3.96
+          "input_cache_hit": 0.014,
+          "input_cache_miss": 0.44,
+          "output": 1.32
         },
         "peak_windows": [
           "01:00-04:00 UTC",
           "06:00-10:00 UTC"
         ]
       },
-      "verified_at": "2026-08-16T03:27:54Z"
+      "verified_at": "2026-08-16T03:52:47Z"
     },
     "pricing_status": "verified",
     "subscription_warning": "ChatGPT Plus/Codex subscription is separate from DeepSeek API billing."
   },
   "calls": {
     "attempts_per_case_group": 1,
+    "formal_experiment_calls": 0,
     "groups": 3,
     "primary": 150,
     "real_smoke_calls": 3,
     "repair_pilot_cases": 50,
     "smoke_maximum": 3,
+    "superseded_smoke_calls": 3,
     "transport_retries_configured": 0
+  },
+  "candidate_selection": {
+    "decision_timing": "before the 150-call formal experiment",
+    "final_candidate": {
+      "max_tokens": 16384,
+      "model": "deepseek-v4-flash",
+      "reasoning_effort": "low",
+      "status": "current pre-experiment candidate"
+    },
+    "initial_candidate": {
+      "max_tokens": 8192,
+      "model": "deepseek-v4-pro",
+      "reasoning_effort": "high",
+      "smoke_calls": 3,
+      "smoke_result": "3/3 finish_reason=length with 8192 reasoning/completion tokens and empty final content",
+      "status": "superseded pre-experiment smoke"
+    },
+    "reason": "pre-experiment output-budget compatibility failure, not post-hoc repair-result optimization"
   },
   "credential": {
     "available": true,
@@ -61,7 +81,7 @@
   },
   "leakage_readiness": {
     "artifact_boundary_audit": {
-      "artifacts_checked": 12,
+      "artifacts_checked": 15,
       "status": "passed"
     },
     "evaluation_only_metadata_absent": "passed",
@@ -80,13 +100,13 @@
   "model": {
     "api_format": "OpenAI-compatible Chat Completions",
     "base_url": "https://api.deepseek.com",
-    "max_tokens": 8192,
-    "name": "deepseek-v4-pro",
-    "official_documented_model_version": "DeepSeek-V4-Pro-0813",
+    "max_tokens": 16384,
+    "name": "deepseek-v4-flash",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
     "provider": "DeepSeek Official API",
-    "reasoning_effort": "high",
+    "reasoning_effort": "low",
     "response_models_observed": [
-      "deepseek-v4-pro"
+      "deepseek-v4-flash"
     ],
     "stream": false,
     "temperature": "not_sent_ineffective_in_thinking_mode",
@@ -618,7 +638,7 @@
     {
       "case_id": "450-B-bug-15950152-15950193",
       "group": "C",
-      "prompt_hash": "184d77a5dbd1c577ed9eccc2a2bd71fbd8891f385428a8a0b8c54fe2421e2cfd"
+      "prompt_hash": "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0"
     },
     {
       "case_id": "141-B-bug-9726688-9726780",
@@ -849,95 +869,115 @@
   "protocol_version": "repair-v2",
   "readiness": {
     "blocking_reasons": [
-      "three-call genuine DeepSeek smoke with usage and final content not complete"
+      "450-B runtime evidence reproducibility rule not frozen"
     ],
     "bulk_online_ready": false,
     "bulk_user_authorized": false,
-    "mandatory_stop": true
+    "mandatory_stop": true,
+    "smoke_technical_ready": true
+  },
+  "remaining_bulk_reproducibility_blocker": {
+    "case_id": "450-B-bug-15950152-15950193",
+    "case_retained": true,
+    "issue": "Group C runtime actual output can change across baseline runs",
+    "status": "unresolved"
   },
   "smoke": {
     "actual_usage_by_group": {
       "A": {
         "calls": 1,
         "usage": {
-          "completion_tokens": 8192,
+          "completion_tokens": 11154,
+          "final_answer_tokens": 336,
           "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 737,
-          "prompt_tokens": 737,
-          "reasoning_tokens": 8192,
-          "total_tokens": 8929
+          "prompt_cache_miss_tokens": 658,
+          "prompt_tokens": 658,
+          "reasoning_tokens": 10818,
+          "total_tokens": 11812
         }
       },
       "B": {
         "calls": 1,
         "usage": {
-          "completion_tokens": 8192,
+          "completion_tokens": 5285,
+          "final_answer_tokens": 382,
           "prompt_cache_hit_tokens": 640,
-          "prompt_cache_miss_tokens": 562,
-          "prompt_tokens": 1202,
-          "reasoning_tokens": 8192,
-          "total_tokens": 9394
+          "prompt_cache_miss_tokens": 483,
+          "prompt_tokens": 1123,
+          "reasoning_tokens": 4903,
+          "total_tokens": 6408
         }
       },
       "C": {
         "calls": 1,
         "usage": {
-          "completion_tokens": 8192,
-          "prompt_cache_hit_tokens": 1152,
-          "prompt_cache_miss_tokens": 202,
-          "prompt_tokens": 1354,
-          "reasoning_tokens": 8192,
-          "total_tokens": 9546
+          "completion_tokens": 11005,
+          "final_answer_tokens": 382,
+          "prompt_cache_hit_tokens": 1024,
+          "prompt_cache_miss_tokens": 251,
+          "prompt_tokens": 1275,
+          "reasoning_tokens": 10623,
+          "total_tokens": 12280
         }
       }
     },
     "case_id": "259-B-bug-13083263-13083279",
     "classification_by_group": {
-      "A": "invalid_model_output",
-      "B": "invalid_model_output",
-      "C": "invalid_model_output"
+      "A": "validated_patch",
+      "B": "validated_patch",
+      "C": "validated_patch"
     },
     "compile_success_by_group": {
-      "A": null,
-      "B": null,
-      "C": null
+      "A": true,
+      "B": true,
+      "C": true
     },
     "content_present_by_group": {
-      "A": false,
-      "B": false,
-      "C": false
+      "A": true,
+      "B": true,
+      "C": true
     },
     "extracted_source_hash_by_group": {
-      "A": null,
-      "B": null,
-      "C": null
+      "A": "9dab2cd2619689fb3f7e4110cbd6774ea4aabe64cd7d730df72958d0b6f5a830",
+      "B": "c870fc04751a285bfa802c8e638ef9397c3b0c1bad93afa6d2cf07302aafb846",
+      "C": "726f3c43448b6a7962545f9a108760135a68540cdf700ed45cff60e3f790f3dc"
     },
     "extraction_status_by_group": {
-      "A": "invalid_model_output",
-      "B": "invalid_model_output",
-      "C": "invalid_model_output"
+      "A": "success",
+      "B": "success",
+      "C": "success"
     },
     "finish_reason_by_group": {
-      "A": "length",
-      "B": "length",
-      "C": "length"
+      "A": "stop",
+      "B": "stop",
+      "C": "stop"
     },
     "plausible_by_group": {
-      "A": null,
-      "B": null,
-      "C": null
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "requested_model_by_group": {
+      "A": "deepseek-v4-flash",
+      "B": "deepseek-v4-flash",
+      "C": "deepseek-v4-flash"
     },
     "response_model_by_group": {
-      "A": "deepseek-v4-pro",
-      "B": "deepseek-v4-pro",
-      "C": "deepseek-v4-pro"
+      "A": "deepseek-v4-flash",
+      "B": "deepseek-v4-flash",
+      "C": "deepseek-v4-flash"
     },
     "selection_rule": "first case in the frozen Repair Pilot manifest",
-    "truncation_detected": true,
+    "system_fingerprint_by_group": {
+      "A": "a26a7955944dc5c60445bff77fac9c8e",
+      "B": "a26a7955944dc5c60445bff77fac9c8e",
+      "C": "a26a7955944dc5c60445bff77fac9c8e"
+    },
+    "truncation_detected": false,
     "validated_by_group": {
-      "A": null,
-      "B": null,
-      "C": null
+      "A": true,
+      "B": true,
+      "C": true
     }
   },
   "token_estimate": {
@@ -946,18 +986,18 @@
     "bulk_projection": {
       "basis": "full-Pilot character estimates calibrated by each smoke group's actual DeepSeek prompt-token ratio",
       "input_by_group": {
-        "A": 34300,
-        "B": 54300,
-        "C": 62000
+        "A": 30600,
+        "B": 50800,
+        "C": 58400
       },
       "input_calibration_ratios": {
-        "A": 1.824,
-        "B": 1.83,
-        "C": 1.803
+        "A": 1.629,
+        "B": 1.709,
+        "C": 1.698
       },
-      "output_basis": "all three smoke completions reached max_tokens; this is an all-calls-hit-8192 conservative cap scenario, not expected usage",
-      "output_total": 1228800,
-      "reasoning_total": 1228800,
+      "output_basis": "one real completion per group multiplied by 50",
+      "output_total": 1372200,
+      "reasoning_total": 1317200,
       "uncertainty": "high; one smoke case is not representative"
     },
     "groups": {

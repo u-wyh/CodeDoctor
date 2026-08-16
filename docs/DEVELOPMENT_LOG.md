@@ -1834,3 +1834,169 @@ lxc stop codedoctor-docker-host
 - 等待用户审阅 provider 全部消耗 reasoning budget、final content 为空这一协议异常；任何参数或协议调整都需要单独决策，不能事后静默改变冻结实验。
 - 若未来形成新的预注册方案，先离线验证边界与预算，再取得新的真实调用授权；不得把本次批准解释为重跑许可。
 - 只有技术 smoke 通过且用户另行明确批准付费 bulk 后，才允许使用 `--confirm-bulk`；当前不得启动 150 calls，也不得进入 Phase 8。
+
+## 2026-08-16 - Phase 7: DeepSeek V4 Flash Real Smoke Validation
+
+### 1. 本次目标
+
+- 在 150-call 正式实验开始前，将最终候选从 `deepseek-v4-pro` 切换为 `deepseek-v4-flash`。
+- 冻结统一 Flash 配置：thinking enabled、reasoning effort low、max tokens 16384、stream false、temperature not sent、attempt 1、transport retry 0。
+- 保持 Repair Pilot、A/B/C prompt、repair-time oracle、FL-v1、runtime evidence、extraction 和 validation protocol 不变。
+- 对预注册 case `259-B-bug-13083263-13083279` 仅执行 A/B/C 各一次真实 Flash smoke，最多 3 次调用，不使用 `--confirm-bulk`。
+- 将 Pro 与 Flash 工程 smoke 明确排除在未来正式 Evidence Ablation 指标之外，更新 Flash token/cost 和 readiness 报告。
+
+### 2. 实际完成内容
+
+- 官方文档核验 `deepseek-v4-flash`、`DeepSeek-V4-Flash-0731`、thinking mode、`reasoning_effort=low` 和 OpenAI-compatible Chat Completions 支持。
+- 将 DeepSeek 专属配置从 Pro/high/8192 更新为 Flash/low/16384。A/B/C 请求继续由同一 provider 构造，不发送 temperature、top_p 或 seed。
+- 报告明确记录时间顺序：旧 Pro 三次调用属于 superseded pre-experiment smoke；3/3 均 reasoning/completion 8192、finish reason length、final content empty。Pro 配置在任何正式 bulk call 之前因 output-budget compatibility failure 被拒绝，不是根据正式 repair result 进行 post-hoc optimization。
+- 在真实调用前重新验证 serialized payload。A/B/C payload 字段均严格为 model、messages、thinking、reasoning_effort、max_tokens、stream；model=Flash、effort=low、max tokens=16384，三个 cache path 均不存在，reference/ground-truth/hidden-validation/evaluation-only leakage 均 absent。
+- 仅执行一次 1 case × A/B/C CLI。真实 attempted=3、responses received=3、transport retry=0，没有第 4 次调用，没有使用 `--confirm-bulk`。
+- A：response.model `deepseek-v4-flash`，system fingerprint `a26a7955944dc5c60445bff77fac9c8e`；prompt 658、cache hit 0、cache miss 658、reasoning 10818、final-answer 336、completion 11154、total 11812；finish reason stop；plain source 提取成功；compile/plausible/validated 均 true，分类 `validated_patch`。
+- B：response.model 与 fingerprint 同上；prompt 1123、cache hit 640、cache miss 483、reasoning 4903、final-answer 382、completion 5285、total 6408；finish reason stop；fenced code 提取成功；compile/plausible/validated 均 true，分类 `validated_patch`。
+- C：response.model 与 fingerprint 同上；prompt 1275、cache hit 1024、cache miss 251、reasoning 10623、final-answer 382、completion 11005、total 12280；finish reason stop；fenced code 提取成功；compile/plausible/validated 均 true，分类 `validated_patch`。
+- 三组均有完整 final content，均未发生 length truncation；patch extraction、Docker compile、repair tests 和 hidden validation 全链路实际执行。该结果只说明 technical smoke 成功，不计入正式 repair rate。
+- Artifact 新增 `experiment_role` 和请求配置摘要；raw reasoning 仍只保存 present、characters、SHA-256。Flash smoke 标记为 `pre_experiment_smoke`，旧 Pro 通过 candidate timeline 标记为 superseded，两者均排除在正式指标之外。
+- 正式统计器只接受 `formal_evidence_ablation` role；未来正式运行使用独立 artifact cache namespace，避免相同 Flash model/prompt 的 `--resume` 复用或覆盖本轮 smoke。
+- 重新运行 50-case 静态 prompt 估算并以 Flash actual prompt usage 校准：A input 30,600、B 50,800、C 58,400，合计 139,800；按单个 smoke case 的实际 Flash completion 外推 1,372,200，reasoning 外推 1,317,200，uncertainty=high。
+- 于 `2026-08-16T03:52:47Z` 核验官方 Flash 价格。调用时 flat 价格为 cache hit `$0.0028/M`、cache miss `$0.14/M`、output `$0.28/M`；计划 off-peak 为 `$0.007/$0.22/$0.66`，peak 为 `$0.014/$0.44/$1.32`。
+- 三次 Flash smoke 按实际 cache 分账估算 `$0.007884`。150-call all-cache-miss 估算：调用时价格 `$0.403788`、计划 off-peak `$0.936408`、计划 peak `$1.872816`。
+- `smoke_technical_ready=true`；但 `450-B-bug-15950152-15950193` Group C runtime actual output 非确定的冻结处理规则仍未解决，因此 `bulk_online_ready=false`、`bulk_user_authorized=false`、formal calls=0。
+
+### 3. 新增、修改、删除的文件
+
+新增的跟踪文件：无。
+
+修改：
+
+- `README.md`
+- `benchmark/metadata/repair/deepseek_experiment_config.json`
+- `benchmark/metadata/repair/deepseek_pricing_20260816.json`
+- `benchmark/metadata/repair/pre_experiment_estimate.json`
+- `benchmark/reports/llm_repair_evidence_ablation.md`
+- `benchmark/reports/llm_repair_pre_experiment.md`
+- `benchmark/results/repair/evidence_ablation.json`
+- `benchmark/scripts/run_repair_ablation.py`
+- `repair/deepseek.py`
+- `repair/pre_experiment.py`
+- `repair/reporting.py`
+- `repair/tests/test_deepseek.py`
+- `repair/tests/test_pre_experiment.py`
+- `repair/tests/test_reporting.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+本地新增但由 Git 忽略：
+
+- `benchmark/artifacts/repair/259-B-bug-13083263-13083279/A/a0212e2e5b55067f337d1437d29d9e2770c7560b9ab2bf90ea547c569d27d048.json`
+- `benchmark/artifacts/repair/259-B-bug-13083263-13083279/B/6a36fc0d6c3c979d948013d6564965e2c1d8bb59c616deb25d97ea398b977320.json`
+- `benchmark/artifacts/repair/259-B-bug-13083263-13083279/C/85dbcee93e59bd0ed376a7643ba342795adf94a811a532dc6c3e97d9870f1dbb.json`
+
+### 4. 执行过的重要命令
+
+```bash
+curl -L --fail --silent --show-error https://api-docs.deepseek.com/quick_start/pricing/
+curl -L --fail --silent --show-error https://api-docs.deepseek.com/guides/thinking_mode
+
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest repair.tests.test_deepseek repair.tests.test_pre_experiment repair.tests.test_protocol repair.tests.test_prompting repair.tests.test_reporting repair.tests.test_artifacts repair.tests.test_pipeline -v
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- docker version --format '{{.Server.Version}}'
+lxc exec codedoctor-docker-host -- docker image inspect codedoctor-cpp-sandbox --format '{{.Id}}'
+
+source ~/.config/codedoctor/secrets.env
+python3 -c 'import os; print("DeepSeek credential available" if os.getenv("DEEPSEEK_API_KEY") else "DeepSeek credential unavailable")'
+
+source ~/.config/codedoctor/secrets.env
+printf '%s\n' "$DEEPSEEK_API_KEY" | lxc exec codedoctor-docker-host -- bash -lc 'IFS= read -r DEEPSEEK_API_KEY; export DEEPSEEK_API_KEY; cd /workspace/CodeDoctor; exec env PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --cases 259-B-bug-13083263-13083279 --resume'
+
+source ~/.config/codedoctor/secrets.env
+printf '%s\n' "$DEEPSEEK_API_KEY" | lxc exec codedoctor-docker-host -- bash -lc 'IFS= read -r DEEPSEEK_API_KEY; export DEEPSEEK_API_KEY; cd /workspace/CodeDoctor; exec env PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed'
+
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_repair_ablation_report.py
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v'
+
+python3 -m json.tool benchmark/metadata/repair/deepseek_experiment_config.json
+python3 -m json.tool benchmark/metadata/repair/deepseek_pricing_20260816.json
+python3 -m json.tool benchmark/metadata/repair/pre_experiment_estimate.json
+python3 -m json.tool benchmark/results/repair/evidence_ablation.json
+git diff --check
+lxc exec codedoctor-docker-host -- docker ps -a --filter name=codedoctor --format '{{.ID}} {{.Names}} {{.Status}}'
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行了内联 Python 审计：构造并扫描实际 serialized Flash payload；检查 cache path；核对 Flash/Pro artifact 数量、角色、模型、fingerprint、usage、finish reason、content hash、extraction、compile/plausible/validated、artifact SHA-256；验证 formal artifacts=0；扫描 credential 模式、raw reasoning、changed file 大小和冻结文件 diff。
+
+### 5. 实际测试结果
+
+- 调用前宿主专项测试：23/23 PASS；同一专项测试在 LXD 中 23/23 PASS。
+- 最终完整回归：sandbox 29/29、benchmark 12/12、fault localization 36/36、repair 37/37，共 114/114 PASS，无 skip。
+- FL frozen protocol PASS，`repair-v2` protocol PASS，provider tests PASS，prompt boundary PASS，bulk guard PASS，cache/resume 与 formal namespace isolation PASS。
+- Serialized payload：3/3 PASS；model、thinking、effort、max tokens 和 stream 一致，temperature/top_p absent。
+- 真实 Flash smoke：3 requests attempted、3 responses received、0 retry；A/B/C 均 finish reason stop、final content non-empty、extraction success、compile success、plausible true、validated true。
+- Length truncation：0/3；`smoke_technical_ready=true`。
+- Formal Evidence Ablation：online artifacts=0、status=not_run；6 个 DeepSeek engineering artifacts 和 9 个 fake artifacts 均不进入正式指标。
+- Leakage：150/150 prompts PASS，15/15 artifacts PASS；reference、ground truth、hidden validation、evaluation-only metadata absent。
+- Artifact integrity：Flash A/B/C SHA-256 分别为 `62bc89126f54af1d710e670432c4a32cf1abecb4fd162600e433e470917a8581`、`d09d6c9801e875acc9b5952c5b3606e3cf4ba9b23ffbf9ef8a4a724e934f4264`、`3b7003cd9ddbaba44901b093df27282faa7f6ea2fa7c1f016822e6ae4ddea549`；报告生成后保持不变。
+- Secret/raw audit：changed diff credential pattern 0，artifact credential pattern 0，tracked `.env` 0，raw reasoning storage absent，超过 1 MB changed file 0。
+- 冻结边界：context、prompting、provider、pipeline、extraction、evaluator、repair protocol、Repair Pilot 和 FL input 无 diff。
+- Docker 清理：无残留 `codedoctor-*` 容器，LXD 最终 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 旧统计逻辑会混合 Pro 与 Flash smoke
+
+原预实验估算只按 provider=deepseek 选择 artifact；同时存在 Pro 与 Flash 时，每组会被统计为两次调用，无法形成正确的 current-candidate usage 和 readiness。
+
+#### 6.2 工程 smoke 原来只有 experimental 布尔值
+
+正式统计器把所有 `experimental=true` artifact 视为正式数据，无法表达 pre-experiment engineering smoke 与 formal Evidence Ablation 的区别。
+
+#### 6.3 相同 Flash 配置的正式运行可能复用 smoke cache
+
+即使统计层按 role 排除 smoke，未来正式实验若使用相同 model/prompt 参数与 `--resume`，仍可能命中本轮 Flash smoke 的 content-addressed cache，导致正式第一 case 复用工程调用。
+
+#### 6.4 正式报告仍保留旧 generic provider 配置措辞
+
+首次生成正式报告后，setup 仍写 temperature 0.0 和 max tokens 4096，与最终 Flash freeze 不一致。
+
+#### 6.5 450-B runtime evidence 仍不可复现
+
+`450-B-bug-15950152-15950193` Group C 的 actual output 可跨 baseline run 变化。该 case 不能删除，但正式 bulk 前必须形成最小、明确且冻结的处理规则。
+
+### 7. 问题的解决方式
+
+- 预实验估算按 current model、max tokens 和 `pre_experiment_smoke` role 精确筛选 Flash；其他 DeepSeek model 进入 superseded 列表，formal role 单独计数。
+- Artifact 写入显式 `experiment_role`。正式统计器仅接受 `formal_evidence_ablation`，旧无 role 的 DeepSeek engineering artifacts 也默认排除；重生成结果验证 formal online artifacts=0。
+- 为未来正式 DeepSeek 运行增加独立 `formal_evidence_ablation/` artifact root，和 smoke 使用不同 cache namespace；单测验证两个 root 不同，递归 artifact loader 同时支持审计两类数据。
+- 将正式报告 setup 更新为 Flash、thinking enabled、low、16384、temperature/seed not sent，并重新生成报告。
+- 450-B 保持在 50-case Pilot，结构化标记为 unresolved remaining bulk reproducibility blocker；因此即使 Flash technical smoke 成功，bulk readiness 仍保持 false。
+
+### 8. 设计取舍
+
+- Pro→Flash、high→low、8192→16384 是正式实验前的 output-budget compatibility 修正；不改变 A/B/C 任务语义，也不把本次三个 validated patch 当作模型效果证据。
+- `final_answer_tokens` 仅在 provider 同时给出 completion 与 reasoning tokens 时由两者差值计算；raw final source 和 raw reasoning 不进入报告。
+- Flash output 外推使用一个 smoke case 的实际 completion usage乘以 50，明确标记 high uncertainty；不沿用 Pro 的 8192 cap，也不声称是精确期望成本。
+- Credential availability、technical smoke readiness、bulk reproducibility readiness 和 user authorization 分开记录。
+- 不为 450-B 临时扩展复杂分析模块，不删除 case，也不在本轮擅自冻结新的 runtime normalization 规则。
+
+### 9. 当前已知不足
+
+- Flash smoke 仅覆盖一个预注册 case；三个 validated patch 不代表 50-case repair rate，也不能支持 A/B/C 因果结论。
+- Token/cost 外推受单 case reasoning 长度影响很大；A 与 C 的 reasoning usage 接近 11k，150-call 实际费用仍可能明显波动。
+- `deepseek-v4-flash` 是 mutable alias；虽然三次 response.model 和 fingerprint 一致，未来正式实验仍必须逐 artifact 记录。
+- 450-B runtime actual output 非确定性尚未解决，是当前唯一结构化 bulk blocker。
+- 官方峰谷价格将在当日稍后生效；未来正式调用前必须按实际 UTC 时段再次核验。
+- 正式 150-call 实验未开始，formal repair/plausible/validated rates、paired bootstrap 和 McNemar 仍为 N/A。
+
+### 10. 下一步计划
+
+- 停止真实调用，不使用本轮已经耗尽的 3-call Flash smoke 授权继续试验。
+- 在不删除 450-B、不改变 A/B/C 语义的前提下，单独制定并预注册最小 runtime reproducibility 处理规则，然后重新做纯离线 prompt/hash 审计。
+- 规则冻结后重新生成 pre-experiment readiness；即使 `bulk_online_ready` 变为 true，也继续等待用户对付费 150-call 实验的明确授权。
+- 未获得明确批准前不得使用 `--confirm-bulk`，不得启动正式实验，不得进入 Phase 8。
