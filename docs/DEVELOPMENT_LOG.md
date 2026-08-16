@@ -1534,3 +1534,167 @@ lxc stop codedoctor-docker-host
 - smoke 全部审计通过后重新生成预实验报告，再次汇报实际 model/provider、credential、billing、调用量、token、成本与 leakage 状态。
 - 只有收到用户对付费/批量调用的明确批准后，才可使用 `--confirm-bulk` 执行 50 × 3 = 150 次单轮实验。
 - 完整 Phase 7 在线实验和人工审查完成前，不开始 Phase 8，不加入 Agent、RAG、多轮修复、test augmentation、AST/CFG 或新的 FL 方法。
+
+## 2026-08-16 - Phase 7: DeepSeek Provider Readiness
+
+### 1. 本次目标
+
+- 不修改冻结的 `repair-v2`、A/B/C prompt、Repair Pilot 或 FL-v1，正式选择 DeepSeek Official API 作为 Phase 7 候选 provider。
+- 冻结 `deepseek-v4-pro`、thinking enabled、reasoning effort high、stream false、max tokens 8192、attempt 1 和 transport retry 0。
+- 在真实调用前完成 provider、credential、prompt boundary、leakage、bulk guard 和 cache/resume readiness 检查。
+- 仅在允许的 Key 存在且全部离线检查通过时，运行最多 1 frozen case × A/B/C = 3 次真实 smoke；不得运行 150-call bulk。
+- 核验 DeepSeek 官方价格，更新 token/cost 与预实验报告，然后再次暂停。
+
+### 2. 实际完成内容
+
+- 保持 `repair/context.py`、`repair/evaluator.py`、`repair/extraction.py`、`repair/pipeline.py`、`repair/prompting.py`、`repair/provider.py` 和 `repair_protocol_v2.json` 无 diff；冻结哈希验证继续通过。
+- 新增薄 DeepSeek OpenAI-compatible 适配器，复用现有 prompt、ModelParameters、错误类型、extraction、Docker evaluator、artifact/cache 和 single-attempt pipeline，不建立平行 repair framework。
+- DeepSeek 请求固定发送 `model=deepseek-v4-pro`、`thinking.type=enabled`、`reasoning_effort=high`、`stream=false`、`max_tokens=8192`；不发送 temperature、top_p 或 seed。配置 JSON 与代码常量必须完全一致，否则 CLI 拒绝执行。
+- DeepSeek Key 只按 `DEEPSEEK_API_KEY`、`CODEDOCTOR_API_KEY` 顺序解析，明确不使用 `OPENAI_API_KEY` fallback。宿主和 LXD 中两个允许变量均 absent，实际 1-case 命令在网络前以 exit code 2 返回 `DeepSeek API credential unavailable`。
+- reasoning extraction 只返回 `message.content`。`reasoning_content` 正文不进入 patch extraction、prompt、下一轮或 artifact；只保存 present、character count 和 SHA-256 摘要。usage 按 provider 实际字段保存，缺失字段不伪造成 0。
+- DeepSeek artifact metadata 支持 requested model、response.model、official documented version、system fingerprint、finish reason、prompt/completion/total/cache/reasoning tokens 和 credential environment name，不保存 Key value。HTTP error body写 artifact 前主动进行 Key redaction。
+- DeepSeek 无确认调用上限固定为 3；4 次及以上需要另行明确批准与 `--confirm-bulk`。本轮没有使用该标志。
+- smoke case 固定为 Repair Pilot manifest 第一项 `259-B-bug-13083263-13083279`，不按 FL 或预期修复难度选择。
+- 全量离线估算真实构造 50 × A/B/C = 150 个冻结 prompts，并执行 50 个 buggy baseline。A/B/C base 与 B/C FL 前缀审计通过，C runtime section 不含额外 input/expected output。
+- 官方 DeepSeek 文档核验 `deepseek-v4-pro`、OpenAI Chat Completions、thinking/high 参数和 `DeepSeek-V4-Pro-0813` documented model version。没有真实 response，因此 response.model/system fingerprint 仍未观测。
+- 官方价格于 `2026-08-16T02:49:39Z` 核验：当时每 1M tokens 的 cache-hit input `$0.003625`、cache-miss input `$0.435`、output `$0.87`。官方页面同时预告 `2026-08-16T16:00:00Z` 启用 peak/off-peak：off-peak `$0.022/$0.66/$1.98`，peak `$0.044/$1.32/$3.96`；peak windows 为 `01:00-04:00 UTC` 与 `06:00-10:00 UTC`。
+- Key 条件不满足，因此真实 DeepSeek smoke 按协议跳过。真实 calls=0，A/B/C usage、classification、finish reason 和实际 resolved model 全部保留 N/A；没有伪造 token usage。
+- 预实验报告更新为 DeepSeek 配置、实际 credential/readiness、真实 usage 表、官方价格、成本、prompt/artifact audit 和 mandatory stop。`bulk_online_ready=false`、`bulk_user_authorized=false`。
+
+### 3. 新增、修改、删除的文件
+
+新增：
+
+- `benchmark/metadata/repair/deepseek_experiment_config.json`
+- `benchmark/metadata/repair/deepseek_pricing_20260816.json`
+- `repair/deepseek.py`
+- `repair/tests/test_deepseek.py`
+- `repair/tests/test_pre_experiment.py`
+
+修改：
+
+- `README.md`
+- `benchmark/config.py`
+- `benchmark/metadata/repair/pre_experiment_estimate.json`
+- `benchmark/reports/llm_repair_pre_experiment.md`
+- `benchmark/scripts/run_repair_ablation.py`
+- `repair/models.py`
+- `repair/pre_experiment.py`
+- `repair/protocol.py`
+- `repair/tests/test_protocol.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+本地保留但忽略：
+
+- `benchmark/artifacts/repair/<case>/<group>/*.json`：原有 9 个 repair-v2 fake smoke artifacts；本轮没有新增真实 DeepSeek artifact。
+
+### 4. 执行过的重要命令
+
+```bash
+date --iso-8601=seconds
+date -u --iso-8601=seconds
+
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v
+env -u DEEPSEEK_API_KEY -u CODEDOCTOR_API_KEY OPENAI_API_KEY=dummy PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --limit 1
+DEEPSEEK_API_KEY=dummy PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --limit 2
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- docker version --format '{{.Server.Version}}'
+lxc exec codedoctor-docker-host -- docker image inspect codedoctor-cpp-sandbox --format '{{.Id}}'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider fake --limit 3 --resume'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --limit 1 --resume'
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v'
+
+python3 -m json.tool benchmark/metadata/repair/deepseek_experiment_config.json
+python3 -m json.tool benchmark/metadata/repair/deepseek_pricing_20260816.json
+python3 -m json.tool benchmark/metadata/repair/pre_experiment_estimate.json
+git diff --check
+lxc exec codedoctor-docker-host -- docker ps -a --filter name=codedoctor --format '{{.ID}} {{.Names}} {{.Status}}'
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行了 DeepSeek 官方 API 文档浏览：Thinking Mode、Create Chat Completion、Models & Pricing、Change Log 和 Context Caching；只使用 `api-docs.deepseek.com` 的官方信息。执行了内联 Python 审计：检查 Key presence 但不读取 value；验证 150 prompts 的 base/FL/runtime 边界；扫描 changed files 的 secret pattern、文件体积、可执行位和 `.env`；验证 9 个 fake artifacts 无 secret 参数、在线 artifact=0；核对 pre-experiment readiness 和成本字段。
+
+### 5. 实际测试结果
+
+- 完整回归：sandbox 29/29、benchmark 12/12、fault localization 36/36、最终 repair 32/32，共 109/109 PASS，无 skip。repair suite 在 DeepSeek redaction/readiness 收紧后单独重跑并通过。
+- DeepSeek provider 测试覆盖：冻结配置、Key 优先级、拒绝 OpenAI fallback、thinking request body、temperature omission、final content-only extraction、reasoning 摘要、usage/cache/reasoning token、artifact 无 secret、HTTP error Key redaction。
+- CLI 无 credential 测试：宿主与 LXD 的 1-case DeepSeek 命令均在联网前以 exit code 2 停止，错误为 `DeepSeek API credential unavailable`。
+- 3-call guard 测试：使用 dummy Key 请求 2 cases × 3 groups = 6 calls，在联网前以 exit code 2 拒绝；dummy URL/API 未调用。协议单测同时验证 DeepSeek 3 allowed、4 blocked、显式批准位的未来路径。
+- Prompt/leakage：50 cases、150 prompts PASS；reference leakage PASS、validation leakage PASS、ground-truth diff absent、hidden validation absent、evaluation-only metadata absent。9/9 fake artifacts boundary audit PASS。
+- Cache/resume：3 cases × A/B/C fake artifacts 重跑前后数量均为 9，集合 SHA-256 均为 `72233316ac431fa13c68b1453dff22df69fed665028fc7182f62e1dd9266e6ee`。
+- 冻结协议：六个 frozen implementation 文件和 `repair_protocol_v2.json` 无 diff，`validate_repair_protocol()` 返回 `repair-v2`。
+- 真实 DeepSeek calls=0；实际 A/B/C prompt/completion/reasoning/total usage=N/A；actual classification=N/A；response.model/system fingerprint=N/A；无 truncated response 可检查。
+- 无真实 usage 时保留 provider-independent 150-call token 预算：A input 18,800、B 29,700、C 34,400，output proxy 24,600，input 总计 82,900。reasoning usage 不伪造，记为 N/A。
+- 保守 all-cache-miss 成本：核验时费率 `$0.057464`；计划生效后的 off-peak `$0.103422`；peak `$0.206844`。由于真实 thinking usage 缺失，这些是字符估算预算，不是实际 smoke 外推。
+- Secret/raw audit：changed files 14，secret pattern 0，`.env` 0，超过 1MB 文件 0，可执行 changed file 0；artifact secret-key violations 0；raw Codeflaws、临时 executable 和 raw reasoning artifact 均未进入待提交内容。
+- Docker 29.1.3、sandbox image `sha256:7f529aa877352a798339448978b742b45a25f241da10a7ec0a77270817842420`；无残留 `codedoctor-*` containers，LXD 最终 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 LXD 启动后 Docker socket 短暂不可用
+
+首次在同一命令中启动 LXD 后立即查询 Docker，返回 `/var/run/docker.sock` 不存在，预实验估算没有开始。
+
+#### 6.2 当前没有允许的 DeepSeek API credential
+
+宿主和 LXD 中 `DEEPSEEK_API_KEY`、`CODEDOCTOR_API_KEY` 均 absent；`OPENAI_API_KEY` 也 absent，且即使存在也禁止作为 DeepSeek fallback。
+
+#### 6.3 官方价格在核验当天存在定时切换
+
+官方页面给出核验时 flat price，同时预告同日 `16:00 UTC` 开始 peak/off-peak 新价格；若只记录一个价格会在实验时点产生歧义。
+
+#### 6.4 HTTP error redaction 测试夹具缺少 close 方法
+
+redaction 断言通过，但 Python 清理模拟 HTTPError 时输出 ignored exception，说明 fake file interface 不完整。
+
+#### 6.5 初版 technical readiness 只检查 artifact 数量
+
+仅要求 A/B/C 各一个 artifact 可能把 model error、invalid output、缺 usage 或 `finish_reason=length` 误判为 smoke complete。
+
+#### 6.6 长文件分段读取产生视觉重复
+
+两个相邻 `sed` 范围在边界处重叠，使 `Bulk projection basis` 看起来重复；`apply_patch` 因实际文件不匹配而安全失败。
+
+### 7. 问题的解决方式
+
+- 等待实例启动后显式确认/启动 Docker service，再验证 Server 29.1.3 和 sandbox image，随后成功运行两次全量离线估算。
+- 严格执行 credential gate：没有创建、读取、打印或提交 Key，没有尝试 DeepSeek 网络调用，没有使用 dummy Key 触发请求。
+- 将官方价格与 `verified_at`、scheduled `effective_at`、UTC peak windows、currency 和 source URL一起保存；分别计算核验时、未来 off-peak、未来 peak 三种 cache-miss 成本。
+- 为 FakeHTTPResponse 补齐 `close()`，repair suite 重新运行后输出干净；生产 HTTP error detail 同时替换可能回显的 Key。
+- technical readiness 收紧为：恰好 3 个 A/B/C artifacts、每组完整 usage、final content 可提取、非 model/invalid-output 且 finish reason 非 length；新增单测覆盖 stop 与 length。
+- 使用 `rg -n` 精确核对模板和报告，确认二者实际都只有一处 projection basis；失败补丁没有修改文件。
+
+### 8. 设计取舍
+
+- 因 `repair/provider.py` 和 `repair/pipeline.py` 属于 repair-v2 frozen implementation，使用新薄适配器而不是重构冻结文件；适配器继承现有 OpenAI-compatible provider 的认证构造并复用所有 repair pipeline 边界。
+- `temperature=None` 只表示 DeepSeek thinking request 不发送 temperature；generic OpenAI-compatible/fake CLI 默认仍保持 0.0，不改旧行为。
+- DeepSeek 专属 thinking/high/stream/max tokens 由 provider 名称和严格 config validator 固定，cache key 继续包含 provider、model、temperature null、max tokens、timeout 和 seed；不能以 CLI 参数静默漂移。
+- reasoning_content 仅保存不可逆摘要和长度，既能审计 thinking 是否出现，又避免 raw reasoning artifact 扩张或参与实验输入。
+- 成本主估计一律使用 cache miss，不假设 best-effort context cache 命中；在真实 smoke usage 缺失时不使用虚假的 reasoning token。
+- `bulk_online_ready` 表示技术就绪，不等于用户授权；`bulk_user_authorized` 单独保持 false。本轮两者均 false。
+
+### 9. 当前已知不足
+
+- 没有 credential，因此尚未验证 DeepSeek 真实 HTTP compatibility、账户权限、响应 schema、resolved response.model/system fingerprint、thinking token usage 或 balance billing。
+- 官方 documented version 为 `DeepSeek-V4-Pro-0813`，请求仍使用 mutable alias `deepseek-v4-pro`；alias 未来可能变化，必须记录每次 response.model 和 system fingerprint。
+- 150-call token/cost 仍基于字符近似和 buggy-source output proxy；thinking mode 的实际 completion/reasoning usage可能显著不同。
+- 当前 artifact enrichment 在 frozen pipeline 写入后补充 provider metadata；进程若恰好在两次原子写之间中断，已完成 artifact 可能暂缺 usage，需要人工审计，不能自动重发付费请求。
+- 真实 smoke 尚未检查 finish_reason length、源码完整性、compile/plausible/validated classification 或 hidden validation 路径。
+- 官方价格会变化；真实 smoke 和 bulk 批准前必须再次打开官方 pricing page 核验，不应只依赖本次快照。
+
+### 10. 下一步计划
+
+- 由用户在执行环境中配置 `DEEPSEEK_API_KEY`，或明确使用 `CODEDOCTOR_API_KEY` generic fallback；不要把 value 写入文件或聊天。
+- 重新执行全部离线 readiness 后，只运行 `259-B-bug-13083263-13083279` 的 A/B/C 三次真实 smoke，不使用 `--confirm-bulk`，transport retry 仍为 0。
+- 检查三个 response 的 final content、reasoning 摘要、usage/cache/reasoning tokens、finish reason、resolved model、patch extraction、Docker compile、repair tests、hidden validation、classification 和 artifact integrity。
+- 用真实三组 usage 重新外推 150-call tokens/cost，并在当时再次核验 DeepSeek 官方 peak/off-peak 价格；随后保持 mandatory stop。
+- 只有用户在审阅真实 smoke 与更新报告后另行明确批准，才允许使用 `--confirm-bulk`；不得自动开始 150 calls，也不得进入 Phase 8。

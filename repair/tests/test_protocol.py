@@ -10,6 +10,9 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(bulk_confirmation_required("openai-compatible", 9, False))
         self.assertTrue(bulk_confirmation_required("openai-compatible", 10, False))
         self.assertFalse(bulk_confirmation_required("openai-compatible", 150, True))
+        self.assertFalse(bulk_confirmation_required("deepseek", 3, False))
+        self.assertTrue(bulk_confirmation_required("deepseek", 4, False))
+        self.assertFalse(bulk_confirmation_required("deepseek", 150, True))
         self.assertFalse(bulk_confirmation_required("fake", 150, False))
 
     def test_registered_implementation_hashes(self) -> None:

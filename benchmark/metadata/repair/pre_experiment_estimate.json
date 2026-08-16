@@ -1,40 +1,96 @@
 {
   "billing": {
-    "estimated_api_cost": null,
-    "path": "not selected",
-    "pricing_status": "not_verified",
-    "subscription_warning": "ChatGPT Plus/Codex subscription and API billing are separate; no shared quota is assumed."
+    "bulk_cache_miss_cost_estimates": {
+      "at_verification_cache_miss_usd": 0.057464,
+      "scheduled_off_peak_cache_miss_usd": 0.103422,
+      "scheduled_peak_cache_miss_usd": 0.206844
+    },
+    "path": "DeepSeek Official API balance",
+    "pricing": {
+      "currency": "USD",
+      "model": "deepseek-v4-pro",
+      "official_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "price_unit_tokens": 1000000,
+      "pricing_at_verification": {
+        "input_cache_hit": 0.003625,
+        "input_cache_miss": 0.435,
+        "output": 0.87,
+        "schedule": "flat"
+      },
+      "scheduled_change": {
+        "effective_at": "2026-08-16T16:00:00Z",
+        "off_peak": {
+          "input_cache_hit": 0.022,
+          "input_cache_miss": 0.66,
+          "output": 1.98
+        },
+        "off_peak_window": "All UTC hours outside the peak windows",
+        "peak": {
+          "input_cache_hit": 0.044,
+          "input_cache_miss": 1.32,
+          "output": 3.96
+        },
+        "peak_windows": [
+          "01:00-04:00 UTC",
+          "06:00-10:00 UTC"
+        ]
+      },
+      "verified_at": "2026-08-16T02:49:39Z"
+    },
+    "pricing_status": "verified",
+    "subscription_warning": "ChatGPT Plus/Codex subscription is separate from DeepSeek API billing."
   },
   "calls": {
     "attempts_per_case_group": 1,
     "groups": 3,
     "primary": 150,
+    "real_smoke_calls": 0,
     "repair_pilot_cases": 50,
-    "smoke_maximum": 9,
+    "smoke_maximum": 3,
     "transport_retries_configured": 0
   },
   "credential": {
     "available": false,
+    "environment_used": null,
     "environment_variables": [
-      "CODEDOCTOR_API_KEY",
-      "OPENAI_API_KEY"
-    ]
+      "DEEPSEEK_API_KEY",
+      "CODEDOCTOR_API_KEY"
+    ],
+    "openai_api_key_is_not_a_fallback": true
   },
   "leakage_readiness": {
+    "artifact_boundary_audit": {
+      "artifacts_checked": 9,
+      "status": "passed"
+    },
     "evaluation_only_metadata_absent": "passed",
     "ground_truth_diff_absent": "passed",
     "hidden_validation_absent": "passed",
     "manual_prompt_inspection": "passed",
+    "prompt_boundary_audit": {
+      "cases_checked": 50,
+      "prompts_checked": 150,
+      "status": "passed"
+    },
     "reference_leakage_regression": "passed",
     "reference_source_absent": "passed",
     "validation_leakage_regression": "passed"
   },
   "model": {
-    "base_url_configured": false,
-    "name": null,
-    "provider": "OpenAI-compatible Chat Completions (actual service not selected)"
+    "api_format": "OpenAI-compatible Chat Completions",
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 8192,
+    "name": "deepseek-v4-pro",
+    "official_documented_model_version": "DeepSeek-V4-Pro-0813",
+    "provider": "DeepSeek Official API",
+    "reasoning_effort": "high",
+    "response_models_observed": [],
+    "stream": false,
+    "temperature": "not_sent_ineffective_in_thinking_mode",
+    "thinking": {
+      "type": "enabled"
+    }
   },
-  "online_smoke_artifacts": 0,
   "prompt_hashes": [
     {
       "case_id": "259-B-bug-13083263-13083279",
@@ -559,7 +615,7 @@
     {
       "case_id": "450-B-bug-15950152-15950193",
       "group": "C",
-      "prompt_hash": "f1152ab89f75e59e66826a16de15bf928b1540cbcf9cda4748a0694291c81f8f"
+      "prompt_hash": "da6fb7e91d5b3f44e190326e7d0f09de0a019ada931ab1687c7b7482d60c6768"
     },
     {
       "case_id": "141-B-bug-9726688-9726780",
@@ -790,21 +846,46 @@
   "protocol_version": "repair-v2",
   "readiness": {
     "blocking_reasons": [
-      "model/version not selected",
-      "provider/base URL not selected",
-      "independent API credential not configured",
-      "genuine online smoke not run",
-      "provider pricing not verified",
-      "explicit user approval for bulk calls not granted"
+      "DeepSeek API credential unavailable",
+      "three-call genuine DeepSeek smoke with usage and final content not complete"
     ],
     "bulk_online_ready": false,
-    "explicit_bulk_user_approval": false,
-    "mandatory_stop": true,
-    "pricing_verified": false
+    "bulk_user_authorized": false,
+    "mandatory_stop": true
+  },
+  "smoke": {
+    "actual_usage_by_group": {
+      "A": {
+        "calls": 0,
+        "usage": null
+      },
+      "B": {
+        "calls": 0,
+        "usage": null
+      },
+      "C": {
+        "calls": 0,
+        "usage": null
+      }
+    },
+    "case_id": "259-B-bug-13083263-13083279",
+    "classification_by_group": {},
+    "finish_reason_by_group": {},
+    "selection_rule": "first case in the frozen Repair Pilot manifest"
   },
   "token_estimate": {
     "approximate_average_output_tokens_per_call": 160,
     "approximate_total_output_tokens": 24600,
+    "bulk_projection": {
+      "basis": "provider-independent character estimate; no real DeepSeek smoke usage",
+      "input_by_group": {
+        "A": 18800,
+        "B": 29700,
+        "C": 34400
+      },
+      "output_total": 24600,
+      "reasoning_total": null
+    },
     "groups": {
       "A": {
         "approximate_average_input_tokens": 380,
@@ -828,6 +909,6 @@
         "minimum_input_tokens": 368
       }
     },
-    "method": "ceil(UTF-8-decoded character count / 4) per prompt/source; averages rounded to 10 tokens and totals to 100 tokens; buggy-source length is the expected complete-source output proxy"
+    "method": "ceil(UTF-8-decoded character count / 4) per prompt/source; averages rounded to 10 tokens and totals to 100 tokens; buggy-source length is the complete-source output proxy until real usage exists"
   }
 }

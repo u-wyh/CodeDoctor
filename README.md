@@ -137,22 +137,21 @@ python3 benchmark/scripts/build_repair_pilot.py --force
 python3 benchmark/scripts/run_repair_pilot_fl.py --force
 ```
 
-使用 OpenAI-compatible provider 时，凭据只从环境变量读取：
+Phase 7 的候选 provider 已冻结为 DeepSeek Official API，继续使用 OpenAI-compatible Chat Completions。DeepSeek 配置固定为 `deepseek-v4-pro`、thinking enabled、reasoning effort high、stream false、max tokens 8192；thinking mode 不发送 temperature，也不声称 temperature determinism。凭据优先读取 `DEEPSEEK_API_KEY`，再读取 generic fallback `CODEDOCTOR_API_KEY`，不会使用 `OPENAI_API_KEY`：
 
 ```bash
-export CODEDOCTOR_API_KEY='...'
-export CODEDOCTOR_BASE_URL='https://provider.example/v1'
-export CODEDOCTOR_MODEL='fixed-model-version'
-python3 benchmark/scripts/run_repair_ablation.py --limit 3 --resume
+export DEEPSEEK_API_KEY='...'
+python3 benchmark/scripts/run_repair_ablation.py \
+  --provider deepseek --limit 1 --resume
 ```
 
-支持 `--cases`、`--group`、`--model`、`--limit` 和 `--resume`。真实在线 smoke 最多运行 3 cases × 3 groups（9 次调用）；完整 50-case A/B/C 运行前必须人工审查 prompts 和 smoke artifacts，并生成调用量、token、计费与泄漏边界预实验报告：
+真实 DeepSeek smoke 使用冻结 Repair Pilot manifest 的第一个 case，最多 1 case × 3 groups（3 次调用），transport retry 为 0。缺少凭据、配置漂移或 leakage audit 失败时不得联网。完整 50-case A/B/C 运行前必须人工审查 prompts 和 smoke artifacts，并生成调用量、真实 token usage、计费与泄漏边界预实验报告：
 
 ```bash
 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed
 ```
 
-超过 9 次在线调用会被 CLI 拒绝。只有在预实验报告完成且用户明确批准后，才可使用 `--confirm-bulk`；该标志本身不代表自动获得批准。生成结构化统计和消融报告：
+超过 3 次 DeepSeek 在线调用会被 CLI 拒绝。只有在真实 smoke、预实验报告和成本核验完成且用户另行明确批准后，才可使用 `--confirm-bulk`；该标志本身不代表自动获得批准。本轮没有批准 150-call bulk。生成结构化统计和消融报告：
 
 ```bash
 python3 benchmark/scripts/generate_repair_ablation_report.py

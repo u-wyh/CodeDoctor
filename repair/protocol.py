@@ -7,17 +7,21 @@ from typing import Any
 from benchmark.config import PROJECT_ROOT, REPAIR_PROTOCOL
 
 
-BULK_ONLINE_CALL_THRESHOLD = 9
+UNCONFIRMED_ONLINE_CALL_LIMITS = {
+    "deepseek": 3,
+    "openai-compatible": 9,
+}
+
+
+def unconfirmed_online_call_limit(provider: str) -> int | None:
+    return UNCONFIRMED_ONLINE_CALL_LIMITS.get(provider)
 
 
 def bulk_confirmation_required(
     provider: str, expected_calls: int, confirmed: bool
 ) -> bool:
-    return (
-        provider == "openai-compatible"
-        and expected_calls > BULK_ONLINE_CALL_THRESHOLD
-        and not confirmed
-    )
+    limit = unconfirmed_online_call_limit(provider)
+    return limit is not None and expected_calls > limit and not confirmed
 
 
 def validate_repair_protocol() -> dict[str, Any]:

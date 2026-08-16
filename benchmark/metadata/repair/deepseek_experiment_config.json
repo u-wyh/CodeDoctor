@@ -1,0 +1,21 @@
+{
+  "api_format": "OpenAI-compatible Chat Completions",
+  "base_url": "https://api.deepseek.com",
+  "credential_environment_priority": [
+    "DEEPSEEK_API_KEY",
+    "CODEDOCTOR_API_KEY"
+  ],
+  "maximum_repair_attempts": 1,
+  "max_tokens": 8192,
+  "model": "deepseek-v4-pro",
+  "official_documented_model_version": "DeepSeek-V4-Pro-0813",
+  "provider": "deepseek",
+  "provider_name": "DeepSeek Official API",
+  "reasoning_effort": "high",
+  "stream": false,
+  "temperature": "not_sent_ineffective_in_thinking_mode",
+  "thinking": {
+    "type": "enabled"
+  },
+  "transport_retries": 0
+}

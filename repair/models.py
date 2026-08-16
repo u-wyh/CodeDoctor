@@ -88,7 +88,7 @@ class ModelParameters:
     provider: str
     base_url: str
     model: str
-    temperature: float
+    temperature: float | None
     max_tokens: int
     timeout_seconds: float
     seed: int | None = None
