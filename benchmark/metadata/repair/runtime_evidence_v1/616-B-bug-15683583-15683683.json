@@ -1,0 +1,49 @@
+{
+  "case_id": "616-B-bug-15683583-15683683",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 616-B-15683583.c -o 616-B-15683583.o\ngcc 616-B-15683583.o -o 616-B-15683583 -lm -s -O2\n",
+    "stdout_utf8_sha256": "244be2ec7775883e051a5eb0e1055b7a947db96eef259a0903c564f5fe9b598b",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2",
+      "stdout_utf8_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "1",
+      "stdout_utf8_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "84",
+      "stdout_utf8_sha256": "44c8031cb036a7350d8b9b8603af662a4b9cdbd2f96e8d5de5af435c9c35da69",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

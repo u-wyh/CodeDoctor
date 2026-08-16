@@ -1,1116 +1,933 @@
 {
-  "billing": {
-    "bulk_cache_miss_cost_estimates": {
-      "actual_smoke_at_verification_usd": 0.007884,
-      "at_verification_cache_miss_usd": 0.403788,
-      "scheduled_off_peak_cache_miss_usd": 0.936408,
-      "scheduled_peak_cache_miss_usd": 1.872816
-    },
-    "path": "DeepSeek Official API balance",
-    "pricing": {
-      "currency": "USD",
-      "model": "deepseek-v4-flash",
-      "official_source": "https://api-docs.deepseek.com/quick_start/pricing/",
-      "price_unit_tokens": 1000000,
-      "pricing_at_verification": {
-        "input_cache_hit": 0.0028,
-        "input_cache_miss": 0.14,
-        "output": 0.28,
-        "schedule": "flat_pre_2026-08-16T16:00:00Z"
-      },
-      "scheduled_change": {
-        "effective_at": "2026-08-16T16:00:00Z",
-        "off_peak": {
-          "input_cache_hit": 0.007,
-          "input_cache_miss": 0.22,
-          "output": 0.66
-        },
-        "off_peak_window": "All UTC hours outside the peak windows",
-        "peak": {
-          "input_cache_hit": 0.014,
-          "input_cache_miss": 0.44,
-          "output": 1.32
-        },
-        "peak_windows": [
-          "01:00-04:00 UTC",
-          "06:00-10:00 UTC"
-        ]
-      },
-      "verified_at": "2026-08-16T03:52:47Z"
-    },
-    "pricing_status": "verified",
-    "subscription_warning": "ChatGPT Plus/Codex subscription is separate from DeepSeek API billing."
-  },
-  "calls": {
-    "attempts_per_case_group": 1,
-    "formal_experiment_calls": 0,
-    "groups": 3,
-    "primary": 150,
-    "real_smoke_calls": 3,
-    "repair_pilot_cases": 50,
-    "smoke_maximum": 3,
-    "superseded_smoke_calls": 3,
-    "transport_retries_configured": 0
-  },
-  "candidate_selection": {
-    "decision_timing": "before the 150-call formal experiment",
-    "final_candidate": {
-      "max_tokens": 16384,
-      "model": "deepseek-v4-flash",
-      "reasoning_effort": "low",
-      "status": "current pre-experiment candidate"
-    },
-    "initial_candidate": {
-      "max_tokens": 8192,
-      "model": "deepseek-v4-pro",
-      "reasoning_effort": "high",
-      "smoke_calls": 3,
-      "smoke_result": "3/3 finish_reason=length with 8192 reasoning/completion tokens and empty final content",
-      "status": "superseded pre-experiment smoke"
-    },
-    "reason": "pre-experiment output-budget compatibility failure, not post-hoc repair-result optimization"
-  },
-  "credential": {
-    "available": true,
-    "environment_used": "DEEPSEEK_API_KEY",
-    "environment_variables": [
-      "DEEPSEEK_API_KEY",
-      "CODEDOCTOR_API_KEY"
-    ],
-    "openai_api_key_is_not_a_fallback": true
-  },
-  "frozen_runtime_evidence": {
-    "capture_rule": {
-      "buggy_executions_per_repair_test": 1,
-      "case_order": "Repair Pilot manifest order",
-      "normalization": "none",
-      "repair_test_order": "manifest-defined order",
-      "selection": "first and only observation",
-      "transport_retries": 0
-    },
-    "manifest_path": "benchmark/metadata/repair/runtime_evidence_manifest_v1.json",
-    "nondeterminism_audit": {
-      "artifact_path": "benchmark/metadata/repair/runtime_evidence_nondeterminism_audit_v1.json",
-      "audit_sha256": "053f5605fd0c05fd7612a77f9943ca5849a1454ce54375e1300d8aacfde47223",
-      "records": [
-        {
-          "case_id": "450-B-bug-15950152-15950193",
-          "changed_fields": [
-            "n1.stdout"
-          ],
-          "frozen_observation_hash": "1511d2a4afa55737136de978cc21413361d31fe86ac0459967a0e1cfdb29b5d2",
-          "observed_distinct_hashes": [
-            "1511d2a4afa55737136de978cc21413361d31fe86ac0459967a0e1cfdb29b5d2",
-            "2c9cc8d761f37e186ca62514051e8d12e20e5c31d2077275d3c904ee8e70a5f4",
-            "3b7bb68edf823815b66e0d548f9157a8f83620dfb843491e8243b37ead7e3844",
-            "465915ba8e004be2dfbd47dadd01e30b74132dee17b89b22e46ade76d30782bb",
-            "55f1c4ecf4c8ae15ce7ba338758cbc93ad4b86dd05ef22a0b3c18764390f41ec",
-            "7100dd1301bf1ce53d59be152bc7fd11103e57cc5234e4546438b5208589eeec",
-            "84686f3e0ab7c81a5cc5e582470b18f1e36981300aaefd378b3d26532cd61ec2",
-            "ead041b6b4b0e893f4a332387ce1616d3833efb16de10418b2b0110924bc8102",
-            "eadb78936a3e4f0bf168c20a60fb7b2633f695435142d5a3ed8efef407a52a16"
-          ],
-          "observed_runs": 10,
-          "runtime_nondeterministic": true
-        }
-      ]
-    },
-    "prompt_reproducibility": {
-      "all_prompt_hashes_identical_across_reloads": true,
-      "artifact_path": "benchmark/metadata/repair/runtime_evidence_prompt_audit_v1.json",
-      "leakage_audit": {
-        "credential_absent": "passed",
-        "evaluation_canaries_absent": "passed",
-        "forbidden_snapshot_keys_absent": "passed",
-        "hidden_validation_absent": "passed",
-        "reference_source_absent": "passed",
-        "status": "passed"
-      },
-      "payloads_checked": 150,
-      "prompt_set_hash": "9a65e8fcf2eea3d3da8a64bbfac4d32736e9090da7917da4ea6270d7cb9eaea0",
-      "prompts_checked": 150,
-      "target_case_c_hashes": [
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
-        "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0"
-      ],
-      "target_case_c_ten_render_hashes_identical": true
-    },
-    "runner": {
-      "backend": "docker",
-      "compile_timeout_seconds": 20.0,
-      "docker_image": "codedoctor-cpp-sandbox",
-      "docker_image_id": "sha256:7f529aa877352a798339448978b742b45a25f241da10a7ec0a77270817842420",
-      "execution_policy": {
-        "cap_drop": "ALL",
-        "cpus": 1.0,
-        "memory": "256m",
-        "network": "none",
-        "no_new_privileges": true,
-        "pids_limit": 64,
-        "read_only": true
-      },
-      "repair_test_order": "Repair Pilot manifest order",
-      "run_timeout_seconds": 5.0,
-      "transport_retries": 0
-    },
-    "validation": {
-      "case_count": 50,
-      "manifest_hash": "96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c",
-      "protocol_version": "runtime-evidence-v1",
-      "repair_test_count": 174,
-      "status": "passed"
-    }
-  },
-  "leakage_readiness": {
-    "artifact_boundary_audit": {
-      "artifacts_checked": 15,
-      "status": "passed"
-    },
-    "evaluation_only_metadata_absent": "passed",
-    "ground_truth_diff_absent": "passed",
+  "all_prompt_hashes_identical_across_reloads": true,
+  "generated_at": "2026-08-16T04:23:53.874613+00:00",
+  "leakage_audit": {
+    "credential_absent": "passed",
+    "evaluation_canaries_absent": "passed",
+    "forbidden_snapshot_keys_absent": "passed",
     "hidden_validation_absent": "passed",
-    "manual_prompt_inspection": "passed",
-    "prompt_boundary_audit": {
-      "cases_checked": 50,
-      "prompts_checked": 150,
-      "status": "passed"
-    },
-    "reference_leakage_regression": "passed",
     "reference_source_absent": "passed",
-    "validation_leakage_regression": "passed"
+    "status": "passed"
   },
-  "model": {
-    "api_format": "OpenAI-compatible Chat Completions",
-    "base_url": "https://api.deepseek.com",
-    "max_tokens": 16384,
-    "name": "deepseek-v4-flash",
-    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
-    "provider": "DeepSeek Official API",
-    "reasoning_effort": "low",
-    "response_models_observed": [
-      "deepseek-v4-flash"
-    ],
-    "stream": false,
-    "temperature": "not_sent_ineffective_in_thinking_mode",
-    "thinking": {
-      "type": "enabled"
-    }
-  },
-  "prompt_hashes": [
+  "payloads_checked": 150,
+  "prompt_records": [
     {
       "case_id": "259-B-bug-13083263-13083279",
       "group": "A",
+      "payload_hash": "ed9b6af95171fbdef4cfdbc5cd90bc90807fba96b4bc60af3fd6bf4debdfc671",
       "prompt_hash": "6d55e6fe53938d960ba7d70ea47f9565ef092dd029574741d484c79fe33de782"
     },
     {
       "case_id": "259-B-bug-13083263-13083279",
       "group": "B",
+      "payload_hash": "801e3a4a85d60fc7c73547be2a5d1fa3d0240939c01626046969576dcb035976",
       "prompt_hash": "6f3f4aecc6377c58023d51a0a79f007ed1800659203b4a4e06da9e7080802059"
     },
     {
       "case_id": "259-B-bug-13083263-13083279",
       "group": "C",
+      "payload_hash": "01b2effe30403e3ace4e669acafbafce69a1375eb46fe8b985aac02e95e1f221",
       "prompt_hash": "ebfd8e5ce38afffd5c2975f837bd21fb41499794ffeda36620c7d4d1063cba26"
     },
     {
       "case_id": "158-C-bug-9815086-9815194",
       "group": "A",
+      "payload_hash": "d8bb0e3b48e76a76105dd4b73a7080e07df10bba361969d77bcf43c7318d35ef",
       "prompt_hash": "45ecde9f3afbb38bc3c7145dd33068f9035500404d9d673f5a4b7d096ea59187"
     },
     {
       "case_id": "158-C-bug-9815086-9815194",
       "group": "B",
+      "payload_hash": "e3d3242d3167b5baeffa068e2d48671464b1c546e5ff61a9e12704188a1bf1c0",
       "prompt_hash": "21798439865a303eb83088bf46b7690e9bccb112f2370d4b3e977d23946b5c81"
     },
     {
       "case_id": "158-C-bug-9815086-9815194",
       "group": "C",
+      "payload_hash": "918644a02c0db611a58ad5196b4df43e2eaf1d9a656c22c95ecee33eaf1afc73",
       "prompt_hash": "7382c4e8ff4d759a963f5b0e4e9752e191616e9782085d15cc1c189f4d8e2a9b"
     },
     {
       "case_id": "40-B-bug-179453-179470",
       "group": "A",
+      "payload_hash": "f088d1abd6e14d0252e00f3f793158a32560547f59a0e0d513b811aaca3b7299",
       "prompt_hash": "2e6d5d12ca1cbb4ae877caf37b11c14ffcfa40ac2897e362029b2a0b63a117a2"
     },
     {
       "case_id": "40-B-bug-179453-179470",
       "group": "B",
+      "payload_hash": "b6183f45232550152b5539093270223c7f2354525bbf56e176b852d79fedf04d",
       "prompt_hash": "7aa3469543fd042d33a1634e6685c88c12fe9e9262ada518238329ef0cd938ff"
     },
     {
       "case_id": "40-B-bug-179453-179470",
       "group": "C",
+      "payload_hash": "6151475c85129f747a5ef781fbb6153037b4e1d9ee37b85473689ea5c1ac98e3",
       "prompt_hash": "70b8d51d6643966697306317eb7cc2e544d2ce3378ca5f2a29a8f72849f38fd7"
     },
     {
       "case_id": "234-A-bug-2425047-2425051",
       "group": "A",
+      "payload_hash": "2b8ce844db4b23bb175a5e05e81d8b09414035e17c658f6821b73ef81b5748dc",
       "prompt_hash": "2bca335f021ef9700e2593cc429dd949c2e58838241c93474ffb56c2a699bd51"
     },
     {
       "case_id": "234-A-bug-2425047-2425051",
       "group": "B",
+      "payload_hash": "6b158f1ddec167c31d0e0314adb95ee9025925ab073aaf003e07b26274d88cca",
       "prompt_hash": "e18d9242d3d73499671c1c06f87b6352a600299587faaaa08f0a9e778d55b622"
     },
     {
       "case_id": "234-A-bug-2425047-2425051",
       "group": "C",
+      "payload_hash": "2479c3b04a1055716c8d8645bedf4323f028f6f35d2595b6f380d814c649d2af",
       "prompt_hash": "53b6207e9d72931da3da24c09323d01229c8585a603c881961a66f4b70f1f118"
     },
     {
       "case_id": "149-B-bug-1170226-1170231",
       "group": "A",
+      "payload_hash": "e2c9623193a6d1e764b6de42990bc75aa5e44d125c2b22d2de3f2f907b1a595d",
       "prompt_hash": "aaafee8e804e5f99fc29d6cabef9921bf596605ab5427411d02d7c6bf1fdf59a"
     },
     {
       "case_id": "149-B-bug-1170226-1170231",
       "group": "B",
+      "payload_hash": "c08f4126643df86b445996124328cb02f3d4f909fcf5d321abfc53633105c1ed",
       "prompt_hash": "7c9bb99ca522b085640f7f3c969816a2a919b5a588e26b58b0255819041cecbb"
     },
     {
       "case_id": "149-B-bug-1170226-1170231",
       "group": "C",
+      "payload_hash": "0c27013ec51d43ef8c642785b0f98ee67025402925fc12f925645e06294cf13d",
       "prompt_hash": "ff54f3ff901165cb0a13e4be6a26befa531005e508ab9a832ea9219135b84401"
     },
     {
       "case_id": "545-D-bug-17326520-17326553",
       "group": "A",
+      "payload_hash": "012a156e4a4dbda4bc5ffb43866eec254bccafda8922e77039ae8469e88ba2b7",
       "prompt_hash": "9b8eae6849fd9826eb182f26b15e702bdb3cba892624c2e88c005351769257a3"
     },
     {
       "case_id": "545-D-bug-17326520-17326553",
       "group": "B",
+      "payload_hash": "14af2e2140d3e1b64bd7a6ddb69b8baaa60a029c2a012cf771cc8d782b0681b4",
       "prompt_hash": "e7787c53c60c33dfb469b638a301819cfa5ccfb4b69a813defd8c2eafd55838e"
     },
     {
       "case_id": "545-D-bug-17326520-17326553",
       "group": "C",
+      "payload_hash": "d1e0f4ea2a4e8970c05a7b0a28af2ef46d43fe2bea3a77c9bfffb179a26813af",
       "prompt_hash": "ef9fa74ba5ae3ca1f1c4623ada79fb2d9f540886a6dc71ab1a119ba1aea526ea"
     },
     {
       "case_id": "492-A-bug-17190485-17190512",
       "group": "A",
+      "payload_hash": "b02a4bc792fa640f9c6a8c7f84120672808f8b1370c04bcdba4bc69d6ac8b742",
       "prompt_hash": "21067d8b53728f06b8bff2cf48ae0b6836134de2b4e969094a7c7fcf310190ed"
     },
     {
       "case_id": "492-A-bug-17190485-17190512",
       "group": "B",
+      "payload_hash": "ab3e6ec5e3f2dfb8458288ece0c62ce471ca24f23a6c4939b6926685c3a933ab",
       "prompt_hash": "9712ab48236d46f55c8d4c60e152dbda4efa581d5e8718a28f039012cde07ec6"
     },
     {
       "case_id": "492-A-bug-17190485-17190512",
       "group": "C",
+      "payload_hash": "4d80b5987630f3638a6b92c6cdc0a9001115dc1542019819b32539702414511d",
       "prompt_hash": "a3b089d6a932b847de013c32aa119dd7c4dd0fdcc5f31a7b4f0b78e89cb1bf1c"
     },
     {
       "case_id": "282-C-bug-15737668-15737873",
       "group": "A",
+      "payload_hash": "6af67f3fb42b070ca28716be96261f90ff9aa0335be1022a2d9f75d7e644e2c5",
       "prompt_hash": "3f7591a5922a38789527d0c777c744db98a0d8df07cd988adbf9495c09953a96"
     },
     {
       "case_id": "282-C-bug-15737668-15737873",
       "group": "B",
+      "payload_hash": "23d23e8c048f75cf37bf68575180601ef6ad378e494b9eb54223f5d8e0b292bc",
       "prompt_hash": "592dc29c8e8ba69761ffde3638f3119edfb22d40637a473b3b1b443a731c0d25"
     },
     {
       "case_id": "282-C-bug-15737668-15737873",
       "group": "C",
+      "payload_hash": "4f88c01d60577545f8cdc627d7c6a1f5213651a4f7bfb262f851963b45fb0558",
       "prompt_hash": "8219bf63b64a2fc0da599e91facddc69784fd7a2eb8d573ab72fd6aaf5f2b52a"
     },
     {
       "case_id": "328-B-bug-4567715-4567729",
       "group": "A",
+      "payload_hash": "7aac308e7b3843f38780572966e29ba5cebc3b33eb5e2103b5aeeac545e63f4d",
       "prompt_hash": "6689419712f53e63c31bdd15e62c87f375e79df3f671aadefb58f21fac1e08df"
     },
     {
       "case_id": "328-B-bug-4567715-4567729",
       "group": "B",
+      "payload_hash": "00c58c67ba86998a67ffee757e6cf5a905d169e05b2b5341bdb0a9c110da2879",
       "prompt_hash": "40d0f4b7b190526b62a64c1a43258f149795d3be4dea1462fa49300ab9987613"
     },
     {
       "case_id": "328-B-bug-4567715-4567729",
       "group": "C",
+      "payload_hash": "951d0139a9bdf0fa8bb53f789d0c7ccdec7bb46f671368a032327479b7fa0fc9",
       "prompt_hash": "b5e8dccb38d1b0e06e7d7e4da5fd8f8f17fa00a4d837a7a83e867e864aa02ee6"
     },
     {
       "case_id": "580-A-bug-18107163-18107188",
       "group": "A",
+      "payload_hash": "8bff0d6623422a4d8b566652a0b47c7edbb0a479b62b77f95f4bc74778b6305c",
       "prompt_hash": "19699e5996db817e26e2b53b7fbc3909050d438cfef00532a8e73211c6e0e6d3"
     },
     {
       "case_id": "580-A-bug-18107163-18107188",
       "group": "B",
+      "payload_hash": "e33b115266ff6eda442c4368a44ded9d7021f0a166424c78208d1df0c7adbf8b",
       "prompt_hash": "6c2dd0718f2c1578b116c18678f6f2ea2add8ba4dce028ff7d02d8a888c22d60"
     },
     {
       "case_id": "580-A-bug-18107163-18107188",
       "group": "C",
+      "payload_hash": "4c467befa04629f7121fc77d7e6e4e64971810dee1caf3281ff5f98c8790feb0",
       "prompt_hash": "46a0ca770326c81a0f226ab800756ad62a7658ba99924ccae87149367ca54ed3"
     },
     {
       "case_id": "31-A-bug-17852743-17861117",
       "group": "A",
+      "payload_hash": "88f6525b1a979f505d32eaaf124f264d91a8ddf06ef1f7fcdc20b7ba78916ca6",
       "prompt_hash": "3b9fb8fa5dae22b8157dac78674c3e2fa2440a4d6806e4633680b8747c09d599"
     },
     {
       "case_id": "31-A-bug-17852743-17861117",
       "group": "B",
+      "payload_hash": "f6e1fcaa98431dd20d4ec99c80a4c3eef2e66be5b620645362474a3dfd527968",
       "prompt_hash": "46db19a6c72abd51309a91c88c4f8a5ea0e6193ff60c89f3cfb00052b5b2cd91"
     },
     {
       "case_id": "31-A-bug-17852743-17861117",
       "group": "C",
+      "payload_hash": "9a746bb18d122f72cfa1295fac01759613d6e770ae6e38e10f21147ef78d93ee",
       "prompt_hash": "9ead8a13d4f0f05daea482b36ad9ae1bbdae3bce04f0ee01456a05c9da7d5538"
     },
     {
       "case_id": "99-A-bug-6985349-6985355",
       "group": "A",
+      "payload_hash": "e806d35c8a74bda0a86e30c26bc79449a9ca46422938425a3d8fe0ba5585e52d",
       "prompt_hash": "4dd338b5dd896ae31da86e1b1595aca198d4628e0ca0f0ecd33e1792cad9e215"
     },
     {
       "case_id": "99-A-bug-6985349-6985355",
       "group": "B",
+      "payload_hash": "1b5070bdabde5b581917d940d743ee5540499cea78853ad6abb78a8ef5d7ad3b",
       "prompt_hash": "d5555009a4beab5f7cec78d6a7606abe00f9fb29d6b85f02983da0559f3ea5ae"
     },
     {
       "case_id": "99-A-bug-6985349-6985355",
       "group": "C",
+      "payload_hash": "70e9d438752020a3771e4d3c416080c237c7673ad557db9c372251b1d77180bb",
       "prompt_hash": "063e40347d1311470f43527bfbf6c15d9688559ff5a76b99e967669a6ade8974"
     },
     {
       "case_id": "611-A-bug-18197396-18197911",
       "group": "A",
+      "payload_hash": "d75c2e0a395746f72cee86dbd28c08284e280d81a0c8974dd194c7e1e4324d3a",
       "prompt_hash": "85cced9138dd37b89b1337617ca1ae5323cf0ba33be99b97c66de18d1f15b034"
     },
     {
       "case_id": "611-A-bug-18197396-18197911",
       "group": "B",
+      "payload_hash": "123064d53af0c521081ca964833994751e558fd654552c5c59f0aa514e59e9d2",
       "prompt_hash": "1cb5cc8e89957004f32fc38313f70480420d68a31fe0a1b09c8c6fcb605f162f"
     },
     {
       "case_id": "611-A-bug-18197396-18197911",
       "group": "C",
+      "payload_hash": "596e4aa6ab619d6544e83e91ba38a5dc6dc371c0cdcbe99bb3df6d19253afb10",
       "prompt_hash": "7a3a09d7acf6de41d0e2b8a3066d70374643293b1425663c0a3456cd3ae3427c"
     },
     {
       "case_id": "567-A-bug-15485089-15485103",
       "group": "A",
+      "payload_hash": "5aea0b859717506730b2638394fb6f0dab320e27a3395023081cfd308fc23621",
       "prompt_hash": "355645e0f8eb768138c87c68f31c84e943d42f9f1fecd63b31bb6f945f5b02b1"
     },
     {
       "case_id": "567-A-bug-15485089-15485103",
       "group": "B",
+      "payload_hash": "89ab5363bb5d3920a2783736262b528a2c2cf011f65529ab7ae8641a57435e23",
       "prompt_hash": "8579ace8bc80b54179879d2d3cbdddfa857486110c70b3ee7e0485d66fd13362"
     },
     {
       "case_id": "567-A-bug-15485089-15485103",
       "group": "C",
+      "payload_hash": "c603eae9331322b029f6e9d4129b32ddfd9c1c1dd1e2e709a675f0649472c959",
       "prompt_hash": "b01f2cbeee3fd91c52f995bef60da2a677515d2a403f8d60636d2a39fe8250c2"
     },
     {
       "case_id": "417-C-bug-6586834-6586850",
       "group": "A",
+      "payload_hash": "8061ac6c2135b5bf863fcc1e0764266f0d3215f90fb5ae717e9da1e11737b11f",
       "prompt_hash": "3162c0811be9566fe067f23d2ea6356ad036d0018cfadfa7e0ba3c44518f6cc0"
     },
     {
       "case_id": "417-C-bug-6586834-6586850",
       "group": "B",
+      "payload_hash": "2baec1defe64beedd7b2370f549b49a438a7c3257c90c1048ffbe6cdd9890936",
       "prompt_hash": "89345a657977df4faa34f0fcea9f5201cf1dd758003cb91f35e5de624ad3bd41"
     },
     {
       "case_id": "417-C-bug-6586834-6586850",
       "group": "C",
+      "payload_hash": "aa3295b5e2f76dce78ccadd2ab4b0bf63e0a628d586614bb1f3571b80e6e10c5",
       "prompt_hash": "fbdf73c40ed56f8a245bdef7dfda8d9f2d06519d019638a6187aa598191bb416"
     },
     {
       "case_id": "616-B-bug-15683583-15683683",
       "group": "A",
+      "payload_hash": "a8a697770ec93f4b36453d051c68946477d336e1fb62be7fb68bd92d7710e72c",
       "prompt_hash": "b1b7331029c1dd41017c557fab5d79bf889d4efc0b695ef74b958e02adaa1f5b"
     },
     {
       "case_id": "616-B-bug-15683583-15683683",
       "group": "B",
+      "payload_hash": "253296f9589779464afb0e4886addfcc2c90e8f1f2c391096a17deea7dd380bc",
       "prompt_hash": "de60b5220cc6c59e3668f271aa394202bd52893461c72ab6ab081206f91e0ef0"
     },
     {
       "case_id": "616-B-bug-15683583-15683683",
       "group": "C",
+      "payload_hash": "cb4093a4bf09c86b0ca5f3b8d1f1496bb300910da778f5b16002b7ca3e3ff342",
       "prompt_hash": "afca7454f32138d5036c4ba15f271ce2cdefba95f8ce5a26011ecf1ea93d7270"
     },
     {
       "case_id": "322-B-bug-12162423-12162461",
       "group": "A",
+      "payload_hash": "dcf9b434d327d943b54907fdb04ba1b069ba4663390cd1116e475fc69f43c63b",
       "prompt_hash": "700c0a08da7aec879a472dfdafe279d46fe0ee7370a61e38baa2cf1f607b6c21"
     },
     {
       "case_id": "322-B-bug-12162423-12162461",
       "group": "B",
+      "payload_hash": "b66ef28fb3cc42e3d144eff38ebd1586d9ebd416f1011bced934ec8d2be7c874",
       "prompt_hash": "98bcbeeba6b36350f1486748bcb126fe62fc9d97f48de131e2bead42b5e35d2c"
     },
     {
       "case_id": "322-B-bug-12162423-12162461",
       "group": "C",
+      "payload_hash": "dc8e83674fbd20bcc2ba8e1b8e7de5abc77787f92970e2f37570ab054e8d9050",
       "prompt_hash": "ee9032ce01146551e329015ab22d039075f7e0f06b36df8e471f8075b905a99e"
     },
     {
       "case_id": "89-A-bug-685910-685915",
       "group": "A",
+      "payload_hash": "691fdbbe03ca70a269e559922ce0fb7afe1d72afe357409f72193c9489ad9d3b",
       "prompt_hash": "8b4bfb1b757413aacc1d232dc8e37a90a6dab29a34631b3a45848a0032c1ec56"
     },
     {
       "case_id": "89-A-bug-685910-685915",
       "group": "B",
+      "payload_hash": "ebb6669358fa8fe7c229f9f355da8cbd9954c543e0508e172ec778245110c93c",
       "prompt_hash": "4d79d8ed7021537e8206e7c1cf4385abc2cdd809b4a9e780f8e34f3aa649116c"
     },
     {
       "case_id": "89-A-bug-685910-685915",
       "group": "C",
+      "payload_hash": "4350e5bc029dcb51194e382a6251fa682c1f79cef3044ab2fd9b1a2dc992211b",
       "prompt_hash": "ab1a3538aff49a85a3971fa07dd753ab09b1d66edf24cbe8c8e0124fddbda1e2"
     },
     {
       "case_id": "413-A-bug-6604635-6604651",
       "group": "A",
+      "payload_hash": "b37e5d41d68c4a70551e9306329e1f005393f140e3e14a8edf3d5a18d2b9cbd4",
       "prompt_hash": "cfb3a5293250845a7d29565e388959b19722e4c8b8f3fbb3543a179586d6cbaa"
     },
     {
       "case_id": "413-A-bug-6604635-6604651",
       "group": "B",
+      "payload_hash": "18be2315b9b6e9d7f4e91ca9eba62ad719c2dfcfc7dcb0e5d98e4b207bb19886",
       "prompt_hash": "e6d97559d82764ca08971b2facba3b2c9a6835967becf96fcda345f8e64d9ac3"
     },
     {
       "case_id": "413-A-bug-6604635-6604651",
       "group": "C",
+      "payload_hash": "62a0f35b6259f08153120deb0ccaacdcd7578f122abb3eca59baed6613547e25",
       "prompt_hash": "742c461ae9180aef72f2c82cb5f20d2a35196fc70cdbe68df04f67b869a6a043"
     },
     {
       "case_id": "160-B-bug-14660992-14661027",
       "group": "A",
+      "payload_hash": "173cf788427cb46fe658269bfb748a9c95dae29bcec35cd6dcbbf8a571e486c6",
       "prompt_hash": "28a11180d6e23e0143814c3b9f619658ceaaefae76f3cf6dbfc2b7334119091c"
     },
     {
       "case_id": "160-B-bug-14660992-14661027",
       "group": "B",
+      "payload_hash": "cbf6065ff46bae78ee0b07e58c421d4707ab4676b04835796ae4264d81ddac4c",
       "prompt_hash": "6f66ad33fe4360f97fff86ba5a0ea8d20641aaa0929b83675279d6309562d16d"
     },
     {
       "case_id": "160-B-bug-14660992-14661027",
       "group": "C",
+      "payload_hash": "71597f05fb15b37cc574af3a8c8a136c45a928907d0bb1ece3b50294f083c3b9",
       "prompt_hash": "f065511bd02e9eb88002487e4b9de84361fc204c0d2502a8fb6a887b23f4b76d"
     },
     {
       "case_id": "325-A-bug-4069075-4069088",
       "group": "A",
+      "payload_hash": "506abf38f69a3eae85199fed89b83990c19b5d8b9a9576abc0daa892d64864ba",
       "prompt_hash": "42423ef7896902ba81eba2a3acc02fbc4b5c083d3b3495ccd9b3c49e47fe983e"
     },
     {
       "case_id": "325-A-bug-4069075-4069088",
       "group": "B",
+      "payload_hash": "e4de3ac9971f31eab72c6933ef6f3c247492dd5618c02f5a78fdebf0a407d343",
       "prompt_hash": "783a53e6bc70f0f04141b7945556f7e9406f50eb4c18f5553fbece49642c2b6a"
     },
     {
       "case_id": "325-A-bug-4069075-4069088",
       "group": "C",
+      "payload_hash": "9531ac1cfe03c48f197db66b4fb5726a05a8953af4aa85f227721b25abb903da",
       "prompt_hash": "3e6d8902a367ffce1e249da1a2fb24de34875d5ca3b0928a3349a86e8f441c5a"
     },
     {
       "case_id": "16-B-bug-3929377-3929378",
       "group": "A",
+      "payload_hash": "5d42056805f1928527188069bda9123ef49ac7ed289e6928d33cfc6f17defa89",
       "prompt_hash": "a363bb730a0860e08d02f3ca8951878fda695896ee6bf0af7abc310c436b3a40"
     },
     {
       "case_id": "16-B-bug-3929377-3929378",
       "group": "B",
+      "payload_hash": "59e530f285de0a3db0c966e5f5d26a1d12f2754d00966afbccf8b460c64ded34",
       "prompt_hash": "2ef8ea5e142df86bdfa987d52d8cab49d8390701d8d41d09975f746dc560b1b9"
     },
     {
       "case_id": "16-B-bug-3929377-3929378",
       "group": "C",
+      "payload_hash": "3615269b8a6222228d7960167d50c8e3acd3cf8dfdc7d978deb46e0a1969b203",
       "prompt_hash": "04e83b975f8667d5b2ffb3fff9f2c7081b0f1de246ac9aa6edad55dd969a707a"
     },
     {
       "case_id": "514-C-bug-10224933-10224936",
       "group": "A",
+      "payload_hash": "a241e2656484686de6a4f7b57706542fe864d5e52559d926977ccf8a7d54d3be",
       "prompt_hash": "2f107768000de9e2fce44a962a9ba764209b6344424c3294d24a0e23179e965a"
     },
     {
       "case_id": "514-C-bug-10224933-10224936",
       "group": "B",
+      "payload_hash": "7077633fdd4f205bbdec3c9e2429490e79310bc92e7b9a976100e24ce1d17f4e",
       "prompt_hash": "14cbe75a91edcdbc22c95faf261c33e41e2bec97c8d172961b847020af1a4911"
     },
     {
       "case_id": "514-C-bug-10224933-10224936",
       "group": "C",
+      "payload_hash": "596af6958a325f848f5b3a5acbc315cca20eff366aeb54dd8850248c96b70e47",
       "prompt_hash": "dc79e977f2c76fc84a34ee5e0e2ea253c9406aa0539265246994405a0b097a0b"
     },
     {
       "case_id": "665-C-bug-17762752-17762802",
       "group": "A",
+      "payload_hash": "497a259b2012486bba70c1a47f354ec920b867194b2aad5f83f8cca1246ba713",
       "prompt_hash": "ce89bc115b0a125e620fce2ae770feca6db8a1272d75e5fe61c7ab9e9335819d"
     },
     {
       "case_id": "665-C-bug-17762752-17762802",
       "group": "B",
+      "payload_hash": "41190d4f6cf5d539b3e3458d8db4f3d964ca2ec83ffdffc42f338bcbbdfc30f9",
       "prompt_hash": "c98aca5ac0ee4ff228c82103a1b3fd2310b8ef36538d3a16ca5fa37c3aaa7b33"
     },
     {
       "case_id": "665-C-bug-17762752-17762802",
       "group": "C",
+      "payload_hash": "affe21085141bf53da3f197c95d501530621b300dd094a227fa861dfd7452b02",
       "prompt_hash": "95d587458fa8e967aa53a5087af41c6c9e5ec5ae6de00292fef029bebb014d17"
     },
     {
       "case_id": "586-B-bug-13581699-13581787",
       "group": "A",
+      "payload_hash": "0e0087c1fbce27226c8489b7eeee89684a641adac947dba27376586cd84e2a39",
       "prompt_hash": "adc0c16cbe10b1d084c669e19f09f568bb5b9b323a24ed52b6bb3b0c06989476"
     },
     {
       "case_id": "586-B-bug-13581699-13581787",
       "group": "B",
+      "payload_hash": "db997c688f2017c8ee11974d550718de256d4abea51108ec070e846794bea3e0",
       "prompt_hash": "59e6df2fd8018809ca64eb1745eb355627b3bf3cd3665416e2e7b4178f484ddf"
     },
     {
       "case_id": "586-B-bug-13581699-13581787",
       "group": "C",
+      "payload_hash": "e987fa7b6839e1a874864731343d627e7e2ada3adc2c2247f7b40f2e8bda0ad8",
       "prompt_hash": "e27adbb836d25e255305d0bc3874117cc6e9c93c79929dd257f1ce120ccb8910"
     },
     {
       "case_id": "149-A-bug-16617896-16617908",
       "group": "A",
+      "payload_hash": "0e2cf61b8a68cc630b1398e27ad8c27b199c15b65941814e1034e1d1d544f7da",
       "prompt_hash": "1081bd3bb82d7c4509d91add94084dfb34c3844ad4b3fcc2e169d6819bcf153f"
     },
     {
       "case_id": "149-A-bug-16617896-16617908",
       "group": "B",
+      "payload_hash": "8c93482279e7927aebbbdc008275e5911ce130937c4a31a6d0c25031d1b5258f",
       "prompt_hash": "25972c4444b278d6e8cb54e9cff1a4ced4cb855b9461eff19a796f9e763cb28c"
     },
     {
       "case_id": "149-A-bug-16617896-16617908",
       "group": "C",
+      "payload_hash": "bdcd4d791b51c25a213e0dc2c4f6a9e1c195f930366b64b8705c2d2595f2acf9",
       "prompt_hash": "4b4dec25bc5afcc180c9f4a3943dd0f3583cfa9b3e416cf4d16d37a0040eaa69"
     },
     {
       "case_id": "515-A-bug-16019620-16019646",
       "group": "A",
+      "payload_hash": "092ccf2dfa5f1f74acce96acf400cd8c3cdeecadeaaf84bf4d1991e5d767e1ff",
       "prompt_hash": "cfeb1e730e5b8e65c10d2f085fb58f3b11152d7a2b8426490f2e818fa2642b0d"
     },
     {
       "case_id": "515-A-bug-16019620-16019646",
       "group": "B",
+      "payload_hash": "fcf3a385a2d8a81cb9fb0ab2c7699dcea718dd8fcd20b5525c05197a88b51178",
       "prompt_hash": "78a024bbb510e76c7c78d5e6be9c5b5cdf2875daf359b0f2a8cff7ed6f8d7a60"
     },
     {
       "case_id": "515-A-bug-16019620-16019646",
       "group": "C",
+      "payload_hash": "d15a0ad08554f85e5a378787ca11b260ea6155d2732c0f233db46e8e8bdb776c",
       "prompt_hash": "97cd5c414acd4201bb65bb14e432f086fc834be0ee9fd8b2ae2dc1493093b2e4"
     },
     {
       "case_id": "659-D-bug-18135109-18135261",
       "group": "A",
+      "payload_hash": "d124f9ea8675772ad466bb08e4906e25fb3eab9c2dddf6a5bd50984ff2d194c4",
       "prompt_hash": "330d92e25d5c428879a338a563cdf2fce8bbbf97b18a65b928036c6a7180f7ac"
     },
     {
       "case_id": "659-D-bug-18135109-18135261",
       "group": "B",
+      "payload_hash": "e8b9e28d2327dc24e3cd45cc5de0628b7ecf8535fd40bf969c73ae0e973cc526",
       "prompt_hash": "20337c8bdca77b244ec501c105d75c0b5286ff6d45c4950d25eccafd77e31df6"
     },
     {
       "case_id": "659-D-bug-18135109-18135261",
       "group": "C",
+      "payload_hash": "2103d5cf9a1029c496d5f0de259247e800495889e9987343fd1bee41b9912ebe",
       "prompt_hash": "ae67c948b8121efa5b63ff2302c380af60165682c54518a53f3e82854686390a"
     },
     {
       "case_id": "408-B-bug-6612687-6612709",
       "group": "A",
+      "payload_hash": "766e4042963ad23458ea966e7c1bd420d1dc7c003727a57457463c4db65f2744",
       "prompt_hash": "b5d9f9fcd7019cbb23872b5ce79ab5e7ea2f5a6a754e3f00e5a4cbd0e33441c8"
     },
     {
       "case_id": "408-B-bug-6612687-6612709",
       "group": "B",
+      "payload_hash": "3c95309267249b3fdebb8e524444531c97ae234206e6030bfa8783452db61a8d",
       "prompt_hash": "834b7fe6f15cd7af6004707e74193f2a2f2cba716d0695808e5d4473d71cef60"
     },
     {
       "case_id": "408-B-bug-6612687-6612709",
       "group": "C",
+      "payload_hash": "2a039a4e8cfc94f117632f7be2790f65546de4a3cd570aff7141a29929727d87",
       "prompt_hash": "a564024f618e1ae09511213cfc90c0672072f32eea07149a3fa3fa9f520d5434"
     },
     {
       "case_id": "433-A-bug-14776196-14776225",
       "group": "A",
+      "payload_hash": "001b9efeb658af0ef20923aa776bafae47ff876d0edbdac9436b4cdc0ab52f21",
       "prompt_hash": "b50cb0a2a0f81b8ed52addadbf6908f7cc18715c536d4adc0110656f81312093"
     },
     {
       "case_id": "433-A-bug-14776196-14776225",
       "group": "B",
+      "payload_hash": "1b03c32597d20b87df27a19e1e9b608e10adfaa2228403765f4aafe0b6f3a5c6",
       "prompt_hash": "64454c3988486cf8ea33712ff1b51a5977d0edf641bd5e486e37e79ad7703f3c"
     },
     {
       "case_id": "433-A-bug-14776196-14776225",
       "group": "C",
+      "payload_hash": "558b4b92a439bca37aa2c6212995140424c089d4c48b41e837438ba163164170",
       "prompt_hash": "681077e49520789e1b3a3e2b0390f4df1a11ec8a3fe80a78b19ed57bb95c68e0"
     },
     {
       "case_id": "557-B-bug-17172272-17172312",
       "group": "A",
+      "payload_hash": "021e8f98db1497c01dadd9d0ceba8062316744782668f9d1ca465476ad81d32a",
       "prompt_hash": "080b6946a49a1769311fa649b36b984ea8647e0b815e608fe329cf91eec0df8f"
     },
     {
       "case_id": "557-B-bug-17172272-17172312",
       "group": "B",
+      "payload_hash": "409788c46ad82db89468198c4ff8e424cf14c5915bf94d67e81ab22d7a8b7d32",
       "prompt_hash": "3e68de43c048273cd70e6cf4163c9950d777eadb24c691e47be28eb750583ff9"
     },
     {
       "case_id": "557-B-bug-17172272-17172312",
       "group": "C",
+      "payload_hash": "88c202fd095d3cdd033db055b5b561f8ab76c41cdb6478783d4f5c63448a41c2",
       "prompt_hash": "c0b77c3ac332d698c5ece4c1f32560c5c445ff5317e87ee4bfaa79fc1a000590"
     },
     {
       "case_id": "527-B-bug-11093666-11093671",
       "group": "A",
+      "payload_hash": "1e528c7e9724981bc1daf63f57f83631fe570a6ccfb290050491dc554558e916",
       "prompt_hash": "5ad8cd66698abeccafe6a74bee64c4267d32b73cd23c3db3a2b9b81191193248"
     },
     {
       "case_id": "527-B-bug-11093666-11093671",
       "group": "B",
+      "payload_hash": "bae0013370af681bd8c4a339fa1e1aa6afd45e84d4f68612d7b4b9f12f86ced8",
       "prompt_hash": "62c9fa8fa817bc4dc26114eac8ba47a058a973195eb8fa5f24d41e290a9f578f"
     },
     {
       "case_id": "527-B-bug-11093666-11093671",
       "group": "C",
+      "payload_hash": "fed3e956ec6e06ba828864ffc0a5af8f24fd3a883b82a0b140b77e13d38fda45",
       "prompt_hash": "0dd902befba719befa1c42a4d40ab84eaac7a2b6d0092744f5708fbc1091f3ba"
     },
     {
       "case_id": "306-A-bug-4028440-4028451",
       "group": "A",
+      "payload_hash": "6406ae54c5cd8cd68348e654baf49ca47dac005db8492a09c19b024fdaecb707",
       "prompt_hash": "0fb46ba5639f77773d875f38d0707f486726441e4d55587e3048d0b31023c7d1"
     },
     {
       "case_id": "306-A-bug-4028440-4028451",
       "group": "B",
+      "payload_hash": "f6bec015baf74171eec34fc25d8e838f9e9ddda8afb01ede7cec7982d3774006",
       "prompt_hash": "f8ee1d394d5e607bd666f6f0d8beddbdb62034eeb06260d27b4b57fc2417455a"
     },
     {
       "case_id": "306-A-bug-4028440-4028451",
       "group": "C",
+      "payload_hash": "a3f649ea3f0307049770d426eb37d63dcbbcb19eaf17fd0417b08e81d2ecd022",
       "prompt_hash": "34ec2fc6ef8ed6aeab6b20e7566a4775bddd4fcbf514dffe9f8206a8169a32a3"
     },
     {
       "case_id": "598-B-bug-15587975-15587993",
       "group": "A",
+      "payload_hash": "247a982c41aaf9c4f9d2c319033c53e4a46cfb0187ff2053534ba5550ac08b7e",
       "prompt_hash": "17b341770356e7170c5a9c4843b417f496b79cf2e51d6facb3a73eda41b35cd6"
     },
     {
       "case_id": "598-B-bug-15587975-15587993",
       "group": "B",
+      "payload_hash": "0ec429b652bdd7fdff116427664b3950911a9ee758a69ae4af4885a8e1d06289",
       "prompt_hash": "0740360be962a89f6d837e70a3f1e36e00ae6e2f93d5c418adb972b9258d2ff7"
     },
     {
       "case_id": "598-B-bug-15587975-15587993",
       "group": "C",
+      "payload_hash": "cd659aecffe9cc98f8441b33810e86e3bedf70fe8933ea21085e15f0c2c10db2",
       "prompt_hash": "8852fc8989fa2d47b2e2284ef5803dcbe234365d9ac58345c7c78f5f0ee4cf1b"
     },
     {
       "case_id": "450-B-bug-15950152-15950193",
       "group": "A",
+      "payload_hash": "70b0995c6969401d5bc4927dbbf52386ec3b13ddaddf13eb8d35fb8bebd77471",
       "prompt_hash": "0285a1143878348565e04ee13373accf2cb7bf655a2baf97a6920913f8142fff"
     },
     {
       "case_id": "450-B-bug-15950152-15950193",
       "group": "B",
+      "payload_hash": "64ae26a090fce7e6dbe48d1256a3f27e8b2e3d43c8469ca88c5836c6d95fe86f",
       "prompt_hash": "d3e2b55491a22bf16d89f76c40e2539220fbb0072e684ebef18a726ed24a07b7"
     },
     {
       "case_id": "450-B-bug-15950152-15950193",
       "group": "C",
+      "payload_hash": "262171fe89a57442ff929d87fa09df4104680efea0d1cb6ad8b97341c2fbb12f",
       "prompt_hash": "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0"
     },
     {
       "case_id": "141-B-bug-9726688-9726780",
       "group": "A",
+      "payload_hash": "85c256500b3988a191073363f044f2f886ecc41cb6fe6459699adc969d793cb0",
       "prompt_hash": "00fce0644c5bc283a8567d34dd477d6add910b4470a3b5babd145fbd46c22cc7"
     },
     {
       "case_id": "141-B-bug-9726688-9726780",
       "group": "B",
+      "payload_hash": "088f1f2d7e0b66cf885e0a45c821d2ecf699c703f53c88979ef3eb13a93407c3",
       "prompt_hash": "113d7b6c87a96a07d80b4fb79d8d5c0217fd135d1a0b3934f983ee44f9fd8954"
     },
     {
       "case_id": "141-B-bug-9726688-9726780",
       "group": "C",
+      "payload_hash": "3f67fcad805874e0ba9c072572e6ade61f10f005ed20fbf069670d7fdd4f57af",
       "prompt_hash": "cfe2967357abd434a61c84a32333aa2e7a19a8d319168253e1695af2e1931243"
     },
     {
       "case_id": "515-B-bug-12615092-12615121",
       "group": "A",
+      "payload_hash": "1b63c7d6c3af5d3eae5e22bfe21db62dcaa44a5c74c8d76d342623862328d3cf",
       "prompt_hash": "aa519a0898fabb992e072c8dfd10e43ee299ae83b50619060336f6353d3eaac1"
     },
     {
       "case_id": "515-B-bug-12615092-12615121",
       "group": "B",
+      "payload_hash": "2c0ba0c07c26f7bcbc1b4b2c817801b4fca358228fd4c42c0b57bf861d24faf5",
       "prompt_hash": "b57190119a3024234f4dedc179e04cff50063336ba246b0e6f63205923a55174"
     },
     {
       "case_id": "515-B-bug-12615092-12615121",
       "group": "C",
+      "payload_hash": "decabfedbf8bdc45cbbf2ec5f4b9c1b62906c4f863dd311ffa0757346e4da52c",
       "prompt_hash": "18405601ca3171e0daf6390d34de6bd2e007beeb31aa9b671a1b75936d87e0cb"
     },
     {
       "case_id": "603-A-bug-14677732-14677817",
       "group": "A",
+      "payload_hash": "29a5d7f4a47c50b1c6d89142b5557f7871d099753534ad714f194dfe921a281e",
       "prompt_hash": "3afb65cabe2dab6506de8986d986c01b480134761e174f2e73ae62b5bf418c9b"
     },
     {
       "case_id": "603-A-bug-14677732-14677817",
       "group": "B",
+      "payload_hash": "990ac433e12176eb369b6dfecf949cda4461d8433ab93f8c72877a202c56eb33",
       "prompt_hash": "c8d569461ebd3beea067ddbe2fc1b831cd7ff8cd7abfe6ad75f55336e2218aa0"
     },
     {
       "case_id": "603-A-bug-14677732-14677817",
       "group": "C",
+      "payload_hash": "8ffcf13a7c764a284564baf3509d741463abce6999593f39e0a46824c1bc57cb",
       "prompt_hash": "bce8ab4d5f01812e3c909338f712a296335e1902e1996f54786fa10ab99d61d1"
     },
     {
       "case_id": "628-A-bug-16337935-16338043",
       "group": "A",
+      "payload_hash": "11e0bc95e2e76cb718d4eb17d59b4ee000d85e41614fc71d4b4930631d4f34c9",
       "prompt_hash": "076810546e4116be555fdea36dd5239b29350397b853f5683f8456b9988be3b4"
     },
     {
       "case_id": "628-A-bug-16337935-16338043",
       "group": "B",
+      "payload_hash": "292f9525964ca78b6caed61f834b9b95f8c031a5b5a5d3a276ef14d210f82dfa",
       "prompt_hash": "5b111e4784240166feb5a443c7a26f64cdc7877a2b166b7096b73245c9ea414b"
     },
     {
       "case_id": "628-A-bug-16337935-16338043",
       "group": "C",
+      "payload_hash": "63a646d5a3906a928d9a3dd15203c63f48dbbf9c93f0690dbc67ea4c7dd6b394",
       "prompt_hash": "5577299adbdb1020b559c71c06cfc943a2fd63ba54a23c94e83e39cc7d22489f"
     },
     {
       "case_id": "166-A-bug-11517296-11517321",
       "group": "A",
+      "payload_hash": "86abb4244b7a338fd67796a240937fe7d9136fd7df53cdcda94a88fd34fa128f",
       "prompt_hash": "843ac346c3dae31443579e146dd9707fb4b4b3fceaf4d2362c82605eba52d564"
     },
     {
       "case_id": "166-A-bug-11517296-11517321",
       "group": "B",
+      "payload_hash": "fc37eadc149ec9fcf3f23dfb75d6f564f3a44983e6da5314b62e8e853f794c75",
       "prompt_hash": "02ee312374f72a393b576f625802b015ded3d37ce948b6d0ae180a5e5fba6bd2"
     },
     {
       "case_id": "166-A-bug-11517296-11517321",
       "group": "C",
+      "payload_hash": "f6c29695546cc838f21cf133190e1721b79b5164bc9b11df285f62f0087134c5",
       "prompt_hash": "9554cf791583a51c3c912634fea4fd01339a3996ceb7abf9798ace3aaa1fadf4"
     },
     {
       "case_id": "373-B-bug-5440932-5440937",
       "group": "A",
+      "payload_hash": "e4953803f5e3ae92395aa218c98cb26a98790a47e7829f19765758d89e1a61bc",
       "prompt_hash": "90ed27905d863b26935e8c7cdf79abeab27efe347f64468f223c4ff1a363fd3d"
     },
     {
       "case_id": "373-B-bug-5440932-5440937",
       "group": "B",
+      "payload_hash": "29b735fe51d795ff93575e70589d77e0155a0f9f5a5a8f93cb087a1588e81482",
       "prompt_hash": "75e453d16405842e150462c34523d25a51e0a3cd984000ad28e6265552ad7689"
     },
     {
       "case_id": "373-B-bug-5440932-5440937",
       "group": "C",
+      "payload_hash": "b7dff1d8dcfd7481f340d1a7ac8db68ee94db844d33a03812a277639726cbc79",
       "prompt_hash": "224b8cd3b39e265fa745daebca19ed1a8eef5c9294da70dffb64d6c3ac9f5088"
     },
     {
       "case_id": "478-A-bug-17555253-17555286",
       "group": "A",
+      "payload_hash": "cd339459d6da3698b87b5d69aefc21436e4fd88e1e9bfb9d67545d30e5cb90e6",
       "prompt_hash": "21d2746104a8d56fafadc5c2c4535407b680efc596ca300351f8e36e01086566"
     },
     {
       "case_id": "478-A-bug-17555253-17555286",
       "group": "B",
+      "payload_hash": "16708366b8aff58b2893404efc11ed3cfbe3d38a351b5b904c7ac42342c6291c",
       "prompt_hash": "ac4693d0b688f9fe8837243d08b6dabfb7f2de84e9b0f4e6553ed7504aa2dacb"
     },
     {
       "case_id": "478-A-bug-17555253-17555286",
       "group": "C",
+      "payload_hash": "47824edf30e085d896523d6e160296a48a5b6229958f3d3213d8a996504b4039",
       "prompt_hash": "c8323dbdebab21b246ebb8ecc7b7041467efd0703c0685e322f1fc5742d3b09b"
     },
     {
       "case_id": "34-A-bug-11354973-11354982",
       "group": "A",
+      "payload_hash": "06ca9b012a239a74385bd542c5bbd6742b66375b5fd446fd42d457c6910ae94a",
       "prompt_hash": "0d089632bf396f8cc23c22bbade2a3a8dc83492a3d1100aa121a4464563518c8"
     },
     {
       "case_id": "34-A-bug-11354973-11354982",
       "group": "B",
+      "payload_hash": "ce222f6c1cd7ab103416807299caaaffbc0a6fc63d977ad4c623e851d9de8377",
       "prompt_hash": "e3d52a04f60d819937a57df936404bc12b9332ef6839100274f03e3b3c7f19f4"
     },
     {
       "case_id": "34-A-bug-11354973-11354982",
       "group": "C",
+      "payload_hash": "0a18e9351d16657b265304c00a7c414a8733e3431da356289fc5aeb0a71a113a",
       "prompt_hash": "cc8557c80de4a5b73f13ba8c140b43c9f9d4cf7767ac26204f6979c2f451ce90"
     },
     {
       "case_id": "336-A-bug-6863058-6863063",
       "group": "A",
+      "payload_hash": "8b12e925f115c2ae5d55e8155e3c0742a66ba01476d8267120c8d0baad063ba1",
       "prompt_hash": "97c70044bf9ab788bf23702df1f1e03c3286d8190f5397f628e8c0ce9452fed5"
     },
     {
       "case_id": "336-A-bug-6863058-6863063",
       "group": "B",
+      "payload_hash": "70af2129ba9696f6bc78f06b7d31c581e3a154dd8ab46c0a3cf3bff2854d3028",
       "prompt_hash": "dab215e25e7d6a6431408a503ffff8db82672af8886d9ef8e47f4031f4476890"
     },
     {
       "case_id": "336-A-bug-6863058-6863063",
       "group": "C",
+      "payload_hash": "9317da244383f078b96b20d27bb8318527dce2643bcf07419f1f68db9cd2b602",
       "prompt_hash": "54d413d90d724e6c376e24d430b427a67ed7033c7592c2dae078c618e2b949da"
     },
     {
       "case_id": "606-B-bug-14733385-14733456",
       "group": "A",
+      "payload_hash": "a263c5d8213814c8175b13ca79de0f69c6d06f48c85694a8c72eae923d80c9a4",
       "prompt_hash": "8141a54e5a549a71bef5413c2c46fa731cf3b4c729d84c0cb65b6cd8c42fad2f"
     },
     {
       "case_id": "606-B-bug-14733385-14733456",
       "group": "B",
+      "payload_hash": "800ea4d9efe78e6217fb57bd6b8a01eeb0ed7ac4ddf08439ab7ca589c0ca7a00",
       "prompt_hash": "16f129688ab1edd277bbe15dc705b6fa6a22d1bc3d1dfa68286076b7e7d654b0"
     },
     {
       "case_id": "606-B-bug-14733385-14733456",
       "group": "C",
+      "payload_hash": "ad943906df8afcc2cd1cf9c3cb9888555127aa319c6d48c6603e9135c15095fb",
       "prompt_hash": "b6c4fe526fd8157d7c45c2ad477ee17503e164f008b12294b88d311cc675a5e8"
     },
     {
       "case_id": "467-A-bug-17691358-17691499",
       "group": "A",
+      "payload_hash": "f6ec2c21e658e8aab79d95740a2d21c30d1329656f929177522c4d5fa3d57600",
       "prompt_hash": "9765e1be2efd58dcd1cdde8a038afd0c349d05839b08f66fe9a7ae4239df9b19"
     },
     {
       "case_id": "467-A-bug-17691358-17691499",
       "group": "B",
+      "payload_hash": "1dd9b8578d62b5d4e8cfa75e5fcba152cae451bf4425b9c10ba52160c7aa0dd5",
       "prompt_hash": "e6b444248163bf99a11d4e398ea1e627237cf0a2623da0775e17939f9d918996"
     },
     {
       "case_id": "467-A-bug-17691358-17691499",
       "group": "C",
+      "payload_hash": "7d3d2813c9efcb6fcceff112719fe0922ce6b6bf03bf43697649af31e6317ad9",
       "prompt_hash": "73d081b4fb2be54170555fa677250dcee74be23d45d18ef25aa46f18d4ea3aad"
     },
     {
       "case_id": "87-A-bug-7652942-7652952",
       "group": "A",
+      "payload_hash": "c9e19b077c53eccd8b725f841057f3c4f55cd6ea9836a10dfeed1bd783f80aea",
       "prompt_hash": "ca142fc3a5c801880bf663aea9b5c2b2251615b741865c251977599830e6d632"
     },
     {
       "case_id": "87-A-bug-7652942-7652952",
       "group": "B",
+      "payload_hash": "b50bf973d897d116d27abb3813a4b8c4e674a6319c4cf4afd9821128c641d82f",
       "prompt_hash": "f96c782d887efdb7b032afaeb6276512d1eabcd00801fe791809f69886c8042b"
     },
     {
       "case_id": "87-A-bug-7652942-7652952",
       "group": "C",
+      "payload_hash": "f044bf72bc465b29f6d6b8b9b06b344519a4fad9651c1048d484018accf00c3e",
       "prompt_hash": "dbb24f941f503395ff37ebfcaaaf87f3cad6f60d535f5e9379cb4f6c64ea979d"
     },
     {
       "case_id": "103-A-bug-18288288-18288294",
       "group": "A",
+      "payload_hash": "b328b2f17f533230d534e01f4944144512cd1152abda334183f276a952e12ca6",
       "prompt_hash": "b2e90d18bff256f1b7fcc183bc02169aaa6f571623b3e6f4985e30079472aaf8"
     },
     {
       "case_id": "103-A-bug-18288288-18288294",
       "group": "B",
+      "payload_hash": "a323ff6192eb00615f7976d2a8e71811f024252aafddcf1b37df5bdcad272973",
       "prompt_hash": "d593d9740d9d6eff452fa5ac1a87ac3b787c8a65a4169d99aaaa590d761acbb6"
     },
     {
       "case_id": "103-A-bug-18288288-18288294",
       "group": "C",
+      "payload_hash": "f63e7aecd98c76101e348b8123b324287f5d3e15905799c4607d0ab4a950d60a",
       "prompt_hash": "ad43723d0b3d3f655d306a7b52d0d9ac8b10fbc31669c7f881bd422b082ae99e"
     },
     {
       "case_id": "546-B-bug-13932383-13932411",
       "group": "A",
+      "payload_hash": "c83af381916b19b611185d78afc1b804e45a7f39b7e33abe97f138910841c69b",
       "prompt_hash": "61792cd263a05805a022cfad1c8111ee1005f27079b0e6a59719a7063ff85dca"
     },
     {
       "case_id": "546-B-bug-13932383-13932411",
       "group": "B",
+      "payload_hash": "9b5d824b059dc47789932e1b96b2246a6c58ab3dbf8e911a8c793d0e9e878740",
       "prompt_hash": "218aa3cec94751d78b770c77fd33f09a32252327b128e94c564151ac3113eeab"
     },
     {
       "case_id": "546-B-bug-13932383-13932411",
       "group": "C",
+      "payload_hash": "70a0ac7457e6901bbefe57b0ffbae4866214798b86e93206a058d0adb72c74e1",
       "prompt_hash": "5da3e9e17704d6bb0477f4edc22c024208643b724f6b840684e3e809a2fc43db"
     },
     {
       "case_id": "202-C-bug-1847611-1847612",
       "group": "A",
+      "payload_hash": "1b1f17072039ac1a311bcf1b65106ade3180ee384ba03e9965ac87073b9c6b92",
       "prompt_hash": "cadc16a2ceacc52b9279e0ea68c1ceec10f6cf986671f5498ebc9301696cef69"
     },
     {
       "case_id": "202-C-bug-1847611-1847612",
       "group": "B",
+      "payload_hash": "cd7c8c4c2acfcdc50fbe6ec89a4dd87a4e02883b70925195b7b700fd20f59d2f",
       "prompt_hash": "5f2248423985ab49199c21847e7353611ff7f1f29b5a1ad6c2959f7b6f2e52e4"
     },
     {
       "case_id": "202-C-bug-1847611-1847612",
       "group": "C",
+      "payload_hash": "86cdec67a96ead11e4f19f767adca1074fe4a1df056153847c0f96a388208508",
       "prompt_hash": "3a6c60fe8003cdad97ed1b57d02a6f0f83e933f56e3d27834e2417f680434432"
     }
   ],
-  "protocol_version": "repair-v2",
-  "readiness": {
-    "blocking_reasons": [],
-    "bulk_online_ready": true,
-    "bulk_user_authorized": false,
-    "mandatory_stop": true,
-    "smoke_technical_ready": true
-  },
-  "remaining_bulk_reproducibility_blocker": {
-    "case_id": "450-B-bug-15950152-15950193",
-    "case_retained": true,
-    "issue": "buggy runtime remains non-deterministic, while formal prompts load one preregistered observation",
-    "status": "resolved by frozen single-observation protocol"
-  },
-  "smoke": {
-    "actual_usage_by_group": {
-      "A": {
-        "calls": 1,
-        "usage": {
-          "completion_tokens": 11154,
-          "final_answer_tokens": 336,
-          "prompt_cache_hit_tokens": 0,
-          "prompt_cache_miss_tokens": 658,
-          "prompt_tokens": 658,
-          "reasoning_tokens": 10818,
-          "total_tokens": 11812
-        }
-      },
-      "B": {
-        "calls": 1,
-        "usage": {
-          "completion_tokens": 5285,
-          "final_answer_tokens": 382,
-          "prompt_cache_hit_tokens": 640,
-          "prompt_cache_miss_tokens": 483,
-          "prompt_tokens": 1123,
-          "reasoning_tokens": 4903,
-          "total_tokens": 6408
-        }
-      },
-      "C": {
-        "calls": 1,
-        "usage": {
-          "completion_tokens": 11005,
-          "final_answer_tokens": 382,
-          "prompt_cache_hit_tokens": 1024,
-          "prompt_cache_miss_tokens": 251,
-          "prompt_tokens": 1275,
-          "reasoning_tokens": 10623,
-          "total_tokens": 12280
-        }
-      }
-    },
-    "case_id": "259-B-bug-13083263-13083279",
-    "classification_by_group": {
-      "A": "validated_patch",
-      "B": "validated_patch",
-      "C": "validated_patch"
-    },
-    "compile_success_by_group": {
-      "A": true,
-      "B": true,
-      "C": true
-    },
-    "content_present_by_group": {
-      "A": true,
-      "B": true,
-      "C": true
-    },
-    "extracted_source_hash_by_group": {
-      "A": "9dab2cd2619689fb3f7e4110cbd6774ea4aabe64cd7d730df72958d0b6f5a830",
-      "B": "c870fc04751a285bfa802c8e638ef9397c3b0c1bad93afa6d2cf07302aafb846",
-      "C": "726f3c43448b6a7962545f9a108760135a68540cdf700ed45cff60e3f790f3dc"
-    },
-    "extraction_status_by_group": {
-      "A": "success",
-      "B": "success",
-      "C": "success"
-    },
-    "finish_reason_by_group": {
-      "A": "stop",
-      "B": "stop",
-      "C": "stop"
-    },
-    "plausible_by_group": {
-      "A": true,
-      "B": true,
-      "C": true
-    },
-    "requested_model_by_group": {
-      "A": "deepseek-v4-flash",
-      "B": "deepseek-v4-flash",
-      "C": "deepseek-v4-flash"
-    },
-    "response_model_by_group": {
-      "A": "deepseek-v4-flash",
-      "B": "deepseek-v4-flash",
-      "C": "deepseek-v4-flash"
-    },
-    "selection_rule": "first case in the frozen Repair Pilot manifest",
-    "system_fingerprint_by_group": {
-      "A": "a26a7955944dc5c60445bff77fac9c8e",
-      "B": "a26a7955944dc5c60445bff77fac9c8e",
-      "C": "a26a7955944dc5c60445bff77fac9c8e"
-    },
-    "truncation_detected": false,
-    "validated_by_group": {
-      "A": true,
-      "B": true,
-      "C": true
-    }
-  },
-  "token_estimate": {
-    "approximate_average_output_tokens_per_call": 160,
-    "approximate_total_output_tokens": 24600,
-    "bulk_projection": {
-      "basis": "full-Pilot character estimates calibrated by each smoke group's actual DeepSeek prompt-token ratio",
-      "input_by_group": {
-        "A": 30600,
-        "B": 50800,
-        "C": 58400
-      },
-      "input_calibration_ratios": {
-        "A": 1.629,
-        "B": 1.709,
-        "C": 1.698
-      },
-      "output_basis": "one real completion per group multiplied by 50",
-      "output_total": 1372200,
-      "reasoning_total": 1317200,
-      "uncertainty": "high; one smoke case is not representative"
-    },
-    "groups": {
-      "A": {
-        "approximate_average_input_tokens": 380,
-        "approximate_total_input_tokens": 18800,
-        "calls": 50,
-        "maximum_input_tokens": 732,
-        "minimum_input_tokens": 237
-      },
-      "B": {
-        "approximate_average_input_tokens": 590,
-        "approximate_total_input_tokens": 29700,
-        "calls": 50,
-        "maximum_input_tokens": 956,
-        "minimum_input_tokens": 264
-      },
-      "C": {
-        "approximate_average_input_tokens": 690,
-        "approximate_total_input_tokens": 34400,
-        "calls": 50,
-        "maximum_input_tokens": 1016,
-        "minimum_input_tokens": 368
-      }
-    },
-    "method": "ceil(UTF-8-decoded character count / 4) per prompt/source; averages rounded to 10 tokens and totals to 100 tokens; buggy-source length is the complete-source output proxy until real usage exists"
-  }
+  "prompt_set_hash": "9a65e8fcf2eea3d3da8a64bbfac4d32736e9090da7917da4ea6270d7cb9eaea0",
+  "prompts_checked": 150,
+  "protocol_version": "runtime-evidence-prompt-audit-v1",
+  "runtime_evidence_manifest_hash": "96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c",
+  "target_case_c_hashes": [
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0",
+    "7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0"
+  ],
+  "target_case_c_ten_render_hashes_identical": true,
+  "target_case_id": "450-B-bug-15950152-15950193"
 }

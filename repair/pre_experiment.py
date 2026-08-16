@@ -13,10 +13,14 @@ from benchmark.config import (
     CODEFLAWS_REPAIR_PILOT,
     DEEPSEEK_EXPERIMENT_CONFIG,
     DEEPSEEK_PRICING_SNAPSHOT,
+    PROJECT_ROOT,
     REPAIR_ARTIFACT_ROOT,
     REPAIR_PILOT_FL,
     REPAIR_PRE_EXPERIMENT_ESTIMATE,
     REPAIR_PRE_EXPERIMENT_REPORT,
+    RUNTIME_EVIDENCE_MANIFEST,
+    RUNTIME_EVIDENCE_NONDETERMINISM_AUDIT,
+    RUNTIME_EVIDENCE_PROMPT_AUDIT,
 )
 from benchmark.models import load_manifest
 
@@ -27,6 +31,7 @@ from .models import EvidenceGroup, PromptDocument
 from .prompting import render_prompt
 from .protocol import validate_repair_protocol
 from .reporting import validate_artifact_boundaries
+from .runtime_evidence import load_frozen_runtime_evidence
 
 
 def approximate_tokens(text: str) -> int:
@@ -276,6 +281,29 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
     deepseek = validate_configuration(DEEPSEEK_EXPERIMENT_CONFIG)
     pricing = json.loads(DEEPSEEK_PRICING_SNAPSHOT.read_text(encoding="utf-8"))
     cases = list(load_manifest(CODEFLAWS_REPAIR_PILOT))
+    frozen_runtime = load_frozen_runtime_evidence(cases)
+    prompt_reproducibility = json.loads(
+        RUNTIME_EVIDENCE_PROMPT_AUDIT.read_text(encoding="utf-8")
+    )
+    nondeterminism_audit = json.loads(
+        RUNTIME_EVIDENCE_NONDETERMINISM_AUDIT.read_text(encoding="utf-8")
+    )
+    runtime_reproducibility_ready = (
+        frozen_runtime.validation["case_count"] == len(cases)
+        and prompt_reproducibility.get("prompts_checked") == len(cases) * 3
+        and prompt_reproducibility.get(
+            "all_prompt_hashes_identical_across_reloads"
+        )
+        is True
+        and prompt_reproducibility.get(
+            "target_case_c_ten_render_hashes_identical"
+        )
+        is True
+        and prompt_reproducibility.get("leakage_audit", {}).get("status")
+        == "passed"
+        and prompt_reproducibility.get("runtime_evidence_manifest_hash")
+        == frozen_runtime.validation["manifest_hash"]
+    )
     fl_records = load_fl_records(REPAIR_PILOT_FL)
     input_tokens: dict[str, list[int]] = {group.value: [] for group in EvidenceGroup}
     output_tokens: list[int] = []
@@ -284,7 +312,7 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
     prompts: dict[str, dict[str, PromptDocument]] = {}
     for index, case in enumerate(cases, start=1):
         print(f"[{index}/{len(cases)}] estimating {case.case_id}", flush=True)
-        baseline = evaluate_source(case, case.get_buggy_source(), include_validation=False)
+        baseline = frozen_runtime.evaluations[case.case_id]
         output_tokens.append(approximate_tokens(case.get_buggy_source()))
         case_prompts = {}
         case_input_tokens = {}
@@ -373,9 +401,8 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
     has_key = credential_environment is not None
     complete_smoke = _complete_smoke(online, actual_usage)
     leakage_passed = manual_inspection == "passed"
-    runtime_reproducibility_blocked = True
     smoke_technical_ready = has_key and complete_smoke and leakage_passed
-    bulk_online_ready = smoke_technical_ready and not runtime_reproducibility_blocked
+    bulk_online_ready = smoke_technical_ready and runtime_reproducibility_ready
     observed_models = sorted(
         {
             str(item["provider_response_metadata"]["response_model"])
@@ -476,8 +503,8 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
                     ),
                     (not leakage_passed, "manual prompt inspection not passed"),
                     (
-                        runtime_reproducibility_blocked,
-                        "450-B runtime evidence reproducibility rule not frozen",
+                        not runtime_reproducibility_ready,
+                        "frozen runtime evidence gate not ready",
                     ),
                 )
                 if condition
@@ -547,11 +574,45 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
                 for item in online
             },
         },
+        "frozen_runtime_evidence": {
+            "capture_rule": frozen_runtime.manifest["capture_rule"],
+            "manifest_path": str(RUNTIME_EVIDENCE_MANIFEST.relative_to(PROJECT_ROOT)),
+            "nondeterminism_audit": {
+                "artifact_path": str(
+                    RUNTIME_EVIDENCE_NONDETERMINISM_AUDIT.relative_to(PROJECT_ROOT)
+                ),
+                "audit_sha256": nondeterminism_audit["audit_sha256"],
+                "records": nondeterminism_audit["records"],
+            },
+            "prompt_reproducibility": {
+                "all_prompt_hashes_identical_across_reloads": prompt_reproducibility[
+                    "all_prompt_hashes_identical_across_reloads"
+                ],
+                "artifact_path": str(
+                    RUNTIME_EVIDENCE_PROMPT_AUDIT.relative_to(PROJECT_ROOT)
+                ),
+                "leakage_audit": prompt_reproducibility["leakage_audit"],
+                "payloads_checked": prompt_reproducibility["payloads_checked"],
+                "prompt_set_hash": prompt_reproducibility["prompt_set_hash"],
+                "prompts_checked": prompt_reproducibility["prompts_checked"],
+                "target_case_c_hashes": prompt_reproducibility[
+                    "target_case_c_hashes"
+                ],
+                "target_case_c_ten_render_hashes_identical": prompt_reproducibility[
+                    "target_case_c_ten_render_hashes_identical"
+                ],
+            },
+            "runner": frozen_runtime.manifest["runner"],
+            "validation": frozen_runtime.validation,
+        },
         "remaining_bulk_reproducibility_blocker": {
             "case_id": "450-B-bug-15950152-15950193",
             "case_retained": True,
-            "status": "unresolved",
-            "issue": "Group C runtime actual output can change across baseline runs",
+            "status": "resolved by frozen single-observation protocol",
+            "issue": (
+                "buggy runtime remains non-deterministic, while formal prompts load "
+                "one preregistered observation"
+            ),
         },
         "token_estimate": {
             "approximate_average_output_tokens_per_call": average_output,
@@ -613,6 +674,10 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
     initial = selection["initial_candidate"]
     final = selection["final_candidate"]
     reproducibility = value["remaining_bulk_reproducibility_blocker"]
+    runtime = value["frozen_runtime_evidence"]
+    runtime_validation = runtime["validation"]
+    runtime_prompt_audit = runtime["prompt_reproducibility"]
+    runtime_diagnostic = runtime["nondeterminism_audit"]["records"][0]
     observed = ", ".join(model["response_models_observed"]) or "not observed; no real response"
     return f"""# LLM Repair Pre-Experiment Report
 
@@ -718,6 +783,22 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 - Prompt boundary audit: `{leakage['prompt_boundary_audit']['status']}` over {leakage['prompt_boundary_audit']['prompts_checked']} prompts.
 - Artifact boundary audit: `{leakage['artifact_boundary_audit']['status']}` over {leakage['artifact_boundary_audit']['artifacts_checked']} artifacts.
 - Reference source, ground-truth diff, hidden validation, and evaluation-only metadata absent: `{leakage['reference_source_absent']}` / `{leakage['ground_truth_diff_absent']}` / `{leakage['hidden_validation_absent']}` / `{leakage['evaluation_only_metadata_absent']}`.
+
+## Frozen Runtime Evidence Protocol
+
+- Problem discovery: repeated execution of `450-B-bug-15950152-15950193` changed only `n1.stdout`; stderr stayed empty, exit code stayed 0, timeout stayed false, and verdicts stayed unchanged. The source reads uninitialized `f[0]` when `n % 6 == 0`, so the varying stdout is undefined behavior from an uninitialized value.
+- The case remains in the 50-case Repair Pilot. Runtime normalization, output sorting, regex replacement, reference substitution, and post-hoc observation selection are forbidden.
+- Research interpretation: the model receives one real buggy execution observation. The buggy runtime need not become deterministic, but that first observation must be frozen before formal LLM calls.
+- Capture rule: each Repair Pilot case and each repair test is executed exactly once in manifest order, with transport retry 0; the first and only observation is retained without normalization.
+- Snapshot coverage: {runtime_validation['case_count']}/50 cases and {runtime_validation['repair_test_count']} repair tests; protocol `{runtime_validation['protocol_version']}`.
+- Manifest: `{runtime['manifest_path']}`; overall hash `{runtime_validation['manifest_hash']}`. It binds the Repair Pilot hash, repair-v2 hash, artifact paths and hashes, test order, timestamp, and Docker runner configuration.
+- Exact preservation: stdout/stderr are stored as JSON strings and independently verified with UTF-8 SHA-256; missing files, corrupt content, manifest mismatch, Pilot mismatch, or repair-v2 mismatch fail closed.
+- Formal prompt path: Group A uses base context, Group B adds frozen FL-v1, and Group C adds only the loaded and hash-verified runtime snapshot. Formal prompt construction never reruns the buggy program.
+- Formal render audit: {runtime_prompt_audit['prompts_checked']}/150 prompts built successfully; two complete independent snapshot reloads produced the same prompt-set hash `{runtime_prompt_audit['prompt_set_hash']}`.
+- 450-B Group C: 10/10 frozen-evidence renders produced the same prompt hash `{runtime_prompt_audit['target_case_c_hashes'][0]}`.
+- Diagnostic reruns remain evaluation-only: {runtime_diagnostic['observed_runs']} post-freeze runs produced {len(runtime_diagnostic['observed_distinct_hashes'])} distinct observation hashes and changed only `{runtime_diagnostic['changed_fields']}`. They did not modify the snapshot or prompts.
+- Snapshot, manifest, prompts, and serialized Flash payload leakage audit: `{runtime_prompt_audit['leakage_audit']['status']}`; reference source, ground truth, hidden validation, evaluation canaries, and credentials are absent.
+- The buggy runtime behavior remains non-deterministic, but the repair experiment consumes a preregistered frozen runtime observation, making the experimental prompt reproducible.
 
 ## Mandatory Stop
 

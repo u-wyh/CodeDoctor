@@ -1,0 +1,49 @@
+{
+  "case_id": "158-C-bug-9815086-9815194",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 158-C-9815086.c -o 158-C-9815086.o\ngcc 158-C-9815086.o -o 158-C-9815086 -lm -s -O2\n",
+    "stdout_utf8_sha256": "7dbb625b19bb310d0b98302359359fe1071d0062df0e05906b99e8531bff90e5",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/\n/home/vasya/\n/home/me/vasya/\n/home/me/vasya/petya/\n",
+      "stdout_utf8_sha256": "99395bfc227030de5e19dc589469164c69ab5c8d30b7ba651fd8dbe6a07c79ae",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/a/b/\n/a/a/b/\n",
+      "stdout_utf8_sha256": "09ad5d9a3750e7a2ce74b29ab810c3ac73d17104f7b0dc522c9f0db4365fae3b",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "/\n/home/vasya/\n/home/me/vasya/\n/home/me/vasya/petya/\n",
+      "stdout_utf8_sha256": "99395bfc227030de5e19dc589469164c69ab5c8d30b7ba651fd8dbe6a07c79ae",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

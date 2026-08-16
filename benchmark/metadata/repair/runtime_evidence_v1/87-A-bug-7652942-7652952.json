@@ -1,0 +1,60 @@
+{
+  "case_id": "87-A-bug-7652942-7652952",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 87-A-7652942.c -o 87-A-7652942.o\ngcc 87-A-7652942.o -o 87-A-7652942 -lm -s -O2\n",
+    "stdout_utf8_sha256": "aaa7df75fb287ecdbe82b3245ac830a3996e42d7a6a577663163502262f02ebe",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "7 3\nDasha\n",
+      "stdout_utf8_sha256": "1c02274d578a5648d40549107d6086855e8ed7e83bf419d9de3b67961a880a81",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "5 3\nMasha\n",
+      "stdout_utf8_sha256": "61855b1bdf6145ef325edb4a2eb9ab25586d970b6bbec2e5fd44d127824ffb0c",
+      "test_id": "n3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "3 2\nEqual\n",
+      "stdout_utf8_sha256": "089deea2916f47f4bc829e246b5ef0840816cc2d494435e17036c71685baa0a3",
+      "test_id": "n4",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "7 3\nDasha\n",
+      "stdout_utf8_sha256": "1c02274d578a5648d40549107d6086855e8ed7e83bf419d9de3b67961a880a81",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

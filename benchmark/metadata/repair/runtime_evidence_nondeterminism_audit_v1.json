@@ -1,0 +1,31 @@
+{
+  "audit_sha256": "053f5605fd0c05fd7612a77f9943ca5849a1454ce54375e1300d8aacfde47223",
+  "evaluation_metadata_only": true,
+  "generated_at": "2026-08-16T04:17:36.057826+00:00",
+  "prompt_influence": "none",
+  "protocol_version": "runtime-nondeterminism-audit-v1",
+  "records": [
+    {
+      "case_id": "450-B-bug-15950152-15950193",
+      "changed_fields": [
+        "n1.stdout"
+      ],
+      "frozen_observation_hash": "1511d2a4afa55737136de978cc21413361d31fe86ac0459967a0e1cfdb29b5d2",
+      "observed_distinct_hashes": [
+        "1511d2a4afa55737136de978cc21413361d31fe86ac0459967a0e1cfdb29b5d2",
+        "2c9cc8d761f37e186ca62514051e8d12e20e5c31d2077275d3c904ee8e70a5f4",
+        "3b7bb68edf823815b66e0d548f9157a8f83620dfb843491e8243b37ead7e3844",
+        "465915ba8e004be2dfbd47dadd01e30b74132dee17b89b22e46ade76d30782bb",
+        "55f1c4ecf4c8ae15ce7ba338758cbc93ad4b86dd05ef22a0b3c18764390f41ec",
+        "7100dd1301bf1ce53d59be152bc7fd11103e57cc5234e4546438b5208589eeec",
+        "84686f3e0ab7c81a5cc5e582470b18f1e36981300aaefd378b3d26532cd61ec2",
+        "ead041b6b4b0e893f4a332387ce1616d3833efb16de10418b2b0110924bc8102",
+        "eadb78936a3e4f0bf168c20a60fb7b2633f695435142d5a3ed8efef407a52a16"
+      ],
+      "observed_runs": 10,
+      "runtime_nondeterministic": true
+    }
+  ],
+  "selection_rule": "diagnostic cases named before audit; no observation selection",
+  "snapshot_manifest_hash": "96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c"
+}

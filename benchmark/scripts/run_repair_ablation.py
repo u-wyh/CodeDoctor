@@ -40,6 +40,7 @@ from repair.provider import (  # noqa: E402
     FakeEchoRepairModel,
     OpenAICompatibleProvider,
 )
+from repair.runtime_evidence import load_frozen_runtime_evidence  # noqa: E402
 
 
 def _selected_groups(values: list[str] | None) -> list[EvidenceGroup]:
@@ -138,7 +139,8 @@ def main() -> int:
         for item in value.split(",")
         if item.strip()
     }
-    cases = list(load_manifest(CODEFLAWS_REPAIR_PILOT))
+    pilot_cases = list(load_manifest(CODEFLAWS_REPAIR_PILOT))
+    cases = list(pilot_cases)
     if requested:
         cases = [case for case in cases if case.case_id in requested]
         missing = requested - {case.case_id for case in cases}
@@ -159,6 +161,15 @@ def main() -> int:
             "--confirm-bulk are required"
         )
 
+    frozen_runtime = None
+    if args.provider == "deepseek" and args.confirm_bulk:
+        try:
+            frozen_runtime = load_frozen_runtime_evidence(pilot_cases)
+        except (FileNotFoundError, OSError, TypeError, ValueError) as exc:
+            parser.error(f"frozen runtime evidence gate failed: {exc}")
+        if frozen_runtime.validation["case_count"] != len(pilot_cases):
+            parser.error("frozen runtime evidence gate did not cover the Repair Pilot")
+
     fl_records = load_fl_records(REPAIR_PILOT_FL)
     experiment_role = (
         "formal_evidence_ablation"
@@ -174,7 +185,13 @@ def main() -> int:
     completed = 0
     for index, case in enumerate(cases, start=1):
         print(f"[{index}/{len(cases)}] baseline {case.case_id}", flush=True)
-        baseline = evaluate_source(case, case.get_buggy_source(), include_validation=False)
+        baseline = (
+            frozen_runtime.evaluations[case.case_id]
+            if frozen_runtime is not None
+            else evaluate_source(
+                case, case.get_buggy_source(), include_validation=False
+            )
+        )
         for group in groups:
             result = run_repair_attempt(
                 case,

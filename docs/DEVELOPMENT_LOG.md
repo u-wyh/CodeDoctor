@@ -2000,3 +2000,137 @@ lxc stop codedoctor-docker-host
 - 在不删除 450-B、不改变 A/B/C 语义的前提下，单独制定并预注册最小 runtime reproducibility 处理规则，然后重新做纯离线 prompt/hash 审计。
 - 规则冻结后重新生成 pre-experiment readiness；即使 `bulk_online_ready` 变为 true，也继续等待用户对付费 150-call 实验的明确授权。
 - 未获得明确批准前不得使用 `--confirm-bulk`，不得启动正式实验，不得进入 Phase 8。
+
+## 2026-08-16 - Phase 7: Frozen Runtime Evidence Protocol
+
+### 1. 本次目标
+
+- 诊断 `450-B-bug-15950152-15950193` 的 buggy runtime 非确定性来源，同时保留该 case 和冻结的 A/B/C repair-v2 实验协议。
+- 为完整 50-case Repair Pilot 建立通用 `runtime-evidence-v1`：正式 LLM 调用前每个 repair-time test 只运行一次，冻结未经归一化的真实观察。
+- 让正式 Group C 只加载并校验 snapshot；缺失、损坏、Pilot/protocol/hash 不匹配时 fail closed，禁止现场重跑 buggy program。
+- 离线重建并审计 150 个正式 prompt/payload，不调用 DeepSeek，不使用 `--confirm-bulk`，不启动正式 150-call 实验。
+
+### 2. 实际完成内容
+
+- 对 450-B 的 buggy source 和三个 repair tests 进行了 20 次完整重复评估。`p1` 始终输出 `1`，`p2` 始终输出 `1000000006`；`n1.stdout` 在 20 次中出现 13 组不同 observation，stderr 始终为空、exit code 始终为 0、timeout 始终为 false、测试 verdict 始终不变。
+- 确认原因是源程序在 `n % 6 == 0` 时读取未初始化的 `f[0]`，属于 undefined behavior；没有删除 450-B，没有加入 case-specific 分支，也没有对变化输出做排序、正则替换、截断或 reference substitution。
+- 新增通用 snapshot capture/load 模块。capture 按 Repair Pilot 和 repair-test manifest 顺序执行，每个测试一次、transport retry 0，保存 exact stdout/stderr、UTF-8 SHA-256、exit code、timeout、verdict、test ID/order 和 compile metadata。
+- 生成 50/50 snapshot，共覆盖 174 个 repair-time tests。Manifest 绑定 Repair Pilot 原始文件 hash、repair-v2 文件 hash/version、每个 artifact path/hash、测试顺序、生成时间、Docker image ID、runner 限制和 capture rule。
+- 最终 overall manifest hash 为 `96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c`。Loader 实际验证 manifest、50 个 artifact、stdout/stderr hash、Pilot、repair-v2 和 test order，结果 PASS。
+- 450-B 冻结 observation hash 为 `1511d2a4afa55737136de978cc21413361d31fe86ac0459967a0e1cfdb29b5d2`。冻结值中 `n1.stdout` 为 `1`；冻结后的独立 10 次诊断得到 9 个不同 observation hash，变化字段仅 `n1.stdout`，因此标记 `runtime_nondeterministic=true`，且该 audit 明确为 evaluation metadata only、prompt influence none。
+- 正式 DeepSeek bulk 路径在任何 generation 前完整加载并校验 50-case frozen evidence；正式 baseline 来自 snapshot。未确认的 smoke 路径继续保留原动态 runner，既有宿主/Docker Runner 逻辑未删除。
+- Pre-experiment estimator 改为只用 frozen evidence 构建 prompts，并将 snapshot coverage、manifest hash、prompt reproducibility 和 leakage audit 纳入 readiness。当前 `bulk_online_ready=true`、`bulk_user_authorized=false`、blocking reasons 为空、mandatory stop 保持 true。
+- 两个独立 Python 进程分别构建 150/150 prompts 和 serialized Flash payloads，prompt-set hash 均为 `9a65e8fcf2eea3d3da8a64bbfac4d32736e9090da7917da4ea6270d7cb9eaea0`。450-B Group C 在每次 audit 中额外 reload/render 10 次，唯一 hash 为 `7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0`。
+- Leakage audit 扫描 snapshot、manifest、150 prompts 和 150 serialized provider payloads；reference source、ground-truth diff、hidden validation、evaluation canary、credential 和 forbidden snapshot key 全部 absent。Expected output 继续只由 repair-v2 公共 repair-time oracle 提供。
+- 更新 README 和预实验报告，明确说明 buggy runtime 本身仍非确定，但正式实验消费预注册的单次冻结观察，因此实验 prompt 可复现。
+- 正式 Evidence Ablation 报告重新生成，online formal artifacts 仍为 0。DeepSeek 模型参数、6 份 engineering smoke artifact 和冻结的 repair-v2/FL 输入均未修改；本轮真实 DeepSeek API 调用次数为 0。
+
+### 3. 新增、修改、删除的文件
+
+新增：
+
+- `benchmark/metadata/repair/runtime_evidence_manifest_v1.json`
+- `benchmark/metadata/repair/runtime_evidence_nondeterminism_audit_v1.json`
+- `benchmark/metadata/repair/runtime_evidence_prompt_audit_v1.json`
+- `benchmark/metadata/repair/runtime_evidence_v1/` 下 50 个 case snapshot JSON
+- `benchmark/scripts/audit_repair_prompt_reproducibility.py`
+- `benchmark/scripts/audit_repair_runtime_nondeterminism.py`
+- `benchmark/scripts/freeze_repair_runtime_evidence.py`
+- `repair/runtime_evidence.py`
+- `repair/tests/test_runtime_evidence.py`
+
+修改：
+
+- `README.md`
+- `benchmark/config.py`
+- `benchmark/metadata/repair/pre_experiment_estimate.json`
+- `benchmark/reports/llm_repair_pre_experiment.md`
+- `benchmark/scripts/run_repair_ablation.py`
+- `repair/pre_experiment.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+### 4. 执行过的重要命令
+
+```bash
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/freeze_repair_runtime_evidence.py'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_repair_runtime_nondeterminism.py --case 450-B-bug-15950152-15950193 --runs 10'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_repair_prompt_reproducibility.py && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_repair_prompt_reproducibility.py'
+
+source ~/.config/codedoctor/secrets.env
+python3 -c 'import os; print("DeepSeek credential available" if os.getenv("DEEPSEEK_API_KEY") else "DeepSeek credential unavailable")'
+source ~/.config/codedoctor/secrets.env
+printf '%s\0' "$DEEPSEEK_API_KEY" | lxc exec codedoctor-docker-host -- bash -lc 'IFS= read -r -d "" DEEPSEEK_API_KEY; export DEEPSEEK_API_KEY; cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed'
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_repair_ablation_report.py'
+
+git diff --check
+git diff --exit-code HEAD -- repair/context.py repair/evaluator.py repair/extraction.py repair/pipeline.py repair/prompting.py repair/provider.py benchmark/metadata/repair/repair_protocol_v2.json
+lxc exec codedoctor-docker-host -- bash -lc 'docker ps -a --filter ancestor=codedoctor-cpp-sandbox --format "{{.ID}} {{.Status}} {{.Names}}"; docker ps -a --filter ancestor=codedoctor-cpp-analysis --format "{{.ID}} {{.Status}} {{.Names}}"'
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行了两组内联 Python 审计：第一组在 snapshot freeze 前对 450-B 完整 `evaluate_source` 20 次并比较每个 test 的 stdout/stderr/exit code/timeout/verdict；第二组在最终阶段验证 repair-v2、50/174 coverage、manifest/prompt hashes、450-B nondeterminism、readiness 和 formal call count。还扫描了待提交 diff 中的 credential pattern、`.env`、临时文件、raw dataset 变更、artifact 大小和冻结文件 diff。
+
+### 5. 实际测试结果
+
+- 最终完整回归：sandbox 29/29、benchmark 12/12、fault localization 36/36、repair 46/46，共 123/123 PASS，无 skip。
+- 最终生成文件更新后再次运行 repair 46/46 PASS。
+- Frozen evidence：50/50 cases、174 tests，manifest validation、artifact hash、stdout/stderr hash、Pilot hash、repair-v2 hash和顺序校验全部 PASS。
+- Fail-closed tests：snapshot corruption、manifest corruption、missing snapshot、Pilot mismatch、protocol mismatch 均被拒绝。
+- Prompt boundary：A/B 不含 runtime evidence，C 只加载 registered frozen evidence，PASS。
+- Prompt reproducibility：150/150 构建成功；两个独立进程的完整 prompt-set hash 一致；450-B C 的 10/10 hash 一致。
+- Leakage：snapshot、manifest、150 prompts、150 serialized payloads 全部 PASS；reference、ground truth、hidden validation、evaluation canary、credential absent。
+- Bulk guard：mocked corrupted snapshot 在 generation/network 前被 CLI 拒绝，PASS；测试没有执行真实 `--confirm-bulk` 命令。
+- Formal metrics：online artifacts=0，6 份 DeepSeek engineering smoke 继续排除；本轮真实 API calls=0。
+- Docker 清理：无匹配的 sandbox/analysis 残留容器；`codedoctor-docker-host` 最终为 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 450-B 的 Group C prompt 会随现场 baseline 执行变化
+
+问题不是 prompt serializer 漂移，而是 `n1` 触发 `n % 6 == 0` 后读取未初始化 `f[0]`，导致 actual stdout 跨进程变化。要求 buggy runtime 自身变成 deterministic 不符合该 evidence 的研究语义。
+
+#### 6.2 动态 baseline 无法支持正式实验的 resume 和独立重建
+
+原正式路径每次现场执行 buggy program；即使同一模型和 prompt 代码不变，非确定 runtime observation 仍会改变 Group C prompt/cache key。
+
+#### 6.3 Freeze 不能演变为 post-hoc observation selection
+
+诊断重复运行产生了多个输出，但选择固定值、最常见值或最有利值都会改变实验语义并引入研究者自由度。因此诊断结果不能反向影响 snapshot。
+
+### 7. 问题的解决方式
+
+- 将 runtime evidence 定义为“正式调用前按统一规则获得的第一次且唯一一次真实观察”，并对完整 Pilot 一次性冻结；后续重复运行仅属于独立 nondeterminism audit。
+- Manifest 和 loader 同时绑定数据集、repair-v2、顺序、Docker 配置和逐文件 hash。Formal builder 只执行 load、verify、render，不提供自动 recapture fallback。
+- 通过 50-case 统一实现避免 450-B 特判；保留 expected-output 公共 oracle、FL-v1 reliability 规则和 A/B/C 唯一增量边界。
+- 将 freeze validity 和 prompt reproducibility 纳入 pre-experiment readiness；任何 snapshot/manifest/protocol 漂移都会在正式 generation 前 fail closed。
+
+### 8. 设计取舍
+
+- Snapshot 保存 JSON display text 和独立 UTF-8 hash，不引入 binary artifact；JSON round-trip 单测覆盖 trailing whitespace/newline 的精确保留。
+- 不保存 signal 的新独立字段；沿用 repair-v2 已允许进入 C 的 exit code、timeout、passed、stdout 和 stderr，避免扩大 evidence 内容。
+- Docker image ID 和执行限制作为 provenance 写入 manifest，但正式 prompt reload 不依赖 Docker daemon，保证 resume 和离线重建不触发 buggy execution。
+- Prompt audit 使用 dummy offline credential 只构造 request payload；不调用 provider transport，不保存 API key 或 raw LLM reasoning。
+
+### 9. 当前已知不足
+
+- 450-B 的 buggy runtime 仍是 undefined behavior；协议保证的是正式 prompt 可复现，不是程序输出变得确定。
+- Frozen observation 是当前 Docker image/backend 下的一次真实执行，不代表该 UB 在其他编译器、镜像或机器上的典型输出。
+- Manifest 使用 SHA-256 完整性校验但没有外部数字签名；它可检测意外损坏和未同步漂移，不提供对恶意仓库改写的真实性证明。
+- Nondeterminism audit 本轮重点重复检查已知的 450-B，没有对其余 49 个 case 全量重复采样；这不影响已冻结 prompt 的可复现性。
+- Flash token/output 成本仍由单 case engineering smoke 外推，uncertainty high；模型 alias 和未来价格仍可能变化。
+- 正式 150-call 实验尚未运行，formal repair/plausible/validated metrics 仍为 N/A；`bulk_user_authorized=false`。
+
+### 10. 下一步计划
+
+- 保持 mandatory stop，等待用户对付费 50 cases x 3 groups 正式实验的明确批准；批准前不得使用 `--confirm-bulk`。
+- 正式启动前再次只读核验 credential availability、官方价格、frozen manifest/prompt hash、formal artifact namespace 和调用预算。
+- 获得批准后严格使用 frozen runtime evidence 和独立 formal cache namespace执行一次 150-call A/B/C 实验，逐 artifact 记录 provider response metadata 并保持 engineering smoke 排除。
+- 本轮在 Phase 7 停止，不进入 Phase 8。

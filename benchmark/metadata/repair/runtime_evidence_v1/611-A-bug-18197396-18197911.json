@@ -1,0 +1,49 @@
+{
+  "case_id": "611-A-bug-18197396-18197911",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "611-A-18197396.c: In function 'main':\n611-A-18197396.c:9:5: warning: 'gets' is deprecated [-Wdeprecated-declarations]\n    9 |     gets(str);\n      |     ^~~~\nIn file included from 611-A-18197396.c:1:\n/usr/include/stdio.h:605:14: note: declared here\n  605 | extern char *gets (char *__s) __wur __attribute_deprecated__;\n      |              ^~~~\n611-A-18197396.c:10:11: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]\n   10 |     int l=strlen(str);\n      |           ^~~~~~\n611-A-18197396.c:3:1: note: include '<string.h>' or provide a declaration of 'strlen'\n    2 | #include <stdlib.h>\n  +++ |+#include <string.h>\n    3 | \n611-A-18197396.c:10:11: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]\n   10 |     int l=strlen(str);\n      |           ^~~~~~\n611-A-18197396.c:10:11: note: include '<string.h>' or provide a declaration of 'strlen'\n/usr/bin/ld: 611-A-18197396.o: in function `main':\n611-A-18197396.c:(.text+0x32): warning: the `gets' function is dangerous and should not be used.\n",
+    "stderr_utf8_sha256": "1c80b802e7447e1c9f38de99a5758afd860db0a57ec38f8891142f04afe09d5a",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 611-A-18197396.c -o 611-A-18197396.o\ngcc 611-A-18197396.o -o 611-A-18197396 -lm -s -O2\n",
+    "stdout_utf8_sha256": "e5f158787b1b9eab1e8f4ba999dc9560bb9c89253c945e834c9130d109c82d94",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "52\n",
+      "stdout_utf8_sha256": "6f3e559bbd93fa2f9b25cbd9b5f348a4b20c902d8e6498de5c28d73df8e2f571",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "11\n",
+      "stdout_utf8_sha256": "25d4f2a86deb5e2574bb3210b67bb24fcc4afb19f93a7b65a057daa874a9d18e",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "11\n",
+      "stdout_utf8_sha256": "25d4f2a86deb5e2574bb3210b67bb24fcc4afb19f93a7b65a057daa874a9d18e",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

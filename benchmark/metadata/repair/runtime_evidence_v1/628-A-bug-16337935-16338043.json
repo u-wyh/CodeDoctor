@@ -1,0 +1,49 @@
+{
+  "case_id": "628-A-bug-16337935-16338043",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 628-A-16337935.c -o 628-A-16337935.o\ngcc 628-A-16337935.o -o 628-A-16337935 -lm -s -O2\n",
+    "stdout_utf8_sha256": "7d9f08e825fa354745ab7cf80e7284a69963f864a6310e7c5fbd9b48d906462f",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "18 15\n",
+      "stdout_utf8_sha256": "e351967db7dcb645b74d24da26b79501e57af1ea928efd4569193be97e220186",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "27 32\n",
+      "stdout_utf8_sha256": "b408e1701673a3a73e44b002cac3a4fa30c25974f019845bd178ef38ff73a85b",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "18 15\n",
+      "stdout_utf8_sha256": "e351967db7dcb645b74d24da26b79501e57af1ea928efd4569193be97e220186",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

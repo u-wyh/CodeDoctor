@@ -107,18 +107,34 @@
 - Artifact boundary audit: `passed` over 15 artifacts.
 - Reference source, ground-truth diff, hidden validation, and evaluation-only metadata absent: `passed` / `passed` / `passed` / `passed`.
 
+## Frozen Runtime Evidence Protocol
+
+- Problem discovery: repeated execution of `450-B-bug-15950152-15950193` changed only `n1.stdout`; stderr stayed empty, exit code stayed 0, timeout stayed false, and verdicts stayed unchanged. The source reads uninitialized `f[0]` when `n % 6 == 0`, so the varying stdout is undefined behavior from an uninitialized value.
+- The case remains in the 50-case Repair Pilot. Runtime normalization, output sorting, regex replacement, reference substitution, and post-hoc observation selection are forbidden.
+- Research interpretation: the model receives one real buggy execution observation. The buggy runtime need not become deterministic, but that first observation must be frozen before formal LLM calls.
+- Capture rule: each Repair Pilot case and each repair test is executed exactly once in manifest order, with transport retry 0; the first and only observation is retained without normalization.
+- Snapshot coverage: 50/50 cases and 174 repair tests; protocol `runtime-evidence-v1`.
+- Manifest: `benchmark/metadata/repair/runtime_evidence_manifest_v1.json`; overall hash `96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c`. It binds the Repair Pilot hash, repair-v2 hash, artifact paths and hashes, test order, timestamp, and Docker runner configuration.
+- Exact preservation: stdout/stderr are stored as JSON strings and independently verified with UTF-8 SHA-256; missing files, corrupt content, manifest mismatch, Pilot mismatch, or repair-v2 mismatch fail closed.
+- Formal prompt path: Group A uses base context, Group B adds frozen FL-v1, and Group C adds only the loaded and hash-verified runtime snapshot. Formal prompt construction never reruns the buggy program.
+- Formal render audit: 150/150 prompts built successfully; two complete independent snapshot reloads produced the same prompt-set hash `9a65e8fcf2eea3d3da8a64bbfac4d32736e9090da7917da4ea6270d7cb9eaea0`.
+- 450-B Group C: 10/10 frozen-evidence renders produced the same prompt hash `7e3a33b3bb13be56d39a99bbab7c9305c957b377d12f84f6a6c3f40698da70e0`.
+- Diagnostic reruns remain evaluation-only: 10 post-freeze runs produced 9 distinct observation hashes and changed only `['n1.stdout']`. They did not modify the snapshot or prompts.
+- Snapshot, manifest, prompts, and serialized Flash payload leakage audit: `passed`; reference source, ground truth, hidden validation, evaluation canaries, and credentials are absent.
+- The buggy runtime behavior remains non-deterministic, but the repair experiment consumes a preregistered frozen runtime observation, making the experimental prompt reproducible.
+
 ## Mandatory Stop
 
 - `smoke_technical_ready = true`.
-- `bulk_online_ready = false`.
+- `bulk_online_ready = true`.
 - `bulk_user_authorized = false`.
-- Remaining reproducibility blocker: `450-B-bug-15950152-15950193` is `unresolved`; Group C runtime actual output can change across baseline runs. The case remains in the Pilot.
+- Remaining reproducibility blocker: `450-B-bug-15950152-15950193` is `resolved by frozen single-observation protocol`; buggy runtime remains non-deterministic, while formal prompts load one preregistered observation. The case remains in the Pilot.
 
 Blocking reasons:
 
-- 450-B runtime evidence reproducibility rule not frozen
+- None
 
-DeepSeek Phase 7 bulk experiment is technically not ready.
+DeepSeek Phase 7 bulk experiment is technically ready.
 
 No 150-call bulk experiment has been started.
 

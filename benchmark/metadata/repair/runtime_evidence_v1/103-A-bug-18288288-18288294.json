@@ -1,0 +1,60 @@
+{
+  "case_id": "103-A-bug-18288288-18288294",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "103-A-18288288.c: In function 'main':\n103-A-18288288.c:4:14: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]\n    4 |         for(;scanf(\"%d\",&a);R+=1+i++*~-a);\n      |              ^~~~~\n103-A-18288288.c:1:1: note: include '<stdio.h>' or provide a declaration of 'scanf'\n  +++ |+#include <stdio.h>\n    1 | long long R,i;\n103-A-18288288.c:4:14: warning: incompatible implicit declaration of built-in function 'scanf' [-Wbuiltin-declaration-mismatch]\n    4 |         for(;scanf(\"%d\",&a);R+=1+i++*~-a);\n      |              ^~~~~\n103-A-18288288.c:4:14: note: include '<stdio.h>' or provide a declaration of 'scanf'\n103-A-18288288.c:5:9: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]\n    5 |         printf(\"%lld\",R-1);\n      |         ^~~~~~\n103-A-18288288.c:5:9: note: include '<stdio.h>' or provide a declaration of 'printf'\n103-A-18288288.c:5:9: warning: incompatible implicit declaration of built-in function 'printf' [-Wbuiltin-declaration-mismatch]\n103-A-18288288.c:5:9: note: include '<stdio.h>' or provide a declaration of 'printf'\n",
+    "stderr_utf8_sha256": "4b1c5543a1a171bab80ac6611cf43bf9ae8d2fe0b16e64d78e8d7c5f875504d0",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 103-A-18288288.c -o 103-A-18288288.o\ngcc 103-A-18288288.o -o 103-A-18288288 -lm -s -O2\n",
+    "stdout_utf8_sha256": "0b8ccbd407563a0bc4f59b4c726d82d6cb3f7b73c0ee340f37f73ab584e65f13",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": null,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n2",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n3",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n4",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n1",
+      "timed_out": true
+    }
+  ],
+  "schema_version": "1.0.0"
+}

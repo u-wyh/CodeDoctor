@@ -1,0 +1,60 @@
+{
+  "case_id": "306-A-bug-4028440-4028451",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 306-A-4028440.c -o 306-A-4028440.o\ngcc 306-A-4028440.o -o 306-A-4028440 -lm -s -O2\n",
+    "stdout_utf8_sha256": "0c2199f479a585de5b84a9bc55e7ded760d9b429f33170d887d2f4fc8bb69870",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "4 4 4 4 4 4 4 4 4 4 4 4 ",
+      "stdout_utf8_sha256": "484c251e6e65497af67706beddbaf1a8f80fe9384cb5bdc4d582b1ed66e275d1",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "3 3 3 3 3 3 3 3 3 3 3 3 4 4 4 ",
+      "stdout_utf8_sha256": "3338a65b0ae906c675681ae7ab22eee5fed7d962e223e18eb142bd500ed2ff57",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 ",
+      "stdout_utf8_sha256": "9af0700d1157ddb08b6d49cb24efb3027621dff950f7704d2cc8f9762940a2fb",
+      "test_id": "p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "3 3 3 3 3 3 3 3 3 3 3 3 ",
+      "stdout_utf8_sha256": "c959062825ef70e0597b36ab201eaf7988909e9068bc685c1d8f5635ea710768",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

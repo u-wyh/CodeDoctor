@@ -1,0 +1,71 @@
+{
+  "case_id": "527-B-bug-11093666-11093671",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 527-B-11093666.c -o 527-B-11093666.o\ngcc 527-B-11093666.o -o 527-B-11093666 -lm -s -O2\n",
+    "stdout_utf8_sha256": "58e35a937cd1e37969acbf7778223303e63fcffe241f332d51064301fb53af80",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "1\n4 6",
+      "stdout_utf8_sha256": "42b4dd13438b9b40f086205fd087d749b35df9e8788409629b4672ecab1e26c5",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "1\n-1 -1",
+      "stdout_utf8_sha256": "b78fcb43d2a6c31d68cd6cb1668457dd8bbc2a746a8b43d7fb0ea44f8bbcd373",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2\n1 2",
+      "stdout_utf8_sha256": "3f3866d69cbba2ea4e3df4d1de18af95cc9e02f84df9144776f4ad2f6b35958d",
+      "test_id": "p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2\n4 4",
+      "stdout_utf8_sha256": "3b907ec0eaa9066c17a54e9c729e5666aaf881d184e4cb0631ce79e38c2faf2a",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2\n4 4",
+      "stdout_utf8_sha256": "3b907ec0eaa9066c17a54e9c729e5666aaf881d184e4cb0631ce79e38c2faf2a",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

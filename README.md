@@ -148,8 +148,12 @@ python3 benchmark/scripts/run_repair_ablation.py \
 真实 DeepSeek smoke 使用冻结 Repair Pilot manifest 的第一个 case，最多 1 case × 3 groups（3 次调用），transport retry 为 0。工程 smoke 会标记为 `pre_experiment_smoke` 并排除在正式 Evidence Ablation 指标之外；旧 Pro 与当前 Flash artifact 通过配置和 cache key 隔离。缺少凭据、配置漂移或 leakage audit 失败时不得联网。完整 50-case A/B/C 运行前必须人工审查 prompts 和 smoke artifacts，并生成调用量、真实 token usage、计费与泄漏边界预实验报告：
 
 ```bash
+python3 benchmark/scripts/freeze_repair_runtime_evidence.py
+python3 benchmark/scripts/audit_repair_prompt_reproducibility.py
 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed
 ```
+
+`runtime-evidence-v1` 在正式 LLM 调用前按 Repair Pilot 顺序对每个 repair test 仅执行一次 buggy program，并冻结未归一化的 stdout、stderr、exit code、timeout 和 verdict。Manifest 绑定 50-case Pilot、repair-v2、测试顺序、Docker 配置以及每份 snapshot hash。正式 Group C 只加载并验证该 snapshot；缺失、损坏或 hash/protocol/Pilot 不匹配时 fail closed，不会现场重新执行 buggy program。A/B 不获得 runtime evidence，expected output 仍只属于三组共享的 repair-time oracle。
 
 超过 3 次 DeepSeek 在线调用会被 CLI 拒绝。只有在真实 smoke、预实验报告和成本核验完成且用户另行明确批准后，才可使用 `--confirm-bulk`；该标志本身不代表自动获得批准。本轮没有批准 150-call bulk。生成结构化统计和消融报告：
 

@@ -1,0 +1,60 @@
+{
+  "case_id": "557-B-bug-17172272-17172312",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "557-B-17172272.c: In function 'main':\n557-B-17172272.c:13:1: warning: implicit declaration of function 'qsort' [-Wimplicit-function-declaration]\n   13 | qsort(arr,a*2,sizeof(long long int),compare);\n      | ^~~~~\n",
+    "stderr_utf8_sha256": "dd76076868e7279362b04f8098d79fdbd690e4b816f98749d1c003a0ad6e9f24",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 557-B-17172272.c -o 557-B-17172272.o\ngcc 557-B-17172272.o -o 557-B-17172272 -lm -s -O2\n",
+    "stdout_utf8_sha256": "b62e0ebf6c62127cb5c442934c0e653992a8255d1f15919dbc938ef3359f8376",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "3.000000",
+      "stdout_utf8_sha256": "8291fe5714d2b2b756e8c8d67b61672203da76804bbe2d5d63a4110767fc51a1",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "15.000000",
+      "stdout_utf8_sha256": "65eff0b97fec028c604d19050e23194610e68094f71c78d90ab3378966796b18",
+      "test_id": "n3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "4.000000",
+      "stdout_utf8_sha256": "b7acc7abf37425f8b58fa246e8e6b1e8cbf9643c7952f8287a7a53f6edbcbdff",
+      "test_id": "n4",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "15.000000",
+      "stdout_utf8_sha256": "65eff0b97fec028c604d19050e23194610e68094f71c78d90ab3378966796b18",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

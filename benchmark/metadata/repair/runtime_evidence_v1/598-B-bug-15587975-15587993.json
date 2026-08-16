@@ -1,0 +1,38 @@
+{
+  "case_id": "598-B-bug-15587975-15587993",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "598-B-15587975.c: In function 'main':\n598-B-15587975.c:7:5: warning: 'gets' is deprecated [-Wdeprecated-declarations]\n    7 |     gets(s);\n      |     ^~~~\nIn file included from 598-B-15587975.c:1:\n/usr/include/stdio.h:605:14: note: declared here\n  605 | extern char *gets (char *__s) __wur __attribute_deprecated__;\n      |              ^~~~\n/usr/bin/ld: 598-B-15587975.o: in function `main':\n598-B-15587975.c:(.text+0x23): warning: the `gets' function is dangerous and should not be used.\n",
+    "stderr_utf8_sha256": "19109d61ec96cd8d763dbe6707b04c803858bd5ef5d32529063f65cb08cc382c",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 598-B-15587975.c -o 598-B-15587975.o\ngcc 598-B-15587975.o -o 598-B-15587975 -lm -s -O2\n",
+    "stdout_utf8_sha256": "4ce9667ed5e805475e1fa2a3d4cdf57128bc83c2d2dfd26c5af8086d3ae649ba",
+    "success": true
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "abacaba\n",
+      "stdout_utf8_sha256": "e88731298874e7ac75e5751244f8d2a602aa6e73e1d84899d40c17478322531c",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "abacaba\n",
+      "stdout_utf8_sha256": "e88731298874e7ac75e5751244f8d2a602aa6e73e1d84899d40c17478322531c",
+      "test_id": "n1",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

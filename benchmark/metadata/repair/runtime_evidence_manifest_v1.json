@@ -1,0 +1,618 @@
+{
+  "artifacts": [
+    {
+      "case_id": "259-B-bug-13083263-13083279",
+      "order": 0,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/259-B-bug-13083263-13083279.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n1"
+      ],
+      "sha256": "3818a3d7c1f5b9de250cbe389d4748a9321680946265a0df30d25d970e62c17e"
+    },
+    {
+      "case_id": "158-C-bug-9815086-9815194",
+      "order": 1,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/158-C-bug-9815086-9815194.json",
+      "repair_test_ids": [
+        "n2",
+        "p1",
+        "n1"
+      ],
+      "sha256": "2967ba5e48fcb30c06407ec4e652aa09e58ca023d3d09531848f5aae6a50644c"
+    },
+    {
+      "case_id": "40-B-bug-179453-179470",
+      "order": 2,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/40-B-bug-179453-179470.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "7157b2e7691ed29f378a6c5847a96e5add4679fcc7e3a1ef9782ea489a885595"
+    },
+    {
+      "case_id": "234-A-bug-2425047-2425051",
+      "order": 3,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/234-A-bug-2425047-2425051.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n1"
+      ],
+      "sha256": "7f2edb24b8543a242bc0a1ce5a885422d5a2c8d7810a6805360f748c8cd3690c"
+    },
+    {
+      "case_id": "149-B-bug-1170226-1170231",
+      "order": 4,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/149-B-bug-1170226-1170231.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "6f4df6c027f5c2f566149a867e7748967f77499d9a64a03d4177838eeb979a20"
+    },
+    {
+      "case_id": "545-D-bug-17326520-17326553",
+      "order": 5,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/545-D-bug-17326520-17326553.json",
+      "repair_test_ids": [
+        "p1",
+        "n1"
+      ],
+      "sha256": "afef1a4792c6ad21acedc86803266deec64dd59bfdfdecf8d31192f63aae11be"
+    },
+    {
+      "case_id": "492-A-bug-17190485-17190512",
+      "order": 6,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/492-A-bug-17190485-17190512.json",
+      "repair_test_ids": [
+        "n2",
+        "p1",
+        "n1"
+      ],
+      "sha256": "455b94c265edade05feefc7c4a112a129a604c96c2b9974cb9c747635c2911f0"
+    },
+    {
+      "case_id": "282-C-bug-15737668-15737873",
+      "order": 7,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/282-C-bug-15737668-15737873.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "8230d413398b2fc25de1adb9179f822b83fcd85bffdf453c401fa5a2d2ddfe9b"
+    },
+    {
+      "case_id": "328-B-bug-4567715-4567729",
+      "order": 8,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/328-B-bug-4567715-4567729.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "252fa7ccc7b0a91b81caae0e56a9a76588faca60f5e898c9fc73d869090b00f3"
+    },
+    {
+      "case_id": "580-A-bug-18107163-18107188",
+      "order": 9,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/580-A-bug-18107163-18107188.json",
+      "repair_test_ids": [
+        "p1",
+        "n2",
+        "n1"
+      ],
+      "sha256": "5a9e6dca9d6f2bf88319fdbde0adb11ab1d329f8a566094cc5828eeb54e1e4bf"
+    },
+    {
+      "case_id": "31-A-bug-17852743-17861117",
+      "order": 10,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/31-A-bug-17852743-17861117.json",
+      "repair_test_ids": [
+        "n2",
+        "p1",
+        "n1"
+      ],
+      "sha256": "65a3307de82a7695167c008c04446a5dc0058581e0db5b2450b38a0e69927434"
+    },
+    {
+      "case_id": "99-A-bug-6985349-6985355",
+      "order": 11,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/99-A-bug-6985349-6985355.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7",
+        "n1"
+      ],
+      "sha256": "d9b781886763b6f56ab048c87634c9cdc89cedffb089c5a1e1a502df0128b110"
+    },
+    {
+      "case_id": "611-A-bug-18197396-18197911",
+      "order": 12,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/611-A-bug-18197396-18197911.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "a2ef26460ccc8aef8f535dc07d0884a56aeac644654711e9110abfbfbace4324"
+    },
+    {
+      "case_id": "567-A-bug-15485089-15485103",
+      "order": 13,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/567-A-bug-15485089-15485103.json",
+      "repair_test_ids": [
+        "n2",
+        "p1",
+        "n1"
+      ],
+      "sha256": "64a1e708067e537891fead026b8605883583c91de6bf5c955692dfd993032276"
+    },
+    {
+      "case_id": "417-C-bug-6586834-6586850",
+      "order": 14,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/417-C-bug-6586834-6586850.json",
+      "repair_test_ids": [
+        "n2",
+        "n1"
+      ],
+      "sha256": "bc929feb8b78fb0d8626e51fdf42ca4fc8a3ec52f46fd451fb3a14f5cc630d8c"
+    },
+    {
+      "case_id": "616-B-bug-15683583-15683683",
+      "order": 15,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/616-B-bug-15683583-15683683.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "b6093aa16260248507070587c915871727b2329c79a641772c52261c6b6a783c"
+    },
+    {
+      "case_id": "322-B-bug-12162423-12162461",
+      "order": 16,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/322-B-bug-12162423-12162461.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "5881401a706b59ca4b8d6af8f0d3670075dc821b0aa1ff3e01a86b39ec1c3af9"
+    },
+    {
+      "case_id": "89-A-bug-685910-685915",
+      "order": 17,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/89-A-bug-685910-685915.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "542a4845ff6a3554db6dc1c972bb2246c1b64c71f7379ee72e8432c84294aacf"
+    },
+    {
+      "case_id": "413-A-bug-6604635-6604651",
+      "order": 18,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/413-A-bug-6604635-6604651.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "43b2f2a5f1194bc46721e8e4d90a3c72607a4eab315bff72f0bef3f34fbae9b8"
+    },
+    {
+      "case_id": "160-B-bug-14660992-14661027",
+      "order": 19,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/160-B-bug-14660992-14661027.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "8ecd912962d07f00ac4b03f75872466abb93431b226474feb4f3c349f7d42064"
+    },
+    {
+      "case_id": "325-A-bug-4069075-4069088",
+      "order": 20,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/325-A-bug-4069075-4069088.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n1"
+      ],
+      "sha256": "09d600f0f542bcaa059b272c348fa812d6cfef8e1e9537eab2468f5465644078"
+    },
+    {
+      "case_id": "16-B-bug-3929377-3929378",
+      "order": 21,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/16-B-bug-3929377-3929378.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n1"
+      ],
+      "sha256": "fd9ab1b03b9b7cc3794a9b17f221b2c7f8d95f28da8eee9a2c9a6a515e3b3e11"
+    },
+    {
+      "case_id": "514-C-bug-10224933-10224936",
+      "order": 22,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/514-C-bug-10224933-10224936.json",
+      "repair_test_ids": [
+        "n2",
+        "n1"
+      ],
+      "sha256": "c4b167f814544274d7dc438fec22a2fd8b19156159de9ae8aebda54975dd581d"
+    },
+    {
+      "case_id": "665-C-bug-17762752-17762802",
+      "order": 23,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/665-C-bug-17762752-17762802.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "e05413163ebe64d9cebfcb6e5099d1b2026f6282d09106d7a7d3dae7c1ec4ce5"
+    },
+    {
+      "case_id": "586-B-bug-13581699-13581787",
+      "order": 24,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/586-B-bug-13581699-13581787.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "af882f54fff66502fad3e7584e6ddf54290a44467563c8610d483fd9e7bb336b"
+    },
+    {
+      "case_id": "149-A-bug-16617896-16617908",
+      "order": 25,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/149-A-bug-16617896-16617908.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "a0f640f5923a8168940de7ffe87d15c627de7a178e23ac3de4a79139aba461f6"
+    },
+    {
+      "case_id": "515-A-bug-16019620-16019646",
+      "order": 26,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/515-A-bug-16019620-16019646.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "n1"
+      ],
+      "sha256": "2d150f8e3d91ad13247cd50970d392f1e785585eaaa33e2eaf4385b98066fe1e"
+    },
+    {
+      "case_id": "659-D-bug-18135109-18135261",
+      "order": 27,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/659-D-bug-18135109-18135261.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "63ecda8225f56d25e06110e0997a05acab784d0c47f570f9f50c2f78b84d92ea"
+    },
+    {
+      "case_id": "408-B-bug-6612687-6612709",
+      "order": 28,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/408-B-bug-6612687-6612709.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "6ce25fe011612cc4bdf717351c576322c044bbe44c2c4019168f8a91528476d9"
+    },
+    {
+      "case_id": "433-A-bug-14776196-14776225",
+      "order": 29,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/433-A-bug-14776196-14776225.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n1"
+      ],
+      "sha256": "b4b5cfda4f87b4d1cc4258e8b8037a36b9b70b46ed58901f47291ffb42e1efae"
+    },
+    {
+      "case_id": "557-B-bug-17172272-17172312",
+      "order": 30,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/557-B-bug-17172272-17172312.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n4",
+        "n1"
+      ],
+      "sha256": "827f5dd19bb5ac13bfa8d8e669f92698cf1bc2eb9b69003b3a5bb48b396a6ba0"
+    },
+    {
+      "case_id": "527-B-bug-11093666-11093671",
+      "order": 31,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/527-B-bug-11093666-11093671.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n2",
+        "n1"
+      ],
+      "sha256": "4ffb60e684480b8130cce7b6d197b77b27a901c28f5b2ab873df28c6b5a93629"
+    },
+    {
+      "case_id": "306-A-bug-4028440-4028451",
+      "order": 32,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/306-A-bug-4028440-4028451.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "ba3d6266d5039288b9fd3d763ecd726cdcbc571aef7a6a3a66a9f56833da16ee"
+    },
+    {
+      "case_id": "598-B-bug-15587975-15587993",
+      "order": 33,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/598-B-bug-15587975-15587993.json",
+      "repair_test_ids": [
+        "n2",
+        "n1"
+      ],
+      "sha256": "f999b15ddb574836b7bbcf3f2262274ea63265fc5edb1246d7ee857492f8e3a3"
+    },
+    {
+      "case_id": "450-B-bug-15950152-15950193",
+      "order": 34,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/450-B-bug-15950152-15950193.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "8e5d700bfd184a8b4d04efe18749c2867cabde853103168739bc83484f2aadef"
+    },
+    {
+      "case_id": "141-B-bug-9726688-9726780",
+      "order": 35,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/141-B-bug-9726688-9726780.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "n1"
+      ],
+      "sha256": "c9401024efa8883c905355500533e6638a4ff9870dae21fefdb471f350e656e2"
+    },
+    {
+      "case_id": "515-B-bug-12615092-12615121",
+      "order": 36,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/515-B-bug-12615092-12615121.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "n1"
+      ],
+      "sha256": "a7cae3d8805a94c9497c0028b3f6474b2195f1af4b977a2b19b52dfaab581c58"
+    },
+    {
+      "case_id": "603-A-bug-14677732-14677817",
+      "order": 37,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/603-A-bug-14677732-14677817.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "dbffae31a4584efc5038ae94123340a374207466d8f7fed8af24982c0242cd7e"
+    },
+    {
+      "case_id": "628-A-bug-16337935-16338043",
+      "order": 38,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/628-A-bug-16337935-16338043.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "a8b8df292a5f0bf6067d4063e2d444f830cb8eb0751e40c8ba551f85cbdd1c58"
+    },
+    {
+      "case_id": "166-A-bug-11517296-11517321",
+      "order": 39,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/166-A-bug-11517296-11517321.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "d82ddcc16b281f37622a0f27b9daac34492450547ab3b585f99d4ac7263e17e2"
+    },
+    {
+      "case_id": "373-B-bug-5440932-5440937",
+      "order": 40,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/373-B-bug-5440932-5440937.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "n1"
+      ],
+      "sha256": "8acf2f9e93cfe5c5672c84bcfcde6f0cd6e65175ca6d11c522aad2a3198bf350"
+    },
+    {
+      "case_id": "478-A-bug-17555253-17555286",
+      "order": 41,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/478-A-bug-17555253-17555286.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "a00f36fdd2f303e2b2bdfaf5ff39561b58df528465a94872542803ccc5c3d530"
+    },
+    {
+      "case_id": "34-A-bug-11354973-11354982",
+      "order": 42,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/34-A-bug-11354973-11354982.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n1"
+      ],
+      "sha256": "d2421e6b9e4c71fbff2c6ba7eb553496a5299a254fd27ff36272fada16d1bab2"
+    },
+    {
+      "case_id": "336-A-bug-6863058-6863063",
+      "order": 43,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/336-A-bug-6863058-6863063.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "76a5d0ee6d66a07fd6e7b79cb508c7406a887432a2ea8458da63d33aebcef699"
+    },
+    {
+      "case_id": "606-B-bug-14733385-14733456",
+      "order": 44,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/606-B-bug-14733385-14733456.json",
+      "repair_test_ids": [
+        "n2",
+        "p1",
+        "n1"
+      ],
+      "sha256": "c7fead1e05d1f772b1e3baa3d4bf96aae13b639c94d6d7b7229a052f43c45281"
+    },
+    {
+      "case_id": "467-A-bug-17691358-17691499",
+      "order": 45,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/467-A-bug-17691358-17691499.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "982c2f2c6d181dd3093601ad7e7972d77cbd1b4fd1c2f68bcd737a04d7246ec4"
+    },
+    {
+      "case_id": "87-A-bug-7652942-7652952",
+      "order": 46,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/87-A-bug-7652942-7652952.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n4",
+        "n1"
+      ],
+      "sha256": "3fe10ba275d2a315f8a8a75a83df438e14903f628982f00cdf8323240b01d62d"
+    },
+    {
+      "case_id": "103-A-bug-18288288-18288294",
+      "order": 47,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/103-A-bug-18288288-18288294.json",
+      "repair_test_ids": [
+        "n2",
+        "n3",
+        "n4",
+        "n1"
+      ],
+      "sha256": "a7c9aa3de4dea8259eaa7e08c02e0b6e5f0c6b3b3edaa0a3091ae36acd3b2e7e"
+    },
+    {
+      "case_id": "546-B-bug-13932383-13932411",
+      "order": 48,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/546-B-bug-13932383-13932411.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "bd27c8a0db8ae277538ee0bdc8a2eeee97fc3c9b3e8b6ee0577e3b9abeb999e9"
+    },
+    {
+      "case_id": "202-C-bug-1847611-1847612",
+      "order": 49,
+      "path": "benchmark/metadata/repair/runtime_evidence_v1/202-C-bug-1847611-1847612.json",
+      "repair_test_ids": [
+        "p1",
+        "p2",
+        "n1"
+      ],
+      "sha256": "6232c6790fcd09dc82a0c2bf025985e2a862ea3b64c9bec3c3765f21949c32b6"
+    }
+  ],
+  "capture_rule": {
+    "buggy_executions_per_repair_test": 1,
+    "case_order": "Repair Pilot manifest order",
+    "normalization": "none",
+    "repair_test_order": "manifest-defined order",
+    "selection": "first and only observation",
+    "transport_retries": 0
+  },
+  "generated_at": "2026-08-16T04:15:56.815478+00:00",
+  "overall_manifest_hash": "96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_pilot": {
+    "case_count": 50,
+    "path": "benchmark/datasets/codeflaws/metadata/repair_pilot.jsonl",
+    "sha256": "da9cb8d496a989a2ba752b66796ebade22e23f2da292cae48fd86bb1befc5324"
+  },
+  "repair_protocol": {
+    "path": "benchmark/metadata/repair/repair_protocol_v2.json",
+    "protocol_version": "repair-v2",
+    "sha256": "2200102bc6058a589388f2ee5cdf018d2e80b0478b7f29a202f21f282c105a47"
+  },
+  "runner": {
+    "backend": "docker",
+    "compile_timeout_seconds": 20.0,
+    "docker_image": "codedoctor-cpp-sandbox",
+    "docker_image_id": "sha256:7f529aa877352a798339448978b742b45a25f241da10a7ec0a77270817842420",
+    "execution_policy": {
+      "cap_drop": "ALL",
+      "cpus": 1.0,
+      "memory": "256m",
+      "network": "none",
+      "no_new_privileges": true,
+      "pids_limit": 64,
+      "read_only": true
+    },
+    "repair_test_order": "Repair Pilot manifest order",
+    "run_timeout_seconds": 5.0,
+    "transport_retries": 0
+  },
+  "schema_version": "1.0.0"
+}
