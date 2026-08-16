@@ -1,5 +1,6 @@
 """Build the mandatory DeepSeek pre-experiment readiness and cost report."""
 
+import hashlib
 import json
 import math
 import os
@@ -123,6 +124,8 @@ def _bulk_projection(
     approximate_groups: dict[str, dict[str, Any]],
     approximate_output: int,
     actual_usage: dict[str, dict[str, Any]],
+    smoke_input_estimates: dict[str, int] | None = None,
+    smoke_truncated: bool = False,
 ) -> dict[str, Any]:
     if all(actual_usage[group]["calls"] == 1 for group in ("A", "B", "C")):
         usages = {group: actual_usage[group]["usage"] for group in ("A", "B", "C")}
@@ -132,12 +135,39 @@ def _bulk_projection(
             and "completion_tokens" in value
             for value in usages.values()
         ):
-            return {
-                "basis": "one real DeepSeek smoke call per group, multiplied by 50",
-                "input_by_group": {
+            if smoke_input_estimates:
+                input_by_group = {
+                    group: _round_tokens(
+                        approximate_groups[group]["approximate_total_input_tokens"]
+                        * usages[group]["prompt_tokens"]
+                        / smoke_input_estimates[group],
+                        100,
+                    )
+                    for group in ("A", "B", "C")
+                }
+                calibration_ratios = {
+                    group: round(
+                        usages[group]["prompt_tokens"]
+                        / smoke_input_estimates[group],
+                        3,
+                    )
+                    for group in ("A", "B", "C")
+                }
+                input_basis = (
+                    "full-Pilot character estimates calibrated by each smoke "
+                    "group's actual DeepSeek prompt-token ratio"
+                )
+            else:
+                input_by_group = {
                     group: usages[group]["prompt_tokens"] * 50
                     for group in ("A", "B", "C")
-                },
+                }
+                calibration_ratios = None
+                input_basis = "one smoke prompt per group multiplied by 50"
+            return {
+                "basis": input_basis,
+                "input_calibration_ratios": calibration_ratios,
+                "input_by_group": input_by_group,
                 "output_total": sum(
                     usages[group]["completion_tokens"] * 50
                     for group in ("A", "B", "C")
@@ -147,15 +177,25 @@ def _bulk_projection(
                     if any("reasoning_tokens" in usages[group] for group in usages)
                     else None
                 ),
+                "output_basis": (
+                    "all three smoke completions reached max_tokens; this is an "
+                    "all-calls-hit-8192 conservative cap scenario, not expected usage"
+                    if smoke_truncated
+                    else "one real completion per group multiplied by 50"
+                ),
+                "uncertainty": "high; one smoke case is not representative",
             }
     return {
         "basis": "provider-independent character estimate; no real DeepSeek smoke usage",
+        "input_calibration_ratios": None,
         "input_by_group": {
             group: approximate_groups[group]["approximate_total_input_tokens"]
             for group in ("A", "B", "C")
         },
         "output_total": approximate_output,
         "reasoning_total": None,
+        "output_basis": "buggy-source length proxy",
+        "uncertainty": "high; no real DeepSeek usage",
     }
 
 
@@ -194,6 +234,26 @@ def _cache_miss_cost(projection: dict[str, Any], prices: dict[str, float]) -> fl
     )
 
 
+def _actual_smoke_cost(
+    actual_usage: dict[str, dict[str, Any]], prices: dict[str, float]
+) -> float | None:
+    if not all(actual_usage[group]["calls"] == 1 for group in ("A", "B", "C")):
+        return None
+    cost = 0.0
+    for group in ("A", "B", "C"):
+        usage = actual_usage[group]["usage"]
+        if usage is None or "completion_tokens" not in usage:
+            return None
+        if "prompt_cache_hit_tokens" not in usage or "prompt_cache_miss_tokens" not in usage:
+            return None
+        cost += (
+            usage["prompt_cache_hit_tokens"] * prices["input_cache_hit"]
+            + usage["prompt_cache_miss_tokens"] * prices["input_cache_miss"]
+            + usage["completion_tokens"] * prices["output"]
+        ) / 1_000_000
+    return round(cost, 6)
+
+
 def build_estimate(manual_inspection: str) -> dict[str, Any]:
     protocol = validate_repair_protocol()
     deepseek = validate_configuration(DEEPSEEK_EXPERIMENT_CONFIG)
@@ -202,6 +262,7 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
     fl_records = load_fl_records(REPAIR_PILOT_FL)
     input_tokens: dict[str, list[int]] = {group.value: [] for group in EvidenceGroup}
     output_tokens: list[int] = []
+    per_case_input_tokens: dict[str, dict[str, int]] = {}
     prompt_hashes = []
     prompts: dict[str, dict[str, PromptDocument]] = {}
     for index, case in enumerate(cases, start=1):
@@ -209,15 +270,16 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
         baseline = evaluate_source(case, case.get_buggy_source(), include_validation=False)
         output_tokens.append(approximate_tokens(case.get_buggy_source()))
         case_prompts = {}
+        case_input_tokens = {}
         for group in EvidenceGroup:
             context = build_repair_context(
                 case, group, fl_records.get(case.case_id), baseline
             )
             prompt = render_prompt(context, group)
             case_prompts[group.value] = prompt
-            input_tokens[group.value].append(
-                approximate_tokens(prompt.system + "\n" + prompt.user)
-            )
+            prompt_tokens = approximate_tokens(prompt.system + "\n" + prompt.user)
+            input_tokens[group.value].append(prompt_tokens)
+            case_input_tokens[group.value] = prompt_tokens
             prompt_hashes.append(
                 {
                     "case_id": case.case_id,
@@ -226,6 +288,7 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
                 }
             )
         prompts[case.case_id] = case_prompts
+        per_case_input_tokens[case.case_id] = case_input_tokens
 
     prompt_audit = _validate_prompts(prompts)
     groups = {}
@@ -251,10 +314,23 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
         and item.get("model_parameters", {}).get("provider") == "deepseek"
     ]
     actual_usage = _usage_by_group(online)
-    projection = _bulk_projection(groups, approximate_output, actual_usage)
+    smoke_truncated = bool(online) and all(
+        item.get("model_response", {}).get("finish_reason") == "length"
+        for item in online
+    )
+    projection = _bulk_projection(
+        groups,
+        approximate_output,
+        actual_usage,
+        per_case_input_tokens[cases[0].case_id],
+        smoke_truncated,
+    )
     current_prices = pricing["pricing_at_verification"]
     scheduled = pricing["scheduled_change"]
     cost = {
+        "actual_smoke_at_verification_usd": _actual_smoke_cost(
+            actual_usage, current_prices
+        ),
         "at_verification_cache_miss_usd": _cache_miss_cost(
             projection, current_prices
         ),
@@ -353,11 +429,50 @@ def build_estimate(manual_inspection: str) -> dict[str, Any]:
             "classification_by_group": {
                 item["group"]: item.get("classification") for item in online
             },
+            "compile_success_by_group": {
+                item["group"]: item.get("evaluation", {}).get("compile_success")
+                for item in online
+            },
+            "content_present_by_group": {
+                item["group"]: bool(
+                    str(item.get("model_response", {}).get("raw", "")).strip()
+                )
+                for item in online
+            },
+            "extraction_status_by_group": {
+                item["group"]: item.get("extraction", {}).get("status")
+                for item in online
+            },
+            "extracted_source_hash_by_group": {
+                item["group"]: (
+                    hashlib.sha256(
+                        str(item["extraction"]["source"]).encode()
+                    ).hexdigest()
+                    if item.get("extraction", {}).get("source") is not None
+                    else None
+                )
+                for item in online
+            },
             "finish_reason_by_group": {
                 item["group"]: item.get("model_response", {}).get("finish_reason")
                 for item in online
             },
+            "plausible_by_group": {
+                item["group"]: item.get("evaluation", {}).get("plausible")
+                for item in online
+            },
+            "response_model_by_group": {
+                item["group"]: item.get("provider_response_metadata", {}).get(
+                    "response_model"
+                )
+                for item in online
+            },
             "selection_rule": "first case in the frozen Repair Pilot manifest",
+            "truncation_detected": smoke_truncated,
+            "validated_by_group": {
+                item["group"]: item.get("evaluation", {}).get("validated")
+                for item in online
+            },
         },
         "token_estimate": {
             "approximate_average_output_tokens_per_call": average_output,
@@ -398,6 +513,8 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
         f"{_usage_cell(metric, 'prompt_tokens')} | "
         f"{_usage_cell(metric, 'completion_tokens')} | "
         f"{_usage_cell(metric, 'reasoning_tokens')} | "
+        f"{_usage_cell(metric, 'prompt_cache_hit_tokens')} | "
+        f"{_usage_cell(metric, 'prompt_cache_miss_tokens')} | "
         f"{_usage_cell(metric, 'total_tokens')} |"
         for group, metric in value["smoke"]["actual_usage_by_group"].items()
     )
@@ -443,12 +560,17 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 - Smoke selection: `{value['smoke']['case_id']}`, selected by `{value['smoke']['selection_rule']}`.
 - Automatic transport retries: {value['calls']['transport_retries_configured']}.
 
-| Group | Real calls | Prompt tokens | Completion tokens | Reasoning tokens | Total tokens |
-|---|---:|---:|---:|---:|---:|
+| Group | Real calls | Prompt tokens | Completion tokens | Reasoning tokens | Cache hit | Cache miss | Total tokens |
+|---|---:|---:|---:|---:|---:|---:|---:|
 {usage_rows}
 
 - Smoke classifications: `{value['smoke']['classification_by_group'] or 'N/A'}`.
+- Response models: `{value['smoke']['response_model_by_group'] or 'N/A'}`.
+- Final content present: `{value['smoke']['content_present_by_group'] or 'N/A'}`; extraction: `{value['smoke']['extraction_status_by_group'] or 'N/A'}`.
+- Extracted source hashes: `{value['smoke']['extracted_source_hash_by_group'] or 'N/A'}`.
+- Compile success: `{value['smoke']['compile_success_by_group'] or 'N/A'}`; plausible: `{value['smoke']['plausible_by_group'] or 'N/A'}`; validated: `{value['smoke']['validated_by_group'] or 'N/A'}`.
 - Finish reasons: `{value['smoke']['finish_reason_by_group'] or 'N/A'}`. A `length` finish reason or incomplete source requires a stop, not a parameter change.
+- Possible token truncation: `{value['smoke']['truncation_detected']}`.
 
 ## Token Projection
 
@@ -458,9 +580,12 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 
 - Previous output proxy for 150 calls: ~{value['token_estimate']['approximate_total_output_tokens']} tokens.
 - Bulk projection basis: {projection['basis']}.
+- Input calibration ratios A/B/C: `{projection['input_calibration_ratios']}`.
 - Projected A/B/C input tokens: `{projection['input_by_group']}`.
 - Projected output including provider-reported reasoning when real usage exists: `{projection['output_total']}` tokens.
 - Separately reported reasoning tokens: `{projection['reasoning_total'] if projection['reasoning_total'] is not None else 'N/A'}`.
+- Output basis: {projection['output_basis']}.
+- Estimate uncertainty: {projection['uncertainty']}.
 - Estimation method: {value['token_estimate']['method']}.
 
 ## Official Pricing Verification
@@ -476,6 +601,7 @@ def render_pre_experiment_report(value: dict[str, Any]) -> str:
 - Conservative all-cache-miss scheduled off-peak cost: **${cost['scheduled_off_peak_cache_miss_usd']:.6f}**.
 - Conservative all-cache-miss scheduled peak cost: **${cost['scheduled_peak_cache_miss_usd']:.6f}**.
 - Context cache is best-effort, so cache-hit pricing is not assumed.
+- Actual three-call smoke cost at verification prices: `{f"${cost['actual_smoke_at_verification_usd']:.6f}" if cost['actual_smoke_at_verification_usd'] is not None else 'N/A'}`.
 
 ## Information Boundary
 

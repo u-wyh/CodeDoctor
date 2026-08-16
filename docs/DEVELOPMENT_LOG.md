@@ -1698,3 +1698,139 @@ redaction 断言通过，但 Python 清理模拟 HTTPError 时输出 ignored exc
 - 检查三个 response 的 final content、reasoning 摘要、usage/cache/reasoning tokens、finish reason、resolved model、patch extraction、Docker compile、repair tests、hidden validation、classification 和 artifact integrity。
 - 用真实三组 usage 重新外推 150-call tokens/cost，并在当时再次核验 DeepSeek 官方 peak/off-peak 价格；随后保持 mandatory stop。
 - 只有用户在审阅真实 smoke 与更新报告后另行明确批准，才允许使用 `--confirm-bulk`；不得自动开始 150 calls，也不得进入 Phase 8。
+
+## 2026-08-16 - Phase 7: DeepSeek A/B/C Real Smoke Validation
+
+### 1. 本次目标
+
+- 仅检查 `DEEPSEEK_API_KEY` credential 是否存在，不读取、打印或提交 Key。
+- 对预注册 case `259-B-bug-13083263-13083279` 执行 A/B/C 各一次真实 DeepSeek smoke，真实调用上限为 3。
+- 不使用 `--confirm-bulk`，不启动 50 cases x 3 groups 的 150-call 正式实验。
+- 审计真实响应、token usage、cache、模型版本、提取与验证状态、信息边界和 artifact 完整性，并据此更新预实验预算与 readiness。
+
+### 2. 实际完成内容
+
+- 按要求先 `source ~/.config/codedoctor/secrets.env`，仅通过环境变量存在性检查确认 `DEEPSEEK_API_KEY` available；没有读取或输出 secrets 文件内容。
+- 调用前重新运行 13 项 DeepSeek、prompt、protocol、artifact 和 pipeline 测试，全部通过；离线序列化 A/B/C 三个真实 request payload，确认参数只有冻结配置允许的字段，不含 reference、ground truth、hidden validation 或 evaluation-only 信息。
+- 在 LXD 中通过 stdin 临时传递 Key，执行一次预注册命令。命令恰好尝试并收到 A/B/C 三个响应，无 transport retry；没有再次运行、没有使用 `--confirm-bulk`。
+- 三组 response.model 均为 `deepseek-v4-pro`，finish reason 均为 `length`。A/B/C completion tokens 和 reasoning tokens 均为 8192，最终 `message.content` 均为空，因此三组都分类为 `invalid_model_output`，未进入源码编译、repair tests 或 hidden validation。
+- A 实际 usage：prompt 737、cache hit 0、cache miss 737、completion/reasoning 8192、total 8929。
+- B 实际 usage：prompt 1202、cache hit 640、cache miss 562、completion/reasoning 8192、total 9394。
+- C 实际 usage：prompt 1354、cache hit 1152、cache miss 202、completion/reasoning 8192、total 9546。
+- 真实 artifact 只保存 final content、usage 和 reasoning 的 present/characters/SHA-256 摘要，不保存原始 reasoning。三份 artifact SHA-256 在报告生成前后保持为 A `b0ea0e5cea5989b602aafef4d5fd53a52c1f44a7433b21ea1c08dcd3cf298771`、B `5b9a0aa309bfd64df3337c8404e9b245960d4d4e17c432ecfdfcb215739a7f8c`、C `f6695210993daf1c2d250c111b404f46b7ca7ce3737a72d5aeeb7f2373c8a003`。
+- 重新执行 50-case 离线估算器，不产生 API 调用。使用每组真实 prompt token 与字符估算的比率校准完整 Pilot input：A 34,300、B 54,300、C 62,000，总计约 150,600。
+- 因三个样本全部触及 8192 上限，输出外推改为明确的保守上界场景：150 calls x 8192 = 1,228,800 completion tokens；这是 cap scenario，不是 expected usage，uncertainty 标为 high。
+- 于 `2026-08-16T03:27:54Z` 重新核验 DeepSeek 官方价格。核验时 flat 价格为 cache-hit input `$0.003625/M`、cache-miss input `$0.435/M`、output `$0.87/M`；官方计划于 `2026-08-16T16:00:00Z` 切换 peak/off-peak 价格。
+- 三次 smoke 按实际 cache 分账的估算成本为 `$0.022041`。150-call 保守 all-cache-miss 上界在核验时价格为 `$1.134567`，计划 off-peak 为 `$2.532420`，计划 peak 为 `$5.064840`。
+- 12/12 artifacts 信息边界审计通过，150 prompts 泄漏审计通过，冻结 `repair-v2` 校验通过；`bulk_online_ready=false`、`bulk_user_authorized=false`、mandatory stop 保持生效。
+
+### 3. 新增、修改、删除的文件
+
+新增的跟踪文件：无。
+
+修改：
+
+- `benchmark/metadata/repair/deepseek_pricing_20260816.json`
+- `benchmark/metadata/repair/pre_experiment_estimate.json`
+- `benchmark/reports/llm_repair_pre_experiment.md`
+- `repair/pre_experiment.py`
+- `repair/tests/test_pre_experiment.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+本地新增但由 Git 忽略：
+
+- `benchmark/artifacts/repair/259-B-bug-13083263-13083279/A/62689a1b26365dfcce180ea154552437e6475343ee42715f60875a8a0ed0e9cb.json`
+- `benchmark/artifacts/repair/259-B-bug-13083263-13083279/B/ed777e0424c3d993cdbf9c0c98198eb54faee860126ae1f47f1d7496f3664e03.json`
+- `benchmark/artifacts/repair/259-B-bug-13083263-13083279/C/2bd8fd8876a25997ad2c802a106662911651d4385dbcb42fc56d55ce51a17381.json`
+
+### 4. 执行过的重要命令
+
+```bash
+source ~/.config/codedoctor/secrets.env
+python3 -c 'import os; print("DeepSeek credential available" if os.getenv("DEEPSEEK_API_KEY") else "DeepSeek credential unavailable")'
+
+python3 -m unittest repair.tests.test_deepseek repair.tests.test_prompting repair.tests.test_protocol repair.tests.test_artifacts repair.tests.test_pipeline -v
+
+source ~/.config/codedoctor/secrets.env
+printf '%s\n' "$DEEPSEEK_API_KEY" | lxc exec codedoctor-docker-host -- bash -lc 'IFS= read -r DEEPSEEK_API_KEY; export DEEPSEEK_API_KEY; cd /workspace/CodeDoctor; exec env PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --cases 259-B-bug-13083263-13083279 --resume'
+
+source ~/.config/codedoctor/secrets.env
+printf '%s\n' "$DEEPSEEK_API_KEY" | lxc exec codedoctor-docker-host -- bash -lc 'IFS= read -r DEEPSEEK_API_KEY; export DEEPSEEK_API_KEY; cd /workspace/CodeDoctor; exec env PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/estimate_repair_experiment.py --manual-inspection passed'
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests -v'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v'
+
+python3 -m json.tool benchmark/metadata/repair/deepseek_pricing_20260816.json
+python3 -m json.tool benchmark/metadata/repair/pre_experiment_estimate.json
+git diff --check
+lxc exec codedoctor-docker-host -- docker ps -a --filter name=codedoctor --format '{{.ID}} {{.Names}} {{.Status}}'
+lxc stop codedoctor-docker-host
+```
+
+另外实际执行了内联 Python 审计：序列化并扫描三个 request payload；读取 artifact 的非敏感结构字段并核对 usage、finish reason、final content 长度、reasoning 摘要与 SHA-256；验证 12 artifacts 的 A/B/C 边界；扫描待提交 diff 和 artifacts 的 credential 模式；复现 `450-B-bug-15950152-15950193` C 组 runtime prompt hash 非确定性。价格核验只使用 DeepSeek 官方 pricing 页面。
+
+### 5. 实际测试结果
+
+- 调用前专项测试：13/13 PASS。
+- 报告改动专项测试：17/17 PASS。
+- 最终完整回归：sandbox 29/29、benchmark 12/12、fault localization 36/36、repair 33/33，共 110/110 PASS，无 skip。
+- 真实 DeepSeek smoke：3/3 HTTP responses received，0 retry；A/B/C 均 `invalid_model_output`，均 `finish_reason=length`，均无 final content。
+- Compile/plausible/validated：A/B/C 均为 N/A，因为源码提取失败后 pipeline 正确停止，没有伪造编译或验证结果。
+- 泄漏检查：150/150 prompts PASS，12/12 artifacts PASS；reference、ground-truth diff、hidden validation、evaluation-only metadata 均 absent。
+- Secret/raw audit：待提交 diff credential pattern 0，artifact credential pattern 0，secret env tracked=false，raw reasoning storage=absent，超过 1 MB 的 changed files=0。
+- 冻结协议：`repair-v2` 验证通过，冻结 context/evaluator/extraction/pipeline/prompting/provider/protocol 文件无 diff。
+- Docker 清理：没有残留 `codedoctor-*` 容器，`codedoctor-docker-host` 最终为 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 三个响应全部把输出预算用于 reasoning
+
+三次调用均报告 completion tokens=8192、reasoning tokens=8192、finish reason=length，但 final content 为空，导致无法提取 C/C++ 源码。
+
+#### 6.2 单个 C 组离线 prompt hash 存在运行时非确定性
+
+重新生成报告时，`450-B-bug-15950152-15950193` 的 C 组 prompt hash 与上一份估算不同。对同一 case 连续执行三次，PASS/FAIL、exit code 和 timeout 一致，但 prompt hash 在两个值间变化，说明 buggy runtime actual output 本身不稳定。
+
+#### 6.3 初始 artifact 与协议审计脚本使用了错误的缩写路径和返回键
+
+首次哈希命令中的 artifact 文件名是非实际缩写，首次协议脚本也假定返回键为 `version`，因此两次审计脚本先失败；真实 artifact 和生产代码没有损坏。
+
+#### 6.4 核验当天价格存在定时切换
+
+真实 smoke 发生在旧 flat price 时段，但同日稍后启用新的 peak/off-peak 价格，仅报告单一费率会误导后续预算。
+
+### 7. 问题的解决方式
+
+- 严格执行 mandatory stop：三次调用用满后没有重试、没有改参数重跑，也没有开始 bulk。将该现象标为 possible token truncation 和 readiness blocker。
+- 不用空 final content 推断 patch，不运行 compile/repair/validation；classification 保持 `invalid_model_output`，相关评价字段保持 null。
+- 用 `rg --files -uu` 定位真实 ignored artifact，再按完整路径重新计算 SHA-256；协议审计改为读取已有 `protocol_version`，最终全部通过。
+- 对 C 组 hash 漂移进行三次独立 Docker baseline 复现，确认是运行观察非确定性而不是冻结 prompt 代码漂移；保留实际生成的 prompt hash并记录限制，不修改已冻结协议。
+- 同时记录调用时 flat price、计划 off-peak 和 peak 三套预算；真实 smoke 按 provider 报告的 cache hit/miss 分账，新单测直接覆盖该成本函数。
+
+### 8. 设计取舍
+
+- 真实 usage 只用于测量层校准，不修改冻结 prompt、模型参数、extraction 或 evaluator。
+- input 外推使用每组实际/heuristic prompt 比率校准 50-case 静态估算，避免把单个 smoke prompt 直接乘 50；仍明确标记单 case 的 high uncertainty。
+- output 因全部截断只能报告 8192 x 150 的保守 cap，不能称为期望成本。
+- reasoning 只保存不可逆摘要；即便排查 provider 行为，也不把 raw reasoning 写入 artifact 或开发日志。
+- credential available 与 technical readiness、bulk user authorization 分开记录；Key 存在不自动放行批量实验。
+
+### 9. 当前已知不足
+
+- 三次真实 smoke 都没有可编译源码，DeepSeek thinking/high 与 8192 max tokens 的冻结组合尚未证明能完成 repair 输出。
+- 只有一个预注册 case，无法估计一般性的 completion 长度、修复成功率或真实 150-call 成本分布。
+- `deepseek-v4-pro` 是 mutable alias；本次 response.model 仍返回同一 alias，无法仅凭该字段证明后端版本永久固定。
+- C 组包含 buggy 程序的真实运行观察；至少一个 Pilot case 的 actual output 非确定，可能降低独立重建 prompt hash 的复现性。
+- 官方价格已计划切换，未来获批调用前仍需按实际 UTC 时段重新核验费率。
+- 150-call A/B/C 正式实验尚未运行，paired repair/validated 指标与统计检验仍为 N/A。
+
+### 10. 下一步计划
+
+- 保持 `bulk_online_ready=false` 和 mandatory stop，不再使用本轮已耗尽的三次 smoke 授权。
+- 等待用户审阅 provider 全部消耗 reasoning budget、final content 为空这一协议异常；任何参数或协议调整都需要单独决策，不能事后静默改变冻结实验。
+- 若未来形成新的预注册方案，先离线验证边界与预算，再取得新的真实调用授权；不得把本次批准解释为重跑许可。
+- 只有技术 smoke 通过且用户另行明确批准付费 bulk 后，才允许使用 `--confirm-bulk`；当前不得启动 150 calls，也不得进入 Phase 8。

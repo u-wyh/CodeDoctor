@@ -1,9 +1,10 @@
 {
   "billing": {
     "bulk_cache_miss_cost_estimates": {
-      "at_verification_cache_miss_usd": 0.057464,
-      "scheduled_off_peak_cache_miss_usd": 0.103422,
-      "scheduled_peak_cache_miss_usd": 0.206844
+      "actual_smoke_at_verification_usd": 0.022041,
+      "at_verification_cache_miss_usd": 1.134567,
+      "scheduled_off_peak_cache_miss_usd": 2.53242,
+      "scheduled_peak_cache_miss_usd": 5.06484
     },
     "path": "DeepSeek Official API balance",
     "pricing": {
@@ -15,7 +16,7 @@
         "input_cache_hit": 0.003625,
         "input_cache_miss": 0.435,
         "output": 0.87,
-        "schedule": "flat"
+        "schedule": "flat_pre_2026-08-16T16:00:00Z"
       },
       "scheduled_change": {
         "effective_at": "2026-08-16T16:00:00Z",
@@ -35,7 +36,7 @@
           "06:00-10:00 UTC"
         ]
       },
-      "verified_at": "2026-08-16T02:49:39Z"
+      "verified_at": "2026-08-16T03:27:54Z"
     },
     "pricing_status": "verified",
     "subscription_warning": "ChatGPT Plus/Codex subscription is separate from DeepSeek API billing."
@@ -44,14 +45,14 @@
     "attempts_per_case_group": 1,
     "groups": 3,
     "primary": 150,
-    "real_smoke_calls": 0,
+    "real_smoke_calls": 3,
     "repair_pilot_cases": 50,
     "smoke_maximum": 3,
     "transport_retries_configured": 0
   },
   "credential": {
-    "available": false,
-    "environment_used": null,
+    "available": true,
+    "environment_used": "DEEPSEEK_API_KEY",
     "environment_variables": [
       "DEEPSEEK_API_KEY",
       "CODEDOCTOR_API_KEY"
@@ -60,7 +61,7 @@
   },
   "leakage_readiness": {
     "artifact_boundary_audit": {
-      "artifacts_checked": 9,
+      "artifacts_checked": 12,
       "status": "passed"
     },
     "evaluation_only_metadata_absent": "passed",
@@ -84,7 +85,9 @@
     "official_documented_model_version": "DeepSeek-V4-Pro-0813",
     "provider": "DeepSeek Official API",
     "reasoning_effort": "high",
-    "response_models_observed": [],
+    "response_models_observed": [
+      "deepseek-v4-pro"
+    ],
     "stream": false,
     "temperature": "not_sent_ineffective_in_thinking_mode",
     "thinking": {
@@ -615,7 +618,7 @@
     {
       "case_id": "450-B-bug-15950152-15950193",
       "group": "C",
-      "prompt_hash": "da6fb7e91d5b3f44e190326e7d0f09de0a019ada931ab1687c7b7482d60c6768"
+      "prompt_hash": "184d77a5dbd1c577ed9eccc2a2bd71fbd8891f385428a8a0b8c54fe2421e2cfd"
     },
     {
       "case_id": "141-B-bug-9726688-9726780",
@@ -846,7 +849,6 @@
   "protocol_version": "repair-v2",
   "readiness": {
     "blocking_reasons": [
-      "DeepSeek API credential unavailable",
       "three-call genuine DeepSeek smoke with usage and final content not complete"
     ],
     "bulk_online_ready": false,
@@ -856,35 +858,107 @@
   "smoke": {
     "actual_usage_by_group": {
       "A": {
-        "calls": 0,
-        "usage": null
+        "calls": 1,
+        "usage": {
+          "completion_tokens": 8192,
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 737,
+          "prompt_tokens": 737,
+          "reasoning_tokens": 8192,
+          "total_tokens": 8929
+        }
       },
       "B": {
-        "calls": 0,
-        "usage": null
+        "calls": 1,
+        "usage": {
+          "completion_tokens": 8192,
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 562,
+          "prompt_tokens": 1202,
+          "reasoning_tokens": 8192,
+          "total_tokens": 9394
+        }
       },
       "C": {
-        "calls": 0,
-        "usage": null
+        "calls": 1,
+        "usage": {
+          "completion_tokens": 8192,
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 202,
+          "prompt_tokens": 1354,
+          "reasoning_tokens": 8192,
+          "total_tokens": 9546
+        }
       }
     },
     "case_id": "259-B-bug-13083263-13083279",
-    "classification_by_group": {},
-    "finish_reason_by_group": {},
-    "selection_rule": "first case in the frozen Repair Pilot manifest"
+    "classification_by_group": {
+      "A": "invalid_model_output",
+      "B": "invalid_model_output",
+      "C": "invalid_model_output"
+    },
+    "compile_success_by_group": {
+      "A": null,
+      "B": null,
+      "C": null
+    },
+    "content_present_by_group": {
+      "A": false,
+      "B": false,
+      "C": false
+    },
+    "extracted_source_hash_by_group": {
+      "A": null,
+      "B": null,
+      "C": null
+    },
+    "extraction_status_by_group": {
+      "A": "invalid_model_output",
+      "B": "invalid_model_output",
+      "C": "invalid_model_output"
+    },
+    "finish_reason_by_group": {
+      "A": "length",
+      "B": "length",
+      "C": "length"
+    },
+    "plausible_by_group": {
+      "A": null,
+      "B": null,
+      "C": null
+    },
+    "response_model_by_group": {
+      "A": "deepseek-v4-pro",
+      "B": "deepseek-v4-pro",
+      "C": "deepseek-v4-pro"
+    },
+    "selection_rule": "first case in the frozen Repair Pilot manifest",
+    "truncation_detected": true,
+    "validated_by_group": {
+      "A": null,
+      "B": null,
+      "C": null
+    }
   },
   "token_estimate": {
     "approximate_average_output_tokens_per_call": 160,
     "approximate_total_output_tokens": 24600,
     "bulk_projection": {
-      "basis": "provider-independent character estimate; no real DeepSeek smoke usage",
+      "basis": "full-Pilot character estimates calibrated by each smoke group's actual DeepSeek prompt-token ratio",
       "input_by_group": {
-        "A": 18800,
-        "B": 29700,
-        "C": 34400
+        "A": 34300,
+        "B": 54300,
+        "C": 62000
       },
-      "output_total": 24600,
-      "reasoning_total": null
+      "input_calibration_ratios": {
+        "A": 1.824,
+        "B": 1.83,
+        "C": 1.803
+      },
+      "output_basis": "all three smoke completions reached max_tokens; this is an all-calls-hit-8192 conservative cap scenario, not expected usage",
+      "output_total": 1228800,
+      "reasoning_total": 1228800,
+      "uncertainty": "high; one smoke case is not representative"
     },
     "groups": {
       "A": {

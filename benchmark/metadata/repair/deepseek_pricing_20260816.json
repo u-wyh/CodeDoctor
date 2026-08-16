@@ -7,7 +7,7 @@
     "input_cache_hit": 0.003625,
     "input_cache_miss": 0.435,
     "output": 0.87,
-    "schedule": "flat"
+    "schedule": "flat_pre_2026-08-16T16:00:00Z"
   },
   "scheduled_change": {
     "effective_at": "2026-08-16T16:00:00Z",
@@ -27,5 +27,5 @@
       "06:00-10:00 UTC"
     ]
   },
-  "verified_at": "2026-08-16T02:49:39Z"
+  "verified_at": "2026-08-16T03:27:54Z"
 }
