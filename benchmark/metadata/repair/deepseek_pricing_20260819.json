@@ -1,0 +1,12 @@
+{
+  "currency": "USD",
+  "model": "deepseek-v4-flash",
+  "official_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "price_unit_tokens": 1000000,
+  "prices": {
+    "input_cache_hit": 0.0028,
+    "input_cache_miss": 0.14,
+    "output": 0.28
+  },
+  "verified_at": "2026-08-19T16:37:39Z"
+}

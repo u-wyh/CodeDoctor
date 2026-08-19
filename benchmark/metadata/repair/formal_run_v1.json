@@ -1,0 +1,12 @@
+{
+  "authorization": "explicit user authorization for 50 cases x A/B/C",
+  "command": "python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --confirm-bulk",
+  "experiment_role": "formal_evidence_ablation",
+  "first_artifact_completed_at": "2026-08-19T14:15:41.301492+00:00",
+  "last_artifact_completed_at": "2026-08-19T16:35:12.180421+00:00",
+  "protocol_version": "repair-v2",
+  "requests_attempted": 150,
+  "responses_received": 148,
+  "resume_used": false,
+  "transport_retries": 0
+}

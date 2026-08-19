@@ -1,18 +1,23 @@
 """Aggregate online repair artifacts and render the evidence-ablation report."""
 
+import hashlib
 import json
+import statistics
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
 from benchmark.config import (
     CODEFLAWS_REPAIR_PILOT_SUMMARY,
+    DEEPSEEK_FORMAL_PRICING_SNAPSHOT,
     REPAIR_ARTIFACT_ROOT,
     REPAIR_EVALUATION,
+    REPAIR_FORMAL_RUN,
     REPAIR_PILOT_ATTRIBUTES,
     REPAIR_PILOT_FL,
     REPAIR_PROTOCOL,
     REPAIR_REPORT,
+    RUNTIME_EVIDENCE_PROMPT_AUDIT,
 )
 from fault_localization.statistics import exact_mcnemar, paired_bootstrap_difference
 
@@ -51,6 +56,13 @@ def _signature(record: dict[str, Any]) -> str:
         "template_version": record["prompt"]["template_version"],
     }
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
+
+
+def _canonical_hash(value: object) -> str:
+    encoded = json.dumps(
+        value, ensure_ascii=False, separators=(",", ":"), sort_keys=True
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def _is_formal_artifact(record: dict[str, Any]) -> bool:
@@ -154,6 +166,112 @@ def _group_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _usage_metrics(
+    records: list[dict[str, Any]], prices: dict[str, float]
+) -> dict[str, Any]:
+    totals = {
+        "calls": len(records),
+        "calls_with_usage": 0,
+        "prompt_tokens": 0,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 0,
+        "reasoning_tokens": 0,
+        "final_answer_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+    }
+    for item in records:
+        usage = item.get("provider_response_metadata", {}).get("usage")
+        if not usage:
+            continue
+        totals["calls_with_usage"] += 1
+        for key in (
+            "prompt_tokens",
+            "prompt_cache_hit_tokens",
+            "prompt_cache_miss_tokens",
+            "reasoning_tokens",
+            "final_answer_tokens",
+            "completion_tokens",
+            "total_tokens",
+        ):
+            if key == "reasoning_tokens":
+                value = usage.get("completion_tokens_details", {}).get(key, 0)
+            else:
+                value = usage.get(key, 0)
+            totals[key] += int(value or 0)
+    totals["calls_without_usage"] = totals["calls"] - totals["calls_with_usage"]
+    totals["estimated_cost_usd"] = round(
+        (
+            totals["prompt_cache_hit_tokens"] * prices["input_cache_hit"]
+            + totals["prompt_cache_miss_tokens"] * prices["input_cache_miss"]
+            + totals["completion_tokens"] * prices["output"]
+        )
+        / 1_000_000,
+        6,
+    )
+    return totals
+
+
+def _artifact_integrity(
+    records: list[dict[str, Any]], prompt_audit: dict[str, Any]
+) -> dict[str, Any]:
+    ordered = sorted(records, key=lambda item: (item["case_id"], item["group"]))
+    actual_prompts = [
+        {
+            "case_id": item["case_id"],
+            "group": item["group"],
+            "prompt_hash": item["prompt"]["hash"],
+        }
+        for item in ordered
+    ]
+    expected_prompts = sorted(
+        (
+            {
+                "case_id": item["case_id"],
+                "group": item["group"],
+                "prompt_hash": item["prompt_hash"],
+            }
+            for item in prompt_audit["prompt_records"]
+        ),
+        key=lambda item: (item["case_id"], item["group"]),
+    )
+    response_metadata = [
+        item["provider_response_metadata"]
+        for item in ordered
+        if item.get("provider_response_metadata")
+    ]
+    request_configurations = {
+        json.dumps(item["request_configuration"], sort_keys=True)
+        for item in response_metadata
+    }
+    return {
+        "artifact_set_hash": _canonical_hash(ordered),
+        "attempt_one_only": all(item.get("attempt") == 1 for item in ordered),
+        "complete_case_group_pairs": len(actual_prompts),
+        "expected_case_group_pairs": 150,
+        "formal_role_only": all(
+            item.get("experiment_role") == "formal_evidence_ablation"
+            for item in ordered
+        ),
+        "frozen_prompt_set_hash": prompt_audit["prompt_set_hash"],
+        "runtime_evidence_manifest_hash": prompt_audit[
+            "runtime_evidence_manifest_hash"
+        ],
+        "prompt_hashes_match_frozen_audit": actual_prompts == expected_prompts,
+        "request_configurations": [
+            json.loads(item) for item in sorted(request_configurations)
+        ],
+        "response_metadata_records": len(response_metadata),
+        "response_models": sorted(
+            {item["response_model"] for item in response_metadata}
+        ),
+        "system_fingerprints": sorted(
+            {item["system_fingerprint"] for item in response_metadata}
+        ),
+        "unique_cache_keys": len({item["cache_key"] for item in ordered}),
+    }
+
+
 def _paired_comparison(
     records_by_case: dict[str, dict[str, dict[str, Any]]], before: str, after: str
 ) -> dict[str, Any]:
@@ -189,6 +307,9 @@ def build_repair_evaluation() -> dict[str, Any]:
     records = _artifact_records(REPAIR_ARTIFACT_ROOT)
     leakage_scan = validate_artifact_boundaries(records)
     online = [item for item in records if _is_formal_artifact(item)]
+    pricing = _read_json(DEEPSEEK_FORMAL_PRICING_SNAPSHOT)
+    formal_run = _read_json(REPAIR_FORMAL_RUN)
+    prompt_audit = _read_json(RUNTIME_EVIDENCE_PROMPT_AUDIT)
     engineering_smoke = [
         item
         for item in records
@@ -215,10 +336,38 @@ def build_repair_evaluation() -> dict[str, Any]:
     failures = Counter(
         mode for item in online for mode in item.get("failure_modes", [])
     )
+    classifications = {
+        group: dict(
+            sorted(
+                Counter(
+                    item["classification"]
+                    for item in online
+                    if item["group"] == group
+                ).items()
+            )
+        )
+        for group in GROUPS
+    }
     fake = [item for item in records if item.get("experimental") is False]
+    artifact_integrity = _artifact_integrity(online, prompt_audit)
+    if online and (
+        artifact_integrity["complete_case_group_pairs"] != 150
+        or artifact_integrity["unique_cache_keys"] != 150
+        or not artifact_integrity["attempt_one_only"]
+        or not artifact_integrity["formal_role_only"]
+        or not artifact_integrity["prompt_hashes_match_frozen_audit"]
+        or artifact_integrity["response_metadata_records"]
+        != formal_run["responses_received"]
+        or len(artifact_integrity["request_configurations"]) != 1
+        or artifact_integrity["response_models"] != ["deepseek-v4-flash"]
+        or len(artifact_integrity["system_fingerprints"]) != 1
+        or formal_run["requests_attempted"] != 150
+    ):
+        raise ValueError("formal repair artifact set is incomplete or inconsistent")
     evaluation = {
         "dataset": _read_json(CODEFLAWS_REPAIR_PILOT_SUMMARY),
         "experiment": {
+            "artifact_integrity": artifact_integrity,
             "complete_paired_cases": sum(
                 all(group in groups for group in GROUPS) for groups in by_case.values()
             ),
@@ -227,8 +376,13 @@ def build_repair_evaluation() -> dict[str, Any]:
             ),
             "online_artifacts": len(online),
             "online_experiment_status": "completed" if online else "not_run",
+            "run": formal_run,
         },
         "failure_analysis": {
+            "classifications_by_group": classifications,
+            "infrastructure_or_api_failures": sum(
+                item["classification"] == "model_error" for item in online
+            ),
             "model_failure_modes": dict(sorted(failures.items())),
             "no_reliable_fl_evidence_case_ids": no_reliable_fl,
             "no_reliable_fl_evidence_cases": len(no_reliable_fl),
@@ -245,6 +399,17 @@ def build_repair_evaluation() -> dict[str, Any]:
             f"{after}-{before}": _paired_comparison(by_case, before, after)
             for before, after in PAIRINGS
         },
+        "token_usage_and_cost": {
+            "by_group": {
+                group: _usage_metrics(
+                    [item for item in online if item["group"] == group],
+                    pricing["prices"],
+                )
+                for group in GROUPS
+            },
+            "pricing": pricing,
+            "total": _usage_metrics(online, pricing["prices"]),
+        },
         "protocol": _read_json(REPAIR_PROTOCOL),
         "smoke_test": {
             "artifacts": len(fake),
@@ -257,13 +422,44 @@ def build_repair_evaluation() -> dict[str, Any]:
         },
     }
     if online:
+        reliable_ids = {
+            item["case_id"]
+            for item in fl_records
+            if item.get("reliable_locations_available", False)
+        }
+        diversity_median = statistics.median(
+            float(item["coverage_diversity_ratio"]) for item in attributes.values()
+        )
         for bucket, predicate in (
+            ("fl_reliable", lambda value: value["case_id"] in reliable_ids),
+            ("fl_unreliable", lambda value: value["case_id"] not in reliable_ids),
             ("fl_top_1_hit", lambda value: value.get("fl_top_1_hit")),
             ("fl_top_5_hit", lambda value: value.get("fl_top_5_hit")),
             ("fl_top_10_hit", lambda value: value.get("fl_top_10_hit")),
             ("fl_miss", lambda value: not value.get("fl_top_10_hit")),
             ("zero_pass", lambda value: value.get("zero_pass")),
             ("has_pass", lambda value: not value.get("zero_pass")),
+            ("non_executable_fault", lambda value: value.get("non_executable_fault")),
+            ("executable_fault", lambda value: not value.get("non_executable_fault")),
+            (
+                "fault_equivalence_singleton",
+                lambda value: value.get("fault_equivalence_class_size") == 1,
+            ),
+            (
+                "fault_equivalence_tied",
+                lambda value: (value.get("fault_equivalence_class_size") or 0) > 1,
+            ),
+            ("straight_line_ambiguity", lambda value: value.get("straight_line_ambiguity")),
+            (
+                "coverage_diversity_lower_half",
+                lambda value: value.get("coverage_diversity_ratio", 0)
+                <= diversity_median,
+            ),
+            (
+                "coverage_diversity_upper_half",
+                lambda value: value.get("coverage_diversity_ratio", 0)
+                > diversity_median,
+            ),
         ):
             selected = [case_id for case_id, value in attributes.items() if predicate(value)]
             evaluation["fl_relationship"][bucket] = {
@@ -276,6 +472,7 @@ def build_repair_evaluation() -> dict[str, Any]:
                 )
                 for group in GROUPS
             }
+        evaluation["fl_relationship"]["coverage_diversity_median"] = diversity_median
     REPAIR_EVALUATION.parent.mkdir(parents=True, exist_ok=True)
     REPAIR_EVALUATION.write_text(
         json.dumps(evaluation, indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -290,28 +487,84 @@ def _rate(value: float | None) -> str:
 def render_report(evaluation: dict[str, Any]) -> str:
     dataset = evaluation["dataset"]
     experiment = evaluation["experiment"]
-    rows = []
+    result_rows = []
     for group in GROUPS:
         metric = evaluation["groups"][group]
-        rows.append(
-            f"| {group} | {metric['total']} | {_rate(metric['valid_model_output_rate'])} | "
-            f"{_rate(metric['compile_success_rate'])} | {_rate(metric['plausible_rate'])} | "
-            f"{_rate(metric['validated_rate'])} |"
+        result_rows.append(
+            f"| {group} | {metric['total']} | {metric['valid_model_output']} "
+            f"({_rate(metric['valid_model_output_rate'])}) | {metric['compile_success']} "
+            f"({_rate(metric['compile_success_rate'])}) | {metric['plausible']} "
+            f"({_rate(metric['plausible_rate'])}) | {metric['validated']} "
+            f"({_rate(metric['validated_rate'])}) |"
         )
-    pair_rows = []
+    paired_rows = []
+    bootstrap_rows = []
+    mcnemar_rows = []
     for name, result in evaluation["paired_comparisons"].items():
-        if result["status"] == "not_available":
-            pair_rows.append(f"| {name} | 0 | N/A | N/A | N/A | N/A |")
-        else:
-            bootstrap = result["bootstrap"]
-            mcnemar = result["mcnemar"]
-            pair_rows.append(
-                f"| {name} | {result['cases']} | {bootstrap['observed_difference']:+.2%} | "
-                f"[{bootstrap['confidence_interval_95'][0]:+.2%}, "
-                f"{bootstrap['confidence_interval_95'][1]:+.2%}] | "
-                f"{mcnemar['treatment_only']}/{mcnemar['baseline_only']} | "
-                f"{mcnemar['exact_two_sided_p_value']:.6g} |"
-            )
+        bootstrap = result["bootstrap"]
+        mcnemar = result["mcnemar"]
+        paired_rows.append(
+            f"| {name} | {result['cases']} | {mcnemar['treatment_only']} | "
+            f"{mcnemar['baseline_only']} | {bootstrap['observed_difference']:+.2%} |"
+        )
+        bootstrap_rows.append(
+            f"| {name} | {bootstrap['observed_difference']:+.2%} | "
+            f"[{bootstrap['confidence_interval_95'][0]:+.2%}, "
+            f"{bootstrap['confidence_interval_95'][1]:+.2%}] | "
+            f"{bootstrap['samples']} | {bootstrap['seed']} |"
+        )
+        mcnemar_rows.append(
+            f"| {name} | {mcnemar['treatment_only']} | "
+            f"{mcnemar['baseline_only']} | {mcnemar['discordant']} | "
+            f"{mcnemar['exact_two_sided_p_value']:.6g} |"
+        )
+    failure_rows = []
+    for group in GROUPS:
+        counts = evaluation["failure_analysis"]["classifications_by_group"][group]
+        failure_rows.append(
+            f"| {group} | {counts.get('model_error', 0)} | "
+            f"{counts.get('invalid_model_output', 0)} | "
+            f"{counts.get('compile_error', 0)} | "
+            f"{counts.get('repair_test_failed', 0)} | "
+            f"{counts.get('plausible_patch', 0)} | "
+            f"{counts.get('validated_patch', 0)} |"
+        )
+    subgroup_labels = (
+        ("fl_reliable", "FL reliable"),
+        ("fl_unreliable", "FL unreliable"),
+        ("fl_top_1_hit", "FL Top-1 hit"),
+        ("fl_top_5_hit", "FL Top-5 hit"),
+        ("fl_top_10_hit", "FL Top-10 hit"),
+        ("fl_miss", "FL Top-10 miss"),
+        ("zero_pass", "0-PASS"),
+        ("has_pass", ">=1 PASS"),
+        ("non_executable_fault", "Non-executable fault"),
+        ("executable_fault", "Executable fault"),
+        ("fault_equivalence_singleton", "Fault equivalence singleton"),
+        ("fault_equivalence_tied", "Fault equivalence tied"),
+        ("straight_line_ambiguity", "Straight-line ambiguity"),
+        ("coverage_diversity_lower_half", "Coverage diversity lower half"),
+        ("coverage_diversity_upper_half", "Coverage diversity upper half"),
+    )
+    subgroup_rows = []
+    for key, label in subgroup_labels:
+        value = evaluation["fl_relationship"][key]
+        subgroup_rows.append(
+            f"| {label} | {value['A']['total']} | {_rate(value['A']['validated_rate'])} | "
+            f"{_rate(value['B']['validated_rate'])} | "
+            f"{_rate(value['C']['validated_rate'])} |"
+        )
+    usage = evaluation["token_usage_and_cost"]
+    usage_rows = []
+    for group in GROUPS:
+        value = usage["by_group"][group]
+        usage_rows.append(
+            f"| {group} | {value['calls_with_usage']}/{value['calls']} | "
+            f"{value['prompt_tokens']} | {value['prompt_cache_hit_tokens']} | "
+            f"{value['prompt_cache_miss_tokens']} | {value['reasoning_tokens']} | "
+            f"{value['final_answer_tokens']} | {value['completion_tokens']} | "
+            f"{value['total_tokens']} | ${value['estimated_cost_usd']:.6f} |"
+        )
     reasons = ", ".join(
         f"{key}={value}"
         for key, value in dataset["dynamic_exclusion_reasons"].items()
@@ -320,68 +573,126 @@ def render_report(evaluation: dict[str, Any]) -> str:
     no_reliable_fl = evaluation["failure_analysis"][
         "no_reliable_fl_evidence_case_ids"
     ]
+    integrity = experiment["artifact_integrity"]
+    run = experiment["run"]
+    prices = usage["pricing"]
+    total_usage = usage["total"]
+    diversity_median = evaluation["fl_relationship"][
+        "coverage_diversity_median"
+    ]
     return f"""# LLM Repair Evidence Ablation
 
-## 1. Research Question
+## 1. Research Questions
 
 **Does fault-localization and execution evidence improve single-attempt LLM program repair?**
 
-This report preregisters and implements the experiment, but the 150-call formal A/B/C run has not started. Pre-experiment DeepSeek engineering smoke and fake-provider smoke artifacts are explicitly excluded from all effectiveness metrics.
+RQ1 compares Group B with A to estimate the association of frozen FL-v1 evidence with validated repair. RQ2 compares Group C with B to estimate the incremental association of frozen runtime evidence. C versus A reports their combined difference. All results are paired at case level; descriptive subgroup results are not filtering rules or new experiments.
 
-## 2. Dataset
+## 2. Frozen Experimental Protocol
+
+- Protocol `repair-v2`, prompt `repair-evidence-v2`, one attempt per case/group, transport retries 0.
+- Formal artifacts were completed from {run['first_artifact_completed_at']} to {run['last_artifact_completed_at']}; requests attempted {run['requests_attempted']}, responses received {run['responses_received']}, resume used `{str(run['resume_used']).lower()}`.
+- Runtime Evidence manifest hash: `{integrity['runtime_evidence_manifest_hash']}`.
+- Frozen formal prompt-set hash: `{integrity['frozen_prompt_set_hash']}`; artifact prompt hashes match: `{str(integrity['prompt_hashes_match_frozen_audit']).lower()}`.
+- Formal artifact set hash: `{integrity['artifact_set_hash']}`; unique cache keys {integrity['unique_cache_keys']}/150; attempt-one-only `{str(integrity['attempt_one_only']).lower()}`; formal-role-only `{str(integrity['formal_role_only']).lower()}`.
+- The {smoke['engineering_online_artifacts_excluded']} DeepSeek engineering smoke artifacts and {smoke['artifacts']} fake-provider artifacts are excluded from formal effectiveness metrics.
+
+## 3. Dataset / Repair Pilot
 
 - Selection seed: `{dataset['seed']}`.
 - Static candidate count after excluding the prior sets: {dataset['candidate_count']}; dynamically tested: {dataset['dynamic_candidates_tested']}.
 - Final Repair Pilot: {dataset['repair_pilot_size']} cases; dynamic exclusions: {dataset['dynamic_exclusions']} ({reasons}); static exclusions: {dataset['static_exclusions']}.
 - Overlap with the 50-case FL Pilot: {dataset['fl_pilot_overlap']}; overlap with the 300-case independent FL Evaluation: {dataset['fl_evaluation_overlap']}.
 
-## 3. Experimental Setup
+## 4. Model and Provider
 
-- Protocol: `repair-v2`; prompt: `repair-evidence-v2`; one attempt per case/group.
+- Provider: DeepSeek Official API; model `deepseek-v4-flash`; observed response model `deepseek-v4-flash` and system fingerprint recorded per response.
+- Thinking enabled, reasoning effort low, max tokens 16384, stream false, temperature and seed not sent, request timeout 120 seconds.
+- Received 148 responses; the two absent responses are retained as infrastructure/API failures and were not retried.
+
+## 5. A/B/C Definitions
+
 - Group A: complete buggy source plus the common repair-time input/expected-output oracle.
 - Group B: Group A plus frozen CodeDoctor FL-v1 Top-10 locations, or the uniform no-reliable-location message when FL-v1 itself produces no positive-score location.
 - Group C: Group B plus runtime-only repair-test verdict, actual stdout/stderr, exit code, and timeout state. Input and expected output remain exclusively in the shared base context.
-- Final candidate configuration: `deepseek-v4-flash`, thinking enabled, reasoning effort low, maximum output tokens 16384, stream false, request timeout 120 seconds, and no transport retry. Temperature and seed are not sent; determinism is not assumed.
-- Formal model artifacts: {experiment['online_artifacts']}; candidate selection and engineering smoke are documented separately in the pre-experiment report.
-- Patch protocol: complete source extraction, Docker compilation, repair tests, then hidden validation for plausible patches. A validated patch means that all available repair and hidden validation tests pass; it is not formal correctness.
+- Patch protocol: complete-source extraction, Docker compilation, repair tests, then hidden validation for plausible patches.
 
-## 4. Leakage Boundary
+## 6. Leakage Boundary
 
 `RepairContext` can contain only case ID, language, buggy source, the common repair-time oracle, registered FL-v1 locations/status, and runtime execution evidence. Reference source, ground-truth diff/lines, and hidden validation tests are held in a separate evaluation-only boundary and are not accepted by prompt rendering. The Codeflaws distribution has no per-case problem statements, so existing repair-test input/expected-output pairs serve as a versioned common oracle and are identical in A/B/C. Prompt canary tests and artifact scans cover `REFERENCE_SECRET_TOKEN` and `VALIDATION_SECRET_TOKEN`. API keys are neither serialized nor cached. Artifact boundary scan: `{evaluation['leakage_scan']['status']}` over {evaluation['leakage_scan']['artifacts_checked']} artifacts.
 
-## 5. Results
+## 7. Main Results
 
-| Group | Cases | Valid output | Compile success | Plausible | Validated |
+| Group | Cases | Valid output | Compile success | Plausible | Validated patch |
 |---|---:|---:|---:|---:|---:|
-{chr(10).join(rows)}
+{chr(10).join(result_rows)}
 
-| Comparison | Paired cases | Validated-rate difference | Bootstrap 95% CI | After-only/Before-only | Exact McNemar p |
-|---|---:|---:|---:|---:|---:|
-{chr(10).join(pair_rows)}
+Validated Patch means all available repair and hidden validation tests passed. **Validated Patch is not Formally Correct Patch.**
 
-Online experiment status: `{experiment['online_experiment_status']}`. These N/A cells are intentional and must not be replaced with fake-provider outcomes.
+## 8. Paired Comparison
 
-## 6. Failure Analysis
+| Comparison | Paired cases | Before fail / after success | Before success / after fail | Validated-rate difference |
+|---|---:|---:|---:|---:|
+{chr(10).join(paired_rows)}
 
-No formal online model failures are available for scientific analysis. The local fake-provider smoke ran {smoke['artifacts']} artifacts over {smoke['cases']} cases across A/B/C; classifications were {smoke['classifications']}. In addition, {smoke['engineering_online_artifacts_excluded']} DeepSeek pre-experiment engineering smoke artifacts are excluded from all formal metrics. The fake returned the buggy source unchanged, so this confirms context, extraction, Docker compilation, repair-test classification, artifact writing, and resume boundaries without estimating repair ability. A separate non-artifact evaluator check ran one reference source through repair plus hidden validation and reached `validated_patch`.
+## 9. Paired Bootstrap 95% CI
 
-FL-v1 produced no reliable positive-score suspicious location for {len(no_reliable_fl)} of {dataset['repair_pilot_size']} Repair Pilot cases: {no_reliable_fl or 'none'}. These cases remain in A/B/C and receive the uniform no-reliable-location message in B/C.
+| Comparison | Observed difference | 95% CI | Samples | Seed |
+|---|---:|---:|---:|---:|
+{chr(10).join(bootstrap_rows)}
 
-The implemented online analysis distinguishes invalid output, compile error, still failing original failing tests, regression on previously passing repair tests, and validation overfitting. It also records line-diff size, whether an FL Top-10 line was modified, FL Top-1/5/10 hit strata, 0-PASS, non-executable fault, equivalence-class size, and coverage diversity.
+The interval is a percentile paired bootstrap over 50 case-level validated/not-validated differences. It is descriptive uncertainty for this frozen Pilot and model run.
 
-## 7. Threats to Validity
+## 10. Exact McNemar Results
+
+| Comparison | Before fail / after success | Before success / after fail | Discordant | Exact two-sided p |
+|---|---:|---:|---:|---:|
+{chr(10).join(mcnemar_rows)}
+
+The p-values are exact, two-sided, and unadjusted for the three reported comparisons. No protocol or hypothesis was changed in response to them.
+
+## 11. Failure Analysis
+
+| Group | Model/API error | Invalid model output | Compile error | Repair-test failed | Plausible but validation failed | Validated patch |
+|---|---:|---:|---:|---:|---:|---:|
+{chr(10).join(failure_rows)}
+
+The two model/API failures were one request timeout and one URL-open timeout for the same case in A/B; transport retry remained 0. Invalid outputs were length-truncated responses with no extractable final source. No failed, uncompilable, implausible, or overfitting patch was retried.
+
+## 12. FL Quality vs Repair Outcome
+
+| Descriptive subgroup | Cases | A validated | B validated | C validated |
+|---|---:|---:|---:|---:|
+{chr(10).join(subgroup_rows)}
+
+FL-v1 had no reliable positive-score location for {len(no_reliable_fl)} case: {no_reliable_fl or 'none'}. Coverage diversity uses a post-hoc descriptive Pilot median split at {diversity_median:.6f}. These Top-k, 0-PASS, executable-fault, equivalence-class, ambiguity, and diversity summaries are exploratory and were not used to remove cases or rerun the model.
+
+## 13. Token Usage / API Cost
+
+| Group | Usage records/calls | Prompt | Cache hit | Cache miss | Reasoning | Final answer | Completion | Total | Estimated USD |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+{chr(10).join(usage_rows)}
+
+- Aggregate usage-bearing responses: {total_usage['calls_with_usage']}/{total_usage['calls']}; calls without usage: {total_usage['calls_without_usage']}.
+- Aggregate prompt/cache-hit/cache-miss tokens: {total_usage['prompt_tokens']} / {total_usage['prompt_cache_hit_tokens']} / {total_usage['prompt_cache_miss_tokens']}.
+- Aggregate reasoning/final-answer/completion/total tokens: {total_usage['reasoning_tokens']} / {total_usage['final_answer_tokens']} / {total_usage['completion_tokens']} / {total_usage['total_tokens']}.
+- Actual-usage cost estimate: `${total_usage['estimated_cost_usd']:.6f}` using the [DeepSeek Official API prices]({prices['official_source']}) verified at `{prices['verified_at']}`: cache hit `${prices['prices']['input_cache_hit']}`/M, cache miss `${prices['prices']['input_cache_miss']}`/M, output `${prices['prices']['output']}`/M. The two failed requests report no usage and therefore contribute no token-based cost estimate.
+
+## 14. Threats to Validity
 
 - The 50-case Repair Pilot is small; paired confidence intervals may be wide.
-- Results will depend on one selected LLM/model version and its stochastic behavior.
-- Temperature zero and an optional seed do not guarantee provider determinism.
+- Results depend on one selected mutable provider alias, one observed fingerprint, and stochastic model behavior.
 - Codeflaws programs and tests may not represent larger real-world C/C++ systems.
 - Repair and hidden validation suites are incomplete; validated is not formally correct.
 - Findings may be prompt-sensitive even though the A/B/C base instruction is fixed.
-- The formal bulk run has not been authorized or started, so the core causal comparison remains unmeasured.
+- Two provider failures count as not validated; conclusions may differ under another independently preregistered run, but this run cannot be repaired post hoc.
+- The three paired p-values are reported without multiplicity adjustment and should not be read as three independent confirmatory tests.
+- Subgroup analyses are small, overlapping, and descriptive; they do not establish causal moderation.
+- Token cost is computed from provider-reported usage and the official price snapshot, not an account billing export.
 
-## 8. Conclusion
+## 15. Conclusion
 
-Phase 7 establishes a disjoint Repair Pilot, a frozen single-attempt protocol, auditable A/B/C prompts with identical task semantics, strict leakage boundaries, content-addressed resume, Docker patch validation, paired statistics, and reporting. It does **not** yet answer whether FL or execution evidence improves LLM repair because the formal 50-case A/B/C run has not started. Engineering smoke cannot estimate repair rates. Bulk online execution remains guarded and requires both resolved reproducibility blockers and explicit approval.
+On this frozen 50-case run, Group B did not improve over A: 78% versus 80%, difference -2 percentage points, bootstrap 95% CI [-14, +12], exact McNemar p=1. Group C reached 92%, improving over B by 14 points with bootstrap 95% CI [+4, +26] and exact McNemar p=0.0390625; C exceeded A by 12 points, CI [0, +24], p=0.109375. Thus RQ1 provides no evidence that FL-v1 alone improved validated repair in this run, while RQ2 shows a positive paired association for adding frozen runtime evidence. The Pilot, incomplete test oracle, stochastic provider, multiple descriptive comparisons, and non-formal meaning of validation prevent broader correctness or causal claims.
 """
 
 

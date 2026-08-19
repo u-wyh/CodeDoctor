@@ -2134,3 +2134,158 @@ lxc stop codedoctor-docker-host
 - 正式启动前再次只读核验 credential availability、官方价格、frozen manifest/prompt hash、formal artifact namespace 和调用预算。
 - 获得批准后严格使用 frozen runtime evidence 和独立 formal cache namespace执行一次 150-call A/B/C 实验，逐 artifact 记录 provider response metadata 并保持 engineering smoke 排除。
 - 本轮在 Phase 7 停止，不进入 Phase 8。
+
+## 2026-08-19 - Phase 7: Formal LLM Repair Evidence Ablation
+
+### 1. 本次目标
+
+- 在用户明确授权后，按冻结协议执行 50-case Repair Pilot x A/B/C x 1 attempt，共 150 次真实 DeepSeek Official API 正式调用。
+- 保持 `deepseek-v4-flash`、thinking enabled、reasoning effort low、max tokens 16384、stream false、temperature not sent、transport retry 0，以及 Repair Pilot、FL-v1、repair-v2、prompt、oracle、Frozen Runtime Evidence、extraction 和 validation 全部不变。
+- 汇总 Validated Patch Rate、case-level paired comparison、paired bootstrap、exact McNemar、failure modes、FL/0-PASS/non-executable/equivalence/coverage diversity 子组、真实 usage 和成本。
+- 更新正式报告、完整回归、泄漏与 artifact 完整性审计，并提交推送；Phase 7 完成后停止，不进入 Phase 8。
+
+### 2. 实际完成内容
+
+- 调用前确认工作树 clean、HEAD=`3373f49b04fb5ca6b3689dc10348d4c6dd44eb61`、credential available，且没有输出 key 内容。
+- 调用前重新验证 `repair-v2`、50/50 Frozen Runtime Evidence、174 repair tests、Runtime Evidence manifest hash `96aa507caf2332d0f44b4f2fd3d0aaf68d1168e93856d046d57495b12a52ea3c`、150/150 prompt-set hash `9a65e8fcf2eea3d3da8a64bbfac4d32736e9090da7917da4ea6270d7cb9eaea0`、leakage PASS、formal artifact count 0 和 corrupt-freeze bulk guard PASS。
+- 运行唯一一次正式 CLI：`--provider deepseek --confirm-bulk`，没有传 `--resume`、case/group filter 或参数覆盖。150 次 requests attempted，148 次 responses received，150 个 single-attempt artifacts；没有自动 retry，没有对失败结果补调。
+- Formal artifact 首个/最后一个完成时间为 `2026-08-19T14:15:41.301492+00:00` 和 `2026-08-19T16:35:12.180421+00:00`。Codex 监视调用曾被用户中断一次，但底层正式进程持续存活，因此 resume=false，未重启进程，也未重复调用。
+- 两次无 response 的正式失败都发生在 `417-C-bug-6586834-6586850`：A 为 `ModelTimeout: DeepSeek request timed out`，B 为 `ModelAPIError: ... <urlopen error timed out>`。两者按基础设施/API failure 保留，不重试；C 正常完成。
+- A：50 total，46 valid output，46 compile success，43 plausible，40 validated。分类为 model error 1、invalid model output 3、repair-test failed 3、plausible but validation failed 3、validated 40。
+- B：50 total，47 valid output，47 compile success，42 plausible，39 validated。分类为 model error 1、invalid model output 2、repair-test failed 5、plausible but validation failed 3、validated 39。
+- C：50 total，50 valid output，50 compile success，49 plausible，46 validated。分类为 repair-test failed 1、plausible but validation failed 3、validated 46；无 model/API error、invalid model output 或 compile error。
+- 五个 invalid model output 均是 `finish_reason=length` 且没有可提取的完整 final source；没有对 length、compile、repair-test 或 validation failure 进行重新调用。
+- Paired Validated 结果：A→B 为 5 个 A fail/B success、6 个 A success/B fail，差值 -0.02；B→C 为 8 个 B fail/C success、1 个 B success/C fail，差值 +0.14；A→C 为 8 个 A fail/C success、2 个 A success/C fail，差值 +0.12。
+- 10,000 次、seed 20260817 的 paired bootstrap 95% CI：B-A `[-0.14, 0.12]`，C-B `[0.04, 0.26]`，C-A `[0.00, 0.24]`。
+- Exact two-sided McNemar：B-A `p=1.0`，C-B `p=0.0390625`，C-A `p=0.109375`。三个 p-value 未做 multiplicity adjustment，未据此更改协议。
+- FL reliable 49 cases 的 A/B/C validated 为 40/39/45；唯一 unreliable case 为 0/0/1。Top-1 hit 8 cases 为 6/5/7，Top-5 hit 25 cases 为 21/18/22，Top-10 hit 38 cases 为 30/28/34，Top-10 miss 12 cases 为 10/11/12。
+- 0-PASS 13 cases 的 A/B/C validated 为 10/9/13；有 PASS 的 37 cases 为 30/30/33。Non-executable 4 cases均为 4/4/4；executable 46 cases为 36/35/42。
+- Fault-equivalence singleton 2 cases 为 2/1/2，tied 44 cases 为 34/34/40；straight-line ambiguity 36 cases 为 28/28/33。Coverage diversity 使用明确标注为 post-hoc descriptive 的 Pilot median split 0.146429：lower 25 cases 为 20/21/24，upper 25 cases 为 20/18/22。
+- A usage：49/50 有 usage；prompt 23,986，cache hit 0，cache miss 23,986，reasoning 282,420，final answer 11,876，completion 294,296，total 318,282，估算 `$0.085761`。
+- B usage：49/50 有 usage；prompt 41,883，cache hit 20,864，cache miss 21,019，reasoning 254,225，final answer 12,445，completion 266,670，total 308,553，估算 `$0.077669`。
+- C usage：50/50 有 usage；prompt 49,101，cache hit 39,040，cache miss 10,061，reasoning 205,729，final answer 12,632，completion 218,361，total 267,462，估算 `$0.062659`。
+- 总 usage：148/150 有 usage；prompt 114,970，cache hit 59,904，cache miss 55,066，reasoning 742,374，final answer 36,953，completion 779,327，total 894,297。
+- 于 `2026-08-19T16:37:39Z` 核验 DeepSeek Official API 当前 Flash USD 价格：cache hit `$0.0028/M`、cache miss `$0.14/M`、output `$0.28/M`。按 provider 实际 usage 估算总成本 `$0.226089`；两次无 usage 的失败请求不计入 token-based estimate。
+- 重写正式报告为 15 节，包含 RQ、冻结协议、数据集、模型、A/B/C、泄漏、主结果、paired、bootstrap、McNemar、failure、FL/subgroups、usage/cost、threats 和 conclusion；明确 `Validated Patch is not Formally Correct Patch`。
+- 150 formal artifacts 全部 role=`formal_evidence_ablation`、attempt=1、cache key 唯一；artifact set hash `067710f9f3b71855cc4bf1db3dd0614cef89c1d4cec7e4f6e83c0372b7607f17`。150/150 artifact prompt hashes 与冻结 prompt audit 一致，148 个 response 的 model、request configuration 和 fingerprint 一致。
+- Artifact/leakage scan 覆盖 165 个 artifacts 并 PASS；150 formal artifacts 中 API key pattern、canary 和 raw reasoning 均 absent，只保留 reasoning character count 和 SHA-256。
+
+### 3. 新增、修改、删除的文件
+
+新增：
+
+- `benchmark/metadata/repair/deepseek_pricing_20260819.json`
+- `benchmark/metadata/repair/formal_run_v1.json`
+
+修改：
+
+- `benchmark/config.py`
+- `benchmark/reports/llm_repair_evidence_ablation.md`
+- `benchmark/results/repair/evidence_ablation.json`
+- `repair/reporting.py`
+- `repair/tests/test_reporting.py`
+- `docs/DEVELOPMENT_LOG.md`
+
+删除：无。
+
+本地生成但由 Git 忽略：
+
+- `benchmark/artifacts/repair/formal_evidence_ablation/` 下 150 个正式 JSON artifacts，约 3.0 MB。
+
+### 4. 执行过的重要命令
+
+```bash
+source ~/.config/codedoctor/secrets.env
+python3 -c 'import os; print("credential=available" if os.getenv("DEEPSEEK_API_KEY") else "credential=unavailable")'
+git rev-parse HEAD
+git status --porcelain
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- docker image inspect codedoctor-cpp-sandbox --format '{{.Id}}'
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest repair.tests.test_runtime_evidence.RuntimeEvidenceTests.test_bulk_gate_refuses_invalid_freeze_before_generation -v'
+
+source ~/.config/codedoctor/secrets.env
+printf '%s\0' "$DEEPSEEK_API_KEY" | lxc exec codedoctor-docker-host -- bash -lc 'IFS= read -r -d "" DEEPSEEK_API_KEY; export DEEPSEEK_API_KEY; cd /workspace/CodeDoctor && exec env PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_repair_ablation.py --provider deepseek --confirm-bulk'
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_repair_ablation_report.py'
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest repair.tests.test_reporting -v
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_repair_ablation_report.py
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests -v && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests -v'
+
+git diff --exit-code HEAD -- benchmark/metadata/repair/repair_protocol_v2.json benchmark/metadata/repair/runtime_evidence_manifest_v1.json benchmark/metadata/repair/runtime_evidence_v1 benchmark/metadata/repair/runtime_evidence_prompt_audit_v1.json benchmark/metadata/repair/repair_pilot_fl.jsonl benchmark/metadata/repair/repair_pilot_attributes.jsonl repair/context.py repair/evaluator.py repair/extraction.py repair/pipeline.py repair/prompting.py repair/provider.py repair/deepseek.py
+git diff --check
+lxc exec codedoctor-docker-host -- bash -lc 'docker ps -a --filter ancestor=codedoctor-cpp-sandbox --format "{{.ID}} {{.Status}} {{.Names}}"; docker ps -a --filter ancestor=codedoctor-cpp-analysis --format "{{.ID}} {{.Status}} {{.Names}}"'
+lxc stop codedoctor-docker-host
+```
+
+另外执行了离线内联 Python 审计：重新构建 150 prompts 并比对冻结 hash；验证 artifact 数量、case/group 唯一性、attempt、role、cache key、model、request config、fingerprint 和 artifact-set hash；聚合 classification、paired outcomes、usage/cost 和全部描述性子组；扫描 credential、canary 和 raw reasoning。通过官方 DeepSeek API Docs 的 Models & Pricing 页面核验运行时价格。
+
+### 5. 实际测试结果
+
+- Preflight：HEAD、clean worktree、credential existence、repair-v2、50/174 Frozen Runtime Evidence、两个冻结 hash、150 offline prompts、leakage、formal artifact empty 和 bulk guard 全部 PASS。
+- 正式执行：150 requests attempted、148 responses received、150/150 single-attempt artifacts；transport retries 0，resume=false。
+- Targeted reporting tests：4/4 PASS；新增 usage/cost 和 artifact-integrity 单测通过。
+- 完整 regression：sandbox 29/29、benchmark 12/12、fault localization 36/36、repair 47/47，共 124/124 PASS，无 skip。
+- Artifact reproducibility：150/150 unique case/group、150 unique cache keys、attempt-one-only、formal-role-only、frozen prompt match、single request configuration/model/fingerprint 全部 PASS。
+- Leakage：165 artifacts PASS；formal API key pattern 0、canary 0、raw reasoning 0，secret env 未加入 Git。
+- Frozen boundary：Repair Pilot、FL-v1、repair-v2、Runtime Evidence、prompt audit、context/evaluator/extraction/pipeline/prompting/provider/deepseek 无 diff。
+- Docker 清理：无 sandbox/analysis 残留容器，`codedoctor-docker-host` 最终 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 LXD 启动前出现两次基础设施瞬态错误
+
+首次 `lxc start` 报 transient scope failure；随后实例已 RUNNING 但立即执行 `systemctl` 时 DBus 尚未就绪。此时正式 API calls=0。
+
+#### 6.2 两次正式请求发生 timeout
+
+417-C 的 A 在 120 秒 request timeout，B 在 URL open timeout；provider 没有 response/usage。协议禁止 transport retry 和 repair retry。
+
+#### 6.3 五次响应耗尽长度预算
+
+A 三次、B 两次 `finish_reason=length`，没有完整可提取 source，被正式记录为 invalid model output；不能为了提高成功率补调。
+
+#### 6.4 原正式报告模板仍写“bulk 未开始”
+
+已有聚合器能计算 group/paired 结果，但旧 renderer 仍是 pre-run 文案，也没有正式 usage/cost、运行完整性和完整子组表。
+
+#### 6.5 Codex 监视调用被中断
+
+中断只影响前台 polling；统一 exec session 和 LXD 中的正式进程继续运行。重新连接同一 session 后确认任务连续推进，没有 resume 或重复调用。
+
+### 7. 问题的解决方式
+
+- 等待 LXD daemon/DBus ready 后重新执行完整离线 preflight；所有冻结门禁通过后才发第一条正式请求。
+- 两次 timeout 原样保存为 model/API failure，不重试、不替换；最终 150 artifact 集合仍包含这两个 attempt。
+- Length-truncated responses按既有 extraction/classification 规则记为 invalid，不修改 max tokens 或 prompt。
+- 仅扩展 post-experiment `repair/reporting.py`：加入 fail-closed formal artifact integrity、真实 usage/cost、failure/subgroup 聚合和 15 节报告；没有修改任何冻结实验路径。
+- 建立 `formal_run_v1.json` 记录授权命令、attempted/received、resume、retry 和 artifact 时间边界；建立 2026-08-19 官方价格快照。
+- 重新连接原统一 exec session，不启动第二条 bulk 命令；最终 CLI 自报 `completed 150 single-attempt artifacts`、`requests attempted=150`、`responses received=148`。
+
+### 8. 设计取舍
+
+- Provider/network failure 按 intention-to-treat 风格计为 not validated，保留完整 50-pair 比较；不使用 post-hoc retry 改写结果。
+- Exact McNemar 和 paired bootstrap 都使用 case-level validated/not-validated；不把 plausible 视为 validated。
+- FL、Top-k、0-PASS、non-executable、equivalence 和 diversity 只做 post-hoc descriptive 分层，不据此删除 case、追加调用或声称因果 moderation。
+- Coverage diversity 明确采用本次 Pilot median split 并标注 exploratory，避免将其伪装成预注册阈值。
+- Artifact set 使用 canonical SHA-256 和逐项冻结 prompt hash审计；正式原始 artifacts 继续遵循仓库既有 ignore policy，不将模型原始输出批量提交 Git。
+- 成本使用 provider-reported cache hit/miss 和 completion usage，不假设 cache hit；无 usage 的 timeout 不虚构 token 或费用。
+
+### 9. 当前已知不足
+
+- Repair Pilot 仅 50 cases，子组很小且互相重叠；paired CI 仍较宽。
+- `deepseek-v4-flash` 是 mutable provider alias；148 个响应的 model 和 fingerprint 本轮一致，但不能保证未来后端永久相同。
+- 两次 provider failure 和五次 length truncation 计入正式结果；另一轮独立预注册实验可能不同，但本轮不能 post-hoc 修复。
+- 三个 paired McNemar p-value 未做 multiplicity adjustment，`p=0.0390625` 应谨慎解释。
+- Hidden validation 仍不完备；Validated Patch 不等于 formally correct patch。
+- `$0.226089` 是按官方价格和有 usage 的 148 个响应计算的 API cost estimate，不是账户账单导出；失败请求可能存在不可见计费。
+- Formal raw artifacts 保存在本机 ignored artifact store；Git 中保存结构化聚合结果、运行元数据、完整性 hash 和报告。
+
+### 10. 下一步计划
+
+- Phase 7 在此停止，等待人工审阅结果、两个 timeout、五个 length truncation、未校正 p-value 和 artifact set。
+- 不自动重跑失败请求，不追加正式调用，不改变协议，不进入 Phase 8。
+- 人工审查后若需要论文表格或独立复核，只使用现有 150 artifacts 和结构化结果，不重新调用模型。
