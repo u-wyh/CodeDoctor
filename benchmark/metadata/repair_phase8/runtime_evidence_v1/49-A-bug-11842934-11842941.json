@@ -1,0 +1,159 @@
+{
+  "case_id": "49-A-bug-11842934-11842941",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "49-A-11842934.c: In function 'main':\n49-A-11842934.c:8:5: warning: 'gets' is deprecated [-Wdeprecated-declarations]\n    8 |     gets(str);\n      |     ^~~~\nIn file included from 49-A-11842934.c:2:\n/usr/include/stdio.h:605:14: note: declared here\n  605 | extern char *gets (char *__s) __wur __attribute_deprecated__;\n      |              ^~~~\n/usr/bin/ld: 49-A-11842934.o: in function `main':\n49-A-11842934.c:(.text+0x17): warning: the `gets' function is dangerous and should not be used.\n",
+    "stderr_utf8_sha256": "b575d3131ae2dfb3157cc6165f57ca16cb015a55842b201ec2d308595dd88891",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 49-A-11842934.c -o 49-A-11842934.o\ngcc 49-A-11842934.o -o 49-A-11842934 -lm -s -O2\n",
+    "stdout_utf8_sha256": "b49bcc4ca38e1e9d09fa1acc0ac4d910c6a62d38b17f810989f229790214a9fa",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": null,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n2",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n3",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n4",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n5",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n1",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 5,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 6,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0006_p7",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 7,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 8,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0020_p21",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 9,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0022_p23",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 10,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0026_p27",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 11,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0029_p30",
+      "timed_out": true
+    },
+    {
+      "exit_code": null,
+      "order": 12,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "phase8_validation_0032_p33",
+      "timed_out": true
+    }
+  ],
+  "schema_version": "1.0.0"
+}

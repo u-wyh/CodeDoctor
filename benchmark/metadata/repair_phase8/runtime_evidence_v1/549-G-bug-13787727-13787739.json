@@ -1,0 +1,93 @@
+{
+  "case_id": "549-G-bug-13787727-13787739",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 549-G-13787727.c -o 549-G-13787727.o\ngcc 549-G-13787727.o -o 549-G-13787727 -lm -s -O2\n",
+    "stdout_utf8_sha256": "fe1e650ffae2ee6db89b2a5e0117b9beb47524e6b1843b388802063772d2a842",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "phase8_validation_0000_p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 5,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 6,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ":(\n",
+      "stdout_utf8_sha256": "4bee47048261f3772871d372b8c95b85fae8e1112a89f7d0447247a1f26f42d4",
+      "test_id": "phase8_validation_0011_p12",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

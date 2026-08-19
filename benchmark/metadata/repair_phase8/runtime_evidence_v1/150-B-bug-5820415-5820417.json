@@ -1,0 +1,236 @@
+{
+  "case_id": "150-B-bug-5820415-5820417",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "150-B-5820415.c:5:5: warning: conflicting types for built-in function 'pow'; expected 'double(double,  double)' [-Wbuiltin-declaration-mismatch]\n    5 | int pow(int a, int b) {\n      |     ^~~\n150-B-5820415.c:2:1: note: 'pow' is declared in header '<math.h>'\n    1 | #include <stdio.h>\n  +++ |+#include <math.h>\n    2 | \n",
+    "stderr_utf8_sha256": "aa003af88c7e1eaf5b97c66b452426bc67456a7365bb489a899364f2badaf429",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 150-B-5820415.c -o 150-B-5820415.o\ngcc 150-B-5820415.o -o 150-B-5820415 -lm -s -O2\n",
+    "stdout_utf8_sha256": "f03c98529126af776a671eac772e650ab6992e5d276309950163e1c122f1cc25",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n1\n",
+      "stdout_utf8_sha256": "287ca15fb530bb86dcacdc73532badb9e533fb2cda1458732ed788dc54248ad7",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n2\n",
+      "stdout_utf8_sha256": "373745b7f6ff4834677e383ed8eeabbf3d87dc903452d1638522ab9c5ab70dac",
+      "test_id": "n3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n1\n",
+      "stdout_utf8_sha256": "287ca15fb530bb86dcacdc73532badb9e533fb2cda1458732ed788dc54248ad7",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n16384\n",
+      "stdout_utf8_sha256": "87cbd0ef80c2319e3459d5e061696dc58e457ee16d3c18810281d2e881f54885",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n815730721\n",
+      "stdout_utf8_sha256": "990c4e6db79d6d25695718a53192b798f262b4de61efa91e30ba02f7e3228760",
+      "test_id": "phase8_validation_0003_p4",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 5,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n675798323\n",
+      "stdout_utf8_sha256": "ca01a971d007f628d0bc458fa8c6dd59ba9ed9e92d0656221aea654ea84dd103",
+      "test_id": "phase8_validation_0017_p18",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 6,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n345702953\n",
+      "stdout_utf8_sha256": "bfd3d8da5dde07c28559221a8e4b7fccef731ad2a9bdf29489bef655765e7595",
+      "test_id": "phase8_validation_0018_p19",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 7,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n968856942\n",
+      "stdout_utf8_sha256": "4c63bc3b04134be9cfd97dc7703a090801296e377aa35a00796ca42bd77b5a8e",
+      "test_id": "phase8_validation_0020_p21",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 8,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n890209975\n",
+      "stdout_utf8_sha256": "40314b22fcb5594b2ed962a0f48ce3c4857194e848281e639648500ad200c412",
+      "test_id": "phase8_validation_0022_p23",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 9,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n93025\n",
+      "stdout_utf8_sha256": "85fcec5843c3b7b0662dfa75a14f160976ccba5984963c9199f7bb39d8ebae31",
+      "test_id": "phase8_validation_0023_p24",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 10,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n2\n",
+      "stdout_utf8_sha256": "373745b7f6ff4834677e383ed8eeabbf3d87dc903452d1638522ab9c5ab70dac",
+      "test_id": "phase8_validation_0025_p26",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 11,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n1999\n",
+      "stdout_utf8_sha256": "f09344991a51ad00fff7768c54c663621ef5f19442d0c9825d850f586f5cca85",
+      "test_id": "phase8_validation_0027_p28",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 12,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n2000\n",
+      "stdout_utf8_sha256": "97ed3370c48939aa8f84f4bf4b36ef4a890a1f98a19c56f8e2a4fecbd27f4229",
+      "test_id": "phase8_validation_0031_p32",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 13,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n216\n",
+      "stdout_utf8_sha256": "05dae510168b4a7f33c3e9b1dc731c74279884eee317f869ca12494b5b6a18df",
+      "test_id": "phase8_validation_0034_p35",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 14,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n64\n",
+      "stdout_utf8_sha256": "710f18d0ba5fc36c25e1cad4cccfb50650a0c1a3ccb28d2657b936078cd36d7e",
+      "test_id": "phase8_validation_0037_p38",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 15,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n294967268\n",
+      "stdout_utf8_sha256": "c96ae8065a08827377e7cdabf392d2d05057fd839fdc4601c95db2e1deec1fd4",
+      "test_id": "phase8_validation_0042_p43",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 16,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n21610777\n",
+      "stdout_utf8_sha256": "418c54128386e4da63c90e95c6ec1ee108259b06d944eed0648a3bb006dcac64",
+      "test_id": "phase8_validation_0054_p55",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 17,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n939447791\n",
+      "stdout_utf8_sha256": "7921aa2b5cc023cc018faae17b91faa759f0de1c7241f32e7e7caa648c5d0496",
+      "test_id": "phase8_validation_0055_p56",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 18,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n9765625\n",
+      "stdout_utf8_sha256": "64d12d0decf7f9cf79bd1dfd1c8e043b894bcc042422c40580c7084838f3b36c",
+      "test_id": "phase8_validation_0057_p58",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 19,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "999999937\n4\n",
+      "stdout_utf8_sha256": "cfb6ede6031e60151fb533c83030e926b1a9f21a64427f5da85e68cd44f60ca3",
+      "test_id": "phase8_validation_0067_p68",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

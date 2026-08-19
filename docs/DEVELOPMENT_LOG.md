@@ -2289,3 +2289,113 @@ A 三次、B 两次 `finish_reason=length`，没有完整可提取 source，被�
 - Phase 7 在此停止，等待人工审阅结果、两个 timeout、五个 length truncation、未校正 p-value 和 artifact set。
 - 不自动重跑失败请求，不追加正式调用，不改变协议，不进入 Phase 8。
 - 人工审查后若需要论文表格或独立复核，只使用现有 150 artifacts 和结构化结果，不重新调用模型。
+
+## 2026-08-20 - Phase 8: Controlled Execution Feedback Repair Pre-registration
+
+### 1. 本次目标
+
+- 建立与 FL Pilot 50、Independent FL Evaluation 300、Phase 7 Repair Pilot 50 完全独立的 100-case Phase 8 Evaluation Set。
+- 冻结 Base/Feedback/Hidden test partition、FL-v1、buggy runtime evidence 和 100 个 Initial prompts。
+- 实现共享同一 first patch 的 Retry Control（R）与 Execution Feedback（F）双分支、repair-time eligibility、两阶段 bulk gate、fake-provider、leakage/reproducibility tests 和预实验报告。
+- 本轮真实 DeepSeek 调用数必须为 0，不启动 Stage 1 或 Stage 2。
+
+### 2. 研究设计与实际完成内容
+
+- 固定 seed `20260820`，从 3,904-case manifest 中先排除 400 个历史正式 case 和不满足静态/至少两个 validation tests 的 case，再按冻结顺序实际 Docker 验证候选并运行 FL-v1；动态检查到 candidate 113 时得到 100 cases。
+- 按 `feedback_count=min(max(1,floor(n/4)),n-1)` 生成 `phase8_test_partition_v1`。Base/Feedback/Hidden 总数分别为 446/1,001/3,123，partition hash 为 `fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7`。
+- 发现 repair pool 与 validation pool 可能复用 `p1` 等 test id 后，为 validation-derived Feedback/Hidden tests 加入稳定命名空间并完整重建 selection、FL、partition 和 runtime freeze，未改变候选顺序或筛选条件。
+- 冻结 100/100 cases、1,447 个 Base+Feedback tests 的首次 buggy observation；不重跑挑选、不 normalize。runtime manifest hash 为 `943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0`。
+- Initial 使用 Base+Feedback public oracle、FL-v1 和 frozen buggy runtime；R 使用相同 Initial context、同一 first patch 和统一 retry instruction，不含 execution feedback；F 只比 R 增加 first patch 的失败 repair-time execution evidence。
+- eligibility 仅由 extractable first patch 的 compile/Base/Feedback failure 触发；provider failure、invalid output、repair-time success 均不触发。Hidden-only failure 的专项测试确认不会触发第二轮。
+- Stage 1 要求 `--confirm-phase8-stage1`，仅运行 100 个 Initial calls 后冻结并退出；Stage 2 要求独立 `--confirm-phase8-stage2`，并逐项校验 Stage 1 manifest、100 个 Initial artifacts、eligible cohort、first patch hash 和 failure evidence hash，失败时在建 provider/网络请求前关闭。
+- 两次独立进程渲染均得到 prompt-set hash `dd4127d97c7a73b822330d0c1c6890873e3913170b48335c895cca59b1b49672`；leakage audit 通过。
+- 增加 400,000 UTF-8 byte 的 fail-closed Initial request operational gate。4 个完整 payload 超限，最大 30,774,820 bytes，因此当前 Stage 1 如实判定为 technically not ready。
+- 生成 `benchmark/reports/execution_feedback_pre_experiment.md`，记录 RQ、控制组、独立性、partition、信息边界、artifact、leakage、fake smoke、两阶段调用量、模型冻结、粗略 token/cost 和 readiness。
+
+### 3. 新增、修改和删除的文件
+
+- 新增 `repair_phase8/`：`models.py`、`partition.py`、`context.py`、`prompting.py`、`evaluation.py`、`artifacts.py`、`pipeline.py`、`runtime_evidence.py`、`protocol.py` 及 12 项单元测试。
+- 新增脚本：`benchmark/scripts/build_phase8_evaluation_set.py`、`freeze_phase8_runtime_evidence.py`、`audit_phase8_prompts.py`、`generate_phase8_pre_experiment.py`、`run_phase8_experiment.py`。
+- 新增冻结数据：`benchmark/datasets/codeflaws/metadata/phase8_repair_evaluation*.json*`、`benchmark/metadata/repair_phase8/`、`benchmark/results/repair_phase8/coverage/`。
+- 新增报告：`benchmark/reports/execution_feedback_pre_experiment.md`。
+- 修改 `benchmark/config.py`，增加 Phase 8 路径、seed 和 target size。
+- 删除文件：无。
+
+### 4. 执行过的重要命令
+
+```text
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- docker image inspect codedoctor-cpp-sandbox --format '{{.Id}}'
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/build_phase8_evaluation_set.py'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/freeze_phase8_runtime_evidence.py'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/build_phase8_evaluation_set.py --force'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/freeze_phase8_runtime_evidence.py --force'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_phase8_prompts.py && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_phase8_prompts.py'
+
+python3 benchmark/scripts/run_phase8_experiment.py --stage1
+python3 benchmark/scripts/run_phase8_experiment.py --stage2 --confirm-phase8-stage2
+python3 benchmark/scripts/run_phase8_experiment.py --stage1 --confirm-phase8-stage1
+python3 benchmark/scripts/generate_phase8_pre_experiment.py --fake-tests-passed
+
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair_phase8/tests'
+
+python3 -m compileall -q benchmark repair_phase8
+git diff --check
+lxc stop codedoctor-docker-host
+```
+
+### 5. 实际测试结果
+
+- Phase 8 dataset：100/100 unique；与 FL Pilot、Independent FL Evaluation、Phase 7 Repair Pilot overlap 均为 0。
+- Exclusions：453 条记录，其中 historical overlap 400、static validation failed 20、insufficient validation tests 20、reference repair failure 9、reference hidden validation failure 2、buggy passed all tests 1、FL pipeline failure 1。
+- Runtime freeze：100/100 cases、1,447 public repair-time tests，manifest reload/hash 校验通过。
+- Prompt reproducibility：100/100 prompts，两次独立进程 hash 完全一致；reference、ground truth、Hidden validation 和 credential leakage audit 通过。
+- Fake end-to-end：compile failure、test failure、repair-time success、Hidden-only failure、invalid output、provider failure 全部覆盖；Phase 8 专项 12/12 PASS。
+- Bulk guards：无 Stage 1 confirmation 时 exit 2；Stage 2 缺 Stage 1/cohort manifests 时 exit 2；带 Stage 1 confirmation 时因 operational size gate exit 2，三者均发生在网络前。
+- 完整 regression 最终结果：sandbox 29/29、benchmark 12/12、fault localization 36/36、repair 47/47、Phase 8 12/12，共 136/136 PASS。
+- 正式状态：Stage 1 manifest 不存在、eligible cohort manifest 不存在、Phase 8 formal artifact 文件数 0、真实 DeepSeek API 调用数 0。
+- 清理：无 sandbox/analysis 残留容器，`codedoctor-docker-host` 最终 STOPPED。
+
+### 6. 遇到的问题
+
+#### 6.1 Base test 可能为空
+
+部分合法 case 没有原始 Base Repair Tests，但有预注册 Feedback Tests；Initial prompt builder 初版错误地要求两组都非空。
+
+#### 6.2 Base 与 validation test id 冲突
+
+Codeflaws 不同 test pool 会复用 `p1` 等 id，初版按 id 分组会将 Feedback test 错认成 Base test，破坏信息边界。
+
+#### 6.3 Frozen observation 和公共 expected output 过大
+
+4 个 Initial payload 超过 400,000 bytes；最大两个约 30.8 MB 和 29.5 MB。内容主要来自必须公开的完整 expected output 与必须保留的首次 buggy stdout。
+
+#### 6.4 一次组合审计命令被执行策略拒绝
+
+命令包含删除临时输出文件的 `rm -f`，因此在 CreateProcess 前被拒绝；没有执行子命令，也没有网络或实验副作用。
+
+### 7. 问题的解决方式与设计取舍
+
+- 允许 Base oracle 为空并在 prompt 中明确说明，但继续强制至少一个 Feedback test。
+- 对所有 validation-derived tests 使用由原 index 和原 id 构成的稳定命名空间；随后使用同一 seed、同一顺序完整重建，不手改冻结结果。
+- 保留超大首次 observation 和公共 oracle 原文，不截断、不 normalize、不按大小换 case；增加 fail-closed size audit，使 Stage 1 在 credential/network 前停止。
+- R/F 使用相同 first patch hash；F 只携带 failed repair-time evidence。Hidden validation 仅离线评价，不参与 trigger 或 prompt。
+- 使用 canonical JSON 计算 failure evidence hash；Stage 2 不只信任 manifest，还逐项核对磁盘 Initial artifact canonical hash。
+- 被策略拒绝的组合命令改为直接显示 stderr 和 exit code，不创建临时审计文件。
+
+### 8. 当前已知不足和 Blocker
+
+- `phase8_stage1_ready=false`。4 个 Initial requests 超过当前 400,000-byte operational gate，尚无满足“完整公开 oracle + 不裁剪 frozen observation”边界的可执行传输方案。
+- 不能按 output/source 长度 post-hoc 删除 case，也不能改变 deterministic Feedback split；任何压缩、摘要、裁剪或 dataset protocol amendment 都需要在正式调用前单独审阅和冻结。
+- Stage 2 调用量仍未知；只有合法 Stage 1 完成并冻结 eligible count `M` 后才能确定为 `2M`。
+- 成本仅按 Phase 7 的 148 个已有 usage 均值和 2026-08-19 官方价格快照粗估：Stage 1 约 `$0.1583`，Stage 2 约 `$0.001583 * 2M`，不代表账单且不适用于超大 prompt 的真实 tokenization。
+- Hidden validation 仍不完备；Validated Patch 不等于 formally correct patch。
+
+### 9. 下一步计划
+
+- 停止在 Phase 8 pre-registration，不启动 Stage 1 或 Stage 2。
+- 先人工决定如何处理 4 个超大公共 oracle/runtime payload；任何方案必须保持 R/F 语义对称、Hidden 隔离和 frozen first-observation 可审计性，并在真实调用前更新 protocol/audit。
+- blocker 解决后重新执行离线 size/reproducibility/leakage gate；只有 `phase8_stage1_ready=true` 且用户显式批准 `--confirm-phase8-stage1` 时，才允许 100 个 Initial calls。
+- 提交前 `git diff --cached --check` 首次发现 5 个新 Python 文件 EOF 多余空行；已仅删除这些空行，并将本条作为本轮最后一次项目文件编辑记录。

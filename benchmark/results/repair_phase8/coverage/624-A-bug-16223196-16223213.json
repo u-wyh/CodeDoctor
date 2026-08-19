@@ -1,0 +1,754 @@
+{
+  "case_id": "624-A-bug-16223196-16223213",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=624-A-16223196",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 624-A-16223196.c -o 624-A-16223196.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 624-A-16223196.o -o 624-A-16223196 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/624-A-bug-16223196-16223213/624-A-16223196.c",
+  "tests": [
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n2",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n3",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0006_p7",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0012_p13",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0013_p14",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0018_p19",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [
+        {
+          "branch_index": 0,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 1,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 2,
+          "count": 1,
+          "fallthrough": true,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        },
+        {
+          "branch_index": 3,
+          "count": 0,
+          "fallthrough": false,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 4,
+          "count": 0,
+          "fallthrough": true,
+          "line": 9,
+          "taken": false,
+          "throw": false
+        },
+        {
+          "branch_index": 5,
+          "count": 1,
+          "fallthrough": false,
+          "line": 9,
+          "taken": true,
+          "throw": false
+        }
+      ],
+      "covered_lines": [
+        3,
+        8,
+        9,
+        11,
+        12,
+        13
+      ],
+      "executable_lines": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0026_p27",
+      "timed_out": false,
+      "verdict": "FAIL"
+    }
+  ]
+}

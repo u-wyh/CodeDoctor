@@ -1,0 +1,60 @@
+{
+  "case_id": "139-B-bug-1027098-1027128",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "139-B-1027098.c: In function 'main':\n139-B-1027098.c:27:22: warning: implicit declaration of function 'ceil' [-Wimplicit-function-declaration]\n   27 |             double d=ceil(f);\n      |                      ^~~~\n139-B-1027098.c:3:1: note: include '<math.h>' or provide a declaration of 'ceil'\n    2 | #include<string.h>\n  +++ |+#include <math.h>\n    3 | int min(int,int);\n139-B-1027098.c:27:22: warning: incompatible implicit declaration of built-in function 'ceil' [-Wbuiltin-declaration-mismatch]\n   27 |             double d=ceil(f);\n      |                      ^~~~\n139-B-1027098.c:27:22: note: include '<math.h>' or provide a declaration of 'ceil'\n",
+    "stderr_utf8_sha256": "f524b0acd0e6a323acb74f287e4472208e5d6eacce8c1aa181a09bf1fe19f6cc",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 139-B-1027098.c -o 139-B-1027098.o\ngcc 139-B-1027098.o -o 139-B-1027098 -lm -s -O2\n",
+    "stdout_utf8_sha256": "664e2b90f534d07795ea75c7a9c0735a83956c817370bf32f99c9e10e9f09283",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "640",
+      "stdout_utf8_sha256": "3f1bb7c0da3c01e685edd592f3a3ca0b149a399d25b97c0da47118c24a39f59a",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "24",
+      "stdout_utf8_sha256": "c2356069e9d1e79ca924378153cfbbfb4d4416b1f99d41a2940bfdb66c5319db",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "5643",
+      "stdout_utf8_sha256": "b4c79208b5692b281b3dbef2203139e1bc8f519694652c241de220fbd104e0f4",
+      "test_id": "phase8_validation_0006_p7",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "400",
+      "stdout_utf8_sha256": "26d228663f13a88592a12d16cf9587caab0388b262d6d9f126ed62f9333aca94",
+      "test_id": "phase8_validation_0008_p9",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

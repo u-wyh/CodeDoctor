@@ -1,0 +1,60 @@
+{
+  "case_id": "385-B-bug-11063177-11063186",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "385-B-11063177.c: In function 'main':\n385-B-11063177.c:8:5: warning: 'gets' is deprecated [-Wdeprecated-declarations]\n    8 |     gets(string);\n      |     ^~~~\nIn file included from 385-B-11063177.c:1:\n/usr/include/stdio.h:605:14: note: declared here\n  605 | extern char *gets (char *__s) __wur __attribute_deprecated__;\n      |              ^~~~\n/usr/bin/ld: 385-B-11063177.o: in function `main':\n385-B-11063177.c:(.text+0x2a): warning: the `gets' function is dangerous and should not be used.\n",
+    "stderr_utf8_sha256": "72a8272ea31f579584cf03dd4dd06861d42d6bdb3794e1be67ed5ca6bbcd5823",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 385-B-11063177.c -o 385-B-11063177.o\ngcc 385-B-11063177.o -o 385-B-11063177 -lm -s -O2\n",
+    "stdout_utf8_sha256": "cfcab3dfbb5a5138ee8992ad8b336c23ce118a97cf395e3ac9bae6c4d879a16e",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "6\n6\n",
+      "stdout_utf8_sha256": "3275c31dd99be467469cb4b2308e6cdf1d88173b34e1f729620be77ee34993c5",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "8\n20\n20\n",
+      "stdout_utf8_sha256": "81ce530c8cdc635a3d09f1316dc45d8a1cbbd24f3fb9d277a7c7dcc7e4845f14",
+      "test_id": "n3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "6\n6\n",
+      "stdout_utf8_sha256": "3275c31dd99be467469cb4b2308e6cdf1d88173b34e1f729620be77ee34993c5",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "192\n647\n1157\n1971\n2251\n2635\n3259\n3451\n3771\n3915\n4070\n4200\n4353\n4419\n4419\n",
+      "stdout_utf8_sha256": "687cf6fe44b59bffd4346362a5f8fa0ec83e165b24e360e0dd19f3a0cf12b5fb",
+      "test_id": "phase8_validation_0003_p4",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

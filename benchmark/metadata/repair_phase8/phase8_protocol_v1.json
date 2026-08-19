@@ -1,0 +1,60 @@
+{
+  "artifact_namespaces": {
+    "feedback": "feedback",
+    "initial": "initial",
+    "retry_control": "retry_control"
+  },
+  "attempt_limits": {
+    "feedback": 1,
+    "initial": 1,
+    "maximum_repair_depth": 2,
+    "retry_control": 1,
+    "transport_retries": 0
+  },
+  "dataset": {
+    "excluded_prior_sets": [
+      "fl_pilot_50",
+      "fl_evaluation_300",
+      "repair_pilot_50"
+    ],
+    "seed": 20260820,
+    "target_size": 100
+  },
+  "eligibility": {
+    "eligible": [
+      "compile_failure",
+      "base_repair_test_failure",
+      "feedback_test_failure"
+    ],
+    "ineligible": [
+      "repair_time_success",
+      "hidden_validation_only_failure",
+      "provider_failure",
+      "invalid_model_output"
+    ]
+  },
+  "initial_context": "base and feedback repair-time oracle plus frozen FL-v1 and frozen buggy runtime evidence",
+  "model": {
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "DeepSeek Official API",
+    "reasoning_effort": "low",
+    "stream": false,
+    "temperature_sent": false,
+    "thinking": "enabled"
+  },
+  "primary_comparison": "eligible-cohort retry_control versus feedback, paired by case and identical first patch",
+  "prompt_versions": {
+    "feedback": "phase8-feedback-v1",
+    "initial": "phase8-initial-v1",
+    "retry_control": "phase8-retry-control-v1"
+  },
+  "protocol_version": "phase8-v1",
+  "second_round_order": "lowest bit of SHA256('20260820\\0' + case_id): 0=R,F; 1=F,R",
+  "test_partition": {
+    "feedback_count": "min(max(1, floor(validation_count / 4)), validation_count - 1)",
+    "minimum_validation_tests": 2,
+    "selection": "deterministic shuffle using integer SHA256('20260820\\0' + case_id)",
+    "version": "phase8_test_partition_v1"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "case_id": "493-A-bug-10851567-10851582",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 493-A-10851567.c -o 493-A-10851567.o\ngcc 493-A-10851567.o -o 493-A-10851567 -lm -s -O2\n",
+    "stdout_utf8_sha256": "b80a1d9241fb41439355f067c09bb48414d63cd9ed7a78b5d407d70ff85da0b3",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "MC 25 70\nMC 42 82\nMC 13 90\n",
+      "stdout_utf8_sha256": "149a779a8c8883e168155bafb701f90ab9a190fef0070cbb079488dbdd80aa6a",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "MC 25 70\nMC 42 82\nMC 13 90\n",
+      "stdout_utf8_sha256": "149a779a8c8883e168155bafb701f90ab9a190fef0070cbb079488dbdd80aa6a",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "ASFSHDSG 1 2\n",
+      "stdout_utf8_sha256": "3a88110adbb3028bf7f2179cda63a6dcc06c986d30be60ef5199a4fa357a81e4",
+      "test_id": "phase8_validation_0006_p7",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "ARM 13 2\nARM 73 3\nARM 29 11\nARM 77 14\nARM 69 20\nARM 88 25\nARM 91 27\nARM 10 28\nARM 26 31\nARM 43 33\nARM 25 46\nARM 16 57\nARM 37 58\nARM 28 64\nARM 71 65\nARM 8 70\nARM 95 73\nARM 48 75\nARM 22 79\nARM 50 80\nARM 42 89\n",
+      "stdout_utf8_sha256": "669efb95b9f526577163cc95e4ff362428506d6a619ede39518386f5c56a7baa",
+      "test_id": "phase8_validation_0008_p9",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "A 1 2\n",
+      "stdout_utf8_sha256": "e33811b22a0336648b22d40a26afec36a69cec21cf37df9e1afb48eae8e56037",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

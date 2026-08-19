@@ -1,0 +1,453 @@
+{"case_id": "10-A-bug-5292539-5292547", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "103-A-bug-18288288-18288294", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "106-B-bug-1243945-1243950", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "109-A-bug-13092782-13092815", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "109-B-bug-644647-645084", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "112-A-bug-17982394-17982431", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "116-A-bug-18027378-18027873", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "118-A-bug-18174751-18174835", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "122-A-bug-18230727-18230742", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "122-D-bug-10279993-10280015", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "125-A-bug-917277-917278", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "127-B-bug-2567653-2567663", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "131-B-bug-17068991-17069189", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "133-A-bug-18286216-18286228", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "135-C-bug-940791-941001", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "137-A-bug-8025441-8025459", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "139-A-bug-17335175-17335187", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "141-B-bug-12854822-12854834", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "141-B-bug-9726688-9726780", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "141-C-bug-1046918-1046927", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "143-A-bug-13245338-13245361", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "144-A-bug-18358095-18358576", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "144-A-bug-18358203-18358576", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "146-B-bug-17886329-17886431", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "147-B-bug-1016631-1016640", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "148-C-bug-1143117-1143152", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "149-A-bug-16617896-16617908", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "149-A-bug-16883377-16883408", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "149-B-bug-1170226-1170231", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "149-B-bug-9212927-9212935", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "151-A-bug-17395141-17395169", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "151-A-bug-17894633-17894687", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "155-A-bug-17531616-17531623", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "158-C-bug-9815086-9815194", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "158-C-bug-9967801-9967822", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "16-B-bug-2236916-2236935", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "16-B-bug-3929377-3929378", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "16-C-bug-73707-73718", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "160-B-bug-14660992-14661027", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "165-B-bug-10694756-10694905", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "166-A-bug-11517296-11517321", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "17-B-bug-7993385-7993409", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "171-B-bug-1996186-1996190", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "171-D-bug-5093365-5093369", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "172-B-bug-2096087-2096089", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "174-A-bug-4569708-4569724", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "175-B-bug-2033661-2033670", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "176-D-bug-1589777-1589940", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "177-A2-bug-1594730-1595168", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "18-A-bug-15987401-15987453", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "18-C-bug-15990006-15990013", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "182-B-bug-4449326-4449330", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "189-B-bug-18252831-18252846", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "192-A-bug-18022160-18022194", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "197-B-bug-13477022-13477396", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "2-C-bug-17380010-17380021", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "201-A-bug-1881498-1881520", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "202-C-bug-1847611-1847612", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "203-B-bug-1854178-1854446", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "208-A-bug-18266864-18266892", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "215-B-bug-1986588-1986853", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "216-B-bug-2011322-2011410", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "216-C-bug-7345249-7345281", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "218-C-bug-5956612-5956697", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "219-A-bug-14927544-14927550", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "219-A-bug-15458442-15458463", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "22-A-bug-14153918-14154103", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "22-D-bug-17912738-17912936", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "221-B-bug-3805733-3805812", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "222-E-bug-3016637-3016641", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "225-A-bug-2291733-2291785", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "225-A-bug-4167347-4167456", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "225-B-bug-4132856-4132867", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "231-B-bug-2327519-2327523", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "231-D-bug-2317412-2317509", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "234-A-bug-2425047-2425051", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "235-A-bug-13074317-13074342", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "236-A-bug-18227052-18227120", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "245-A-bug-14699193-14699206", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "245-D-bug-3671804-3671831", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "246-A-bug-5489247-5489258", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "246-B-bug-2682998-2683001", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "248-A-bug-13317382-13317394", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "25-A-bug-18256663-18256701", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "250-A-bug-4602258-4602263", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "254-B-bug-2751488-2751528", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "257-A-bug-2955270-2955271", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "257-A-bug-4214465-4214472", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "258-A-bug-11354670-11354681", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "258-B-bug-2810543-2810936", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "259-B-bug-13083263-13083279", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "26-A-bug-17016643-17016759", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "260-A-bug-15451201-15451214", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "260-A-bug-7601925-7605046", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "265-A-bug-12333691-12333797", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "266-A-bug-17776532-17776624", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "266-B-bug-17596335-17596494", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "266-B-bug-18175541-18175550", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "267-A-bug-3019147-3019157", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "267-A-bug-3177411-3177414", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "268-C-bug-18115443-18115491", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "268-C-bug-3069294-3069301", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "271-A-bug-18046060-18046072", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "271-A-bug-18178942-18178961", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "271-C-bug-3099138-3099559", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "278-A-bug-11079686-11079707", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "281-B-bug-3756944-3756959", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "282-C-bug-15737668-15737873", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "284-A-bug-14700624-14700632", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "286-A-bug-3397714-3397718", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "287-A-bug-9919545-9919585", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "287-B-bug-4368319-4368323", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "287-C-bug-3391049-3391143", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "287-C-bug-3393834-3393848", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "288-A-bug-15596425-15596449", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "29-B-bug-2022262-2022266", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "290-A-bug-3438952-3439348", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "291-A-bug-6868406-6868448", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "291-B-bug-3537395-3537438", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "291-B-bug-6753127-6753143", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "294-A-bug-10574686-10574699", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "296-A-bug-16405147-16405246", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "298-A-bug-5491728-5491732", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "3-A-bug-14796916-14796932", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "3-A-bug-17719912-17719919", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "300-B-bug-4994885-4994897", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "306-A-bug-4028440-4028451", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "31-A-bug-17124860-17124877", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "31-A-bug-17852743-17861117", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "31-A-bug-9086035-9086059", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "31-B-bug-136044-136045", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "312-B-bug-11362577-11362605", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "313-B-bug-15165597-15165618", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "315-B-bug-10035506-10035539", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "315-C-bug-4389968-4389972", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "316-A2-bug-3876995-3877003", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "318-A-bug-18258032-18258084", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "322-A-bug-10641504-10641539", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "322-A-bug-9266158-9266170", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "322-B-bug-12162423-12162461", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "325-A-bug-4069075-4069088", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "328-B-bug-4567715-4567729", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "332-A-bug-4173656-4173709", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "333-D-bug-17031841-17031895", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "336-A-bug-11394760-11394769", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "336-A-bug-11528615-11528621", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "336-A-bug-5261009-5261038", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "336-A-bug-6855346-6855367", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "336-A-bug-6863058-6863063", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "336-A-bug-8899200-8899211", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "337-A-bug-18245765-18245779", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "34-A-bug-11354973-11354982", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "34-A-bug-14489985-14490037", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "342-A-bug-11115345-11115428", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "344-B-bug-17327402-17327661", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "347-C-bug-16875259-16875452", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "347-C-bug-16875285-16875452", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "349-B-bug-17878738-17878742", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "350-A-bug-13069733-13069761", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "352-A-bug-17330658-17330722", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "352-E-bug-4766739-4766759", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "355-B-bug-7653189-7653251", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "357-B-bug-4821770-4823919", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "358-A-bug-14050425-14050437", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "358-A-bug-14050431-14050437", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "359-A-bug-17945891-17946129", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "359-A-bug-5624380-5624386", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "363-A-bug-14221971-14221986", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "366-A-bug-5512926-5512961", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "369-A-bug-10273724-10273842", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "370-A-bug-15330051-15330091", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "373-A-bug-6872879-6872885", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "373-B-bug-5440932-5440937", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "374-A-bug-16321915-16321928", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "376-D-bug-5511525-5511569", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "378-A-bug-18230536-18230541", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "379-A-bug-17986097-17986189", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "381-B-bug-5823708-5823796", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "382-A-bug-15682317-15682478", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "384-B-bug-5760795-5760797", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "385-A-bug-15576747-15576847", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "388-A-bug-7207102-7207148", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "389-B-bug-15461642-15461650", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "394-A-bug-5992854-5992862", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "397-A-bug-15438102-15438137", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "399-A-bug-6311202-6311263", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "4-B-bug-12979060-12979073", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "4-B-bug-18023796-18023809", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "40-B-bug-179453-179470", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "400-B-bug-5969807-5969814", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "400-C-bug-5991406-5991427", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "401-A-bug-17128775-17128797", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "401-B-bug-11120244-11120272", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "403-A-bug-6100756-6100800", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "404-A-bug-18232033-18232087", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "404-C-bug-6126358-6126371", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "405-B-bug-12287356-12287584", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "406-B-bug-6137247-6138024", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "407-A-bug-6346926-6346982", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "407-B-bug-6204749-6204831", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "407-B-bug-6204767-6204831", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "408-A-bug-6421253-6421255", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "408-B-bug-6612687-6612709", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "41-C-bug-10642957-10642983", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "41-C-bug-188673-188682", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "411-A-bug-14678684-14678713", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "411-C-bug-6365352-6365605", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "413-A-bug-6604635-6604651", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "417-C-bug-6546858-6546862", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "417-C-bug-6586834-6586850", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "417-C-bug-8926021-8926036", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "42-A-bug-542240-542248", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "420-A-bug-14755133-14755144", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "424-B-bug-10539205-10539214", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "424-B-bug-7716426-7716429", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "427-A-bug-16612650-16612656", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "427-A-bug-17313902-17392896", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "429-A-bug-6614782-6614851", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "43-D-bug-1129070-1129073", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "430-B-bug-10625991-10626001", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "430-C-bug-10629743-10629769", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "431-A-bug-13546818-13547094", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "433-A-bug-14776196-14776225", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "433-A-bug-15145352-15145379", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "433-A-bug-15145370-15145379", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "437-B-bug-7292877-7292899", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "439-A-bug-18265827-18265858", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "439-B-bug-12836642-12836663", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "441-C-bug-6850566-6850598", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "441-C-bug-6850692-6850717", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "448-A-bug-16090142-16090184", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "448-A-bug-16419909-16419927", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "448-A-bug-16605741-16605763", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "448-A-bug-18270347-18270389", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "448-B-bug-10250808-10250838", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "448-B-bug-17161714-17161735", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "45-A-bug-12889228-12889250", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "450-A-bug-12286209-12286212", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "450-B-bug-15950152-15950193", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "451-A-bug-17961145-17961228", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "452-A-bug-17927374-17927396", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "460-B-bug-11914775-11914783", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "460-B-bug-15678392-15678418", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "463-C-bug-7679531-7679553", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "466-C-bug-17903568-17903640", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "467-A-bug-17691358-17691499", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "467-A-bug-18222333-18222346", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "469-B-bug-12440186-12440424", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "469-B-bug-14541678-14542042", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "47-D-bug-7071163-7071191", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "471-A-bug-17550079-17550110", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "471-A-bug-18116605-18116641", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "471-B-bug-12600748-12600884", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "471-C-bug-7987189-7987325", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "478-A-bug-17544897-17544911", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "478-A-bug-17555253-17555286", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "478-C-bug-13010069-13010382", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "483-A-bug-15165128-15165240", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "483-A-bug-17885639-17885651", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "483-C-bug-9388366-9388407", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "489-C-bug-16080835-16080969", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "49-A-bug-14244702-14244718", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "49-A-bug-15166209-15166224", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "49-A-bug-5636802-5636808", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "490-C-bug-9623374-9623441", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "492-A-bug-16605752-16605812", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "492-A-bug-17190485-17190512", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "492-C-bug-11674425-11674429", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "492-C-bug-16026643-16026665", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "495-A-bug-14848767-14848797", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "496-A-bug-15303159-15303846", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "500-C-bug-11925082-11925093", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "500-C-bug-9323818-9324379", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "500-C-bug-9336036-9336051", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "500-C-bug-9336039-9336051", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "501-B-bug-10643923-10643992", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "501-C-bug-9416146-9416176", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "506-A-bug-9466644-9466667", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "508-C-bug-9606566-9606584", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "510-A-bug-16335384-16335403", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "510-C-bug-17361452-17361471", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "513-A-bug-14705967-14705975", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "513-B2-bug-13172231-13172292", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "514-C-bug-10224933-10224936", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "515-A-bug-16019620-16019646", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "515-A-bug-16913836-16913854", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "515-B-bug-12615092-12615121", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "516-A-bug-11839864-11839881", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "525-C-bug-17550779-17550786", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "526-B-bug-10597230-10597317", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "527-A-bug-17471442-17471452", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "527-B-bug-11093666-11093671", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "527-D-bug-10997019-10997037", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "53-A-bug-7503835-7503845", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "53-C-bug-10604859-10605014", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "53-C-bug-10604869-10605014", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "534-B-bug-11003189-11003208", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "534-B-bug-11937469-11937475", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "535-A-bug-17193246-17193256", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "535-A-bug-18113959-18114010", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "535-B-bug-12134801-12153479", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "535-C-bug-10734946-10734954", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "545-B-bug-12545986-12545994", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "545-D-bug-17326520-17326553", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "546-B-bug-13932383-13932411", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "55-A-bug-9385409-9385429", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "55-A-bug-9385434-9385438", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "552-C-bug-15597760-15597797", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "557-B-bug-17172272-17172312", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "558-D-bug-12147470-12147537", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "567-A-bug-15485089-15485103", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "567-B-bug-13009344-13009380", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "567-B-bug-18002647-18002672", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "569-A-bug-14545255-14545366", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "569-C-bug-12461736-12461979", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "572-A-bug-18014147-18014159", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "574-B-bug-13221741-13221750", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "579-A-bug-17016241-17016267", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "580-A-bug-18107163-18107188", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "581-A-bug-17525566-17525597", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "581-C-bug-13800994-13801005", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "584-A-bug-17598745-17598758", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "586-B-bug-13581699-13581787", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "591-A-bug-16038002-16038018", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "593-B-bug-14669840-14669876", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "598-A-bug-17525130-17525348", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "598-B-bug-15587975-15587993", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "6-A-bug-15083956-15083976", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "6-A-bug-16937698-16937889", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "6-C-bug-11542887-11542898", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "603-A-bug-14677732-14677817", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "606-B-bug-14733385-14733456", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "609-A-bug-15458837-15458847", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "609-A-bug-18262765-18262832", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "610-A-bug-16780583-16780598", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "611-A-bug-15975679-15975698", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "611-A-bug-17424123-17424147", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "611-A-bug-18197396-18197911", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "612-C-bug-15186001-15186009", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "616-B-bug-15683583-15683683", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "617-B-bug-15745018-15745037", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "62-A-bug-11353345-11353416", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "622-A-bug-18068430-18068439", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "622-B-bug-16220785-16220807", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "624-A-bug-16223174-16223213", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "625-B-bug-15989422-15989814", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "628-A-bug-16337935-16338043", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "628-A-bug-16819024-16819056", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "63-C-bug-671981-671984", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "630-I-bug-17126325-17126330", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "630-R-bug-17323075-17323090", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "630-R-bug-17825199-17825235", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "633-A-bug-17175159-17175278", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "633-A-bug-17175268-17175278", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "633-B-bug-16385597-16385608", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "651-A-bug-17415829-17415879", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "651-A-bug-17711025-17711041", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "651-A-bug-18131602-18131652", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "651-A-bug-18221346-18221404", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "653-A-bug-17393445-17393471", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "658-A-bug-17124240-17124253", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "658-A-bug-17925090-17925109", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "658-B-bug-17017536-17017553", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "659-A-bug-18002697-18002735", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "659-D-bug-18135109-18135261", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "66-A-bug-13987166-13987365", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "665-C-bug-17762752-17762802", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "669-A-bug-17827358-17827365", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "669-C-bug-17493975-17494209", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "670-A-bug-18092540-18092564", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "670-A-bug-18109062-18109075", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "670-A-bug-18166226-18166254", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "670-D1-bug-17822855-17822888", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "672-B-bug-17918532-17918557", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "673-A-bug-18047067-18047105", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "674-B-bug-17793278-17793353", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "675-B-bug-18032265-18032487", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "675-B-bug-18212225-18212430", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "676-B-bug-18134806-18134816", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "677-E-bug-18205065-18205068", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "680-A-bug-18329193-18329299", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "680-A-bug-18343172-18343191", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "69-B-bug-18294344-18294349", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "69-B-bug-349893-349996", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "69-B-bug-350935-350951", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "7-B-bug-11565651-11565672", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "70-A-bug-13500651-13500674", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "71-A-bug-18210180-18210187", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "71-A-bug-18221269-18221306", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "71-A-bug-18255203-18255214", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "71-B-bug-4205569-4205661", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "75-A-bug-14683488-14683500", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "76-D-bug-727580-727585", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "80-B-bug-2145822-2145839", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "84-A-bug-16282430-16282448", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "87-A-bug-7652942-7652952", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "89-A-bug-685910-685915", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "90-A-bug-7864607-7864663", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "91-B-bug-17913468-17913512", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "99-A-bug-6985349-6985355", "reason": "historical_dataset_overlap", "stage": "prior_set_exclusion"}
+{"case_id": "1-C-bug-15203581-15203678", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "120-A-bug-3755986-3755994", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "120-A-bug-3756299-3756385", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "120-B-bug-3752196-3752201", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "120-B-bug-3754178-3754181", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "120-E-bug-3535976-3536067", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "120-E-bug-7236446-7236513", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "157-B-bug-13517559-13517565", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "234-A-bug-17608639-17608751", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "234-A-bug-17608640-17608751", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "234-A-bug-2519091-2519130", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "234-B-bug-15831884-15832068", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "234-B-bug-2494175-2494181", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "234-C-bug-3793024-3793031", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "254-A-bug-3232299-3232307", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "254-B-bug-2772031-2772034", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "315-B-bug-4917570-4917593", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "315-B-bug-6249009-6249039", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "329-D-bug-4213667-4213684", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "330-B-bug-4143300-4143301", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "35-A-bug-14752871-14752907", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "35-A-bug-2853912-2853922", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "359-B-bug-5454813-5454814", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "359-B-bug-5916637-5916642", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "364-C-bug-5274751-5274860", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "379-B-bug-6978141-6978150", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "397-B-bug-6018428-6018433", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "397-B-bug-6197060-6197072", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "400-A-bug-11086966-11086988", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "430-C-bug-6594918-6595299", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "435-C-bug-6755082-6755089", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "463-C-bug-7678778-7679553", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "518-D-bug-10002685-10002791", "details": ["missing_tests"], "reason": "static_validation_failed", "stage": "static_validation"}
+{"case_id": "575-D-bug-12872706-12872745", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "576-A-bug-13022096-13022115", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "591-A-bug-17225145-17225221", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "630-B-bug-17359301-17359319", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "630-N-bug-17275815-17275839", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "7-B-bug-14690359-14690378", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"case_id": "85-A-bug-735710-735713", "reason": "insufficient_validation_tests", "stage": "static_validation", "validation_test_count": 1}
+{"candidate_index": 1, "case_id": "172-B-bug-1470030-1470076", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 2, "case_id": "509-B-bug-10655714-10655736", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 23, "case_id": "615-A-bug-15960988-15961003", "reason": "reference_failed_validation_tests", "stage": "dynamic_verification"}
+{"candidate_index": 26, "case_id": "489-A-bug-9388852-9388860", "reason": "buggy_passed_all_tests", "stage": "dynamic_verification"}
+{"candidate_index": 27, "case_id": "22-E-bug-14014681-14014693", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 40, "case_id": "66-B-bug-1097687-1097693", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 52, "case_id": "478-B-bug-17913539-17913550", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 53, "case_id": "393-A-bug-14052177-14052206", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 54, "case_id": "257-A-bug-4611748-4611754", "reason": "fl_pipeline_failed", "stage": "dynamic_verification"}
+{"candidate_index": 56, "case_id": "454-B-bug-14310358-14310411", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 84, "case_id": "44-E-bug-13422082-13422200", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 97, "case_id": "346-A-bug-5781133-5781150", "reason": "reference_failed_repair_tests", "stage": "dynamic_verification"}
+{"candidate_index": 101, "case_id": "278-A-bug-13311097-13311271", "reason": "reference_failed_validation_tests", "stage": "dynamic_verification"}

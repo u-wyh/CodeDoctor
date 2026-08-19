@@ -1,0 +1,82 @@
+{
+  "case_id": "46-B-bug-207444-207641",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "46-B-207444.c: In function 'main':\n46-B-207444.c:11:9: warning: implicit declaration of function 'memset' [-Wimplicit-function-declaration]\n   11 |         memset(ch,'\\0',sizeof(ch));\n      |         ^~~~~~\n46-B-207444.c:2:1: note: include '<string.h>' or provide a declaration of 'memset'\n    1 | #include <stdio.h>\n  +++ |+#include <string.h>\n    2 | char s[6][5]={\"\\0\",\"S\",\"M\",\"L\",\"XL\",\"XXL\"},ch[10]={'\\0'};\n46-B-207444.c:11:9: warning: incompatible implicit declaration of built-in function 'memset' [-Wbuiltin-declaration-mismatch]\n   11 |         memset(ch,'\\0',sizeof(ch));\n      |         ^~~~~~\n46-B-207444.c:11:9: note: include '<string.h>' or provide a declaration of 'memset'\n",
+    "stderr_utf8_sha256": "5fc5bc35555d19ffd0c933aea93b3c1cc2f12dafb35c39dd9fb503164fa1f65f",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 46-B-207444.c -o 46-B-207444.o\ngcc 46-B-207444.o -o 46-B-207444 -lm -s -O2\n",
+    "stdout_utf8_sha256": "a50720b825721a7614235d20b4afab77acb40395ec0128fe102608d367a3d34e",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "XXL\nL\nL\n",
+      "stdout_utf8_sha256": "56efc686225c5cb3e53ff2e532330de326b03a6e97f304d3d0adbc680b4a0e91",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stdout_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "S\n",
+      "stdout_utf8_sha256": "7aa397df66304bab4fe275afe0507a01844e7fda848b4e194a9402d010721839",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "S\nXXL\nL\nL\n",
+      "stdout_utf8_sha256": "713f7825d5c91b7df7e9fd05740ee6754308b3f88c5c3cd8f3a5eb009aa05d8e",
+      "test_id": "phase8_validation_0005_p6",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "S\nXXL\nM\nXXL\nS\nL\nM\nS\nM\n",
+      "stdout_utf8_sha256": "5a26a426a1f84c6b48236ec4d7b2353c0daae68969027de2ca320513088d9007",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 5,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "XL\nXXL\nXL\nL\nXL\nXXL\nXXL\nL\nS\nL\nXXL\nXL\nXXL\nXXL\nL\nM\nL\nS\nM\nXL\n",
+      "stdout_utf8_sha256": "5a2c397beea1599ac82ab95b1c1dcdfbd28df5f5ed14fd64990cfa56ed58e075",
+      "test_id": "phase8_validation_0012_p13",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

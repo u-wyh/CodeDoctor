@@ -1,0 +1,115 @@
+{
+  "case_id": "474-A-bug-15919849-15919868",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "474-A-15919849.c: In function 'main':\n474-A-15919849.c:18:15: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]\n   18 |     for(i=0;i<strlen(str);i++){\n      |               ^~~~~~\n474-A-15919849.c:3:1: note: include '<string.h>' or provide a declaration of 'strlen'\n    2 | #include<stdlib.h>\n  +++ |+#include <string.h>\n    3 | #define LL long long\n474-A-15919849.c:18:15: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]\n   18 |     for(i=0;i<strlen(str);i++){\n      |               ^~~~~~\n474-A-15919849.c:18:15: note: include '<string.h>' or provide a declaration of 'strlen'\n",
+    "stderr_utf8_sha256": "63a5a0300ff9299fc6fb6228fd116e2d28841cfbdcc5612732fdd35861e58f1b",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 474-A-15919849.c -o 474-A-15919849.o\ngcc 474-A-15919849.o -o 474-A-15919849 -lm -s -O2\n",
+    "stdout_utf8_sha256": "64d118e43aea751573a18a2e378c46f22d9429ca5a2468bae75bcd8ab44ab2ff",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "allyouneedislove",
+      "stdout_utf8_sha256": "e0b977b6e7891d48ce7158cb1db8592168d6be4fa98f428a77b2cf6cb3dc09e0",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ";zxcvbnmjhgfdsap",
+      "stdout_utf8_sha256": "3ddd52b1085f86ed985e5640932b7135252d8ae4a2a25b3c254e68ba8d1b9681",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "ffffffffffffffffffffffffffffffffffffffffff",
+      "stdout_utf8_sha256": "b663ad7a544fd20dea5556eee0efdba2421723f0c70d7974bf045abc81500c7f",
+      "test_id": "phase8_validation_0004_p5",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "ffffffffffffffffffffffffffffffffffffffffff",
+      "stdout_utf8_sha256": "b663ad7a544fd20dea5556eee0efdba2421723f0c70d7974bf045abc81500c7f",
+      "test_id": "phase8_validation_0005_p6",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "iwshtecyq.eb,c,gsqbsvuoiauwqfab,obtdl.rasigomgers.nzmlxih,.vukks,,nqvbwigxujeswa.yxhemqaorgkwtom,,dm",
+      "stdout_utf8_sha256": "74e17885b03a504219075acff70d1e5f66029522728a3a35a665219632fb6072",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 5,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+      "stdout_utf8_sha256": "2fdbbb78c534427635132f5365dbfa580242f15f4b9b67f43a9e779474c2c2cd",
+      "test_id": "phase8_validation_0013_p14",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 6,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
+      "stdout_utf8_sha256": "2ea6b4c87f587c1dbf8071555effd0cbcd0b7aff2bd481402218e2c3893daf1a",
+      "test_id": "phase8_validation_0016_p17",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 7,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ";",
+      "stdout_utf8_sha256": "41b805ea7ac014e23556e98bb374702a08344268f92489a02f0880849394a1e4",
+      "test_id": "phase8_validation_0023_p24",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 8,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "m,.",
+      "stdout_utf8_sha256": "1ed2868d4d08785a0c55888104e021d7df0b39ce1d8e11bed416df291eb99c85",
+      "test_id": "phase8_validation_0028_p29",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,126 @@
+{
+  "case_id": "624-A-bug-16223196-16223213",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 624-A-16223196.c -o 624-A-16223196.o\ngcc 624-A-16223196.o -o 624-A-16223196 -lm -s -O2\n",
+    "stdout_utf8_sha256": "33e981c1d4ec7e2a5d6d2f8ee56a1c1fa89a9b3fda4a42c45f19a7be2a292c37",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "1.000000",
+      "stdout_utf8_sha256": "b42a73dadec1c669cf9f985d24d8be5e91e302c8b1941a91d30d5f278aa72fcf",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2.000000",
+      "stdout_utf8_sha256": "2a05d3b7c73b9f96c197e3a3c10dd8060d6eb939e47af3c420b1a8c85594fa70",
+      "test_id": "n3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "2.000000",
+      "stdout_utf8_sha256": "2a05d3b7c73b9f96c197e3a3c10dd8060d6eb939e47af3c420b1a8c85594fa70",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "4999.000000",
+      "stdout_utf8_sha256": "cdf22574185da9b130a9f1a195313c81aa6faff5e750b46196962d68df70ffdc",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "3.000000",
+      "stdout_utf8_sha256": "8291fe5714d2b2b756e8c8d67b61672203da76804bbe2d5d63a4110767fc51a1",
+      "test_id": "phase8_validation_0006_p7",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 5,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0.000000",
+      "stdout_utf8_sha256": "272b954865e891d02360e54cc9fc1a8149d8ba85224561317dbd2f8aee055c77",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 6,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0.000000",
+      "stdout_utf8_sha256": "272b954865e891d02360e54cc9fc1a8149d8ba85224561317dbd2f8aee055c77",
+      "test_id": "phase8_validation_0012_p13",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 7,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0.000000",
+      "stdout_utf8_sha256": "272b954865e891d02360e54cc9fc1a8149d8ba85224561317dbd2f8aee055c77",
+      "test_id": "phase8_validation_0013_p14",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 8,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0.000000",
+      "stdout_utf8_sha256": "272b954865e891d02360e54cc9fc1a8149d8ba85224561317dbd2f8aee055c77",
+      "test_id": "phase8_validation_0018_p19",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 9,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0.000000",
+      "stdout_utf8_sha256": "272b954865e891d02360e54cc9fc1a8149d8ba85224561317dbd2f8aee055c77",
+      "test_id": "phase8_validation_0026_p27",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

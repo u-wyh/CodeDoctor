@@ -1,0 +1,102 @@
+{
+  "case_id": "630-N-bug-16989480-16989505",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=630-N-16989480",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 630-N-16989480.c -o 630-N-16989480.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 630-N-16989480.o -o 630-N-16989480 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/630-N-bug-16989480-16989505/630-N-16989480.c",
+  "tests": [
+    {
+      "branches": [],
+      "covered_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "executable_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n2",
+      "timed_out": false,
+      "verdict": "PASS"
+    },
+    {
+      "branches": [],
+      "covered_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "executable_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [],
+      "covered_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "executable_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0004_p5",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [],
+      "covered_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "executable_lines": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false,
+      "verdict": "PASS"
+    }
+  ]
+}

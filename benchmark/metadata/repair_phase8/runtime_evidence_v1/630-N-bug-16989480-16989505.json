@@ -1,0 +1,60 @@
+{
+  "case_id": "630-N-bug-16989480-16989505",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 630-N-16989480.c -o 630-N-16989480.o\ngcc 630-N-16989480.o -o 630-N-16989480 -lm -s -O2\n",
+    "stdout_utf8_sha256": "1b56a9cf422b209c5533bc67f4b60bee0a3bf06d04f015a025c55bb37e2448c3",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "-10.00000000\n-20.00000000\n",
+      "stdout_utf8_sha256": "058de6da919395905eb124b375f5500a752b53c5f2336fcb2eefbf60d7ed90a9",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "-nan\n-nan\n",
+      "stdout_utf8_sha256": "651391b741baba74d55f02fec4e677d1882549cecd87ee057e6f0dcaf4fbfd13",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "-0.00100000\n-999.99900000\n",
+      "stdout_utf8_sha256": "c76bc3871494fa2f25bad37aaaa804b049354afc9a8c96504d6ffe3662c697f1",
+      "test_id": "phase8_validation_0004_p5",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "3.00000000\n-3.00000000\n",
+      "stdout_utf8_sha256": "e843ced1bbf1c2a8e39a6ef73a8021bdcf3abc598a46b41aa6952920ae510ecc",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

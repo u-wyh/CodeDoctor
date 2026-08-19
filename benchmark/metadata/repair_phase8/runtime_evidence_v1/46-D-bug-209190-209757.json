@@ -1,0 +1,115 @@
+{
+  "case_id": "46-D-bug-209190-209757",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 46-D-209190.c -o 46-D-209190.o\ngcc 46-D-209190.o -o 46-D-209190 -lm -s -O2\n",
+    "stdout_utf8_sha256": "3b6b997bce4e33717182e7a7e5845eb4f059c39f7ef4d1bb88a936658db75af1",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n6\n11\n17\n23\n",
+      "stdout_utf8_sha256": "dfddc304a8ddcf99a4f2b6dd660880d6d96ca6c594a77f499e8b2e579b8761f8",
+      "test_id": "p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n6\n11\n17\n6\n",
+      "stdout_utf8_sha256": "c6cd0b2d93ee3cec12228385a03754ba115673416aa871e2d1bab5d5e429cd20",
+      "test_id": "p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "-1\n",
+      "stdout_utf8_sha256": "ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28",
+      "test_id": "p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n0\n4\n",
+      "stdout_utf8_sha256": "601d483a262e7b0bcd6aabe11a8b31bf01d7c57198a2c07614ecaf1cdc38616d",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n",
+      "stdout_utf8_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "test_id": "phase8_validation_0003_p4",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 5,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n2\n5\n-1\n",
+      "stdout_utf8_sha256": "75bc837bcac8a84c8f1abcc24a2d2a88fa05c53a7ead96c4473c1ed02aa1cd9a",
+      "test_id": "phase8_validation_0007_p8",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 6,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n0\n4\n",
+      "stdout_utf8_sha256": "601d483a262e7b0bcd6aabe11a8b31bf01d7c57198a2c07614ecaf1cdc38616d",
+      "test_id": "phase8_validation_0008_p9",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 7,
+      "passed": true,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n3\n7\n-1\n-1\n",
+      "stdout_utf8_sha256": "f1179670046128e29d8d56485fa94f20ea503471d44ce29bc31180312728e4ff",
+      "test_id": "phase8_validation_0009_p10",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 8,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "0\n0\n9\n17\n28\n32\n9\n19\n24\n42\n-1\n-1\n-1\n-1\n48\n-1\n",
+      "stdout_utf8_sha256": "c42a5a8353dff2387df2db51dfe1867a7bd9524565a414c914fd37efd366cabc",
+      "test_id": "phase8_validation_0019_p20",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}

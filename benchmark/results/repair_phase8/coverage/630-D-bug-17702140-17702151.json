@@ -1,0 +1,110 @@
+{
+  "case_id": "630-D-bug-17702140-17702151",
+  "compile_command": [
+    "make",
+    "--no-print-directory",
+    "FILENAME=630-D-17702140",
+    "CC=gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h"
+  ],
+  "compile_stderr": "",
+  "compile_stdout": "gcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 630-D-17702140.c -o 630-D-17702140.o\ngcc -g -O0 --coverage -include /workspace/codedoctor_gcov_signal.h 630-D-17702140.o -o 630-D-17702140 -lm -s -O2\n",
+  "source_path": "benchmark/datasets/codeflaws/raw/codeflaws/630-D-bug-17702140-17702151/630-D-17702140.c",
+  "tests": [
+    {
+      "branches": [],
+      "covered_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "executable_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n2",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [],
+      "covered_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "executable_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "n1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [],
+      "covered_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "executable_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0000_p1",
+      "timed_out": false,
+      "verdict": "FAIL"
+    },
+    {
+      "branches": [],
+      "covered_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "executable_lines": [
+        3,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "exit_code": 0,
+      "gcov_version": "12.2.0",
+      "test_id": "phase8_validation_0007_p8",
+      "timed_out": false,
+      "verdict": "FAIL"
+    }
+  ]
+}

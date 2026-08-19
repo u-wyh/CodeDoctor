@@ -1,0 +1,71 @@
+{
+  "case_id": "151-B-bug-3999343-3999355",
+  "compile": {
+    "exit_code": 0,
+    "stderr": "",
+    "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 151-B-3999343.c -o 151-B-3999343.o\ngcc 151-B-3999343.o -o 151-B-3999343 -lm -s -O2\n",
+    "stdout_utf8_sha256": "24f816c8127253078821f983858a410b2682182e21e7c0720cc3274594530db5",
+    "success": true
+  },
+  "generated_at": "2026-08-19T17:47:55.182074+00:00",
+  "protocol_version": "runtime-evidence-v1",
+  "repair_tests": [
+    {
+      "exit_code": 0,
+      "order": 0,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov .",
+      "stdout_utf8_sha256": "bfe75b73aac735ad07f1ea8bbe19abe7cc133269c633fc57ff48afa250d57165",
+      "test_id": "n2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 1,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "If you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik .",
+      "stdout_utf8_sha256": "268ddeb52563f753a7db169834ef7aa92209fd6de89d077cf2e430bf5b697a05",
+      "test_id": "n3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 2,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "If you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski .",
+      "stdout_utf8_sha256": "8f94ef0791be37522bd9727d68a7cd17ea8799d3868442d630427ac7e28d419f",
+      "test_id": "n4",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 3,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov .",
+      "stdout_utf8_sha256": "bfe75b73aac735ad07f1ea8bbe19abe7cc133269c633fc57ff48afa250d57165",
+      "test_id": "n1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "order": 4,
+      "passed": false,
+      "stderr": "",
+      "stderr_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "If you want to call a taxi, you should call: VUMvHy.\nIf you want to order a pizza, you should call: VUMvHy.\nIf you want to go to a cafe with a wonderful girl, you should call: VUMvHy .",
+      "stdout_utf8_sha256": "090afde448ec338d76aed7f9b0e95a7ad8aa6fc503966d0b30bc12faa2264165",
+      "test_id": "phase8_validation_0003_p4",
+      "timed_out": false
+    }
+  ],
+  "schema_version": "1.0.0"
+}
