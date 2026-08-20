@@ -1,0 +1,48 @@
+{
+  "accepted_differential_cap_per_case": 100,
+  "compiler": {
+    "language": "c",
+    "normal_flags": [
+      "-std=c99",
+      "-O2",
+      "-lm"
+    ],
+    "sanitizer_flags": [
+      "-std=c99",
+      "-g",
+      "-O1",
+      "-fno-omit-frame-pointer",
+      "-fno-pie",
+      "-no-pie",
+      "-fsanitize=address,undefined",
+      "-lm"
+    ]
+  },
+  "differential_generator": "phase9-deterministic-numeric-mutation-v1",
+  "execution": {
+    "candidate_chunk_size": 128,
+    "max_parallel_programs_per_container": 4,
+    "shared_container_cpu_limit": 1.0,
+    "shared_container_memory_mb": 256,
+    "shared_container_pids_limit": 64
+  },
+  "labels": {
+    "V0": "Compile",
+    "V1": "Plausible Patch",
+    "V2": "Existing Validated Patch",
+    "V3": "Sanitizer-Clean",
+    "V4": "Differential Survivor"
+  },
+  "proposal_cap_per_case": 500,
+  "protocol_version": "phase9-validation-v1",
+  "reference_acceptance": {
+    "normal_exit_zero_twice": true,
+    "outputs_identical_across_two_runs": true,
+    "sanitizer_clean": true,
+    "selection_order": "ascending generator_order_hash"
+  },
+  "run_timeout_seconds": 5.0,
+  "seed": 20260820,
+  "strongly_validated_definition": "V2_PASS AND V3_PASS AND V4_PASS",
+  "transport_retries": 0
+}

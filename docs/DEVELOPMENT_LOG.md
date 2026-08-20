@@ -2695,3 +2695,103 @@ lxc stop codedoctor-docker-host
 - Raw Stage 2 artifacts 仅保留在当前本地工作区并由 Git 忽略；Git 中以 SHA-256 manifest 保留完整性身份，但不携带约 300 MB 原始内容。
 - Phase 8 RQ 当前结论：在冻结 6-case cohort 中，R 和 F 都 validated 4/6；一个 F rescue 被一个 opposite-direction loss 抵消，没有观察到 aggregate validated advantage。
 - Phase 8 到此停止。不自动进入 Phase 9；后续工作必须由用户另行明确授权。
+
+## 2026-08-20 - Phase 9 Patch Validation Strength and Overfitting
+
+### 1. 日期和阶段
+
+- 日期：2026-08-20。
+- 阶段：Phase 9，有限测试集下的 patch validation strength 与 overfitting 审计。
+- 起始 commit：`b43dcca8bc1921ef7b55450439fb2c9b0920bea0`。
+
+### 2. 本次目标
+
+- 冻结并审计 Phase 7 A/B/C、Phase 8 Initial/R/F 正式实验中实际可提取的 patch，不发起任何新 LLM 调用。
+- 建立 `V0 compile -> V1 repair-time -> V2 hidden -> V3 ASan+UBSan -> V4 reference differential` validation ladder。
+- 使用 seed `20260820` 的 deterministic numeric mutation、reference acceptance filter 和同 case 共享 stress set，研究 hidden validation 仍遗漏的 patch overfitting。
+- 生成小型 manifest、hash、summary 和正式报告，不提交生成输入正文、二进制或 raw sanitizer/differential artifacts。
+
+### 3. 实际完成内容
+
+- 建立 245 patch / 141 unique case 的 Formal Patch Corpus；来源仅为冻结正式 artifacts，7 个 Phase 7、9 个 Phase 8 Initial、1 个 Phase 8 Stage 2 invalid/no-patch attempt 未被伪造为可执行 patch。
+- 实现 deterministic Numeric Mutation v1、Docker compile-once/run-many batch executor、reference 双运行确定性检查、reference sanitizer filter、V3/V4 classification、bounded findings、checkpoint/resume 和结果聚合。
+- 对 141 cases 实际构建 reference-accepted differential stress sets；生成 50,911 个候选，冻结 11,983 个 accepted tests，13 cases 为 0 accepted 并按协议保留为 V4=N/A。
+- 对全部 245 patches 建立正式 checkpoint；218 个 V2 PASS patch进入 stronger validation，V2 未通过者直接记录 V3/V4=N/A。
+- 生成 Phase 9 result manifest 与 17 节正式报告；case studies 按 `case_id` 确定性选择，没有人工挑选或 repair feedback。
+- 本阶段 real LLM calls=`0`；未读取 credential，未调用 DeepSeek/OpenAI，未把 Phase 9 failure evidence 送回任何 repair loop。
+
+### 4. 新增、修改和删除文件
+
+- 新增：`validation_phase9/` 下 `batch.py`、`corpus.py`、`mutation.py`、`pipeline.py`、`reporting.py` 及 18 项回归测试。
+- 新增：`benchmark/scripts/build_phase9_patch_corpus.py`、`run_phase9_validation.py`、`generate_phase9_report.py`。
+- 新增：`benchmark/metadata/validation/phase9_validation_protocol_v1.json`、`phase9_patch_corpus_v1.json`、`differential_tests_v1.json`、`phase9_validation_results_v1.json`。
+- 新增：`benchmark/reports/patch_validation_overfitting.md`。
+- 修改：`.gitignore`、`benchmark/config.py`。
+- 本地生成但不提交：`benchmark/artifacts/validation_phase9/` 中约 12 MB reference/patch checkpoints，包含可重建输入正文和 bounded raw evidence。
+- 删除文件：无；未修改 Phase 7/8 冻结 artifacts，未重写 Git 历史。
+
+### 5. 执行过的重要命令
+
+```text
+lxc start codedoctor-docker-host
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s validation_phase9/tests -v
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_phase9_validation.py --stage references --resume'
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/run_phase9_validation.py --stage patches --resume'
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/build_phase9_patch_corpus.py
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_phase9_report.py
+lxc exec codedoctor-docker-host -- bash -lc 'set -e; cd /workspace/CodeDoctor; for suite in sandbox benchmark fault_localization repair repair_phase8 validation_phase9; do PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s "$suite/tests"; done'
+git diff --check
+git diff --cached --check
+git diff --name-only HEAD -- benchmark/artifacts/repair benchmark/artifacts/repair_phase8 benchmark/metadata/repair benchmark/reports/execution_feedback_formal.md benchmark/reports/llm_repair_formal.md
+lxc exec codedoctor-docker-host -- bash -lc "docker ps -a --filter ancestor=codedoctor-cpp-sandbox --format '{{.ID}} {{.Status}} {{.Names}}'"
+lxc stop codedoctor-docker-host
+```
+
+### 6. 实际实验结果
+
+- Corpus：patches=`245`、unique cases=`141`、V1 plausible=`229`、V2 existing validated=`218`；V1->V2 rejection=`11/229=4.8%`。
+- V2->V3 sanitizer rejection=`0`；V2->V4 differential rejection=`52/201 V4-applicable=25.9%`。
+- Strongly Validated=`149/245=60.8%`；V2 中另有 17 patches 因 V4=N/A 而不能称为 strong。
+- Additional Rejection Rate=`52/217=24.0%`，分母为至少有一个 applicable stronger validation 的 V2 patches。
+- Phase 7 原 V2 vs strong：A `40/50` vs `28/50`，B `39/50` vs `28/50`，C `46/50` vs `35/50`。
+- Phase 8 原 V2 vs strong：Initial `85/100` vs `55/100`，R `4/6` vs `2/6`，F `4/6` vs `1/6`。
+- Patch failure：ASan affected patches=`0`、UBSan=`0`、differential output mismatch=`50`、runtime error=`0`、timeout=`2`；mismatch finding instances=`1,697`。
+- Reference official-test sanitizer exclusions：ASan=`71`、UBSan=`44`、timeout=`11`。
+- Formal patch executions无 provider、Docker daemon、container parser 或 checkpoint coverage failure。
+
+### 7. Reproducibility、计算成本和 artifact hashes
+
+- Patch corpus manifest hash=`365902f86f92987d25d5ba9c8167a21b776c57b83ee7025a4ecd11a055eeffd9`。
+- Differential manifest hash=`f593f20b0af854a63d7b8ca3caf41a6734080b1fd7f0cad5fc5e82e0886a7682`。
+- Result manifest hash=`48341fd5925b381124bb3cca3e93b3d1f59ff092dcc298edf933761ee34b5e38`。
+- Protocol file SHA-256=`4bb2e039216386d9d9baccbaf52793c4b49f061b6c9b6367fe3870f9e8d79656`。
+- 冻结上游 hash 保持：Phase 7=`067710f9f3b71855cc4bf1db3dd0614cef89c1d4cec7e4f6e83c0372b7607f17`，Phase 8 Stage 1=`7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b`，Stage 2 artifacts=`cf4f44f802913085ce70d7da344a3952c014295f712954b0de93d58ab2c96a04`，Stage 2 result=`bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e`。
+- 记录程序执行共 `86,872` 次：reference normal=`35,058`、reference sanitizer=`23,902`、patch sanitizer=`9,142`、patch differential=`18,770`。
+- 累计 batch wall time=`2,773.9 s`（约 `46.2 min`），不含 Python 聚合和 regression tests；API cost=`$0`。
+
+### 8. 实际测试与审计结果
+
+- Phase 9 targeted tests 最终 `18/18 PASS`，覆盖 corpus formal-only/hash/duplicate、mutation determinism/caps/bounds、reference crash/timeout/nondeterminism/sanitizer rejection、ASan/UBSan/timeout/clean classification、differential outcomes、manifest reproducibility、result invariants 和 leakage。
+- 完整 regression 最终：sandbox `29/29`、benchmark `12/12`、fault localization `36/36`、repair `47/47`、Phase 8 `28/28`、Phase 9 `18/18`，合计 `170/170 PASS`。
+- Corpus、differential、result 三个 manifest 自哈希复算 PASS；同 case 共享 test IDs 和 differential manifest coverage 审计 PASS。
+- `git diff --check` 与 staged diff check PASS；无 staged file 超过 10 MB，最大必要 manifest `differential_tests_v1.json` 为 7,060,054 bytes。
+- 未暂存本地 raw checkpoints、`.env`、credential、raw reasoning、二进制、sanitizer raw dumps 或 `__pycache__`；Phase 7/8 冻结路径相对 HEAD 零 diff。
+- Docker residue 检查为空；LXD 最终 `STOPPED`。
+
+### 9. 遇到的问题和解决方式
+
+- 初次大补丁中的 sanitizer input 列表推导语法无效；`py_compile` 立即发现后做最小修复，Phase 9 单元测试恢复 PASS。
+- 初始 reference 全量串行执行约每 case 一分钟，遇到 mutation timeout 时更慢；保持候选生成、SHA 顺序、5 秒超时和 acceptance 条件不变，改为 128 候选固定分块、累计接受 100 后停止，并在同一受限容器内最多 4 路独立并发。真实 8-input sanitizer smoke 通过，正式 checkpoint 支持 resume。
+- Batch TSV 最初存在 RUN 列数/索引和 shell format 参数不一致；解析测试与真实 Docker clean/UBSan smoke 暴露后修正，再开始正式实验。
+- Leakage test 曾把审计字段名 `raw_reasoning_committed=false` 误判为 raw reasoning 内容；将断言收窄为禁止真实 `"raw_reasoning":` 字段后，18 项 Phase 9 测试和完整回归均 PASS。
+- 两个 Python 文件末尾多余空行触发 staged `git diff --check`；删除多余空行后检查 PASS，结果 manifests 未变化。
+
+### 10. 当前已知不足和下一步计划
+
+- Reference-accepted differential stress input 不等于形式化合法题目输入；numeric mutation 覆盖有限，且 finite tests 不能证明语义等价。
+- Sanitizer 只覆盖实际执行路径；本 corpus 未观察到 patch 侧 ASan/UBSan rejection，不代表不存在内存或未定义行为问题。
+- 13 cases 没有 accepted differential test，17 个 V2 patches 因 V4=N/A 无法获得 strong 标签；这是保守证据不足，不是形式化 failure。
+- Codeflaws representativeness 有限，同 case 的 A/B/C、Initial/R/F patches 统计上相关；本报告仅给 patch-level descriptive evidence，没有把 patches 伪装成独立 cases。
+- `Strongly Validated Patch != Formally Correct Patch`；149 个 survivors 只表示更强的有限经验验证。
+- Phase 9 RQ 结论：hidden validation 拒绝 11/229 plausible patches；V3 未新增拒绝；V4 在 201 个 applicable V2 patches 中新增拒绝 52 个；所有 Phase 7/8 arms 的 strong rate 均低于原 V2 rate。
+- Phase 9 到此停止，不自动进入 Phase 10，也不对发现的失败 patch 再调用 LLM。

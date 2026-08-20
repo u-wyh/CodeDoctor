@@ -48,6 +48,9 @@ benchmark/results/repair/coverage/*
 benchmark/artifacts/repair_phase8/retry_control/*
 benchmark/artifacts/repair_phase8/feedback/*
 
+# Phase 9 generated inputs, binaries, and raw validation evidence
+benchmark/artifacts/validation_phase9/*
+
 !benchmark/datasets/codeflaws/raw/.gitkeep
 !benchmark/datasets/codeflaws/processed/.gitkeep
 !benchmark/datasets/codeflaws/downloads/.gitkeep
