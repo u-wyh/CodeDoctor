@@ -10,6 +10,7 @@ __pycache__/
 .coverage
 htmlcov/
 *.log
+logs/
 
 # Local configuration and credentials
 .env
@@ -19,6 +20,10 @@ htmlcov/
 *.key
 *.p12
 *.pfx
+credentials.json
+credentials.*.json
+secrets.json
+secrets.*.json
 
 # Build and temporary workspaces
 build/
@@ -26,6 +31,13 @@ dist/
 tmp/
 temp/
 *.tmp
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.exe
+a.out
 *.gcda
 *.gcno
 *.gcov

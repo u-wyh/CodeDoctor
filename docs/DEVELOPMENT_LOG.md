@@ -2889,3 +2889,108 @@ git diff --check
 - Codeflaws 和竞赛类 C/C++ bugs 的代表性有限；FL metric 不等于 repair utility，reference-accepted stress input 不等于形式化合法输入。
 - `Validated Patch != Correct Patch`，`Strongly Validated Patch != Formally Correct Patch`。
 - CodeDoctor 核心研究方向和实验链路已经冻结；当前不存在毕业设计主线必须新增的第五个核心研究模块。下一步只应进行论文写作、图表排版、答辩材料和必要的非实验性勘误，不自动进入新 Phase。
+
+## 2026-08-20 - Final Engineering Cleanup and Fresh Clone Reproduction Check
+
+### 1. 日期和阶段
+
+- 日期：2026-08-20。
+- 阶段：冻结后的工程清理与 fresh-clone 可复现性审计；不是 Phase 10。
+- 起始 commit：`a5a028b1feabf5ae950eabbfdf77d5604d56c9ac`。
+- 本轮 real LLM calls=`0`，API cost=`$0`；未读取 credential，未运行 Phase 6-9 昂贵实验。
+
+### 2. 本次目标
+
+- 审计仓库结构、obsolete/debug/duplicate/unused candidates、大文件、ignore 和 secret 边界。
+- 检查 README 是否足以支持论文提交后的项目理解和轻量复现。
+- 在独立临时 clone 中验证 tracked metadata、scripts、reports、Docker sandbox 及 benchmark/repair/validation smoke。
+- 对比 artifact-complete 当前工作副本与 raw-free fresh clone 的 regression 行为，不修改冻结实验协议和结果。
+
+### 3. 实际完成内容
+
+- 完成 `tree -L 2` 结构审计：核心代码按 `benchmark`、`fault_localization`、`repair`、`repair_phase8`、`validation_phase9`、`sandbox`、`analysis` 和 `final_consolidation` 分区；scripts/reports 位于 `benchmark/` 下。
+- 未发现可确定删除的 obsolete/debug 文件、exact duplicate script 或未使用模块；13 处保守 AST unused-import 结果仅标记为 candidate cleanup，没有修改冻结代码。
+- 执行 working-tree 与 tracked-file 双重大文件审计，分类 9 个超过 10 MiB 的本地文件及 5 个超过 10,000,000 bytes 的 tracked 文件；未发现大于 10 MB 的 class C 临时文件，未重写 Git 历史。
+- `.gitignore` 补充 credentials/secrets JSON、`logs/` 和常见 object/library/executable 输出；Phase 8 Initial/R/F 与 Phase 9 raw artifact sample 均继续命中 ignore。
+- README 增加当前项目简介、四个核心模块、环境要求、final results 入口、fresh-clone 零 API smoke 和正式实验冻结提示；没有大规模重写历史研究说明。
+- 新增 `docs/FINAL_ENGINEERING_AUDIT.md`，记录结构、大文件、secret、fresh clone、regression、代码质量和 blocker。
+
+### 4. 新增、修改和删除的文件
+
+- 修改：`.gitignore`。
+- 修改：`README.md`。
+- 新增：`docs/FINAL_ENGINEERING_AUDIT.md`。
+- 修改：`docs/DEVELOPMENT_LOG.md`（本条追加记录）。
+- 删除：无。
+- Phase 4-9 algorithms、prompts、protocols、partitions、seeds、metadata、frozen artifacts、hashes、reports 和 final tables 均未修改。
+
+### 5. 执行过的重要命令
+
+```text
+find . -type f -size +10M -printf '%s %p\n'
+git ls-files | while IFS= read -r f; do size=$(wc -c < "$f"); if [ "$size" -gt 10000000 ]; then printf '%s %s\n' "$size" "$f"; fi; done
+git check-ignore -q <raw/build/log/credential/binary sample>
+python3 -m compileall -q analysis benchmark fault_localization repair repair_phase8 sandbox validation_phase9 final_consolidation
+g++ -std=c++17 -Wall -Wextra -pedantic examples/hello_world/main.cpp
+g++ -std=c++17 -Wall -Wextra -pedantic examples/sum/main.cpp
+python3 -m unittest final_consolidation.tests.test_consolidation
+python3 -m unittest benchmark.tests.test_models
+python3 -m unittest repair.tests.test_pipeline
+python3 -m unittest validation_phase9.tests.test_pipeline
+python3 -m sandbox.runner.main examples/sum/main.cpp examples/sum/input.txt --backend local
+git stash create 'final-engineering-reproduction-candidate'
+git update-ref refs/heads/codex/repro-check <candidate>
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- git clone --branch codex/repro-check /workspace/CodeDoctor <temporary clone>
+lxc exec codedoctor-docker-host -- docker build --tag codedoctor-cpp-sandbox --file sandbox/docker/Dockerfile sandbox/docker
+lxc exec codedoctor-docker-host -- bash -lc 'python3 -m unittest discover -s <suite>/tests -p "test*.py"'
+lxc stop codedoctor-docker-host
+git update-ref -d refs/heads/codex/repro-check
+git diff --check
+```
+
+- 第一次 fresh-clone 命令因 LXD mount ownership 的 Git `safe.directory` 检查而拒绝；仅在临时容器配置中登记 mount 后重试成功。
+- 容器没有 `rg`，README 内容检查按既定 fallback 使用 `grep`；没有改变验证条件。
+- 一个含清理语句的组合检查命令被执行策略拒绝，实际未执行；随后拆成无破坏性命令完成相同检查。
+
+### 6. 大文件、ignore 和 secret 结果
+
+- Working tree 最大文件为 ignored Codeflaws download archive `265,695,532 bytes`；两份 ignored Phase 8 Stage 2 raw artifacts 分别约 150 MB。
+- Tracked `>10,000,000 bytes` 文件共 5 个：两个 Phase 8 Initial artifacts、Codeflaws metadata manifest、两个 Phase 8 runtime-evidence snapshots；最大 tracked 文件 `54,430,433 bytes`。
+- Class A 必须保留：正式 raw artifacts（本地或已 tracked）、dataset manifest、冻结 runtime evidence；Class B 可下载/解压重建：Codeflaws downloads/raw archives；Class C 大型临时文件：`0`。
+- Ignore audit PASS：raw dataset、generated artifacts、build、logs、`.env`、credential filenames、keys 和 binaries 均有规则保护；unignored generated-looking file=`0`。
+- Secret scan=`PASS`：扫描 tracked 与待提交文件，仅输出状态；未报告 API key、token、password、private key 或非示例 `.env`。
+
+### 7. Fresh clone 内容与 smoke 结果
+
+- 使用临时 candidate ref 克隆到 LXD 独立临时目录；clone HEAD=`ef52d0e42d6bb3136ab4fb1ef7d4a78ca4d6ef91`，worktree clean。
+- 内容检查 PASS：final metadata=`5` files、benchmark scripts=`34` Python files、final table/plot files=`19`，README、final report 和 smoke fixtures 均存在；ignored raw Codeflaws dataset 正确缺席。
+- Final metadata/consolidation integrity=`7/7 PASS`。
+- Docker sandbox sum smoke=`success`，stdout=`3\n`。
+- Benchmark model smoke=`3/3 PASS`。
+- Fake-provider repair pipeline smoke=`1/1 PASS`；real provider calls=`0`。
+- Validation pipeline smoke=`5/5 PASS`。
+
+### 8. Regression 结果
+
+- Artifact-complete 当前工作副本在真实 Docker LXD 中：sandbox `29/29`、benchmark `12/12`、fault localization `36/36`、repair `47/47`、Phase 8 `28/28`、Phase 9 `18/18`、final `7/7`，合计 `177/177 PASS`、`0 FAIL`、`0 SKIP`。
+- Raw-free fresh clone：sandbox `29/29 PASS`、benchmark `12/12 PASS`、fault localization `36/36 PASS`、Phase 8 `28/28 PASS`。
+- Fresh-clone repair：47 tests 中 1 error；production runtime-evidence test 直接读取 ignored raw Codeflaws input。
+- Fresh-clone Phase 9：14 tests executed，2 errors；corpus/reporting tests 依赖 ignored Phase 7/9 raw artifacts，reporting class 的其余测试因 setup failure 未执行。
+- Fresh-clone final consolidation：独立 smoke 先 `7/7 PASS`；但在 Phase 9 suite 之后出现 setup error，因为 Phase 9 corpus 路径在 raw artifact store 为空时重写了 tracked `benchmark/results/repair/evidence_ablation.json`。
+- 临时 clone、candidate ref 均已删除，LXD 已恢复 `STOPPED`；当前正式工作副本未受临时测试污染。
+
+### 9. 遇到的问题与处理方式
+
+- README 停留在较早阶段，缺少 frozen pipeline、四模块、final results 与 fresh-clone 入口；采用顶部增量补充，不删除历史协议说明，并明确历史 LLM runner 不是 reproduction smoke。
+- `credentials.json`、通用二进制和 JSON logs 原先没有全部命中 ignore；仅扩展 `.gitignore`，未触碰历史 tracked 文件。
+- Fresh clone 完整 regression 暴露 raw dependency 与 test isolation 缺陷。修复需要改变 repair/validation test 或 reporting/corpus fail-closed 行为，涉及用户禁止修改的 frozen-adjacent experimental paths；按规则停止修复，只记录和报告。
+- Phase 9 fresh-clone test path 会生成不完整 Phase 7 evaluation 并覆盖 tracked frozen result，这是工程 blocker，不是实验数字 discrepancy；没有把被污染文件带回正式工作区，也没有自动 restore/重写 frozen artifact。
+- 首次 staged `git diff --check` 报告新审计文档头部两处 Markdown hard-break trailing whitespace；移除空格后重新检查，不改变审计内容，并保持本日志为本轮最后文件编辑。
+
+### 10. 当前已知不足、判断和下一步
+
+- 独立 metadata/sandbox/benchmark/fake-repair/validation smoke 可在 fresh clone 中复现，且不需要 raw dataset 或 LLM credential。
+- 完整现有 regression 仍隐式依赖 ignored local raw data/artifacts，且一个 Phase 9 路径在依赖缺失时不是 read-only/fail-closed。
+- 因此当前判断：`CodeDoctor repository is not yet fully ready for thesis submission as a self-contained engineering artifact.`
+- 下一步不是新 Phase 或新研究模块。只有在用户明确授权后，才应做窄范围 test-isolation/fail-closed maintenance：让 raw-dependent tests 显式 skip/fixture 化，并确保任何报告重建在 artifact 缺失或 hash 不匹配时拒绝覆盖 frozen outputs。

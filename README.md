@@ -1,6 +1,52 @@
 # CodeDoctor
 
-CodeDoctor 已具备 C/C++ Runner、Docker 沙箱、Codeflaws Benchmark，以及基于 gcov line/branch evidence 的 Spectrum-Based Fault Localization。当前可对 50-case Pilot 的 repair tests 逐测试隔离采集覆盖，并生成原始 Ochiai 与保守 branch tie-breaking 的 tie-aware 对比。
+CodeDoctor is an **LLM-based Automated Program Repair Framework** for C/C++ programs. It combines fault localization, evidence-bounded LLM repair, controlled execution feedback, and progressively stronger patch validation on the Codeflaws benchmark.
+
+> The core experimental pipeline (Phases 4-9) is frozen. The repository preserves the formal protocols, manifests, result tables, and reproducibility hashes; lightweight checks do not call an LLM API or rerun the expensive formal experiments.
+
+## 核心模块
+
+- **Fault Localization**：基于 gcov line/branch evidence 的 SBFL 与冻结的 FL-v1 tie-breaking。
+- **LLM Repair**：严格区分 Base、FL-v1 与 Runtime Evidence 的单次修复消融。
+- **Execution Feedback**：使用同一 first patch 的 Retry/Feedback 配对比较。
+- **Patch Validation**：V1 repair tests、V2 hidden validation、V3 sanitizer 与 V4 differential validation ladder。
+
+## 环境要求
+
+- Linux
+- Python 3.10 或更高版本（核心控制与测试仅使用 Python 标准库）
+- Docker daemon（运行默认 sandbox 与 sanitizer integration tests）
+- `g++`，支持 C++17（仅 local backend 或直接编译示例时需要）
+
+构建专用镜像后即可运行 Docker smoke；不需要数据库、前后端服务或 LLM credential。
+
+## 最终实验结果
+
+- [Final Research Summary](benchmark/reports/final_research_summary.md)
+- [Final Experiment Registry](benchmark/metadata/final/final_experiment_registry.json)
+- [Reproducibility Registry](benchmark/metadata/final/reproducibility_registry.json)
+- [Final Tables](benchmark/reports/final_tables/)
+- [Development Log](docs/DEVELOPMENT_LOG.md)
+
+## Fresh Clone 轻量复现
+
+以下命令只读取已冻结 metadata 和小型 fixtures，不重新运行 Phase 6-9 正式实验，也不会发起 LLM 调用：
+
+```bash
+python3 -m unittest final_consolidation.tests.test_consolidation
+python3 -m unittest benchmark.tests.test_models
+python3 -m unittest repair.tests.test_pipeline
+python3 -m unittest validation_phase9.tests.test_pipeline
+```
+
+Docker sandbox smoke：
+
+```bash
+docker build --tag codedoctor-cpp-sandbox --file sandbox/docker/Dockerfile sandbox/docker
+python3 -m sandbox.runner.main examples/sum/main.cpp examples/sum/input.txt
+```
+
+完整原始 Codeflaws dataset、模型 raw responses 和大型运行 intermediates 默认不随 fresh clone 分发；正式结果通过 tracked manifests、hashes、reports 和 final tables 固定。不要把 formal experiment runner 当作轻量复现命令。
 
 ## 构建沙箱镜像
 
@@ -130,6 +176,8 @@ python3 -m benchmark.scripts.run_fault_localization_pilot --reuse-coverage
 
 ## LLM Repair Evidence Ablation
 
+本节保留冻结 Phase 7 协议及历史执行入口，仅用于研究追溯；fresh-clone reproduction 不需要 credential，也不应重新发起正式调用。
+
 Phase 7 使用 `repair-v2` 固定比较单次修复的三组输入。当前 Codeflaws 快照没有可靠的逐题题面，因此 A/B/C 都使用完全相同的 buggy source 与 repair-test 输入/期望输出作为共同 repair-time oracle；B 仅追加冻结的 FL-v1 Top-10，C 再追加 verdict、实际 stdout/stderr、exit code 和 timeout 等运行观察。Repair Pilot 的选择不使用 FL 命中表现，无可靠 FL 位置的样例仍保留。先构建与两个 FL 数据集都不重叠的 Repair Pilot，并生成 FL 输入：
 
 ```bash
@@ -165,4 +213,4 @@ python3 benchmark/scripts/generate_repair_ablation_report.py
 
 ## 当前边界
 
-Docker 后端显著缩小了程序权限，但仍不等同于针对敌意代码的完整强隔离。当前没有限制输出大小和磁盘写入量，没有自定义 seccomp/AppArmor 策略，也没有使用 gVisor、Kata Containers 或独立虚拟机。静态/动态分析工具将在后续阶段加入。
+Docker 后端显著缩小了程序权限，但仍不等同于针对敌意代码的完整强隔离。当前没有限制输出大小和磁盘写入量，没有自定义 seccomp/AppArmor 策略，也没有使用 gVisor、Kata Containers 或独立虚拟机。CodeDoctor 的核心实验链路已经冻结，这些边界不在本轮扩展。
