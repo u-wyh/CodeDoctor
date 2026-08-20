@@ -1,0 +1,155 @@
+{
+  "cohort_manifest_hash": "e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5",
+  "eligible_count": 6,
+  "hard_gate_bytes": 400000,
+  "leakage_audit": {
+    "credential_absent": "passed",
+    "evaluation_canaries_absent": "passed",
+    "hidden_validation_absent": "passed",
+    "raw_reasoning_absent": "passed",
+    "reference_source_absent": "passed",
+    "status": "passed"
+  },
+  "operational_size_gate": {
+    "hard_gate_failure_count": 0,
+    "status": "passed",
+    "warning_count": 0,
+    "warning_threshold_bytes": 300000
+  },
+  "order_balance": {
+    "feedback->retry_control": 4,
+    "retry_control->feedback": 2
+  },
+  "overall_manifest_hash": "a0254c9e1f73e16d67049da3c62052eec7032322407199945a99d9bbb381c39c",
+  "payload_byte_statistics": {
+    "all": {
+      "max": 136634,
+      "mean": 36227.25,
+      "median": 16089.0,
+      "min": 8867,
+      "p95": 136634,
+      "total": 434727
+    },
+    "feedback": {
+      "max": 136634,
+      "mean": 38758.5,
+      "median": 16448.0,
+      "min": 11618,
+      "p95": 136634,
+      "total": 232551
+    },
+    "retry_control": {
+      "max": 112631,
+      "mean": 33696.0,
+      "median": 15371.0,
+      "min": 8867,
+      "p95": 112631,
+      "total": 202176
+    }
+  },
+  "prompt_count": 12,
+  "prompt_records": [
+    {
+      "arm": "retry_control",
+      "case_id": "315-A-bug-8649287-8687189",
+      "estimated_input_tokens": 3314,
+      "payload_hash": "e77eeda4a636093cc76a2bf6e262d0754c07ba74106d2e06aeaca41a82c54ef0",
+      "prompt_hash": "f371a28ec3cdfc7a2a2e48ad2fc6d1b49d0f6270d8f13146a16e0bcd48220cb0",
+      "request_utf8_bytes": 13255
+    },
+    {
+      "arm": "feedback",
+      "case_id": "315-A-bug-8649287-8687189",
+      "estimated_input_tokens": 3673,
+      "payload_hash": "85b7948953487a84399912c3592dd79d573a98dadfe61b017f5b8b109aa23305",
+      "prompt_hash": "8f76269ff3f1c14407918c85f61ea3ec0c1943ff839ef6a0cc5ff431c0f5461c",
+      "request_utf8_bytes": 14691
+    },
+    {
+      "arm": "retry_control",
+      "case_id": "75-A-bug-15928172-15928345",
+      "estimated_input_tokens": 4372,
+      "payload_hash": "7b445b641fdb9e69d7fc79df129c01d0e2cffed645a70f59b0e7804a7e64cc9a",
+      "prompt_hash": "5cf32098c84d49ac13b71422513de8489def630731a08d695a01bf3b51a322b4",
+      "request_utf8_bytes": 17487
+    },
+    {
+      "arm": "feedback",
+      "case_id": "75-A-bug-15928172-15928345",
+      "estimated_input_tokens": 4552,
+      "payload_hash": "a7bcf3e7d55f0de79dba58357eed3b13e1c89d4cda1e8c7d395979f4107e5a01",
+      "prompt_hash": "beab9250e6c2f75546eff2bf04d7257403cb1d8b4e6806621e14527d56cd0195",
+      "request_utf8_bytes": 18205
+    },
+    {
+      "arm": "retry_control",
+      "case_id": "365-A-bug-17262691-17262721",
+      "estimated_input_tokens": 2217,
+      "payload_hash": "f8926cb9ecb015128c0901f791ad4eaa3e9a23b4fd5521617130b57c1509a503",
+      "prompt_hash": "1d6d7f5f43fb6ee773b813a96980ba8be0c9640fae289b6a95e44d2918aa29c1",
+      "request_utf8_bytes": 8867
+    },
+    {
+      "arm": "feedback",
+      "case_id": "365-A-bug-17262691-17262721",
+      "estimated_input_tokens": 2905,
+      "payload_hash": "7fe5c0bf6cb902faafd44cc3a1c4d528cf4a53b62bebceebfb43d17e13ceb347",
+      "prompt_hash": "f1f3fbae0b639c38906afd5eb2f97987e52382fff85334bd8462f9e93f23ec24",
+      "request_utf8_bytes": 11618
+    },
+    {
+      "arm": "retry_control",
+      "case_id": "404-B-bug-14578678-14578704",
+      "estimated_input_tokens": 28158,
+      "payload_hash": "ad419fde1dcb6e0caff2373a8aa573b87cda3c926a5002457fcb99487e43fb69",
+      "prompt_hash": "c5f971321a81d3fba7ea346e585e7a6a54b6a0dd3abe546903f8d394517ae777",
+      "request_utf8_bytes": 112631
+    },
+    {
+      "arm": "feedback",
+      "case_id": "404-B-bug-14578678-14578704",
+      "estimated_input_tokens": 34159,
+      "payload_hash": "99ccccb6027138be7608e6f2264a4ac7126ecf01a0a4b3cf6dc48c90855340ff",
+      "prompt_hash": "66c5e7d6e2ebd9a6b5c218d2b1a2933faee5d598f1547a6edc4a3d636d5d4479",
+      "request_utf8_bytes": 136634
+    },
+    {
+      "arm": "retry_control",
+      "case_id": "366-B-bug-5240575-5240582",
+      "estimated_input_tokens": 2866,
+      "payload_hash": "8af63fa4d75ab4a21896c15eb2f89f5a7d795b70c4d42f0efe326c3e8f692fe3",
+      "prompt_hash": "7892859013dbd4b87891fff59d2e0132f738bd689a300d5aee1018dead58fdd4",
+      "request_utf8_bytes": 11463
+    },
+    {
+      "arm": "feedback",
+      "case_id": "366-B-bug-5240575-5240582",
+      "estimated_input_tokens": 3051,
+      "payload_hash": "8e6c9b18ffab1d5ee08ef29d6f6e58cf150b28f9efcb3d5461207fb5ad90dd69",
+      "prompt_hash": "2cb6e0691b01bad7d01b67b01a31954dee63a80262433b7147d5a0865b4a5174",
+      "request_utf8_bytes": 12203
+    },
+    {
+      "arm": "retry_control",
+      "case_id": "305-A-bug-13310851-13310872",
+      "estimated_input_tokens": 9619,
+      "payload_hash": "f0c3c6fbbd573a0f39aac911df3b41b9c6f2879586e3e8cef98bed63b53e412a",
+      "prompt_hash": "01096e22ca2df3ba8f248e60f3623c7c0cc0241cc578b38e3f05cd7be18cdf34",
+      "request_utf8_bytes": 38473
+    },
+    {
+      "arm": "feedback",
+      "case_id": "305-A-bug-13310851-13310872",
+      "estimated_input_tokens": 9800,
+      "payload_hash": "e189a5f454ebee3dab78da0d13bc4f5a96439686a51aaf1449ba4a8c2576bd92",
+      "prompt_hash": "a5c70f1dc5b75b96b6dea26f673f65c824edbe14557e0640ad8d14efcc267b92",
+      "request_utf8_bytes": 39200
+    }
+  ],
+  "protocol_version": "phase8-stage2-prompt-audit-v1",
+  "reproducibility": {
+    "hashes_identical_across_rebuilds": true,
+    "status": "passed"
+  },
+  "stage1_manifest_hash": "7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b"
+}

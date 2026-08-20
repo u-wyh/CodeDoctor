@@ -2496,3 +2496,92 @@ lxc stop codedoctor-docker-host
 - DeepSeek provider/model/thinking/reasoning effort/max tokens/stream/temperature/retries 全部未变；本轮未重新 smoke、未调用真实 API。
 - 本轮在 pre-experiment safety correction 后停止，不执行 `--confirm-phase8-stage1`，不启动 Stage 1/Stage 2。
 - 下一步仅在用户显式批准后运行 100-call Stage 1；Stage 1 完成后仍必须暂停、冻结 eligible cohort，并等待独立 Stage 2 授权。
+
+## 2026-08-20 - Phase 8 Stage 1 Formal Experiment
+
+### 1. 本次目标
+
+- 在冻结 commit `ce640a7ee558f5f376239672a6692b0ba86dbbcd` 上执行且仅执行 Phase 8 Stage 1。
+- 对 100 个 Evaluation Set cases 各发起一次 DeepSeek Initial repair，不补调、不进入 Stage 2。
+- 冻结 first patches、Stage 1 manifest 和 eligible cohort，离线生成并审计 R/F prompt candidates。
+- 汇总真实 usage/cost、完成报告、全回归和仓库边界审计。
+
+### 2. 实际完成内容
+
+- 正式执行 100 个 Initial calls；100 个均收到响应，provider failure=0，未发生进程/监视中断，未使用 resume。
+- 冻结 100 个 Initial artifacts、`stage1_manifest_v1.json` 和 `eligible_cohort_v1.json`；eligible cohort `M=6`。
+- 新增离线 Stage 1 reporting 与 Stage 2 prompt audit：基于相同 first patch 各生成 6 个 R 和 6 个 F candidates，不构造正式 Stage 2 provider call。
+- 审计 R/F common-information 前缀、F-only bounded execution feedback、400,000-byte hard gate、leakage、两次重建稳定性和 deterministic arm order。
+- 更新 pre-experiment 状态和正式 Stage 1 报告；Stage 2 guard PASS，但 Stage 2 user authorization 保持 false。
+- 使用 2026-08-19 冻结价格快照计算 usage cost，并于 2026-08-20 对照 DeepSeek 官方 Models & Pricing 页面确认价格值仍为 cache hit `$0.0028/M`、cache miss `$0.14/M`、output `$0.28/M`。
+
+### 3. 新增、修改和删除文件
+
+- 新增：`repair_phase8/reporting.py`、`repair_phase8/tests/test_reporting.py`。
+- 新增：`benchmark/scripts/generate_phase8_stage1_report.py`。
+- 新增正式 artifacts：`benchmark/artifacts/repair_phase8/initial/` 下 100 个 JSON。
+- 新增冻结 metadata：`stage1_manifest_v1.json`、`eligible_cohort_v1.json`、`stage2_prompt_audit_v1.json`。
+- 新增报告：`benchmark/reports/execution_feedback_stage1.md`。
+- 修改：`benchmark/config.py`、`benchmark/reports/execution_feedback_pre_experiment.md`。
+- 删除文件：无。
+
+### 4. 执行过的重要命令
+
+```text
+PYTHONDONTWRITEBYTECODE=1 python3 -c 'from repair_phase8.protocol import validate_phase8_preflight; ...'
+source ~/.config/codedoctor/secrets.env
+python3 -c 'import os; print("DeepSeek credential available" if os.getenv("DEEPSEEK_API_KEY") else "DeepSeek credential unavailable")'
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- docker image inspect codedoctor-cpp-sandbox --format '{{.Id}}'
+source ~/.config/codedoctor/secrets.env
+printf '<credential forwarded without output>' | lxc exec codedoctor-docker-host -- bash -lc '... python3 benchmark/scripts/run_phase8_experiment.py --stage1 --confirm-phase8-stage1'
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_phase8_stage1_report.py
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair_phase8/tests -v
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair_phase8/tests'
+PYTHONDONTWRITEBYTECODE=1 python3 -c 'from repair_phase8.protocol import validate_stage2_gate; ...'
+git diff --check
+git diff --exit-code HEAD -- <frozen Phase 8 input artifacts>
+lxc stop codedoctor-docker-host
+```
+
+上述命令中的 credential 仅通过环境/标准输入转发；未读取、打印或记录实际 API Key。
+
+### 5. 实际测试和实验结果
+
+- Stage 1 attempted/received/provider failure：`100/100/0`。
+- Valid outputs=`91`；compile success=`91`；repair-time success=`85`；validated patches=`85`。
+- Repair-time success but Hidden failure=`0`；hidden-validation-only trigger 专项测试 PASS。
+- Invalid model output=`9`；length truncation=`9`；finish reasons 为 stop=`91`、length=`9`，协议要求下均未补调。
+- Eligible `M=6`；primary eligibility reasons：base only=`2`、feedback only=`2`、base+feedback=`2`。
+- Usage：prompt=`777055`、cache hit=`0`、cache miss=`777055`、reasoning=`595938`、final answer=`24729`、completion=`620667`、total=`1397722` tokens；字段缺失计数为 0。
+- Stage 1 usage-based cost estimate=`$0.28257446`，不是账单导出。
+- Stage 1 artifact-set hash=`7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b`。
+- Eligible cohort manifest hash=`e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5`。
+- Stage 2 prompt audit hash=`a0254c9e1f73e16d67049da3c62052eec7032322407199945a99d9bbb381c39c`。
+- R bytes min/median/p95/max=`8867/15371/112631/112631`；F=`11618/16448/136634/136634`；warning/hard-gate failures=`0/0`。
+- R/F rebuild reproducibility PASS；leakage audit PASS；order balance F->R=`4`、R->F=`2`。
+- Expected Stage 2 calls=`12`；estimated Stage 2 cost=`$0.03607045`，基于 serialized-byte input heuristic 和 Stage 1 mean completion usage。
+- Artifact boundary scan：103 files PASS；credential-like value/raw reasoning 均未发现；Initial artifacts=`100`，Stage 2 artifacts=`0`。
+- 完整 regression：sandbox `29/29`、benchmark `12/12`、fault localization `36/36`、repair `47/47`、Phase 8 `26/26`，合计 `150/150 PASS`。
+- LXD/Docker 最终停止；没有残留正在运行的正式实验进程。
+
+### 6. 遇到的问题和解决方式
+
+- 首次 fail-closed 摘要脚本使用旧的 `payload_validation` 嵌套键并触发 `KeyError`；核心 `validate_phase8_preflight()` 已先返回 PASS，随后按当前 `operational_size_gate`/`leakage_audit` 结构重跑完整摘要，确认所有 gate 后才发出第一条请求。
+- 部分模型响应和 case 验证耗时明显较长；始终监视同一个正式进程，没有启动并行或重复实验。最终无 terminal/SSH/monitoring interruption，无 resume。
+- 9 个响应因 `finish_reason=length` 无法提取完整 patch；严格按协议记为 invalid output，不重试、不进入 cohort。
+- 一个 Initial artifact 因保留完整 evaluation evidence 达约 54.4 MB；仍低于 GitHub 100 MB 单文件限制，但增加仓库体积。
+
+### 7. 当前已知不足
+
+- Stage 1 cost 是 provider usage 乘官方单价的估算，不是 DeepSeek 账单导出。
+- R/F 的真实 token usage 尚不存在；Stage 2 cost 只能使用 payload byte heuristic 和 Stage 1 observed completion mean 估计。
+- 正式 artifacts 约 79.7 MB，且最大单文件约 54.4 MB；可审计性优先，但 Git 仓库会明显增大。
+- 9 个 length-truncated cases 按冻结协议无法补调，也不是 primary R/F eligible cohort。
+- Stage 1 不能回答 Execution Feedback 是否优于 Retry；必须完成未来 paired R/F experiment 后才能分析研究问题。
+
+### 8. 下一步计划
+
+- 当前 `phase8_stage2_ready=true`、`phase8_stage2_user_authorized=false`、technical blocker=none。
+- 保持 Stage 2 real LLM calls=`0`；只有获得新的明确人工授权后，才可使用冻结 cohort、first patches、R/F hashes 和 arm order 执行恰好 `2M=12` 次调用。

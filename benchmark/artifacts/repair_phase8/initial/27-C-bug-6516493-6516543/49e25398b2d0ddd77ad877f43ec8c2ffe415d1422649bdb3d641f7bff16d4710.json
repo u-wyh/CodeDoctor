@@ -1,0 +1,80 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "49e25398b2d0ddd77ad877f43ec8c2ffe415d1422649bdb3d641f7bff16d4710",
+  "case_id": "27-C-bug-6516493-6516543",
+  "classification": "invalid_model_output",
+  "completed": true,
+  "eligibility_reason": "invalid_model_output",
+  "extraction": {
+    "source": null,
+    "status": "invalid_model_output",
+    "strategy": null
+  },
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "length",
+    "id": "a9d8bf40-30b2-4571-9f37-f62e96c72ea5",
+    "raw": "```c\n#include <stdio.h>\n\nint main(int argc,",
+    "response_hash": "7ed7269c34420c78dfd129c416be11bd2949f5c325df138bc806a8128838da79"
+  },
+  "oracle_render_hash": "948811d4aafce7fc9d65105721d0a80261931566a578a9ccbf4db83d2bb37e41",
+  "prompt": {
+    "hash": "a6827c903f1ed9f0824d24c1b9da0090eaa45cd27364279eb9ba1c3f845a7c83",
+    "oracle_render_hash": "948811d4aafce7fc9d65105721d0a80261931566a578a9ccbf4db83d2bb37e41",
+    "raw_observation_hash": "1ae119a9b5ed57602acd471ebaa642d4c5ecf0813ea3dd7a124250bc72c75304",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "075985a101c527789aaa10fdcc0219bc084e4b9c2cf901b112097eb94aadef2e",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include <stdio.h>\n\n#define MAX(a, b) (a > b ? a : b)\n#define MIN(a, b) (a < b ? a : b)\n#define AV(a, b, c) ((MIN(a,c) < b && b < MAX(a,c)) ? b : ((MIN(b,c) < a && a < MAX(b,c)) ? a : c))\n\nint main(int argc, char *argv[]) {\n    int n, a[100000], i, min, max;\n\n    scanf (\"%d\", &n);\n\n    for (i = 0; i < n; i++)\n        scanf (\"%d\", &a[i]);\n\n    min = max = 1;\n\n    for (i = 0; i < n; i++) {\n        if ((a[i] > a[min - 1] && a[i] < a[max - 1]) || a[i] > a[max-1])\n            break;\n        if (a[i] > a[max-1]) max = i+1;\n        if (a[i] < a[min-1]) min = i+1;\n        //if (max - min > )\n        //printf(\"%d %d\\n\", min, max);\n    }\n\n    if (max != min && i < n)\n        printf(\"3\\n%d %d %d\\n\", MIN(min, MIN(max, i+1)), AV(min, max, i+1), MAX(max, MAX(max, i+1)));\n    else\n        printf(\"0\\n\");\n    return 0;   \n}\n```\n\n## Base repair-time oracle\n### n2\ninput_bytes: 18\ninput_sha256: 181f14e19615f1863a6f7c524d230786f611a12c52d1e73a4c7c264b4f10f1cc\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5\n67 499 600 42 23\n```\nexpected_output_bytes: 7\nexpected_output_sha256: 6c3a326d43935d9270f92de82eef355e4cc53e35932852eb20e58b898c144775\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n1 3 4\n```\n### p1\ninput_bytes: 7\ninput_sha256: fcf1118351be8397e5f451ca4bc45bff96a26824f71e01f56a13fcd16e2702f7\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n1 2 3\n```\nexpected_output_bytes: 1\nexpected_output_sha256: 5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n0\n```\n### n3\ninput_bytes: 7\ninput_sha256: 993b61f9ae7fcab49b7a6427bf7af503a50f8f652ef37f3e1fa6af403fd9df18\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n2 3 1\n```\nexpected_output_bytes: 7\nexpected_output_sha256: fcf1118351be8397e5f451ca4bc45bff96a26824f71e01f56a13fcd16e2702f7\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n1 2 3\n```\n### n1\ninput_bytes: 26\ninput_sha256: 97ed8d790ca9088ae8a389273551a846f24fa40f52e39898cfd76233de86ce4a\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n-771740 -255752 -300809\n\n```\nexpected_output_bytes: 8\nexpected_output_sha256: 6b3272564201ddb9c9af54f753cb42a5c57b80c776cdd05f049d26c8695e2079\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n1 2 3\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0003_p4\ninput_bytes: 26\ninput_sha256: 97ed8d790ca9088ae8a389273551a846f24fa40f52e39898cfd76233de86ce4a\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n-771740 -255752 -300809\n\n```\nexpected_output_bytes: 8\nexpected_output_sha256: 6b3272564201ddb9c9af54f753cb42a5c57b80c776cdd05f049d26c8695e2079\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n1 2 3\n\n```\n### phase8_validation_0004_p5\ninput_bytes: 40\ninput_sha256: 0cf0e1d6d55c25fc34b8e58caf384e3ac7c5b7ef778a16c0233cbff51ebea379\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5\n834472 -373089 441294 -633071 -957672\n\n```\nexpected_output_bytes: 8\nexpected_output_sha256: 6b3272564201ddb9c9af54f753cb42a5c57b80c776cdd05f049d26c8695e2079\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n1 2 3\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 29, line_score=0.894427, branch_score=0: printf(\"0\\n\");\n- rank 2: line 18, line_score=0.816497, branch_score=0.894427, tie=[2,3]: if ((a[i] > a[min - 1] && a[i] < a[max - 1]) || a[i] > a[max-1])\n- rank 3: line 26, line_score=0.816497, branch_score=0.894427, tie=[2,3]: if (max != min && i < n)\n- rank 4: line 12, line_score=0.816497, branch_score=0.816497, tie=[4,7]: for (i = 0; i < n; i++)\n- rank 5: line 17, line_score=0.816497, branch_score=0.816497, tie=[4,7]: for (i = 0; i < n; i++) {\n- rank 6: line 20, line_score=0.816497, branch_score=0.816497, tie=[4,7]: if (a[i] > a[max-1]) max = i+1;\n- rank 7: line 21, line_score=0.816497, branch_score=0.816497, tie=[4,7]: if (a[i] < a[min-1]) min = i+1;\n- rank 8: line 7, line_score=0.816497, branch_score=0, tie=[8,12]: int main(int argc, char *argv[]) {\n- rank 9: line 10, line_score=0.816497, branch_score=0, tie=[8,12]: scanf (\"%d\", &n);\n- rank 10: line 13, line_score=0.816497, branch_score=0, tie=[8,12]: scanf (\"%d\", &a[i]);\n\n## Frozen buggy runtime evidence\n### n2: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 7\nexpected_sha256: 6c3a326d43935d9270f92de82eef355e4cc53e35932852eb20e58b898c144775\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n0\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 1\nexpected_total_bytes: 1\nexpected_sha256: 5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n0\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n3: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 7\nexpected_sha256: fcf1118351be8397e5f451ca4bc45bff96a26824f71e01f56a13fcd16e2702f7\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n0\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 8\nexpected_sha256: 6b3272564201ddb9c9af54f753cb42a5c57b80c776cdd05f049d26c8695e2079\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n0\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0003_p4: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 8\nexpected_sha256: 6b3272564201ddb9c9af54f753cb42a5c57b80c776cdd05f049d26c8695e2079\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n0\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0004_p5: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 8\nstdout_sha256: 6b3272564201ddb9c9af54f753cb42a5c57b80c776cdd05f049d26c8695e2079\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787197467,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 52194,
+      "present": true,
+      "sha256": "bc581e3d851ea31bd3f40c789bf45871349708490393abb66c31da56744d2ce2"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 16384,
+      "completion_tokens_details": {
+        "reasoning_tokens": 16370
+      },
+      "final_answer_tokens": 14,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 3458,
+      "prompt_tokens": 3458,
+      "total_tokens": 19842
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "1ae119a9b5ed57602acd471ebaa642d4c5ecf0813ea3dd7a124250bc72c75304",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "075985a101c527789aaa10fdcc0219bc084e4b9c2cf901b112097eb94aadef2e",
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T03:44:27.830753+00:00"
+}

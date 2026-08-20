@@ -1,0 +1,189 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "a462d5e7dc98e7d3162ffaa8a84ca62a9cafc744e4ea6d0849fd3ad89e61d2c5",
+  "case_id": "484-A-bug-14085371-14085385",
+  "classification": "validated_patch",
+  "completed": true,
+  "eligibility_reason": "repair_time_success",
+  "evaluation": {
+    "classification": "validated_patch",
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 484-A-14085371.c -o 484-A-14085371.o\ngcc 484-A-14085371.o -o 484-A-14085371 -lm -s -O2\n",
+    "compile_success": true,
+    "failure_modes": [],
+    "plausible": true,
+    "repair_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "1\n3\n7\n",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "7\n63\n511\n8191\n65535\n524287\n8388607\n67108863\n536870911\n8589934591\n68719476735\n549755813887\n8796093022207\n70368744177663\n562949953421311\n9007199254740991\n72057594037927935\n576460752303423487\n",
+        "test_id": "n1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "1\n3\n7\n",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      }
+    ],
+    "validated": true,
+    "validation_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "1\n1\n3\n3\n3\n3\n7\n7\n7\n7\n2\n3\n3\n3\n3\n7\n7\n7\n7\n3\n3\n3\n3\n7\n7\n7\n7\n4\n5\n5\n7\n7\n7\n7\n5\n5\n7\n7\n7\n7\n6\n7\n7\n7\n7\n7\n7\n7\n7\n8\n9\n9\n9\n9\n10\n",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "7\n63\n511\n8191\n65535\n524287\n8388607\n67108863\n536870911\n8589934591\n68719476735\n549755813887\n8796093022207\n70368744177663\n562949953421311\n9007199254740991\n72057594037927935\n576460752303423487\n",
+        "test_id": "phase8_validation_0002_p3",
+        "timed_out": false
+      }
+    ]
+  },
+  "extraction": {
+    "source": "#include<stdio.h>\nint main(int argc, char *argv[])\n{\n    int n;\n    scanf(\"%d\",&n);\n    int i;\n    for(i=0;i<n;i++)\n    {\n        long long int l,r;\n        scanf(\"%lld %lld\",&l,&r);\n        while((l|(l+1))<=r)\n        {\n            l=l|(l+1);\n        }\n        printf(\"%lld\\n\",l);\n    }\n    return 0;\n}\n",
+    "status": "success",
+    "strategy": "plain_source"
+  },
+  "failure_evidence": null,
+  "failure_evidence_hash": null,
+  "first_patch_hash": "b7b20e192679a0f6960fceedf672bb4890693b6af32450594625d8cb4802ec3a",
+  "hidden_validation_results": [
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "1\n1\n3\n3\n3\n3\n7\n7\n7\n7\n2\n3\n3\n3\n3\n7\n7\n7\n7\n3\n3\n3\n3\n7\n7\n7\n7\n4\n5\n5\n7\n7\n7\n7\n5\n5\n7\n7\n7\n7\n6\n7\n7\n7\n7\n7\n7\n7\n7\n8\n9\n9\n9\n9\n10\n",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "7\n63\n511\n8191\n65535\n524287\n8388607\n67108863\n536870911\n8589934591\n68719476735\n549755813887\n8796093022207\n70368744177663\n562949953421311\n9007199254740991\n72057594037927935\n576460752303423487\n",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    }
+  ],
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "stop",
+    "id": "4330e78e-9a20-41ac-ac5b-68764193544a",
+    "raw": "#include<stdio.h>\nint main(int argc, char *argv[])\n{\n    int n;\n    scanf(\"%d\",&n);\n    int i;\n    for(i=0;i<n;i++)\n    {\n        long long int l,r;\n        scanf(\"%lld %lld\",&l,&r);\n        while((l|(l+1))<=r)\n        {\n            l=l|(l+1);\n        }\n        printf(\"%lld\\n\",l);\n    }\n    return 0;\n}",
+    "response_hash": "10a121730801e9eb04f92c6d5e64d148ef83bfe50f52c171ffdc5529f30eeed4"
+  },
+  "oracle_render_hash": "ba0d424f71bb2de3c91d545f86da6bbba3ce4d134809094b7c91d22c6b944b50",
+  "prompt": {
+    "hash": "9152c6028df45878a577aa9fa8c410c27d2490659ba5d51421fd2693e09e72e9",
+    "oracle_render_hash": "ba0d424f71bb2de3c91d545f86da6bbba3ce4d134809094b7c91d22c6b944b50",
+    "raw_observation_hash": "906804dd807cfd775cea0b9c9b80f059381d1e73111e90ea498eb22a1f6754bb",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "fd91368e2f2d53161bc561e2b30a61d73a7013bcdab5dff425ec189fd8f01c34",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include<stdio.h>\nint main(int argc, char *argv[])\n{\n    int n;\n    scanf(\"%d\",&n);\n    int i;\n    for(i=0;i<n;i++)\n    {\n        long long int l,r;\n        scanf(\"%lld %lld\",&l,&r);\n        while((l|(l+1))<=r)\n        {\n            l=l|(l+1);\n        }\n        printf(\"%d\\n\",l);\n    }\n    return 0;\n}\n```\n\n## Base repair-time oracle\n### p1\ninput_bytes: 14\ninput_sha256: 645246579c9a6f914e5b5dbfee758dbd7edb09277a9e142290ab663d639fbfc9\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n1 2\n2 4\n1 10\n```\nexpected_output_bytes: 5\nexpected_output_sha256: 282a34405b1fc2fbc54120dbbabf7c3d3d05e17d5904b824b37c089feae553ae\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n1\n3\n7\n```\n### n1\ninput_bytes: 246\ninput_sha256: ecb5d218f6064f139df3e912d2c0e3378234c83fd831d217d4d080ae108bed48\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n18\n1 10\n1 100\n1 1000\n1 10000\n1 100000\n1 1000000\n1 10000000\n1 100000000\n1 1000000000\n1 10000000000\n1 100000000000\n1 1000000000000\n1 10000000000000\n1 100000000000000\n1 1000000000000000\n1 10000000000000000\n1 100000000000000000\n1 1000000000000000000\n\n```\nexpected_output_bytes: 189\nexpected_output_sha256: 8cbb029182d37ca596050963265af64d646f1bedcdffd28d3da9bf4845833651\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n7\n63\n511\n8191\n65535\n524287\n8388607\n67108863\n536870911\n8589934591\n68719476735\n549755813887\n8796093022207\n70368744177663\n562949953421311\n9007199254740991\n72057594037927935\n576460752303423487\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0000_p1\ninput_bytes: 15\ninput_sha256: 1b32146d8f5703085695f867bcbf4d6bbaf349ac4b9f024d6be49850c65a1b5b\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n1 2\n2 4\n1 10\n\n```\nexpected_output_bytes: 6\nexpected_output_sha256: 96b884b5f166bf1156f872e2e0231ca5d58a66862f5f0291d8dd3a3d3c39b7fc\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n1\n3\n7\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 7, line_score=0.57735, branch_score=0.57735, tie=[1,2]: for(i=0;i<n;i++)\n- rank 2: line 11, line_score=0.57735, branch_score=0.57735, tie=[1,2]: while((l|(l+1))<=r)\n- rank 3: line 2, line_score=0.57735, branch_score=0, tie=[3,8]: int main(int argc, char *argv[])\n- rank 4: line 5, line_score=0.57735, branch_score=0, tie=[3,8]: scanf(\"%d\",&n);\n- rank 5: line 10, line_score=0.57735, branch_score=0, tie=[3,8]: scanf(\"%lld %lld\",&l,&r);\n- rank 6: line 13, line_score=0.57735, branch_score=0, tie=[3,8]: l=l|(l+1);\n- rank 7: line 15, line_score=0.57735, branch_score=0, tie=[3,8]: printf(\"%d\\n\",l);\n- rank 8: line 17, line_score=0.57735, branch_score=0, tie=[3,8]: return 0;\n\n## Frozen buggy runtime evidence\n### p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 6\nstdout_sha256: 96b884b5f166bf1156f872e2e0231ca5d58a66862f5f0291d8dd3a3d3c39b7fc\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 5\nexpected_total_bytes: 5\nexpected_sha256: 282a34405b1fc2fbc54120dbbabf7c3d3d05e17d5904b824b37c089feae553ae\nactual_window_start: 0\nactual_window_end: 6\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n1\n3\n7\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 81\nstdout_sha256: ac84ab7e921f2a798bec20727ff9d5e52d02a3d5862a37c6ba331f98d521e41d\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 54\nexpected_total_bytes: 189\nexpected_sha256: 8cbb029182d37ca596050963265af64d646f1bedcdffd28d3da9bf4845833651\nactual_window_start: 0\nactual_window_end: 81\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n7\n63\n511\n8191\n65535\n524287\n8388607\n67108863\n536870911\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0000_p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 6\nstdout_sha256: 96b884b5f166bf1156f872e2e0231ca5d58a66862f5f0291d8dd3a3d3c39b7fc\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787201474,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 2853,
+      "present": true,
+      "sha256": "69c73e30de45466ecea76274e810e9e6a14b2a3c5f1cf4cda5709ccfbcd154b1"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 986,
+      "completion_tokens_details": {
+        "reasoning_tokens": 885
+      },
+      "final_answer_tokens": 101,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2004,
+      "prompt_tokens": 2004,
+      "total_tokens": 2990
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "906804dd807cfd775cea0b9c9b80f059381d1e73111e90ea498eb22a1f6754bb",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "fd91368e2f2d53161bc561e2b30a61d73a7013bcdab5dff425ec189fd8f01c34",
+  "repair_time_results": {
+    "base_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "1\n3\n7\n",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "7\n63\n511\n8191\n65535\n524287\n8388607\n67108863\n536870911\n8589934591\n68719476735\n549755813887\n8796093022207\n70368744177663\n562949953421311\n9007199254740991\n72057594037927935\n576460752303423487\n",
+        "test_id": "n1",
+        "timed_out": false
+      }
+    ],
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_success": true,
+    "feedback_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "1\n3\n7\n",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      }
+    ],
+    "success": true
+  },
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T04:51:14.310181+00:00"
+}

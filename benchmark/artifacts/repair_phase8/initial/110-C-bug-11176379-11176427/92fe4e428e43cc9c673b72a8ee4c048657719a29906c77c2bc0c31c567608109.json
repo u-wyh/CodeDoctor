@@ -1,0 +1,477 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "92fe4e428e43cc9c673b72a8ee4c048657719a29906c77c2bc0c31c567608109",
+  "case_id": "110-C-bug-11176379-11176427",
+  "classification": "validated_patch",
+  "completed": true,
+  "eligibility_reason": "repair_time_success",
+  "evaluation": {
+    "classification": "validated_patch",
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 110-C-11176379.c -o 110-C-11176379.o\ngcc 110-C-11176379.o -o 110-C-11176379 -lm -s -O2\n",
+    "compile_success": true,
+    "failure_modes": [],
+    "plausible": true,
+    "repair_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "47\n",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "n2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "n1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4477777777777\n",
+        "test_id": "phase8_validation_0012_p13",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4444777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n",
+        "test_id": "phase8_validation_0017_p18",
+        "timed_out": false
+      }
+    ],
+    "validated": true,
+    "validation_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "47\n",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4477777777\n",
+        "test_id": "phase8_validation_0002_p3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4\n",
+        "test_id": "phase8_validation_0004_p5",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "7\n",
+        "test_id": "phase8_validation_0005_p6",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "444\n",
+        "test_id": "phase8_validation_0006_p7",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "44477777\n",
+        "test_id": "phase8_validation_0007_p8",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4444777777777777\n",
+        "test_id": "phase8_validation_0008_p9",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n",
+        "test_id": "phase8_validation_0009_p10",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "44447777777777777777777777777777777777777777777777777777777777777777777\n",
+        "test_id": "phase8_validation_0010_p11",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "444447777777777777\n",
+        "test_id": "phase8_validation_0011_p12",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "444477777777777777\n",
+        "test_id": "phase8_validation_0013_p14",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "444777777777777777777777777777777777777777777777777777777777777777777\n",
+        "test_id": "phase8_validation_0014_p15",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "47777777777\n",
+        "test_id": "phase8_validation_0015_p16",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4444477777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n",
+        "test_id": "phase8_validation_0016_p17",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "477777777777777777777777777\n",
+        "test_id": "phase8_validation_0018_p19",
+        "timed_out": false
+      }
+    ]
+  },
+  "extraction": {
+    "source": "#include<stdio.h>\n#include<stdlib.h>\n\nint main(int argc, char *argv[]){\n    int num, rem, quo1, quo2, i, n;\n    scanf(\"%d\", &num);\n    if (num == 4 || num == 7) {\n        printf(\"%d\\n\", num);\n        return 0;\n    }\n    rem = num % 7;\n    quo1 = num / 7;\n    for (i = 0; i <= quo1; i++) {\n        if ((rem + i * 7) % 4 == 0) {\n            break;\n        }\n    }\n    if (i > quo1) {\n        printf(\"-1\\n\");\n        return 0;\n    }\n    quo2 = (rem + i * 7) / 4;\n    n = i;\n    for (i = 0; i < quo2; i++) {\n        printf(\"4\");\n    }\n    for (i = 0; i < (quo1 - n); i++) {\n        printf(\"7\");\n    }\n    printf(\"\\n\");\n    return 0;\n}\n",
+    "status": "success",
+    "strategy": "fenced_code"
+  },
+  "failure_evidence": null,
+  "failure_evidence_hash": null,
+  "first_patch_hash": "464f17d85993db24d1bc1838ef45494210f2ba2ac7b5909740c2c690451c16a1",
+  "hidden_validation_results": [
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "47\n",
+      "test_id": "phase8_validation_0000_p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "4477777777\n",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "4\n",
+      "test_id": "phase8_validation_0004_p5",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "7\n",
+      "test_id": "phase8_validation_0005_p6",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "444\n",
+      "test_id": "phase8_validation_0006_p7",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "44477777\n",
+      "test_id": "phase8_validation_0007_p8",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "4444777777777777\n",
+      "test_id": "phase8_validation_0008_p9",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n",
+      "test_id": "phase8_validation_0009_p10",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "44447777777777777777777777777777777777777777777777777777777777777777777\n",
+      "test_id": "phase8_validation_0010_p11",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "444447777777777777\n",
+      "test_id": "phase8_validation_0011_p12",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "444477777777777777\n",
+      "test_id": "phase8_validation_0013_p14",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "444777777777777777777777777777777777777777777777777777777777777777777\n",
+      "test_id": "phase8_validation_0014_p15",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "47777777777\n",
+      "test_id": "phase8_validation_0015_p16",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "4444477777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n",
+      "test_id": "phase8_validation_0016_p17",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "477777777777777777777777777\n",
+      "test_id": "phase8_validation_0018_p19",
+      "timed_out": false
+    }
+  ],
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "stop",
+    "id": "855f1020-791b-45c2-a826-19dc1d4e906c",
+    "raw": "```c\n#include<stdio.h>\n#include<stdlib.h>\n\nint main(int argc, char *argv[]){\n    int num, rem, quo1, quo2, i, n;\n    scanf(\"%d\", &num);\n    if (num == 4 || num == 7) {\n        printf(\"%d\\n\", num);\n        return 0;\n    }\n    rem = num % 7;\n    quo1 = num / 7;\n    for (i = 0; i <= quo1; i++) {\n        if ((rem + i * 7) % 4 == 0) {\n            break;\n        }\n    }\n    if (i > quo1) {\n        printf(\"-1\\n\");\n        return 0;\n    }\n    quo2 = (rem + i * 7) / 4;\n    n = i;\n    for (i = 0; i < quo2; i++) {\n        printf(\"4\");\n    }\n    for (i = 0; i < (quo1 - n); i++) {\n        printf(\"7\");\n    }\n    printf(\"\\n\");\n    return 0;\n}\n```",
+    "response_hash": "6191a5da8dacadbc5ad93705d6ba4f1aa78064ddbaed9a04a1837d73443bd4ec"
+  },
+  "oracle_render_hash": "8aa2e7952118f1fe5f94088f00265fcd886948d55f87e5d854094647fd15c9a2",
+  "prompt": {
+    "hash": "a6a62ec4f2078b66b2dd43c0e7640424bdf374f499329fc4d03ed931fe2c96f1",
+    "oracle_render_hash": "8aa2e7952118f1fe5f94088f00265fcd886948d55f87e5d854094647fd15c9a2",
+    "raw_observation_hash": "a04ba61819be9e4d4c10d6a49f05dbd79bddbb969550eef75a71c70888fb1cb9",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "a6a09994f830db874a0c806564b12fba8c37f622a557c698a526e8adf09388b4",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n//Lucky sum of digits\n\n#include<stdio.h>\n#include<stdlib.h>\n\nint main(int argc, char *argv[]){\nint num,rem =1,quo1 = 0,quo2=0,i,n;\nscanf(\"%d\",&num);\nif(num == 4 || num == 7)\nprintf(\"%d\",num);\nelse{\n   rem = num % 7 ;\n   quo1 = num/7;\n   for(i=0;i<= quo1;i++){\n          if((rem+i*7) % 4 == 0){\n            break;\n          }\n        }\n        if(i == quo1){\n         printf(\"-1\");\n         return 0;\n        }\n        quo2 = (rem+i*7)/4;\n        n =i;\n       for(i=0;i<quo2;i++){\n                 printf(\"4\");\n        }\n\n        for(i=0;i<(quo1-n);i++){\n                   printf(\"7\");\n         }\n\n\n }\n\nreturn 0;\n}\n```\n\n## Base repair-time oracle\n### p1\ninput_bytes: 2\ninput_sha256: 4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n11\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 31489056e0916d59fe3add79e63f095af3ffb81604691f21cad442a85c7be617\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n47\n```\n### n2\ninput_bytes: 2\ninput_sha256: 4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n10\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 1bad6b8cf97131fceab8543e81f7757195fbb1d36b376ee994ad1cf17699c464\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n-1\n```\n### p2\ninput_bytes: 2\ninput_sha256: 4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n10\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 1bad6b8cf97131fceab8543e81f7757195fbb1d36b376ee994ad1cf17699c464\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n-1\n```\n### n1\ninput_bytes: 3\ninput_sha256: 917df3320d778ddbaa5c5c7742bc4046bf803c36ed2b050f30844ed206783469\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n10\n\n```\nexpected_output_bytes: 3\nexpected_output_sha256: ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n-1\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0001_p2\ninput_bytes: 3\ninput_sha256: 917df3320d778ddbaa5c5c7742bc4046bf803c36ed2b050f30844ed206783469\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n10\n\n```\nexpected_output_bytes: 3\nexpected_output_sha256: ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n-1\n\n```\n### phase8_validation_0003_p4\ninput_bytes: 2\ninput_sha256: 4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n1\n\n```\nexpected_output_bytes: 3\nexpected_output_sha256: ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n-1\n\n```\n### phase8_validation_0012_p13\ninput_bytes: 3\ninput_sha256: ff393127b5a059b172af9b9eed820368071cf24d46df1b8326623c8e79178379\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n85\n\n```\nexpected_output_bytes: 14\nexpected_output_sha256: af417d362c205d0a40af9f32726c425c37605271167eca2fe5da5ece60b0df80\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n4477777777777\n\n```\n### phase8_validation_0017_p18\ninput_bytes: 5\ninput_sha256: 4f71bb761ace37c88826cd8cc1c948e1cf5b5d0cd153dc651a6efdb3dfb9f2b1\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n1024\n\n```\nexpected_output_bytes: 149\nexpected_output_sha256: 2094e890f094aa11306d0ec557fefbed092e2cee256c63265e46a55cc6598e07\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n4444777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 14, line_score=0.790569, branch_score=1: for(i=0;i<= quo1;i++){\n- rank 2: line 15, line_score=0.790569, branch_score=0.845154: if((rem+i*7) % 4 == 0){\n- rank 3: line 9, line_score=0.790569, branch_score=0.790569, tie=[3,6]: if(num == 4 || num == 7)\n- rank 4: line 19, line_score=0.790569, branch_score=0.790569, tie=[3,6]: if(i == quo1){\n- rank 5: line 25, line_score=0.790569, branch_score=0.790569, tie=[3,6]: for(i=0;i<quo2;i++){\n- rank 6: line 29, line_score=0.790569, branch_score=0.790569, tie=[3,6]: for(i=0;i<(quo1-n);i++){\n- rank 7: line 6, line_score=0.790569, branch_score=0, tie=[7,15]: int main(int argc, char *argv[]){\n- rank 8: line 7, line_score=0.790569, branch_score=0, tie=[7,15]: int num,rem =1,quo1 = 0,quo2=0,i,n;\n- rank 9: line 8, line_score=0.790569, branch_score=0, tie=[7,15]: scanf(\"%d\",&num);\n- rank 10: line 12, line_score=0.790569, branch_score=0, tie=[7,15]: rem = num % 7 ;\n\n## Frozen buggy runtime evidence\n### p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 31489056e0916d59fe3add79e63f095af3ffb81604691f21cad442a85c7be617\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n2: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: 79f06f8fde333461739f220090a23cb2a79f6d714bee100d0e4b4af249294619\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 2\nexpected_sha256: 1bad6b8cf97131fceab8543e81f7757195fbb1d36b376ee994ad1cf17699c464\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4444\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### p2: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: 79f06f8fde333461739f220090a23cb2a79f6d714bee100d0e4b4af249294619\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 2\nexpected_sha256: 1bad6b8cf97131fceab8543e81f7757195fbb1d36b376ee994ad1cf17699c464\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4444\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: 79f06f8fde333461739f220090a23cb2a79f6d714bee100d0e4b4af249294619\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 3\nexpected_sha256: ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4444\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0001_p2: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: 79f06f8fde333461739f220090a23cb2a79f6d714bee100d0e4b4af249294619\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 3\nexpected_sha256: ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4444\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0003_p4: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 71ee45a3c0db9a9865f7313dd3372cf60dca6479d46261f3542eb9346e4a04d6\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 3\nexpected_sha256: ee3aa64bb94a50845d5024cd4bd20202a4567aed5cd5328c0d97e9920775fc28\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n44\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0012_p13: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 13\nstdout_sha256: ca45f127f12a21783163f9b8c83f1ea561744687955a62bfbe8a034509f2259c\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 13\nexpected_total_bytes: 14\nexpected_sha256: af417d362c205d0a40af9f32726c425c37605271167eca2fe5da5ece60b0df80\nactual_window_start: 0\nactual_window_end: 13\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4477777777777\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0017_p18: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 148\nstdout_sha256: dc85c4fac804a5a5e1b205b2a336000c003085f0905774201c438b04261e236f\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 148\nexpected_total_bytes: 149\nexpected_sha256: 2094e890f094aa11306d0ec557fefbed092e2cee256c63265e46a55cc6598e07\nactual_window_start: 0\nactual_window_end: 148\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4444777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787198148,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 25668,
+      "present": true,
+      "sha256": "986e12d70b201ea65d1e933cb33080058b533cdc29ed8dbd2ef597ec06ec8638"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 8085,
+      "completion_tokens_details": {
+        "reasoning_tokens": 7847
+      },
+      "final_answer_tokens": 238,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 4107,
+      "prompt_tokens": 4107,
+      "total_tokens": 12192
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "a04ba61819be9e4d4c10d6a49f05dbd79bddbb969550eef75a71c70888fb1cb9",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "a6a09994f830db874a0c806564b12fba8c37f622a557c698a526e8adf09388b4",
+  "repair_time_results": {
+    "base_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "47\n",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "n2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "n1",
+        "timed_out": false
+      }
+    ],
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_success": true,
+    "feedback_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "-1\n",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4477777777777\n",
+        "test_id": "phase8_validation_0012_p13",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4444777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777\n",
+        "test_id": "phase8_validation_0017_p18",
+        "timed_out": false
+      }
+    ],
+    "success": true
+  },
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T03:55:48.023506+00:00"
+}

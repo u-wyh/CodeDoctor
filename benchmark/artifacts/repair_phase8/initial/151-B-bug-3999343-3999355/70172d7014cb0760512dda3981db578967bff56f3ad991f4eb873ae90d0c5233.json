@@ -1,0 +1,253 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "70172d7014cb0760512dda3981db578967bff56f3ad991f4eb873ae90d0c5233",
+  "case_id": "151-B-bug-3999343-3999355",
+  "classification": "validated_patch",
+  "completed": true,
+  "eligibility_reason": "repair_time_success",
+  "evaluation": {
+    "classification": "validated_patch",
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 151-B-3999343.c -o 151-B-3999343.o\ngcc 151-B-3999343.o -o 151-B-3999343 -lm -s -O2\n",
+    "compile_success": true,
+    "failure_modes": [],
+    "plausible": true,
+    "repair_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.",
+        "test_id": "n2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik.",
+        "test_id": "n3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski.",
+        "test_id": "n4",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.",
+        "test_id": "n1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: VUMvHy.\nIf you want to order a pizza, you should call: VUMvHy.\nIf you want to go to a cafe with a wonderful girl, you should call: VUMvHy.",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      }
+    ],
+    "validated": true,
+    "validation_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik.",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski.",
+        "test_id": "phase8_validation_0002_p3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: gAiJXEYwXU.\nIf you want to order a pizza, you should call: ZaxsHjkGMPxZgwzpya, j, dRJrc, UAiXZTnBKDoKb.\nIf you want to go to a cafe with a wonderful girl, you should call: ZaxsHjkGMPxZgwzpya, UAiXZTnBKDoKb.",
+        "test_id": "phase8_validation_0004_p5",
+        "timed_out": false
+      }
+    ]
+  },
+  "extraction": {
+    "source": "#include<stdio.h>\nint main(int argc, char *argv[])\n{\nint n,i,j,maxtaxi=0,maxpizza=0,maxgirl=0,l1=0,l2=0,l3=0;\nscanf(\"%d\",&n);\nint s[n],taxi[100]={0},girl[100]={0},pizza[100]={0};\nchar c[n][100];\nfor(i=0;i<n;i++)\n{scanf(\"%d %s\",&s[i],c[i]);\nchar p[s[i]][10];\nfor(j=0;j<s[i];j++)\n{scanf(\"%s\",p[j]);\nif(p[j][0]==p[j][1]&&p[j][1]==p[j][3]&&p[j][3]==p[j][4]&&p[j][4]==p[j][6]&&p[j][6]==p[j][7])\ntaxi[i]++;\nelse if(p[j][1]<p[j][0]&&p[j][3]<p[j][1]&&p[j][4]<p[j][3]&&p[j][6]<p[j][4]&&p[j][7]<p[j][6])\npizza[i]++;\nelse\ngirl[i]++;\n}\nif(taxi[i]>=maxtaxi)\nmaxtaxi=taxi[i];\nif(pizza[i]>=maxpizza)\nmaxpizza=pizza[i];\nif(girl[i]>=maxgirl)\nmaxgirl=girl[i];}\nfor(i=0;i<n;i++)\n{if(taxi[i]==maxtaxi)\nl1++;\nif(pizza[i]==maxpizza)\nl2++;\nif(girl[i]==maxgirl)\nl3++;}\nint z=0;\nprintf(\"If you want to call a taxi, you should call: \");\nfor(i=0;i<n;i++)\n{if(taxi[i]==maxtaxi)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l1-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}\n}\nprintf(\"\\n\");\nz=0;\nprintf(\"If you want to order a pizza, you should call: \");\nfor(i=0;i<n;i++)\n{if(pizza[i]==maxpizza)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l2-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}\n}\nprintf(\"\\n\");\nz=0;\nprintf(\"If you want to go to a cafe with a wonderful girl, you should call: \");\nfor(i=0;i<n;i++)\n{if(girl[i]==maxgirl)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l3-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}}\nreturn(0);}\n",
+    "status": "success",
+    "strategy": "fenced_code"
+  },
+  "failure_evidence": null,
+  "failure_evidence_hash": null,
+  "first_patch_hash": "591e99ad944a8388bb7f0824c0e80b62843f44612ab2aa7392d81699797f12bc",
+  "hidden_validation_results": [
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.",
+      "test_id": "phase8_validation_0000_p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "If you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik.",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "If you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski.",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "If you want to call a taxi, you should call: gAiJXEYwXU.\nIf you want to order a pizza, you should call: ZaxsHjkGMPxZgwzpya, j, dRJrc, UAiXZTnBKDoKb.\nIf you want to go to a cafe with a wonderful girl, you should call: ZaxsHjkGMPxZgwzpya, UAiXZTnBKDoKb.",
+      "test_id": "phase8_validation_0004_p5",
+      "timed_out": false
+    }
+  ],
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "stop",
+    "id": "1eb9325a-e9e3-473e-a523-1575ac9afebc",
+    "raw": "```c\n#include<stdio.h>\nint main(int argc, char *argv[])\n{\nint n,i,j,maxtaxi=0,maxpizza=0,maxgirl=0,l1=0,l2=0,l3=0;\nscanf(\"%d\",&n);\nint s[n],taxi[100]={0},girl[100]={0},pizza[100]={0};\nchar c[n][100];\nfor(i=0;i<n;i++)\n{scanf(\"%d %s\",&s[i],c[i]);\nchar p[s[i]][10];\nfor(j=0;j<s[i];j++)\n{scanf(\"%s\",p[j]);\nif(p[j][0]==p[j][1]&&p[j][1]==p[j][3]&&p[j][3]==p[j][4]&&p[j][4]==p[j][6]&&p[j][6]==p[j][7])\ntaxi[i]++;\nelse if(p[j][1]<p[j][0]&&p[j][3]<p[j][1]&&p[j][4]<p[j][3]&&p[j][6]<p[j][4]&&p[j][7]<p[j][6])\npizza[i]++;\nelse\ngirl[i]++;\n}\nif(taxi[i]>=maxtaxi)\nmaxtaxi=taxi[i];\nif(pizza[i]>=maxpizza)\nmaxpizza=pizza[i];\nif(girl[i]>=maxgirl)\nmaxgirl=girl[i];}\nfor(i=0;i<n;i++)\n{if(taxi[i]==maxtaxi)\nl1++;\nif(pizza[i]==maxpizza)\nl2++;\nif(girl[i]==maxgirl)\nl3++;}\nint z=0;\nprintf(\"If you want to call a taxi, you should call: \");\nfor(i=0;i<n;i++)\n{if(taxi[i]==maxtaxi)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l1-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}\n}\nprintf(\"\\n\");\nz=0;\nprintf(\"If you want to order a pizza, you should call: \");\nfor(i=0;i<n;i++)\n{if(pizza[i]==maxpizza)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l2-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}\n}\nprintf(\"\\n\");\nz=0;\nprintf(\"If you want to go to a cafe with a wonderful girl, you should call: \");\nfor(i=0;i<n;i++)\n{if(girl[i]==maxgirl)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l3-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}}\nreturn(0);}\n```",
+    "response_hash": "6be1bd555071a4a877eab9956f840766080ad28a02dfbb8b310f08fcf90bcbe0"
+  },
+  "oracle_render_hash": "1c4f87e993afbb9bb63b06da93a724f11e388c54ca7d2bf48da57bb798def526",
+  "prompt": {
+    "hash": "b5d5c9a2064d8e1f9ef8c5c00fc598439a9aefcccb2f9a763874f206c67c73bf",
+    "oracle_render_hash": "1c4f87e993afbb9bb63b06da93a724f11e388c54ca7d2bf48da57bb798def526",
+    "raw_observation_hash": "80b75bb0f418d9e4facc55e1589c1838e020899fab34905307e250abfb4b73d3",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "6d644104559c66645a0fe3c3353667572d0d31a3119ab7f31b8cf9d73a5901a8",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include<stdio.h>\nint main(int argc, char *argv[])\n{\nint n,i,j,maxtaxi=0,maxpizza=0,maxgirl=0,l1=0,l2=0,l3=0;\nscanf(\"%d\",&n);\nint s[n],taxi[100]={0},girl[100]={0},pizza[100]={0};\nchar c[n][100];\nfor(i=0;i<n;i++)\n{scanf(\"%d %s\",&s[i],c[i]);\nchar p[s[i]][10];\nfor(j=0;j<s[i];j++)\n{scanf(\"%s\",p[j]);\nif(p[j][0]==p[j][1]&&p[j][1]==p[j][3]&&p[j][3]==p[j][4]&&p[j][4]==p[j][6]&&p[j][6]==p[j][7])\ntaxi[i]++;\nelse if(p[j][1]<p[j][0]&&p[j][3]<p[j][1]&&p[j][4]<p[j][3]&&p[j][6]<p[j][4]&&p[j][7]<p[j][6])\npizza[i]++;\nelse\ngirl[i]++;\n}\nif(taxi[i]>=maxtaxi)\nmaxtaxi=taxi[i];\nif(pizza[i]>=maxpizza)\nmaxpizza=pizza[i];\nif(girl[i]>=maxgirl)\nmaxgirl=girl[i];}\nfor(i=0;i<n;i++)\n{if(taxi[i]==maxtaxi)\nl1++;\nif(pizza[i]==maxpizza)\nl2++;\nif(girl[i]==maxgirl)\nl3++;}\nint z=0;\nprintf(\"If you want to call a taxi, you should call: \");\nfor(i=0;i<n;i++)\n{if(taxi[i]==maxtaxi)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l1-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}\n}\nprintf(\"\\n\");\nz=0;\nprintf(\"If you want to order a pizza, you should call: \");\nfor(i=0;i<n;i++)\n{if(pizza[i]==maxpizza)\n{printf(\"%s\",c[i]);\nz++;\nif(z<=l2-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}\n}\nprintf(\"\\n\");\nz=0;\nprintf(\"If you want to go to a cafe with a wonderful girl, you should call: \");\nfor(i=0;i<n;i++)\n{if(girl[i]==maxgirl)\n{printf(\"%s \",c[i]);\nz++;\nif(z<=l3-1)\nprintf(\", \");\nelse\n{printf(\".\");\nbreak;}}}\nreturn(0);}\n```\n\n## Base repair-time oracle\n### n2\ninput_bytes: 180\ninput_sha256: f655fb9819115874d5dfa7a5304187f29040b07e8b371984cc4b2dffffb02c24\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n4\n2 Fedorov\n22-22-22\n98-76-54\n3 Melnikov\n75-19-09\n23-45-67\n99-99-98\n7 Rogulenko\n22-22-22\n11-11-11\n33-33-33\n44-44-44\n55-55-55\n66-66-66\n95-43-21\n3 Kaluzhin\n11-11-11\n99-99-99\n98-65-32\n```\nexpected_output_bytes: 210\nexpected_output_sha256: 1577104bfea879c43600fb88a24030043de84c5b6d1029e21154b2f8f2b7411e\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\nIf you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.\n```\n### n3\ninput_bytes: 143\ninput_sha256: d8e4db429f019cde3c320829d549d26d56279310d3bbfac134344c4a008dad6c\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n5 Gleb\n66-66-66\n55-55-55\n01-01-01\n65-43-21\n12-34-56\n3 Serega\n55-55-55\n87-65-43\n65-55-21\n5 Melnik\n12-42-12\n87-73-01\n36-04-12\n88-12-22\n82-11-43\n```\nexpected_output_bytes: 187\nexpected_output_sha256: 3cf759a2b59c7ef999aa1ea9523618758629ed06127fc9ec97cf27abf1d80daf\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\nIf you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik.\n```\n### n4\ninput_bytes: 100\ninput_sha256: 84dff86f4feadf2d3b40f52565c78a05d0098d803272c735a4d6cb3e12fd7024\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n3 Kulczynski\n22-22-22\n65-43-21\n98-12-00\n4 Pachocki\n11-11-11\n11-11-11\n11-11-11\n98-76-54\n0 Smietanka\n```\nexpected_output_bytes: 203\nexpected_output_sha256: 88c162ff378a47b8f0a7a7209d648f13af1c713b86d148df4a879a5482b62a7f\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\nIf you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski.\n```\n### n1\ninput_bytes: 181\ninput_sha256: 8d225b43d654ac72cffcbe6e336bad583a11e65e95d3d5abe20e39cd5788cfe2\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n4\n2 Fedorov\n22-22-22\n98-76-54\n3 Melnikov\n75-19-09\n23-45-67\n99-99-98\n7 Rogulenko\n22-22-22\n11-11-11\n33-33-33\n44-44-44\n55-55-55\n66-66-66\n95-43-21\n3 Kaluzhin\n11-11-11\n99-99-99\n98-65-32\n\n```\nexpected_output_bytes: 211\nexpected_output_sha256: 2e60951d2f054d49e869eb09f0e7688a79aee5c07cefaf9c98179ab1ec9a4074\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\nIf you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0003_p4\ninput_bytes: 164\ninput_sha256: c68565c9ac31cf3d806c967bb67883edd63d8e52643cd681f174742ee0a798f7\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5\n0 PmfItzXdroG\n0 HRykTUCkxgOaD\n0 fcHIUkrn\n2 eUvyUuXFvvuYobrFBxe\n98-76-32\n02-21-39\n8 VUMvHy\n97-65-41\n65-70-26\n54-49-11\n33-33-33\n76-54-31\n11-11-11\n82-95-22\n98-75-31\n\n```\nexpected_output_bytes: 184\nexpected_output_sha256: 72d94cc10944ff3c538ebc824e31838e52e2ef7ce20768ff6b23596c9005dcc1\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\nIf you want to call a taxi, you should call: VUMvHy.\nIf you want to order a pizza, you should call: VUMvHy.\nIf you want to go to a cafe with a wonderful girl, you should call: VUMvHy.\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 8, line_score=1, branch_score=1, tie=[1,20]: for(i=0;i<n;i++)\n- rank 2: line 11, line_score=1, branch_score=1, tie=[1,20]: for(j=0;j<s[i];j++)\n- rank 3: line 13, line_score=1, branch_score=1, tie=[1,20]: if(p[j][0]==p[j][1]&&p[j][1]==p[j][3]&&p[j][3]==p[j][4]&&p[j][4]==p[j][6]&&p[j][6]==p[j][7])\n- rank 4: line 15, line_score=1, branch_score=1, tie=[1,20]: else if(p[j][1]<p[j][0]&&p[j][3]<p[j][1]&&p[j][4]<p[j][3]&&p[j][6]<p[j][4]&&p[j][7]<p[j][6])\n- rank 5: line 20, line_score=1, branch_score=1, tie=[1,20]: if(taxi[i]>=maxtaxi)\n- rank 6: line 22, line_score=1, branch_score=1, tie=[1,20]: if(pizza[i]>=maxpizza)\n- rank 7: line 24, line_score=1, branch_score=1, tie=[1,20]: if(girl[i]>=maxgirl)\n- rank 8: line 26, line_score=1, branch_score=1, tie=[1,20]: for(i=0;i<n;i++)\n- rank 9: line 27, line_score=1, branch_score=1, tie=[1,20]: {if(taxi[i]==maxtaxi)\n- rank 10: line 29, line_score=1, branch_score=1, tie=[1,20]: if(pizza[i]==maxpizza)\n\n## Frozen buggy runtime evidence\n### n2: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 211\nstdout_sha256: bfe75b73aac735ad07f1ea8bbe19abe7cc133269c633fc57ff48afa250d57165\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 209\nexpected_total_bytes: 210\nexpected_sha256: 1577104bfea879c43600fb88a24030043de84c5b6d1029e21154b2f8f2b7411e\nactual_window_start: 0\nactual_window_end: 211\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\nIf you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov .\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n3: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 188\nstdout_sha256: 268ddeb52563f753a7db169834ef7aa92209fd6de89d077cf2e430bf5b697a05\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 186\nexpected_total_bytes: 187\nexpected_sha256: 3cf759a2b59c7ef999aa1ea9523618758629ed06127fc9ec97cf27abf1d80daf\nactual_window_start: 0\nactual_window_end: 188\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\nIf you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik .\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n4: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 204\nstdout_sha256: 8f94ef0791be37522bd9727d68a7cd17ea8799d3868442d630427ac7e28d419f\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 202\nexpected_total_bytes: 203\nexpected_sha256: 88c162ff378a47b8f0a7a7209d648f13af1c713b86d148df4a879a5482b62a7f\nactual_window_start: 0\nactual_window_end: 204\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\nIf you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski .\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 211\nstdout_sha256: bfe75b73aac735ad07f1ea8bbe19abe7cc133269c633fc57ff48afa250d57165\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 209\nexpected_total_bytes: 211\nexpected_sha256: 2e60951d2f054d49e869eb09f0e7688a79aee5c07cefaf9c98179ab1ec9a4074\nactual_window_start: 0\nactual_window_end: 211\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\nIf you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov .\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0003_p4: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 184\nstdout_sha256: 090afde448ec338d76aed7f9b0e95a7ad8aa6fc503966d0b30bc12faa2264165\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 182\nexpected_total_bytes: 184\nexpected_sha256: 72d94cc10944ff3c538ebc824e31838e52e2ef7ce20768ff6b23596c9005dcc1\nactual_window_start: 0\nactual_window_end: 184\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\nIf you want to call a taxi, you should call: VUMvHy.\nIf you want to order a pizza, you should call: VUMvHy.\nIf you want to go to a cafe with a wonderful girl, you should call: VUMvHy .\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787198008,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 4766,
+      "present": true,
+      "sha256": "092c0ed1c294811d23fd9ab351b0217711368d200de988e12e5a7a14a4d1d921"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1956,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1382
+      },
+      "final_answer_tokens": 574,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 4284,
+      "prompt_tokens": 4284,
+      "total_tokens": 6240
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "80b75bb0f418d9e4facc55e1589c1838e020899fab34905307e250abfb4b73d3",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "6d644104559c66645a0fe3c3353667572d0d31a3119ab7f31b8cf9d73a5901a8",
+  "repair_time_results": {
+    "base_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.",
+        "test_id": "n2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Gleb.\nIf you want to order a pizza, you should call: Gleb, Serega.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnik.",
+        "test_id": "n3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Pachocki.\nIf you want to order a pizza, you should call: Kulczynski, Pachocki.\nIf you want to go to a cafe with a wonderful girl, you should call: Kulczynski.",
+        "test_id": "n4",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: Rogulenko.\nIf you want to order a pizza, you should call: Fedorov, Rogulenko, Kaluzhin.\nIf you want to go to a cafe with a wonderful girl, you should call: Melnikov.",
+        "test_id": "n1",
+        "timed_out": false
+      }
+    ],
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_success": true,
+    "feedback_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "If you want to call a taxi, you should call: VUMvHy.\nIf you want to order a pizza, you should call: VUMvHy.\nIf you want to go to a cafe with a wonderful girl, you should call: VUMvHy.",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      }
+    ],
+    "success": true
+  },
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T03:53:28.092902+00:00"
+}

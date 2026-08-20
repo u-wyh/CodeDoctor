@@ -1,0 +1,92 @@
+{
+  "eligible_count": 6,
+  "entries": [
+    {
+      "artifact_record_hash": "e494153aaf937ff40ed01b03e388cabe4e87e2048eb54fbe396cbbce4a85203d",
+      "case_id": "315-A-bug-8649287-8687189",
+      "eligibility_reason": "feedback_test_failure",
+      "failure_evidence_hash": "4c4cb9c249517b6555dfe7d8ec0462f6922ddf8095f8d3512072375f35aebd4f",
+      "first_patch_hash": "f2b23539dc88032d798617069649f9cb5e947d87126ce5724e42251a60d901f8",
+      "initial_prompt_hash": "e4b16401f4de3ac0165d0a8fd80186f9fb754ce271b06c9755e80ca928ec3b0a",
+      "oracle_render_hash": "40fed5e0d9a104ae3ea7bd19277edeeb5f46f1f54788b7f2eb08af296ce7354c",
+      "order": 3,
+      "raw_runtime_observation_hash": "35dfbfc3590b0796d75e3e4c5493b2b3b7051077c13447868b2af083e44b658f",
+      "render_protocol_version": "phase8-runtime-evidence-render-v2",
+      "rendered_evidence_hash": "05bfa59b7f17f24066b39e7bd24ae7d70bc23c40eed743ac508828f98f0c0ce1",
+      "second_round_eligible": true
+    },
+    {
+      "artifact_record_hash": "5c3aaccd2ecb0d9fbd1a4571766e925021a3b8937fde9d235689cb42ebbd49bc",
+      "case_id": "75-A-bug-15928172-15928345",
+      "eligibility_reason": "base_repair_test_failure",
+      "failure_evidence_hash": "186be680cfd96a2eb8410bdc4621e46adf24fbcbe891e03d77324ea9e243da05",
+      "first_patch_hash": "791ce4f972410b07ce726e1b4bce794493bf70c3723a0bd77eb83b94802ba681",
+      "initial_prompt_hash": "68c89725df629c0f693229a14557207f72bc4ac24825dbd84de2846990fac622",
+      "oracle_render_hash": "972d18fc6121ede2a963c138e0f031f9264e6749944521e3f408a842e5a6c4a8",
+      "order": 27,
+      "raw_runtime_observation_hash": "83951428df448e59f8037adf97b45d72cde0edebc7b3de20cd4f9acb91c7fbb9",
+      "render_protocol_version": "phase8-runtime-evidence-render-v2",
+      "rendered_evidence_hash": "e9812c1361a8e43e0c22e4589af60e493303e250a17625962a07aca0ab26e8df",
+      "second_round_eligible": true
+    },
+    {
+      "artifact_record_hash": "a1a29210f8a7c6b39db6f9e5b0e01d840a746e9e5aa037a11558480ec207a48d",
+      "case_id": "365-A-bug-17262691-17262721",
+      "eligibility_reason": "base_and_feedback_test_failure",
+      "failure_evidence_hash": "4eae8a3dab1615d5f1f1b50323f174fcf03cf90a8915650a22845a2207f811f0",
+      "first_patch_hash": "94645cc1cd957c4d80f0a3594e1aa8db8d04cca7685938d56bc110017d04bf40",
+      "initial_prompt_hash": "c87fe1244fd5eb036ba41d6fd9e909fd8f5f727d1a0bd0b9c37e84b509d46327",
+      "oracle_render_hash": "28b1fcebf2110ee4d8ad076aa1c20cde016e1f644bfd36bed2190401fe2b7341",
+      "order": 65,
+      "raw_runtime_observation_hash": "895a6ae174483d5eb2dcb7aeca766dcc3ba3ee2d4c6bc88f8d6bb5a741e45cff",
+      "render_protocol_version": "phase8-runtime-evidence-render-v2",
+      "rendered_evidence_hash": "adc3e3522213956826b1bcbc09116a0ec061ce73ed1e41649b4f6be784118efc",
+      "second_round_eligible": true
+    },
+    {
+      "artifact_record_hash": "c9deeefc30c4ee30d014bb31814aa6db2f79e7d4f375580237ae493d44a83446",
+      "case_id": "404-B-bug-14578678-14578704",
+      "eligibility_reason": "base_and_feedback_test_failure",
+      "failure_evidence_hash": "166133ba08ce0ae11ad0535656e910a93d1f8d70da22c807b8657d5d6b6d4de4",
+      "first_patch_hash": "809aaa538b73076bc5646ff7103a9d1757205df2d6bcfa73f76234199db9dd7d",
+      "initial_prompt_hash": "94425cbe28b334d0b2ac9817893654e7fde7dadc60919adb6c2c3d6c99862aab",
+      "oracle_render_hash": "2546c53b380ed93d40159c85cb64b2f748aae2ed9e2de31e160fecd1ff93cdb5",
+      "order": 78,
+      "raw_runtime_observation_hash": "64841042a49b06a40413a93ee80a9f2c011564da33cd209f8b436a5352443665",
+      "render_protocol_version": "phase8-runtime-evidence-render-v2",
+      "rendered_evidence_hash": "2c12624ad67b0077d230dcdd6a5a3776a1ffc5fae8aef27040b9dd262c1f72ef",
+      "second_round_eligible": true
+    },
+    {
+      "artifact_record_hash": "74cedb002b09be7213be9400ba18255c79b198d2dfc5f783c3c9986a150d5b11",
+      "case_id": "366-B-bug-5240575-5240582",
+      "eligibility_reason": "feedback_test_failure",
+      "failure_evidence_hash": "cdc45f589cb13429e9cdda6d043f3422fb681204affffcd18653d3bc8d4bf2c4",
+      "first_patch_hash": "62ca7e22dac902f8841eb575ba9fda2d03e9d9b3f829abeeb3ca7813ba9d1a20",
+      "initial_prompt_hash": "776acbaa6de7643ab15d26920817e4d3db204a6f3b23c9cc0d312b08e42b5fac",
+      "oracle_render_hash": "e8a246d0f0cc22265b0a5521725f81460c2ec5e88d1a80bd0187d69a54598a7f",
+      "order": 80,
+      "raw_runtime_observation_hash": "a8d7c29327e0fffc01226dd83857d73be5525d241eb334cffd17d3ad8d00a335",
+      "render_protocol_version": "phase8-runtime-evidence-render-v2",
+      "rendered_evidence_hash": "df509a21c98d2c95e627fffb7820843e38d9a8e2dfc33a0c55b800bde68af467",
+      "second_round_eligible": true
+    },
+    {
+      "artifact_record_hash": "8f210bfcef6f6c5130fdd8c8a007a4250785cca71efc24f468b76c3ba87ddcfe",
+      "case_id": "305-A-bug-13310851-13310872",
+      "eligibility_reason": "base_repair_test_failure",
+      "failure_evidence_hash": "dbe5b4f55433b67cf989abcd2425379a9ec1a03e0919c5d18aaffe8098f4eaaf",
+      "first_patch_hash": "bfa2f69f68a233fd844fd93068c6e9e26987d8dd6b8fb7a2b7b66380392f3561",
+      "initial_prompt_hash": "f5bdb7d91f199293abea6792e66fbd7f4cb7038fe9aefad67526c5ef71cf4161",
+      "oracle_render_hash": "0cadae3af4865927e8eeb9a7581438b750cbced0a1c7897cf85227b4234e843c",
+      "order": 94,
+      "raw_runtime_observation_hash": "977c11eafca37dc9603321338b83bf3c5fd6af3cf56cf55d50180b8aacda671b",
+      "render_protocol_version": "phase8-runtime-evidence-render-v2",
+      "rendered_evidence_hash": "47922341fd00dbc1b5f551ef5e0416b07d88791fcae0126a8750dfd6dce650aa",
+      "second_round_eligible": true
+    }
+  ],
+  "overall_manifest_hash": "e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5",
+  "protocol_version": "phase8-eligible-cohort-v1",
+  "stage1_manifest_hash": "7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b"
+}

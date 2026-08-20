@@ -1,0 +1,205 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "ea5e12dff7322dc4fb2d89acc15362bd1cc811535996d9110c7ebc48b9527cd8",
+  "case_id": "548-B-bug-14186312-14186587",
+  "classification": "validated_patch",
+  "completed": true,
+  "eligibility_reason": "repair_time_success",
+  "evaluation": {
+    "classification": "validated_patch",
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 548-B-14186312.c -o 548-B-14186312.o\ngcc 548-B-14186312.o -o 548-B-14186312 -lm -s -O2\n",
+    "compile_success": true,
+    "failure_modes": [],
+    "plausible": true,
+    "repair_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n4\n3\n3\n4\n",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n3\n3\n3\n3\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n5\n5\n5\n5\n5\n5\n4\n3\n3\n4\n4\n4\n",
+        "test_id": "n1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n4\n3\n3\n4\n",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      }
+    ],
+    "validated": true,
+    "validation_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "1\n2\n2\n2\n1\n1\n1\n1\n2\n1\n",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "2\n2\n1\n2\n1\n2\n1\n2\n2\n2\n",
+        "test_id": "phase8_validation_0002_p3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n3\n3\n3\n3\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n5\n5\n5\n5\n5\n5\n4\n3\n3\n4\n4\n4\n",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      }
+    ]
+  },
+  "extraction": {
+    "source": "#include \"stdio.h\"\n\n\nint main(int argc, char* argv[])\n{\n    int n,m,q;\n    scanf(\"%d%d%d\",&n,&m,&q);\n    int a[501][501];\n    int i,j;\n    int x,y,count[501],max[501];\n    for(i=1;i<=n;i++){\n        for(j=1;j<=m;j++){\n            scanf(\"%d\",&a[i][j]);\n        }\n    }\n    \n    for(i=1;i<=n;i++){\n        count[i]=0;\n        max[i]=0;\n        for(j=1;j<=m;j++){\n            if(a[i][j]==1)\n                count[i]++;\n            else{\n                if(count[i]>max[i])\n                    max[i]=count[i];\n                count[i]=0;\n            }\n        }\n        if(count[i]>max[i])\n            max[i]=count[i];\n        \n    }\n    \n    \n    while(q--){\n\n        scanf(\"%d%d\",&x,&y);\n\n        if(a[x][y]==1)\n            a[x][y]=0;\n        else\n            a[x][y]=1;\n    \n        count[x]=0;\n        max[x]=0;\n        for(j=1;j<=m;j++){\n                \n                if(a[x][j]==1)\n                  count[x]++;\n                else{\n                    if(count[x]>max[x])\n                        max[x]=count[x];\n                    count[x]=0;\n                }   \n        }\n        if(count[x]>max[x])\n            max[x]=count[x];\n        int t=-1;\n        \n        for(i=1;i<=n;i++){\n            if(max[i]>t)\n                t=max[i];\n        }\n        \n        printf(\"%d\\n\",t);   \n        \n    }\n\n            \n\n    return 0;\n}\n",
+    "status": "success",
+    "strategy": "fenced_code"
+  },
+  "failure_evidence": null,
+  "failure_evidence_hash": null,
+  "first_patch_hash": "4b860b0ef4dc8fe2a633993a67a68ce4768ec8314a99ffbd2f7c34cd6a2c7710",
+  "hidden_validation_results": [
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "1\n2\n2\n2\n1\n1\n1\n1\n2\n1\n",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "2\n2\n1\n2\n1\n2\n1\n2\n2\n2\n",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "3\n3\n3\n3\n3\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n5\n5\n5\n5\n5\n5\n4\n3\n3\n4\n4\n4\n",
+      "test_id": "phase8_validation_0003_p4",
+      "timed_out": false
+    }
+  ],
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "stop",
+    "id": "8718502f-455a-49e0-b8d3-07b0e15a11a1",
+    "raw": "```c\n#include \"stdio.h\"\n\n\nint main(int argc, char* argv[])\n{\n    int n,m,q;\n    scanf(\"%d%d%d\",&n,&m,&q);\n    int a[501][501];\n    int i,j;\n    int x,y,count[501],max[501];\n    for(i=1;i<=n;i++){\n        for(j=1;j<=m;j++){\n            scanf(\"%d\",&a[i][j]);\n        }\n    }\n    \n    for(i=1;i<=n;i++){\n        count[i]=0;\n        max[i]=0;\n        for(j=1;j<=m;j++){\n            if(a[i][j]==1)\n                count[i]++;\n            else{\n                if(count[i]>max[i])\n                    max[i]=count[i];\n                count[i]=0;\n            }\n        }\n        if(count[i]>max[i])\n            max[i]=count[i];\n        \n    }\n    \n    \n    while(q--){\n\n        scanf(\"%d%d\",&x,&y);\n\n        if(a[x][y]==1)\n            a[x][y]=0;\n        else\n            a[x][y]=1;\n    \n        count[x]=0;\n        max[x]=0;\n        for(j=1;j<=m;j++){\n                \n                if(a[x][j]==1)\n                  count[x]++;\n                else{\n                    if(count[x]>max[x])\n                        max[x]=count[x];\n                    count[x]=0;\n                }   \n        }\n        if(count[x]>max[x])\n            max[x]=count[x];\n        int t=-1;\n        \n        for(i=1;i<=n;i++){\n            if(max[i]>t)\n                t=max[i];\n        }\n        \n        printf(\"%d\\n\",t);   \n        \n    }\n\n            \n\n    return 0;\n}\n```",
+    "response_hash": "bdbcc90adb565cb1b3363e6d7e9a1bd8bbd39599a2486b724ab6be48a6a7c1fc"
+  },
+  "oracle_render_hash": "ada8c021507d1661b258bfe72c827d128fce341735a9a0f822a9a3a24c64eb6d",
+  "prompt": {
+    "hash": "8cae1e58967b4b7c4a44c719a7fc5c8769d2843c5e7f6ffe3db9438dd4bb3401",
+    "oracle_render_hash": "ada8c021507d1661b258bfe72c827d128fce341735a9a0f822a9a3a24c64eb6d",
+    "raw_observation_hash": "11d52d4abc984b03ad06a4e8262d7bef93dfc04608ba3b4b9831c4d4cf5ec2d1",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "80c3c3ca478e4ef1d82d00cce394408c96405fd464600d980daf9560979c821e",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include \"stdio.h\"\n\n\nint main(int argc, char* argv[])\n{\n    int n,m,q;\n    scanf(\"%d%d%d\",&n,&m,&q);\n    int a[501][501];\n    int i,j;\n    int x,y,count[501],max[501];\n    for(i=1;i<=n;i++){\n        for(j=1;j<=m;j++){\n            scanf(\"%d\",&a[i][j]);\n        }\n    }\n    \n    for(i=1;i<=n;i++){\n        count[i]=0;\n        max[i]=0;\n        for(j=1;j<=m;j++){\n            if(a[i][j]==1)\n                count[i]++;\n            else{\n                if(count[i]>max[i])\n                    max[i]=count[i];\n            }\n        }\n        if(count[i]>max[i])\n            max[i]=count[i];\n        \n    }\n    \n    \n    while(q--){\n\n        scanf(\"%d%d\",&x,&y);\n\n        if(a[x][y]==1)\n            a[x][y]=0;\n        else\n            a[x][y]=1;\n    \n        count[x]=0;\n        max[x]=0;\n        for(j=1;j<=m;j++){\n                \n                if(a[x][j]==1)\n                  count[x]++;\n                else{\n                    if(count[x]>max[x])\n                        max[x]=count[x];\n                    count[x]=0;\n                }   \n        }\n        if(count[x]>max[x])\n            max[x]=count[x];\n        int t=-1;\n        \n        for(i=1;i<=n;i++){\n            if(max[i]>t)\n                t=max[i];\n        }\n        \n        printf(\"%d\\n\",t);   \n        \n    }\n\n            \n\n    return 0;\n}\n```\n\n## Base repair-time oracle\n### p1\ninput_bytes: 65\ninput_sha256: cd199c3b562b6c51a75544b39ada517f4a65417aaabc490b02a104b9191832b4\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5 4 5\n0 1 1 0\n1 0 0 1\n0 1 1 0\n1 0 0 1\n0 0 0 0\n1 1\n1 4\n1 1\n4 2\n4 3\n```\nexpected_output_bytes: 9\nexpected_output_sha256: 31268cc338051e013f673a3e0edceff8f4c7e830d6277f5a9c7ff527de465534\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n4\n3\n3\n4\n```\n### n1\ninput_bytes: 177\ninput_sha256: 493e3f7f5897a58069e1fe1cd78c0a03169a299c6d74b6fc46dcaac841f48720\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5 5 30\n0 1 1 1 0\n1 1 0 1 1\n0 1 1 1 1\n0 0 1 1 0\n0 0 0 0 0\n3 2\n2 2\n2 2\n4 3\n1 4\n3 2\n4 1\n2 4\n1 4\n2 1\n5 2\n4 1\n4 1\n5 1\n2 4\n2 4\n4 4\n1 2\n3 1\n4 5\n1 2\n2 3\n1 1\n5 1\n3 4\n1 1\n5 4\n1 5\n5 4\n2 2\n\n```\nexpected_output_bytes: 60\nexpected_output_sha256: 62ae9fc0bd242d240e8bfd49c7ddf26a63201a8bb5bd12c66630075022498b3e\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n3\n3\n3\n3\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n5\n5\n5\n5\n5\n5\n4\n3\n3\n4\n4\n4\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0000_p1\ninput_bytes: 66\ninput_sha256: 8ebaa0110a4bef2ebbb2c2c436b95deffdf35153688e8762e44911beaf1ab480\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5 4 5\n0 1 1 0\n1 0 0 1\n0 1 1 0\n1 0 0 1\n0 0 0 0\n1 1\n1 4\n1 1\n4 2\n4 3\n\n```\nexpected_output_bytes: 10\nexpected_output_sha256: 9cc20ad5698aeb4833ccb0d83ef68f1174eee02414f897f303e81b60b5080e6c\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n3\n4\n3\n3\n4\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 11, line_score=0.57735, branch_score=0.57735, tie=[1,15]: for(i=1;i<=n;i++){\n- rank 2: line 12, line_score=0.57735, branch_score=0.57735, tie=[1,15]: for(j=1;j<=m;j++){\n- rank 3: line 17, line_score=0.57735, branch_score=0.57735, tie=[1,15]: for(i=1;i<=n;i++){\n- rank 4: line 20, line_score=0.57735, branch_score=0.57735, tie=[1,15]: for(j=1;j<=m;j++){\n- rank 5: line 21, line_score=0.57735, branch_score=0.57735, tie=[1,15]: if(a[i][j]==1)\n- rank 6: line 24, line_score=0.57735, branch_score=0.57735, tie=[1,15]: if(count[i]>max[i])\n- rank 7: line 28, line_score=0.57735, branch_score=0.57735, tie=[1,15]: if(count[i]>max[i])\n- rank 8: line 34, line_score=0.57735, branch_score=0.57735, tie=[1,15]: while(q--){\n- rank 9: line 38, line_score=0.57735, branch_score=0.57735, tie=[1,15]: if(a[x][y]==1)\n- rank 10: line 45, line_score=0.57735, branch_score=0.57735, tie=[1,15]: for(j=1;j<=m;j++){\n\n## Frozen buggy runtime evidence\n### p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 10\nstdout_sha256: 9cc20ad5698aeb4833ccb0d83ef68f1174eee02414f897f303e81b60b5080e6c\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 9\nexpected_total_bytes: 9\nexpected_sha256: 31268cc338051e013f673a3e0edceff8f4c7e830d6277f5a9c7ff527de465534\nactual_window_start: 0\nactual_window_end: 10\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n3\n4\n3\n3\n4\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 60\nstdout_sha256: 061f80c98bc3535563a7185708e60895dbbc7dda60647b2de835bfddf941b792\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 60\nexpected_sha256: 62ae9fc0bd242d240e8bfd49c7ddf26a63201a8bb5bd12c66630075022498b3e\nactual_window_start: 0\nactual_window_end: 60\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4\n3\n3\n3\n3\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n5\n5\n5\n5\n5\n5\n4\n3\n3\n4\n4\n4\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0000_p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 10\nstdout_sha256: 9cc20ad5698aeb4833ccb0d83ef68f1174eee02414f897f303e81b60b5080e6c\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787200876,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 4610,
+      "present": true,
+      "sha256": "354450f82b2255c02071495236b745ef5242d4250b21a6a2906adf9968264966"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1635,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1267
+      },
+      "final_answer_tokens": 368,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2493,
+      "prompt_tokens": 2493,
+      "total_tokens": 4128
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "11d52d4abc984b03ad06a4e8262d7bef93dfc04608ba3b4b9831c4d4cf5ec2d1",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "80c3c3ca478e4ef1d82d00cce394408c96405fd464600d980daf9560979c821e",
+  "repair_time_results": {
+    "base_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n4\n3\n3\n4\n",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n3\n3\n3\n3\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n4\n5\n5\n5\n5\n5\n5\n4\n3\n3\n4\n4\n4\n",
+        "test_id": "n1",
+        "timed_out": false
+      }
+    ],
+    "compile_exit_code": 0,
+    "compile_stderr": "",
+    "compile_success": true,
+    "feedback_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "3\n4\n3\n3\n4\n",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      }
+    ],
+    "success": true
+  },
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T04:41:16.230306+00:00"
+}

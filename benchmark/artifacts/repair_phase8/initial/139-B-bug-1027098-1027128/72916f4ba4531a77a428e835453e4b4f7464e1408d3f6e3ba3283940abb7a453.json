@@ -1,0 +1,301 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "72916f4ba4531a77a428e835453e4b4f7464e1408d3f6e3ba3283940abb7a453",
+  "case_id": "139-B-bug-1027098-1027128",
+  "classification": "validated_patch",
+  "completed": true,
+  "eligibility_reason": "repair_time_success",
+  "evaluation": {
+    "classification": "validated_patch",
+    "compile_exit_code": 0,
+    "compile_stderr": "139-B-1027098.c: In function 'main':\n139-B-1027098.c:28:22: warning: implicit declaration of function 'ceil' [-Wimplicit-function-declaration]\n   28 |             double d=ceil(f);\n      |                      ^~~~\n139-B-1027098.c:3:1: note: include '<math.h>' or provide a declaration of 'ceil'\n    2 | #include<string.h>\n  +++ |+#include <math.h>\n    3 | int min(int,int);\n139-B-1027098.c:28:22: warning: incompatible implicit declaration of built-in function 'ceil' [-Wbuiltin-declaration-mismatch]\n   28 |             double d=ceil(f);\n      |                      ^~~~\n139-B-1027098.c:28:22: note: include '<math.h>' or provide a declaration of 'ceil'\n",
+    "compile_stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 139-B-1027098.c -o 139-B-1027098.o\ngcc 139-B-1027098.o -o 139-B-1027098 -lm -s -O2\n",
+    "compile_success": true,
+    "failure_modes": [],
+    "plausible": true,
+    "repair_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "640",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "33",
+        "test_id": "n1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "13959",
+        "test_id": "phase8_validation_0006_p7",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "400",
+        "test_id": "phase8_validation_0008_p9",
+        "timed_out": false
+      }
+    ],
+    "validated": true,
+    "validation_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "640",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "114",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "12",
+        "test_id": "phase8_validation_0002_p3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "6000",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "261",
+        "test_id": "phase8_validation_0004_p5",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "33",
+        "test_id": "phase8_validation_0005_p6",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "16555",
+        "test_id": "phase8_validation_0007_p8",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "380",
+        "test_id": "phase8_validation_0009_p10",
+        "timed_out": false
+      }
+    ]
+  },
+  "extraction": {
+    "source": "#include<stdio.h>\n#include<string.h>\nint min(int,int);\nint main(int argc, char *argv[])\n{\n    int n,m,sum=0,i,j,k,p,r,h,price=5000000;\n    float f;\n    scanf(\"%d\",&n);\n    int a[n][3];\n      for(i=0;i<n;i++)\n      { scanf(\"%d%d%d\",&a[i][0],&a[i][1],&a[i][2]);}\n      scanf(\"%d\",&m);\n        int b[m][3];\n     for(i=0;i<m;i++)\n     { scanf(\"%d%d%d\",&b[i][0],&b[i][1],&b[i][2]);}\n\n    for(i=0;i<n;i++)\n    {\n        price=5000000;\n        p=2*(a[i][0]+a[i][1]);\n        h=a[i][2];\n        for(j=0;j<m;j++)\n        {\n            r=b[j][0]/h;\n            if(r!=0)\n            {r=r*b[j][1];\n            f=(float)p/r;\n            double d=ceil(f);\n            int walp=d*b[j][2];\n                price=min(walp,price);\n        }}\n\n          sum=sum+price;\n    }\n          printf(\"%d\",sum);\n          return 0;\n}\n\nint min(int a,int b)\n{\n    return(a<b?a:b);\n}\n",
+    "status": "success",
+    "strategy": "fenced_code"
+  },
+  "failure_evidence": null,
+  "failure_evidence_hash": null,
+  "first_patch_hash": "14c5b4d71c3654d3c35deed3989049927156f8ec7e0ec6cde24461379e779904",
+  "hidden_validation_results": [
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "640",
+      "test_id": "phase8_validation_0000_p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "114",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "12",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "6000",
+      "test_id": "phase8_validation_0003_p4",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "261",
+      "test_id": "phase8_validation_0004_p5",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "33",
+      "test_id": "phase8_validation_0005_p6",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "16555",
+      "test_id": "phase8_validation_0007_p8",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "380",
+      "test_id": "phase8_validation_0009_p10",
+      "timed_out": false
+    }
+  ],
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "stop",
+    "id": "27e44906-208a-4d7f-96f0-385428717478",
+    "raw": "```c\n#include<stdio.h>\n#include<string.h>\nint min(int,int);\nint main(int argc, char *argv[])\n{\n    int n,m,sum=0,i,j,k,p,r,h,price=5000000;\n    float f;\n    scanf(\"%d\",&n);\n    int a[n][3];\n      for(i=0;i<n;i++)\n      { scanf(\"%d%d%d\",&a[i][0],&a[i][1],&a[i][2]);}\n      scanf(\"%d\",&m);\n        int b[m][3];\n     for(i=0;i<m;i++)\n     { scanf(\"%d%d%d\",&b[i][0],&b[i][1],&b[i][2]);}\n\n    for(i=0;i<n;i++)\n    {\n        price=5000000;\n        p=2*(a[i][0]+a[i][1]);\n        h=a[i][2];\n        for(j=0;j<m;j++)\n        {\n            r=b[j][0]/h;\n            if(r!=0)\n            {r=r*b[j][1];\n            f=(float)p/r;\n            double d=ceil(f);\n            int walp=d*b[j][2];\n                price=min(walp,price);\n        }}\n\n          sum=sum+price;\n    }\n          printf(\"%d\",sum);\n          return 0;\n}\n\nint min(int a,int b)\n{\n    return(a<b?a:b);\n}\n```",
+    "response_hash": "89f49ece9c61d4c7c51a25c08390b7db27117bdc7873c1f523289172ab493e54"
+  },
+  "oracle_render_hash": "2b1fbabe7c8a7f7f7ea65c9542038bd30281137359152d8b0933c04df69f6005",
+  "prompt": {
+    "hash": "725e29b814a070d8e70f86636281f1efbed0c01a0007c31115ab21bb3bf31cf5",
+    "oracle_render_hash": "2b1fbabe7c8a7f7f7ea65c9542038bd30281137359152d8b0933c04df69f6005",
+    "raw_observation_hash": "58f2f0d3c2b86a6774208272fb7c8132b1aed947adbd6a5869c0b763d24a09ff",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "675361b1c856e5f792d366bc99cdc8fb46af079b25d6ca42b61d33254215675c",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include<stdio.h>\n#include<string.h>\nint min(int,int);\nint main(int argc, char *argv[])\n{\n    int n,m,sum=0,i,j,k,p,r,h,price=5000000;\n    float f;\n    scanf(\"%d\",&n);\n    int a[n][3];\n      for(i=0;i<n;i++)\n      { scanf(\"%d%d%d\",&a[i][0],&a[i][1],&a[i][2]);}\n      scanf(\"%d\",&m);\n        int b[m][3];\n     for(i=0;i<m;i++)\n     { scanf(\"%d%d%d\",&b[i][0],&b[i][1],&b[i][2]);}\n\n    for(i=0;i<n;i++)\n    {\n        p=2*(a[i][0]+a[i][1]);\n        h=a[i][2];\n        for(j=0;j<m;j++)\n        {\n            r=b[j][0]/h;\n            if(r!=0)\n            {r=r*b[j][1];\n            f=(float)p/r;\n            double d=ceil(f);\n            int walp=d*b[j][2];\n                price=min(walp,price);\n        }}\n\n          sum=sum+price;\n    }\n          printf(\"%d\",sum);\n          return 0;\n}\n\nint min(int a,int b)\n{\n    return(a<b?a:b);\n}\n```\n\n## Base repair-time oracle\n### p1\ninput_bytes: 36\ninput_sha256: 7e9451e45c94b858bc721b698d1e04aa2a96058a30e3f07bc4d33c2f088fd6f3\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n1\n5 5 3\n3\n10 1 100\n15 2 320\n3 19 500\n```\nexpected_output_bytes: 3\nexpected_output_sha256: 3f1bb7c0da3c01e685edd592f3a3ca0b149a399d25b97c0da47118c24a39f59a\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n640\n```\n### n1\ninput_bytes: 64\ninput_sha256: 892803124738cc48129a1c1cc23d1656bc42bee34ed092b3896bd36a5e7f7734\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n5\n4 4 1\n3 1 4\n4 1 3\n5 1 1\n1 1 1\n5\n5 3 3\n4 3 4\n5 2 3\n2 1 5\n3 1 3\n\n```\nexpected_output_bytes: 3\nexpected_output_sha256: 19b8d5c59e421f037fe563007c7254eb8d98bc221b278c3db3e5fdbbfd52e273\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n33\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0006_p7\ninput_bytes: 101\ninput_sha256: 769e7c5ad1cf659b749a4ee465d4a9e27cb78cba1f5e641db375d6d05c746f2b\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n10\n57 66 71\n14 30 28\n100 56 45\n22 24 76\n64 7 65\n26 80 9\n15 62 23\n63 46 34\n86 20 58\n10 33 2\n1\n86 9 99\n\n```\nexpected_output_bytes: 6\nexpected_output_sha256: 85e9fbc5e7f43fee0593b79f538c82a5de35e5bbbf2fec31576b0d23cec36a78\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n13959\n\n```\n### phase8_validation_0008_p9\ninput_bytes: 177\ninput_sha256: 085f40e8df9da068cbc48deb0c3b437d2a927b517c984675d46c64f8ac8ce362\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10 10 10\n10\n4 10 10\n10 10 10\n7 10 10\n6 10 10\n7 10 10\n4 10 10\n4 10 10\n2 10 10\n7 10 10\n7 10 10\n\n```\nexpected_output_bytes: 4\nexpected_output_sha256: e4df891c484d7abb985dadf539fa1883a646dab6337af5cae4159c587b7050cc\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n400\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 10, line_score=0.707107, branch_score=0.707107, tie=[1,5]: for(i=0;i<n;i++)\n- rank 2: line 14, line_score=0.707107, branch_score=0.707107, tie=[1,5]: for(i=0;i<m;i++)\n- rank 3: line 17, line_score=0.707107, branch_score=0.707107, tie=[1,5]: for(i=0;i<n;i++)\n- rank 4: line 21, line_score=0.707107, branch_score=0.707107, tie=[1,5]: for(j=0;j<m;j++)\n- rank 5: line 24, line_score=0.707107, branch_score=0.707107, tie=[1,5]: if(r!=0)\n- rank 6: line 4, line_score=0.707107, branch_score=0, tie=[6,27]: int main(int argc, char *argv[])\n- rank 7: line 5, line_score=0.707107, branch_score=0, tie=[6,27]: {\n- rank 8: line 6, line_score=0.707107, branch_score=0, tie=[6,27]: int n,m,sum=0,i,j,k,p,r,h,price=5000000;\n- rank 9: line 8, line_score=0.707107, branch_score=0, tie=[6,27]: scanf(\"%d\",&n);\n- rank 10: line 9, line_score=0.707107, branch_score=0, tie=[6,27]: int a[n][3];\n\n## Frozen buggy runtime evidence\n### p1: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 3\nstdout_sha256: 3f1bb7c0da3c01e685edd592f3a3ca0b149a399d25b97c0da47118c24a39f59a\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: c2356069e9d1e79ca924378153cfbbfb4d4416b1f99d41a2940bfdb66c5319db\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 3\nexpected_sha256: 19b8d5c59e421f037fe563007c7254eb8d98bc221b278c3db3e5fdbbfd52e273\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n24\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0006_p7: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: b4c79208b5692b281b3dbef2203139e1bc8f519694652c241de220fbd104e0f4\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 6\nexpected_sha256: 85e9fbc5e7f43fee0593b79f538c82a5de35e5bbbf2fec31576b0d23cec36a78\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n5643\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0008_p9: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 3\nstdout_sha256: 26d228663f13a88592a12d16cf9587caab0388b262d6d9f126ed62f9333aca94\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 3\nexpected_total_bytes: 4\nexpected_sha256: e4df891c484d7abb985dadf539fa1883a646dab6337af5cae4159c587b7050cc\nactual_window_start: 0\nactual_window_end: 3\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n400\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787199201,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 23767,
+      "present": true,
+      "sha256": "416fead84bc188a3dd7b8527af99f27647e3ef1dd43fa9270983343644a390b9"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 7917,
+      "completion_tokens_details": {
+        "reasoning_tokens": 7617
+      },
+      "final_answer_tokens": 300,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2699,
+      "prompt_tokens": 2699,
+      "total_tokens": 10616
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "58f2f0d3c2b86a6774208272fb7c8132b1aed947adbd6a5869c0b763d24a09ff",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "675361b1c856e5f792d366bc99cdc8fb46af079b25d6ca42b61d33254215675c",
+  "repair_time_results": {
+    "base_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "640",
+        "test_id": "p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "33",
+        "test_id": "n1",
+        "timed_out": false
+      }
+    ],
+    "compile_exit_code": 0,
+    "compile_stderr": "139-B-1027098.c: In function 'main':\n139-B-1027098.c:28:22: warning: implicit declaration of function 'ceil' [-Wimplicit-function-declaration]\n   28 |             double d=ceil(f);\n      |                      ^~~~\n139-B-1027098.c:3:1: note: include '<math.h>' or provide a declaration of 'ceil'\n    2 | #include<string.h>\n  +++ |+#include <math.h>\n    3 | int min(int,int);\n139-B-1027098.c:28:22: warning: incompatible implicit declaration of built-in function 'ceil' [-Wbuiltin-declaration-mismatch]\n   28 |             double d=ceil(f);\n      |                      ^~~~\n139-B-1027098.c:28:22: note: include '<math.h>' or provide a declaration of 'ceil'\n",
+    "compile_success": true,
+    "feedback_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "13959",
+        "test_id": "phase8_validation_0006_p7",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "400",
+        "test_id": "phase8_validation_0008_p9",
+        "timed_out": false
+      }
+    ],
+    "success": true
+  },
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T04:13:21.860447+00:00"
+}

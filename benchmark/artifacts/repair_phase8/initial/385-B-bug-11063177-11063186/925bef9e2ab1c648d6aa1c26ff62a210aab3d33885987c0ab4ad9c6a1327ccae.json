@@ -1,0 +1,221 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "925bef9e2ab1c648d6aa1c26ff62a210aab3d33885987c0ab4ad9c6a1327ccae",
+  "case_id": "385-B-bug-11063177-11063186",
+  "classification": "validated_patch",
+  "completed": true,
+  "eligibility_reason": "repair_time_success",
+  "evaluation": {
+    "classification": "validated_patch",
+    "compile_exit_code": 0,
+    "compile_stderr": "385-B-11063177.c: In function 'main':\n385-B-11063177.c:8:5: warning: 'gets' is deprecated [-Wdeprecated-declarations]\n    8 |     gets(string);\n      |     ^~~~\nIn file included from 385-B-11063177.c:1:\n/usr/include/stdio.h:605:14: note: declared here\n  605 | extern char *gets (char *__s) __wur __attribute_deprecated__;\n      |              ^~~~\n/usr/bin/ld: 385-B-11063177.o: in function `main':\n385-B-11063177.c:(.text+0x2a): warning: the `gets' function is dangerous and should not be used.\n",
+    "compile_stdout": "gcc -fno-optimize-sibling-calls -fno-strict-aliasing -fno-asm -std=c99 -c 385-B-11063177.c -o 385-B-11063177.o\ngcc 385-B-11063177.o -o 385-B-11063177 -lm -s -O2\n",
+    "compile_success": true,
+    "failure_modes": [],
+    "plausible": true,
+    "repair_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "6\n",
+        "test_id": "n2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "20\n",
+        "test_id": "n3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "6\n",
+        "test_id": "n1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4419\n",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      }
+    ],
+    "validated": true,
+    "validation_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "6\n",
+        "test_id": "phase8_validation_0000_p1",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "20\n",
+        "test_id": "phase8_validation_0001_p2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "291\n",
+        "test_id": "phase8_validation_0002_p3",
+        "timed_out": false
+      }
+    ]
+  },
+  "extraction": {
+    "source": "#include <stdio.h>\n#include <string.h>\n\nint main(int argc, char *argv[])\n{\n    int ans=0, i, j;\n    char string[5010];\n    gets(string);\n    j = strlen(string);\n    int x = 0;\n    for(i = 1; i <= j-3; i++)\n    {\n        if(string[i-1] == 'b' && string[i] == 'e' && string[i+1] == 'a' && string[i+2] == 'r')\n        {\n            ans += (i-x)*(j-i-2);\n            x = i;\n        }\n    }\n    printf(\"%d\\n\",ans);\n    return 0;\n}\n",
+    "status": "success",
+    "strategy": "plain_source"
+  },
+  "failure_evidence": null,
+  "failure_evidence_hash": null,
+  "first_patch_hash": "6ae7cf5c5b484405119601d718c7de6b68999a1502861a1276a9a16530e43aae",
+  "hidden_validation_results": [
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "6\n",
+      "test_id": "phase8_validation_0000_p1",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "20\n",
+      "test_id": "phase8_validation_0001_p2",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": "291\n",
+      "test_id": "phase8_validation_0002_p3",
+      "timed_out": false
+    }
+  ],
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "stop",
+    "id": "32d7e561-304c-47dc-ab73-1af1437a320b",
+    "raw": "#include <stdio.h>\n#include <string.h>\n\nint main(int argc, char *argv[])\n{\n    int ans=0, i, j;\n    char string[5010];\n    gets(string);\n    j = strlen(string);\n    int x = 0;\n    for(i = 1; i <= j-3; i++)\n    {\n        if(string[i-1] == 'b' && string[i] == 'e' && string[i+1] == 'a' && string[i+2] == 'r')\n        {\n            ans += (i-x)*(j-i-2);\n            x = i;\n        }\n    }\n    printf(\"%d\\n\",ans);\n    return 0;\n}",
+    "response_hash": "928ac0d51074b6e7944b0cad31f8d9409b5860a77db1d5646f19e0491b7b0b30"
+  },
+  "oracle_render_hash": "dd99b3b8ec016fbcd7c41f0657f22dbb8c94652f90af0307f62c26a653ee1d6c",
+  "prompt": {
+    "hash": "235d879ed1836368265b94cafac1470bbd9d07cfc81aecd3a9b4dfa4879b4df8",
+    "oracle_render_hash": "dd99b3b8ec016fbcd7c41f0657f22dbb8c94652f90af0307f62c26a653ee1d6c",
+    "raw_observation_hash": "ec82fbcf5571f7e9547f758302be4c356fc3443f5c8b89d7e820bf350363671d",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "a4f6f08e3e476f2464279a1aaebd55da06340709d92eb96a2580a42f81a4220e",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include <stdio.h>\n#include <string.h>\n\nint main(int argc, char *argv[])\n{\n    int ans=0, i, j;\n    char string[5010];\n    gets(string);\n    j = strlen(string);\n    int x = 0;\n    for(i = 1; i <= j-3; i++)\n    {\n        if(string[i-1] == 'b' && string[i] == 'e' && string[i+1] == 'a' && string[i+2] == 'r')\n        {\n            ans += (i-x)*(j-i-2);\n            printf(\"%d\\n\", ans);\n            x = i;\n        }\n    }\n    printf(\"%d\\n\",ans);\n    return 0;\n}\n```\n\n## Base repair-time oracle\n### n2\ninput_bytes: 9\ninput_sha256: cb623772fe1b7ee25240152b03cae1e7d908147b37d24dcca2b9561e9305039c\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\nbearbtear\n```\nexpected_output_bytes: 1\nexpected_output_sha256: e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n6\n```\n### n3\ninput_bytes: 11\ninput_sha256: a63bb7d3d71f62931d3fa6f11c407bb0fa3e0c37ce20b4715ae07f9c89abeb85\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\nbearaabearc\n```\nexpected_output_bytes: 2\nexpected_output_sha256: f5ca38f748a1d6eaf726b8a42fb575c3c71f1864a8143301782de13da2d9202b\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n20\n```\n### n1\ninput_bytes: 10\ninput_sha256: 88083821250238eae076f1944c31fee1590967b84c75e9191351711e17ba1428\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\nbearbtear\n\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 06e9d52c1720fca412803e3b07c4b228ff113e303f4c7ab94665319d832bbfb7\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n6\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0003_p4\ninput_bytes: 101\ninput_sha256: 5908a417f0b5dda7d8d8014d7095ce9a2c8d5d6fadc310c690eabacb485bb743\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\npbearjbearbebearnbabcffbearbearwubearjezpiorrbearbearjbdlbearbearqbearjbearwipmsbearoaftrsebearzsnqb\n\n```\nexpected_output_bytes: 5\nexpected_output_sha256: 2e301893bc4296d63163c497e0e12241854f15eef5e92b3ab35d0e71610a7e1d\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n4419\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 11, line_score=1, branch_score=1, tie=[1,2]: for(i = 1; i <= j-3; i++)\n- rank 2: line 13, line_score=1, branch_score=1, tie=[1,2]: if(string[i-1] == 'b' && string[i] == 'e' && string[i+1] == 'a' && string[i+2] == 'r')\n- rank 3: line 4, line_score=1, branch_score=0, tie=[3,12]: int main(int argc, char *argv[])\n- rank 4: line 6, line_score=1, branch_score=0, tie=[3,12]: int ans=0, i, j;\n- rank 5: line 8, line_score=1, branch_score=0, tie=[3,12]: gets(string);\n- rank 6: line 9, line_score=1, branch_score=0, tie=[3,12]: j = strlen(string);\n- rank 7: line 10, line_score=1, branch_score=0, tie=[3,12]: int x = 0;\n- rank 8: line 15, line_score=1, branch_score=0, tie=[3,12]: ans += (i-x)*(j-i-2);\n- rank 9: line 16, line_score=1, branch_score=0, tie=[3,12]: printf(\"%d\\n\", ans);\n- rank 10: line 17, line_score=1, branch_score=0, tie=[3,12]: x = i;\n\n## Frozen buggy runtime evidence\n### n2: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: 3275c31dd99be467469cb4b2308e6cdf1d88173b34e1f729620be77ee34993c5\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 1\nexpected_total_bytes: 1\nexpected_sha256: e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n6\n6\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n3: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 8\nstdout_sha256: 81ce530c8cdc635a3d09f1316dc45d8a1cbbd24f3fb9d277a7c7dcc7e4845f14\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 2\nexpected_sha256: f5ca38f748a1d6eaf726b8a42fb575c3c71f1864a8143301782de13da2d9202b\nactual_window_start: 0\nactual_window_end: 8\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n8\n20\n20\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 4\nstdout_sha256: 3275c31dd99be467469cb4b2308e6cdf1d88173b34e1f729620be77ee34993c5\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 2\nexpected_total_bytes: 2\nexpected_sha256: 06e9d52c1720fca412803e3b07c4b228ff113e303f4c7ab94665319d832bbfb7\nactual_window_start: 0\nactual_window_end: 4\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n6\n6\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0003_p4: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 73\nstdout_sha256: 687cf6fe44b59bffd4346362a5f8fa0ec83e165b24e360e0dd19f3a0cf12b5fb\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 5\nexpected_sha256: 2e301893bc4296d63163c497e0e12241854f15eef5e92b3ab35d0e71610a7e1d\nactual_window_start: 0\nactual_window_end: 73\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n192\n647\n1157\n1971\n2251\n2635\n3259\n3451\n3771\n3915\n4070\n4200\n4353\n4419\n4419\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787199872,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 11050,
+      "present": true,
+      "sha256": "5741a3dc224c50b49703860ec01306592d53d91671deedcdbed5f20445354507"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3404,
+      "completion_tokens_details": {
+        "reasoning_tokens": 3256
+      },
+      "final_answer_tokens": 148,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2470,
+      "prompt_tokens": 2470,
+      "total_tokens": 5874
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "ec82fbcf5571f7e9547f758302be4c356fc3443f5c8b89d7e820bf350363671d",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "a4f6f08e3e476f2464279a1aaebd55da06340709d92eb96a2580a42f81a4220e",
+  "repair_time_results": {
+    "base_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "6\n",
+        "test_id": "n2",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "20\n",
+        "test_id": "n3",
+        "timed_out": false
+      },
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "6\n",
+        "test_id": "n1",
+        "timed_out": false
+      }
+    ],
+    "compile_exit_code": 0,
+    "compile_stderr": "385-B-11063177.c: In function 'main':\n385-B-11063177.c:8:5: warning: 'gets' is deprecated [-Wdeprecated-declarations]\n    8 |     gets(string);\n      |     ^~~~\nIn file included from 385-B-11063177.c:1:\n/usr/include/stdio.h:605:14: note: declared here\n  605 | extern char *gets (char *__s) __wur __attribute_deprecated__;\n      |              ^~~~\n/usr/bin/ld: 385-B-11063177.o: in function `main':\n385-B-11063177.c:(.text+0x2a): warning: the `gets' function is dangerous and should not be used.\n",
+    "compile_success": true,
+    "feedback_tests": [
+      {
+        "exit_code": 0,
+        "passed": true,
+        "stderr": "",
+        "stdout": "4419\n",
+        "test_id": "phase8_validation_0003_p4",
+        "timed_out": false
+      }
+    ],
+    "success": true
+  },
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T04:24:32.520295+00:00"
+}

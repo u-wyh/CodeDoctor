@@ -63,6 +63,6 @@ Frozen configuration is unchanged: DeepSeek Official API `deepseek-v4-flash`, th
 The transparent input heuristic is `ceil(serialized UTF-8 bytes / 4)`: min=1,374, median=3,967.0, mean=4,892.07, p95=11,493, max=27,959, total=489,207 estimated Stage 1 input tokens. Using the official snapshot verified 2026-08-19T16:37:39Z, cache-miss input $0.14/M, output $0.28/M, and mean completion usage from 148 Phase 7 responses (5265.7 tokens/call), Stage 1 is roughly `$0.2159`. This is a high-uncertainty projection, not billing data.
 
 ## 11. Readiness
-Phase 8 Stage 1 is technically ready; user authorization remains false. Dataset, partition, FL-v1, raw runtime, v2 prompts, reproducibility, leakage, renderer tests, Stage 2 F reuse, and full regression gates pass. No formal LLM call or bulk stage has started.
+Phase 8 Stage 1 was authorized and completed on 2026-08-20. All 100 frozen Initial calls completed without resume or provider failure; the eligible cohort contains 6 cases. The formal results and actual usage are recorded in `execution_feedback_stage1.md`.
 
-No formal blocker remains.
+Stage 2 prompt candidates have been generated and audited offline. Stage 2 remains separately gated and unauthorized; no R/F real LLM call has started.

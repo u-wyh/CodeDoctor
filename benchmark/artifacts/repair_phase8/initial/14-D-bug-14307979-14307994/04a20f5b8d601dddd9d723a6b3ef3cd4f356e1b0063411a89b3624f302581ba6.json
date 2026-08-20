@@ -1,0 +1,80 @@
+{
+  "arm": "initial",
+  "attempt": 1,
+  "cache_key": "04a20f5b8d601dddd9d723a6b3ef3cd4f356e1b0063411a89b3624f302581ba6",
+  "case_id": "14-D-bug-14307979-14307994",
+  "classification": "invalid_model_output",
+  "completed": true,
+  "eligibility_reason": "invalid_model_output",
+  "extraction": {
+    "source": null,
+    "status": "invalid_model_output",
+    "strategy": null
+  },
+  "model_parameters": {
+    "base_url": "https://api.deepseek.com",
+    "max_tokens": 16384,
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek",
+    "seed": null,
+    "temperature": null,
+    "timeout_seconds": 120.0
+  },
+  "model_response": {
+    "finish_reason": "length",
+    "id": "61e3914e-5f89-47b6-aec3-c4b18e56a737",
+    "raw": "",
+    "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "oracle_render_hash": "93d9daaa95e2d348d2c72ef1e54a52744db1cd04e993808f8d23e2fcecba50b2",
+  "prompt": {
+    "hash": "77991c618f774a5ec80f3f955020c10e00a91100a70da733555d9fddbba4539f",
+    "oracle_render_hash": "93d9daaa95e2d348d2c72ef1e54a52744db1cd04e993808f8d23e2fcecba50b2",
+    "raw_observation_hash": "138f707d0ad5e2c949b1a7226b33c4cb2ec67576f40a51f2c381df506796aff8",
+    "render_protocol_version": "phase8-runtime-evidence-render-v2",
+    "rendered_evidence_hash": "9e55341c7d861d5d279ea72e9d81e8a318f63fac5d52254e307a4f45afd3aef5",
+    "system": "You repair buggy C or C++ programs. Return only the complete repaired source code. Do not return an explanation.",
+    "template_version": "phase8-initial-v2",
+    "user": "Repair the following buggy C/C++ program.\n\nRequirements:\n- Make the smallest reasonable change that repairs the program.\n- Preserve the existing input/output protocol.\n- Do not hard-code the supplied test cases or expected outputs.\n- Return the complete compilable source code and no explanatory prose.\n\n## Buggy source\n```c\n#include <stdio.h>\n\nint x[201][201],a[200],b[200],n,distance,end,max,blown;\n\nvoid go(int down,int up,int len) {\n\tint i;\n\tif (len>distance) {\n\t\tdistance=len;\n\t\tend=down;\n\t}\n\tfor (i=1;i<=n;i++)\n\t\tif (x[down][i]&&i!=up&&i!=blown)\n\t\t\tgo(i,down,len+1);\n}\n\nint travel(int start,int fuse) {\n\tblown=fuse;\n\tend=start;\n\tdistance=0;\n\tgo(start,fuse,0);\n\tdistance=0;\n\tgo(end,fuse,0);\n\treturn distance;\n}\n\nint main(int argc, char *argv[]) {\n\tint i;\n\tscanf(\"%d\\n\",&n);\n\tfor (i=0;i<n-1;i++) {\n\t\tscanf(\"%d %d\\n\",&a[i],&b[i]);\n\t\tx[a[i]][b[i]]=x[b[i]][a[i]]=1;\n\t}\n\tfor (i=0;i<n-1;i++) {\n\t\tint nibble=travel(a[i],b[i]);\n\t\tint snake=travel(b[i],a[i]);\n\t\tif (snake&&nibble&&snake+nibble>max) max=snake+nibble;\n\t}\n\tprintf(\"%d\\n\",max);\n\treturn 0;\n}\n```\n\n## Base repair-time oracle\n### p1\ninput_bytes: 13\ninput_sha256: 2161ff93c25f144705121f4b1dafe5880a7daead8e57705a078727c7f3f2a0d5\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n4\n1 2\n2 3\n3 4\n```\nexpected_output_bytes: 1\nexpected_output_sha256: 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n1\n```\n### p2\ninput_bytes: 25\ninput_sha256: f2940c96f24625232f7f5c23b5517fd7da6fc602f3e4db290bedfe5d7e97d7aa\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n7\n1 2\n1 3\n1 4\n1 5\n1 6\n1 7\n```\nexpected_output_bytes: 1\nexpected_output_sha256: 5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n0\n```\n### p3\ninput_bytes: 21\ninput_sha256: ff937a220fab58b1dbea0d6368a256d11311d9ef23fb3a6035860a199ab2e1e5\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n6\n1 2\n2 3\n2 4\n5 4\n6 4\n```\nexpected_output_bytes: 1\nexpected_output_sha256: 4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n4\n```\n### n1\ninput_bytes: 14\ninput_sha256: 24e994c61112b47d3cfa539ea7d67b516886011f3de9dea79fe1b6deb56077b8\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n4\n1 2\n2 3\n3 4\n\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n1\n\n```\n\n## Feedback-test repair-time oracle\nThese input/expected-output examples are public before the first repair attempt.\n### phase8_validation_0001_p2\ninput_bytes: 26\ninput_sha256: 4fa3529b3fd199182e2abaaafc5335fdb35319555f77ed6e502853eed984c0f5\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n7\n1 2\n1 3\n1 4\n1 5\n1 6\n1 7\n\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n0\n\n```\n### phase8_validation_0002_p3\ninput_bytes: 22\ninput_sha256: 9559ff9f8a133558434903805ed84339909a0324510588a0c011adf689163888\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n6\n1 2\n2 3\n2 4\n5 4\n6 4\n\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n4\n\n```\n### phase8_validation_0004_p5\ninput_bytes: 10\ninput_sha256: 8ecb1a0df0f6960b538625c7255189d8292c2d42f4713ea15f3aed45e53cc27c\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n3\n3 1\n1 2\n\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n0\n\n```\n### phase8_validation_0006_p7\ninput_bytes: 14\ninput_sha256: b036377eb9916506f8d18744eb6036055a76b52215e62f78e003c856b01becf1\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n4\n4 2\n2 3\n2 1\n\n```\nexpected_output_bytes: 2\nexpected_output_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n0\n\n```\n### phase8_validation_0022_p23\ninput_bytes: 74\ninput_sha256: 592a5e728de3cbb5b52392859b5f0e8320db86aa9e187d20155f0b2b569e2cde\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n15\n10 12\n12 4\n15 12\n15 6\n5 15\n10 1\n8 15\n13 12\n14 6\n8 3\n11 5\n12 7\n15 9\n2 7\n\n```\nexpected_output_bytes: 3\nexpected_output_sha256: e6c21e8d260fe71882debdb339d2402a2ca7648529bc2303f48649bce0380017\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n16\n\n```\n### phase8_validation_0024_p25\ninput_bytes: 158\ninput_sha256: 07ea4be3f16edf655a97237f8dda95fafb805e6895ef11b0bbef40578ac0cd8c\ninput_truncated: false\ninput_omitted_bytes: 0\ninput:\n```text\n30\n2 4\n14 2\n2 3\n23 14\n30 2\n6 14\n13 4\n24 30\n17 30\n25 2\n26 23\n28 3\n6 8\n23 29\n18 25\n10 2\n25 7\n9 26\n6 27\n13 12\n22 3\n1 28\n11 10\n25 20\n30 19\n16 14\n22 5\n21 30\n15 18\n\n```\nexpected_output_bytes: 3\nexpected_output_sha256: f4ccd05b3271c386ee55d9876c7450012a3b361e5065c09dc22075e38b3cc35c\nexpected_output_truncated: false\nexpected_output_omitted_bytes: 0\nexpected_output:\n```text\n30\n\n```\n\n## CodeDoctor FL-v1 suspicious locations\n- rank 1: line 36, line_score=0.632456, branch_score=0.816497: if (snake&&nibble&&snake+nibble>max) max=snake+nibble;\n- rank 2: line 7, line_score=0.632456, branch_score=0.632456, tie=[2,6]: if (len>distance) {\n- rank 3: line 11, line_score=0.632456, branch_score=0.632456, tie=[2,6]: for (i=1;i<=n;i++)\n- rank 4: line 12, line_score=0.632456, branch_score=0.632456, tie=[2,6]: if (x[down][i]&&i!=up&&i!=blown)\n- rank 5: line 29, line_score=0.632456, branch_score=0.632456, tie=[2,6]: for (i=0;i<n-1;i++) {\n- rank 6: line 33, line_score=0.632456, branch_score=0.632456, tie=[2,6]: for (i=0;i<n-1;i++) {\n- rank 7: line 5, line_score=0.632456, branch_score=0, tie=[7,27]: void go(int down,int up,int len) {\n- rank 8: line 8, line_score=0.632456, branch_score=0, tie=[7,27]: distance=len;\n- rank 9: line 9, line_score=0.632456, branch_score=0, tie=[7,27]: end=down;\n- rank 10: line 13, line_score=0.632456, branch_score=0, tie=[7,27]: go(i,down,len+1);\n\n## Frozen buggy runtime evidence\n### p1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 1\nexpected_sha256: 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n2\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### p2: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 1\nexpected_total_bytes: 1\nexpected_sha256: 5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n0\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### p3: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 1\nexpected_total_bytes: 1\nexpected_sha256: 4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n4\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### n1: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 2\nexpected_sha256: 4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n2\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0001_p2: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0002_p3: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0004_p5: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0006_p7: PASS\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: matches expected output exactly\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0022_p23: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 2\nstdout_sha256: aa67a169b0bba217aa0aa88a65346920c84c42447c36ba5f7ea65f422c1fe5d8\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 3\nexpected_sha256: e6c21e8d260fe71882debdb339d2402a2ca7648529bc2303f48649bce0380017\nactual_window_start: 0\nactual_window_end: 2\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n8\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```\n### phase8_validation_0024_p25: FAIL\nexit_code: 0\ntimed_out: false\nstdout_bytes: 3\nstdout_sha256: 25d4f2a86deb5e2574bb3210b67bb24fcc4afb19f93a7b65a057daa874a9d18e\nstderr_bytes: 0\nstderr_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\nstdout_representation: first-difference\nfirst_differing_byte_offset: 0\nexpected_total_bytes: 3\nexpected_sha256: f4ccd05b3271c386ee55d9876c7450012a3b361e5065c09dc22075e38b3cc35c\nactual_window_start: 0\nactual_window_end: 3\nactual_window_omitted_before_bytes: 0\nactual_window_omitted_after_bytes: 0\nactual_mismatch_window:\n```text\n11\n\n```\nstderr_truncated: false\nstderr_omitted_bytes: 0\nstderr_content:\n```text\n\n```"
+  },
+  "protocol_version": "phase8-v1",
+  "provider_response_metadata": {
+    "created": 1787198799,
+    "credential_environment": "DEEPSEEK_API_KEY",
+    "official_documented_model_version": "DeepSeek-V4-Flash-0731",
+    "reasoning_content": {
+      "characters": 49472,
+      "present": true,
+      "sha256": "a7fc7f192a0257f85003b40bcdbeda83333ed6feaace9dbfb3b6658f67382860"
+    },
+    "request_configuration": {
+      "max_tokens": 16384,
+      "reasoning_effort": "low",
+      "stream": false,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "requested_model": "deepseek-v4-flash",
+    "response_model": "deepseek-v4-flash",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 16384,
+      "completion_tokens_details": {
+        "reasoning_tokens": 16384
+      },
+      "final_answer_tokens": 0,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 5035,
+      "prompt_tokens": 5035,
+      "total_tokens": 21419
+    }
+  },
+  "raw_runtime_manifest_hash": "943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0",
+  "raw_runtime_observation_hash": "138f707d0ad5e2c949b1a7226b33c4cb2ec67576f40a51f2c381df506796aff8",
+  "render_protocol_version": "phase8-runtime-evidence-render-v2",
+  "rendered_evidence_hash": "9e55341c7d861d5d279ea72e9d81e8a318f63fac5d52254e307a4f45afd3aef5",
+  "second_round_eligible": false,
+  "test_partition_hash": "fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7",
+  "timestamp": "2026-08-20T04:06:39.186504+00:00"
+}
