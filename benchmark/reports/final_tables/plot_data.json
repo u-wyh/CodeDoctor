@@ -1,0 +1,208 @@
+{
+  "plot_feedback": [
+    {
+      "outcome": "S0",
+      "panel": "end_to_end",
+      "value": 0.85
+    },
+    {
+      "outcome": "SF",
+      "panel": "end_to_end",
+      "value": 0.89
+    },
+    {
+      "outcome": "SR",
+      "panel": "end_to_end",
+      "value": 0.89
+    },
+    {
+      "outcome": "both success",
+      "panel": "paired",
+      "value": 3
+    },
+    {
+      "outcome": "R fail to F success",
+      "panel": "paired",
+      "value": 1
+    },
+    {
+      "outcome": "R success to F fail",
+      "panel": "paired",
+      "value": 1
+    },
+    {
+      "outcome": "both fail",
+      "panel": "paired",
+      "value": 1
+    }
+  ],
+  "plot_fl": [
+    {
+      "metric": "Top-1",
+      "panel": "ranking",
+      "series": "Original Ochiai",
+      "value": 0.12333333333333334
+    },
+    {
+      "metric": "Top-3",
+      "panel": "ranking",
+      "series": "Original Ochiai",
+      "value": 0.30333333333333334
+    },
+    {
+      "metric": "Top-5",
+      "panel": "ranking",
+      "series": "Original Ochiai",
+      "value": 0.44
+    },
+    {
+      "metric": "Top-10",
+      "panel": "ranking",
+      "series": "Original Ochiai",
+      "value": 0.6866666666666666
+    },
+    {
+      "metric": "MRR",
+      "panel": "ranking",
+      "series": "Original Ochiai",
+      "value": 0.2772608135598254
+    },
+    {
+      "metric": "Top-score tie cases",
+      "panel": "ties",
+      "series": "Original Ochiai",
+      "value": 231
+    },
+    {
+      "metric": "Fault-tie cases",
+      "panel": "ties",
+      "series": "Original Ochiai",
+      "value": 256
+    },
+    {
+      "metric": "Mean maximum tie",
+      "panel": "ties",
+      "series": "Original Ochiai",
+      "value": 15.866666666666667
+    },
+    {
+      "metric": "Mean fault tie",
+      "panel": "ties",
+      "series": "Original Ochiai",
+      "value": 12.04642857142857
+    },
+    {
+      "metric": "Top-1",
+      "panel": "ranking",
+      "series": "FL-v1",
+      "value": 0.18333333333333332
+    },
+    {
+      "metric": "Top-3",
+      "panel": "ranking",
+      "series": "FL-v1",
+      "value": 0.4
+    },
+    {
+      "metric": "Top-5",
+      "panel": "ranking",
+      "series": "FL-v1",
+      "value": 0.5233333333333333
+    },
+    {
+      "metric": "Top-10",
+      "panel": "ranking",
+      "series": "FL-v1",
+      "value": 0.7233333333333334
+    },
+    {
+      "metric": "MRR",
+      "panel": "ranking",
+      "series": "FL-v1",
+      "value": 0.34747608540918534
+    },
+    {
+      "metric": "Top-score tie cases",
+      "panel": "ties",
+      "series": "FL-v1",
+      "value": 157
+    },
+    {
+      "metric": "Fault-tie cases",
+      "panel": "ties",
+      "series": "FL-v1",
+      "value": 205
+    },
+    {
+      "metric": "Mean maximum tie",
+      "panel": "ties",
+      "series": "FL-v1",
+      "value": 11.843333333333334
+    },
+    {
+      "metric": "Mean fault tie",
+      "panel": "ties",
+      "series": "FL-v1",
+      "value": 6.435714285714286
+    }
+  ],
+  "plot_repair": [
+    {
+      "arm": "A",
+      "rate": 0.8,
+      "validation": "Existing V2"
+    },
+    {
+      "arm": "A",
+      "rate": 0.56,
+      "validation": "Strong"
+    },
+    {
+      "arm": "B",
+      "rate": 0.78,
+      "validation": "Existing V2"
+    },
+    {
+      "arm": "B",
+      "rate": 0.56,
+      "validation": "Strong"
+    },
+    {
+      "arm": "C",
+      "rate": 0.92,
+      "validation": "Existing V2"
+    },
+    {
+      "arm": "C",
+      "rate": 0.7,
+      "validation": "Strong"
+    }
+  ],
+  "plot_validation_ladder": [
+    {
+      "count": 229,
+      "denominator": 245,
+      "stage": "V1 Plausible"
+    },
+    {
+      "count": 218,
+      "denominator": 245,
+      "stage": "V2 Existing Validated"
+    },
+    {
+      "count": 217,
+      "denominator": 217,
+      "stage": "V3 Sanitizer-Clean"
+    },
+    {
+      "count": 149,
+      "denominator": 201,
+      "stage": "V4 Differential Survivor"
+    },
+    {
+      "count": 149,
+      "denominator": 245,
+      "stage": "Strongly Validated"
+    }
+  ]
+}

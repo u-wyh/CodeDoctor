@@ -1,0 +1,7 @@
+arm,validation,rate
+A,Existing V2,0.8
+A,Strong,0.56
+B,Existing V2,0.78
+B,Strong,0.56
+C,Existing V2,0.92
+C,Strong,0.7

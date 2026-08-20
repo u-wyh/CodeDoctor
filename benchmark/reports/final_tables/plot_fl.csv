@@ -1,0 +1,19 @@
+panel,metric,series,value
+ranking,Top-1,Original Ochiai,0.12333333333333334
+ranking,Top-3,Original Ochiai,0.30333333333333334
+ranking,Top-5,Original Ochiai,0.44
+ranking,Top-10,Original Ochiai,0.6866666666666666
+ranking,MRR,Original Ochiai,0.2772608135598254
+ties,Top-score tie cases,Original Ochiai,231
+ties,Fault-tie cases,Original Ochiai,256
+ties,Mean maximum tie,Original Ochiai,15.866666666666667
+ties,Mean fault tie,Original Ochiai,12.04642857142857
+ranking,Top-1,FL-v1,0.18333333333333332
+ranking,Top-3,FL-v1,0.4
+ranking,Top-5,FL-v1,0.5233333333333333
+ranking,Top-10,FL-v1,0.7233333333333334
+ranking,MRR,FL-v1,0.34747608540918534
+ties,Top-score tie cases,FL-v1,157
+ties,Fault-tie cases,FL-v1,205
+ties,Mean maximum tie,FL-v1,11.843333333333334
+ties,Mean fault tie,FL-v1,6.435714285714286

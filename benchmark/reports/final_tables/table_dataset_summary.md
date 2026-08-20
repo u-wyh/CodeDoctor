@@ -1,0 +1,10 @@
+# Table Dataset Summary
+
+| case_count | dataset | manifest_path | manifest_sha256 | random_seed |
+| --- | --- | --- | --- | --- |
+| 50 | FL Pilot | benchmark/datasets/codeflaws/metadata/pilot.jsonl | e199170108f20165b81a81b9db6d3cd5521335b40325fbe6a05bd70522b32e31 | 20260815 |
+| 300 | Independent FL Evaluation | benchmark/datasets/codeflaws/metadata/fl_evaluation.jsonl | f01ce64259cbb8eefd5631a2c2a38b97987b7b610721134b679329ab376d05fa | 20260816 |
+| 50 | Phase 7 Repair Pilot | benchmark/datasets/codeflaws/metadata/repair_pilot.jsonl | da9cb8d496a989a2ba752b66796ebade22e23f2da292cae48fd86bb1befc5324 | 20260817 |
+| 100 | Phase 8 Repair Evaluation | benchmark/datasets/codeflaws/metadata/phase8_repair_evaluation.jsonl | ec7d9bcf9a736feb4832d6b16a5ed00a285847c078f2705679aba6b5eebfea61 | 20260820 |
+
+Generated deterministically from frozen formal artifacts and reports.

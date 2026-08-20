@@ -1,0 +1,229 @@
+{
+  "artifact_integrity": {
+    "checked_hashes": {
+      "phase4_evaluation_file": "d97e9e1060d3a5e2ec72f2158bf7de084595946815fb9bb32e4c7d666a7cd349",
+      "phase5_evaluation_file": "38a38602c8c4c8fbf81920062c8cc8435aec3b75cb3d545ab161525fb15f6a9c",
+      "phase6_evaluation_file": "5fef7b3589af6756a32e11ee7d083c8ed6691a126ff62ebf86c9765f4c09c2f2",
+      "phase7_artifact_set": "067710f9f3b71855cc4bf1db3dd0614cef89c1d4cec7e4f6e83c0372b7607f17",
+      "phase8_cohort": "e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5",
+      "phase8_stage1": "7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b",
+      "phase8_stage2_artifacts": "cf4f44f802913085ce70d7da344a3952c014295f712954b0de93d58ab2c96a04",
+      "phase8_stage2_result": "bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e",
+      "phase9_corpus": "365902f86f92987d25d5ba9c8167a21b776c57b83ee7025a4ecd11a055eeffd9",
+      "phase9_differential": "f593f20b0af854a63d7b8ca3caf41a6734080b1fd7f0cad5fc5e82e0886a7682",
+      "phase9_result": "48341fd5925b381124bb3cca3e93b3d1f59ff092dcc298edf933761ee34b5e38"
+    },
+    "frozen_paths_changed": [],
+    "large_raw_artifacts_reread": false,
+    "method": "self-hashed manifests, frozen expected hashes, tracked file SHA-256, and zero-diff audit",
+    "source_commit_is_ancestor": true,
+    "source_commit_sha": "378c8520ddbc0508f5b40fc14f605c7393b5366e",
+    "status": "passed"
+  },
+  "discrepancies": [],
+  "leakage": {
+    "binary_files": [],
+    "credential_pattern_hits": [],
+    "env_or_secret_files": [],
+    "prompt_boundary_audits": {
+      "phase6": "passed",
+      "phase7": "passed",
+      "phase8_stage2": "passed",
+      "phase9": "passed"
+    },
+    "raw_reasoning_fields": 0,
+    "reasoning_metadata_only_fields": 100,
+    "status": "passed"
+  },
+  "metrics_cross_check": "passed",
+  "overall_manifest_hash": "5f4cd0c447a818b4ad3fc9f60e1eb7ed95386d94e9126bd7218a65ade63dd27a",
+  "real_llm_calls": 0,
+  "repository_size": {
+    "history_rewritten": false,
+    "ignored_raw_directory_samples": [
+      {
+        "ignored": true,
+        "sample_path": "benchmark/artifacts/repair/formal_evidence_ablation/__audit__.json"
+      },
+      {
+        "ignored": true,
+        "sample_path": "benchmark/artifacts/repair_phase8/initial/__audit__.json"
+      },
+      {
+        "ignored": true,
+        "sample_path": "benchmark/artifacts/repair_phase8/retry_control/__audit__.json"
+      },
+      {
+        "ignored": true,
+        "sample_path": "benchmark/artifacts/repair_phase8/feedback/__audit__.json"
+      },
+      {
+        "ignored": true,
+        "sample_path": "benchmark/artifacts/validation_phase9/__audit__.json"
+      },
+      {
+        "ignored": true,
+        "sample_path": "benchmark/datasets/codeflaws/raw/__audit__.dat"
+      }
+    ],
+    "largest_git_objects": [
+      {
+        "object": "fa6da0b2b07721a895482eadbd781b71b42b3152",
+        "path": "benchmark/artifacts/repair_phase8/initial/404-B-bug-14578678-14578704/71988fd787a0732d704b8cff22e612141b43ff06eb71e1defa7aa7981ea8ce5f.json",
+        "size_bytes": 54430433
+      },
+      {
+        "object": "b4cb081a0a9021022c28b2187c18e60c2f283e40",
+        "path": "benchmark/datasets/codeflaws/metadata/manifest.jsonl",
+        "size_bytes": 41241634
+      },
+      {
+        "object": "27dce3e7340cd4bd5186f71a5a2f056e073a915a",
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/626-A-bug-16228568-16228576.json",
+        "size_bytes": 29467463
+      },
+      {
+        "object": "1293b35eaf43e5cf4eefd7b987eb78cb4723d5e3",
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/404-B-bug-14578678-14578704.json",
+        "size_bytes": 15469836
+      },
+      {
+        "object": "47e99571c8674c360454ab6ca561ff1a06ea782e",
+        "path": "benchmark/artifacts/repair_phase8/initial/361-B-bug-5055774-5055807/f03de0dd7f1a7ae1d63be7b33ca2cffda40d6a23c528078430108ff190fe6797.json",
+        "size_bytes": 13308613
+      },
+      {
+        "object": "9a72a7871a23ca1b216ca087810066de9e3bf8c6",
+        "path": "benchmark/artifacts/repair_phase8/initial/285-A-bug-3882169-3882175/aefce92248033e3a5943f938afec23ff1c82dc8b2033cc94058ff00fe5912882.json",
+        "size_bytes": 7414132
+      },
+      {
+        "object": "df37a0a25621de8692e582acc464fd269cce98a6",
+        "path": "benchmark/metadata/validation/differential_tests_v1.json",
+        "size_bytes": 7060054
+      },
+      {
+        "object": "35410305c4c470380cf0623e2eae46f0bb8bff3f",
+        "path": "benchmark/datasets/codeflaws/metadata/fl_evaluation.jsonl",
+        "size_bytes": 3178457
+      },
+      {
+        "object": "ae815ada9722f497288556ac5831741a7a13cea3",
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/361-B-bug-5055774-5055807.json",
+        "size_bytes": 1663870
+      },
+      {
+        "object": "18fcbeb79ab6f48d747b869eea0d617682fe473f",
+        "path": "benchmark/datasets/codeflaws/metadata/phase8_repair_evaluation.jsonl",
+        "size_bytes": 1451928
+      }
+    ],
+    "largest_tracked_or_planned_files": [
+      {
+        "path": "benchmark/artifacts/repair_phase8/initial/404-B-bug-14578678-14578704/71988fd787a0732d704b8cff22e612141b43ff06eb71e1defa7aa7981ea8ce5f.json",
+        "size_bytes": 54430433
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/manifest.jsonl",
+        "size_bytes": 41241634
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/626-A-bug-16228568-16228576.json",
+        "size_bytes": 29467463
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/404-B-bug-14578678-14578704.json",
+        "size_bytes": 15469836
+      },
+      {
+        "path": "benchmark/artifacts/repair_phase8/initial/361-B-bug-5055774-5055807/f03de0dd7f1a7ae1d63be7b33ca2cffda40d6a23c528078430108ff190fe6797.json",
+        "size_bytes": 13308613
+      },
+      {
+        "path": "benchmark/artifacts/repair_phase8/initial/285-A-bug-3882169-3882175/aefce92248033e3a5943f938afec23ff1c82dc8b2033cc94058ff00fe5912882.json",
+        "size_bytes": 7414132
+      },
+      {
+        "path": "benchmark/metadata/validation/differential_tests_v1.json",
+        "size_bytes": 7060054
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/fl_evaluation.jsonl",
+        "size_bytes": 3178457
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/361-B-bug-5055774-5055807.json",
+        "size_bytes": 1663870
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/phase8_repair_evaluation.jsonl",
+        "size_bytes": 1451928
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/phase8_test_partition_v1.json",
+        "size_bytes": 1446598
+      },
+      {
+        "path": "benchmark/results/repair_phase8/coverage/113-A-bug-683826-683913.json",
+        "size_bytes": 1102022
+      },
+      {
+        "path": "benchmark/metadata/validation/phase9_validation_results_v1.json",
+        "size_bytes": 1086816
+      },
+      {
+        "path": "benchmark/artifacts/repair_phase8/initial/534-A-bug-14917939-14917955/5b876999298949818126b32c7ee23824ed06e8a869d6d1ba0c9f4a7fc0b6fae8.json",
+        "size_bytes": 746827
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/285-A-bug-3882169-3882175.json",
+        "size_bytes": 654025
+      },
+      {
+        "path": "benchmark/results/fault_localization_independent/evaluation.json",
+        "size_bytes": 594020
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/repair_pilot.jsonl",
+        "size_bytes": 578008
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/pilot.jsonl",
+        "size_bytes": 549557
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/defect_classes.json",
+        "size_bytes": 546076
+      },
+      {
+        "path": "benchmark/results/repair_phase8/coverage/139-C-bug-982301-982319.json",
+        "size_bytes": 533683
+      }
+    ],
+    "status": "warning",
+    "tracked_or_planned_files_over_10_mb": [
+      {
+        "path": "benchmark/artifacts/repair_phase8/initial/404-B-bug-14578678-14578704/71988fd787a0732d704b8cff22e612141b43ff06eb71e1defa7aa7981ea8ce5f.json",
+        "size_bytes": 54430433
+      },
+      {
+        "path": "benchmark/datasets/codeflaws/metadata/manifest.jsonl",
+        "size_bytes": 41241634
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/626-A-bug-16228568-16228576.json",
+        "size_bytes": 29467463
+      },
+      {
+        "path": "benchmark/metadata/repair_phase8/runtime_evidence_v1/404-B-bug-14578678-14578704.json",
+        "size_bytes": 15469836
+      },
+      {
+        "path": "benchmark/artifacts/repair_phase8/initial/361-B-bug-5055774-5055807/f03de0dd7f1a7ae1d63be7b33ca2cffda40d6a23c528078430108ff190fe6797.json",
+        "size_bytes": 13308613
+      }
+    ],
+    "warning_threshold_bytes": 10485760
+  },
+  "status": "passed"
+}

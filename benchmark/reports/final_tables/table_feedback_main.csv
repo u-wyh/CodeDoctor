@@ -1,0 +1,7 @@
+scope,arm,denominator,valid_output,compile_success,repair_time_success,invalid_or_length,validated,validated_rate,both_success,control_fail_treatment_success,control_success_treatment_fail,both_fail,difference,bootstrap_95_lower,bootstrap_95_upper,mcnemar_p
+Stage 1,Initial,100,91,91,85,9,85,0.85,,,,,,,,
+Stage 2,R,6,,,,,4,0.6666666666666666,,,,,,,,
+Stage 2,F,6,,,,,4,0.6666666666666666,3,1,1,1,0.0,-0.5,0.5,1.0
+End-to-end,S0,100,,,,,85,0.85,,,,,,,,
+End-to-end,SR,100,,,,,89,0.89,,,,,,,,
+End-to-end,SF,100,,,,,89,0.89,,,,,,,,

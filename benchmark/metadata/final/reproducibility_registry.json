@@ -1,0 +1,95 @@
+{
+  "artifacts": [
+    {
+      "artifact_name": "Phase 4 line-level evaluation",
+      "hash_algorithm": "file SHA-256",
+      "sha256": "d97e9e1060d3a5e2ec72f2158bf7de084595946815fb9bb32e4c7d666a7cd349",
+      "source_path": "benchmark/results/fault_localization/evaluation.json",
+      "source_phase": 4,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 5 branch evaluation",
+      "hash_algorithm": "file SHA-256",
+      "sha256": "38a38602c8c4c8fbf81920062c8cc8435aec3b75cb3d545ab161525fb15f6a9c",
+      "source_path": "benchmark/results/fault_localization/branch_evaluation.json",
+      "source_phase": 5,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 6 independent evaluation",
+      "hash_algorithm": "file SHA-256",
+      "sha256": "5fef7b3589af6756a32e11ee7d083c8ed6691a126ff62ebf86c9765f4c09c2f2",
+      "source_path": "benchmark/results/fault_localization_independent/evaluation.json",
+      "source_phase": 6,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 7 formal artifact set",
+      "hash_algorithm": "canonical SHA-256 artifact set",
+      "sha256": "067710f9f3b71855cc4bf1db3dd0614cef89c1d4cec7e4f6e83c0372b7607f17",
+      "source_path": "benchmark/results/repair/evidence_ablation.json",
+      "source_phase": 7,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 8 Stage 1 artifact set",
+      "hash_algorithm": "canonical SHA-256 manifest",
+      "sha256": "7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b",
+      "source_path": "benchmark/metadata/repair_phase8/stage1_manifest_v1.json",
+      "source_phase": 8,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 8 eligible cohort",
+      "hash_algorithm": "canonical SHA-256 manifest",
+      "sha256": "e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5",
+      "source_path": "benchmark/metadata/repair_phase8/eligible_cohort_v1.json",
+      "source_phase": 8,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 8 Stage 2 artifact set",
+      "hash_algorithm": "canonical SHA-256 artifact set",
+      "sha256": "cf4f44f802913085ce70d7da344a3952c014295f712954b0de93d58ab2c96a04",
+      "source_path": "benchmark/metadata/repair_phase8/stage2_result_manifest_v1.json",
+      "source_phase": 8,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 8 Stage 2 result",
+      "hash_algorithm": "canonical SHA-256 manifest",
+      "sha256": "bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e",
+      "source_path": "benchmark/metadata/repair_phase8/stage2_result_manifest_v1.json",
+      "source_phase": 8,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 9 formal patch corpus",
+      "hash_algorithm": "canonical SHA-256 manifest",
+      "sha256": "365902f86f92987d25d5ba9c8167a21b776c57b83ee7025a4ecd11a055eeffd9",
+      "source_path": "benchmark/metadata/validation/phase9_patch_corpus_v1.json",
+      "source_phase": 9,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 9 differential stress set",
+      "hash_algorithm": "canonical SHA-256 manifest",
+      "sha256": "f593f20b0af854a63d7b8ca3caf41a6734080b1fd7f0cad5fc5e82e0886a7682",
+      "source_path": "benchmark/metadata/validation/differential_tests_v1.json",
+      "source_phase": 9,
+      "verification_result": "passed"
+    },
+    {
+      "artifact_name": "Phase 9 validation result",
+      "hash_algorithm": "canonical SHA-256 manifest",
+      "sha256": "48341fd5925b381124bb3cca3e93b3d1f59ff092dcc298edf933761ee34b5e38",
+      "source_path": "benchmark/metadata/validation/phase9_validation_results_v1.json",
+      "source_phase": 9,
+      "verification_result": "passed"
+    }
+  ],
+  "overall_manifest_hash": "1d4ee7faa486ad4ac16dd9e59f5505dcaf1334d1c2e7b8b102c6eb5b81a3063b",
+  "protocol_version": "final-reproducibility-registry-v1",
+  "status": "passed"
+}

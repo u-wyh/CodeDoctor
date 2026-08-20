@@ -1,0 +1,16 @@
+{
+  "artifact_integrity_status": "passed",
+  "final_commit_sha": null,
+  "final_commit_sha_note": "Intentionally omitted to avoid a self-referential commit; bind the committed freeze file to the final Git commit externally.",
+  "final_research_summary_sha256": "e594a7902919891db92aa65e3e107f3ea1bb986c5b49fa8449a024e04677950a",
+  "final_tables_hash": "569333609557355eed551981d5615e274d2050995b346823bb7cd14760b22176",
+  "formal_experiment_registry_hash": "e2f7728ffce144dda076fc991c5812246d5416c4f2af6ac196f203472f463fef",
+  "freeze_date": "2026-08-20",
+  "leakage_audit_status": "passed",
+  "overall_manifest_hash": "575091588e48382a3055851a8ead2c91cda4163a4b95d9f6c379059251450234",
+  "pre_freeze_commit_sha": "378c8520ddbc0508f5b40fc14f605c7393b5366e",
+  "protocol_version": "codedoctor-final-freeze-v1",
+  "real_llm_calls": 0,
+  "reproducibility_registry_hash": "1d4ee7faa486ad4ac16dd9e59f5505dcaf1334d1c2e7b8b102c6eb5b81a3063b",
+  "status": "frozen"
+}

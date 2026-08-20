@@ -44,7 +44,8 @@ benchmark/results/fault_localization_independent/rankings/*
 benchmark/artifacts/repair/*
 benchmark/results/repair/coverage/*
 
-# Phase 8 Stage 2 raw artifacts are retained locally; hashed summaries are tracked
+# Phase 8 raw artifacts are retained locally; existing tracked Initial records stay frozen
+benchmark/artifacts/repair_phase8/initial/*
 benchmark/artifacts/repair_phase8/retry_control/*
 benchmark/artifacts/repair_phase8/feedback/*
 

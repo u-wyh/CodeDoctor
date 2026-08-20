@@ -2795,3 +2795,97 @@ lxc stop codedoctor-docker-host
 - `Strongly Validated Patch != Formally Correct Patch`；149 个 survivors 只表示更强的有限经验验证。
 - Phase 9 RQ 结论：hidden validation 拒绝 11/229 plausible patches；V3 未新增拒绝；V4 在 201 个 applicable V2 patches 中新增拒绝 52 个；所有 Phase 7/8 arms 的 strong rate 均低于原 V2 rate。
 - Phase 9 到此停止，不自动进入 Phase 10，也不对发现的失败 patch 再调用 LLM。
+
+## 2026-08-20 - Final Experimental Consolidation
+
+### 1. 日期和阶段
+
+- 日期：2026-08-20。
+- 阶段：Final Experimental Consolidation & Thesis Freeze；不是 Phase 10，也没有新增算法或实验方向。
+- 冻结源 commit：`378c8520ddbc0508f5b40fc14f605c7393b5366e`。
+
+### 2. 本次目标
+
+- 统一整理并交叉校验 Phase 4-9 的正式实验、数据集、主结果、成本和复现 hash。
+- 生成论文可直接使用的 CSV/Markdown 表格及 CSV/JSON 绘图数据。
+- 执行 frozen artifact integrity、leakage、Git size 和完整 regression 审计，冻结核心研究链路。
+- 本轮禁止 LLM/API 调用和昂贵实验重跑；实际 real LLM calls=`0`，新增 API cost=`$0`。
+
+### 3. 实际完成内容
+
+- 建立包含 7 项 formal/frozen entries 的 Final Experiment Registry：Phase 4、Phase 5、Phase 6、Phase 7、Phase 8 Stage 1、Phase 8 Stage 2、Phase 9；未混入 smoke、pre-experiment failure 或 superseded prompt。
+- 直接读取 4 个正式 dataset manifests 的 case IDs，验证 50/300/50/100 case counts、seeds 和全部 6 个跨数据集 overlap=`0`，生成 JSON/CSV/Markdown overlap matrix。
+- 从冻结 artifacts/manifests/reports 生成 FL、Repair A/B/C、Feedback R/F、Validation Ladder、V2 vs Strong、dataset、cost 六类主表和配套绘图数据；Phase 6 CI/tie、Phase 7 三组 paired comparison、Phase 8 Stage 1/2/end-to-end、Phase 9 sanitizer/differential 数据均经过断言校验。
+- 建立 11 项 Reproducibility Registry、最终研究总览、综合 audit summary 和无自引用的 final freeze metadata。
+- 生成器输出采用排序 JSON、固定列顺序、LF 行尾和 canonical hash；相同输入连续生成的聚合 SHA-256 均为 `82cac6e15df495d96459423a5f321084a97c4b84faf4afb505ff779aacedec4a`。
+
+### 4. 新增、修改和删除的文件
+
+- 新增：`final_consolidation/consolidate.py`、包初始化文件及 `final_consolidation/tests/test_consolidation.py`（7 tests）。
+- 新增：`benchmark/scripts/generate_final_consolidation.py`。
+- 新增：`benchmark/metadata/final/` 下 experiment registry、dataset overlap、reproducibility registry、audit summary、final freeze 共 5 个 JSON。
+- 新增：`benchmark/reports/final_research_summary.md`。
+- 新增：`benchmark/reports/final_tables/` 下 7 组 CSV/Markdown 表、4 个 plot CSV 和 1 个统一 plot JSON。
+- 修改：`benchmark/config.py`、`.gitignore`、`docs/DEVELOPMENT_LOG.md`；`.gitignore` 增加未来 Phase 8 Initial raw artifact 保护，不删除已冻结的 tracked artifacts。
+- 删除文件：无；未修改 Phase 4-9 frozen results、manifests、formal reports 或 Git 历史。
+
+### 5. 执行过的重要命令
+
+```text
+python3 -m py_compile final_consolidation/consolidate.py benchmark/scripts/generate_final_consolidation.py final_consolidation/tests/test_consolidation.py
+python3 benchmark/scripts/generate_final_consolidation.py
+python3 -m unittest final_consolidation.tests.test_consolidation
+python3 -m unittest discover -s <sandbox|benchmark|fault_localization|repair|repair_phase8|validation_phase9|final_consolidation>/tests -p 'test*.py'
+docker info --format '{{.ServerVersion}}'
+lxc list --format csv -c ns4
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && python3 -m unittest discover -s <suite>/tests -p "test*.py"'
+lxc stop codedoctor-docker-host
+git diff --check
+```
+
+- 还执行了基于 `find`、`sha256sum` 和第二次 generator run 的 deterministic output 对比；before/after 聚合 hash 完全一致。
+- 未执行 DeepSeek/OpenAI/其他 LLM 命令，未 source、读取或输出任何 credential 文件，未重跑 Phase 9 80k+ executions。
+
+### 6. 实际测试和最终结果
+
+- Final consolidation targeted tests：`7/7 PASS`。
+- 宿主初次全量测试：benchmark `12/12`、fault localization `34 PASS + 2 SKIP`、repair `47/47`、Phase 8 `28/28`、Phase 9 `18/18`、final `7/7`；sandbox 因宿主不存在 Docker CLI 出现 `17` failures。
+- 启动已有专用 `codedoctor-docker-host` 后重新执行完整 regression：sandbox `29/29`、benchmark `12/12`、fault localization `36/36`、repair `47/47`、Phase 8 `28/28`、Phase 9 `18/18`、final consolidation `7/7`，总计 `177/177 PASS`、`0 FAIL`、`0 SKIP`。
+- LXD 实例测试后已恢复 `STOPPED`；没有残留正式实验进程。
+- 正式 LLM 历史总计：attempted=`262`、received=`260`、provider failures=`2`、tokens=`2,596,824`、estimated cost=`$0.54485862`；engineering smoke 未混入。
+- 跨报告与 artifact 数字不一致：`0`；所有用户指定 Phase 4-9 数值均与 frozen sources 一致。
+
+### 7. Hash、integrity、leakage 和 repository size audit
+
+- Final Experiment Registry hash=`e2f7728ffce144dda076fc991c5812246d5416c4f2af6ac196f203472f463fef`。
+- Reproducibility Registry hash=`1d4ee7faa486ad4ac16dd9e59f5505dcaf1334d1c2e7b8b102c6eb5b81a3063b`。
+- Dataset overlap manifest hash=`07290fd9cb723e17e7c2ac02246c3cbe8bde45f2691e346be0790823536ae513`。
+- Final tables hash=`569333609557355eed551981d5615e274d2050995b346823bb7cd14760b22176`；summary SHA-256=`e594a7902919891db92aa65e3e107f3ea1bb986c5b49fa8449a024e04677950a`。
+- Frozen artifact integrity=`PASS`：Phase 4-9 预注册 hashes 全部匹配；冻结路径相对源 commit unexpected diff=`0`。
+- Leakage audit=`PASS`：credential/API key hit=`0`、tracked `.env`/secret file=`0`、raw reasoning fields=`0`、binary files=`0`；100 个 historical Phase 8 reasoning records 仅含 `characters/present/sha256` metadata，不含 reasoning 正文；既有 prompt-boundary audits 均 PASS。
+- Git size audit=`WARNING`：历史 tracked/planned 文件中 5 个超过 10 MB，最大既有 Phase 8 artifact 为 54,430,433 bytes；本轮没有新增大型 raw artifact 或 binary，也没有重写历史。所有 6 个 raw-directory sample 均被 ignore rules 命中。
+- Audit summary hash=`5f4cd0c447a818b4ad3fc9f60e1eb7ed95386d94e9126bd7218a65ade63dd27a`；final freeze hash=`575091588e48382a3055851a8ead2c91cda4163a4b95d9f6c379059251450234`。
+
+### 8. 遇到的问题
+
+- 新测试第一次假设 registry 顶层键为 `experiments`，而生成器实际 schema 使用 `entries`；修正测试后又发现 Stage 2 的正式状态是更明确的 `formal_frozen_small_cohort`，测试改为验证 `formal_frozen` 前缀，最终 7/7 PASS。
+- 宿主机没有 `docker` 命令，默认 Docker backend 的 sandbox/sanitizer integration tests 因而返回 `internal_error`，不能据此判定代码 regression。
+- 初版 validation 主表虽已包含 V1-V4 和 arm audit，但未显式展开 ASan/UBSan、differential finding 与 invalid/length 明细。
+- 首次 staged `git diff --check` 发现 Python `csv` 默认 CRLF 被 Git 识别为 trailing whitespace；CSV 内容与指标未受影响。
+
+### 9. 问题的解决方式和设计取舍
+
+- Registry tests 改为遵循实际 machine-readable schema，同时仍严格排除 smoke/pre-experiment entries。
+- 不修改 Runner 默认 backend，也不弱化或 skip Docker tests；启动已有 LXD Docker 主机，在真实 Docker 环境中完成 177 项完整 regression，随后停止实例。
+- Validation/Feedback 表补入冻结来源中的 sanitizer、50,911 candidates、11,983 accepted inputs、failure modes、additional rejection 和 Stage 1 invalid/length 字段；ASan/UBSan 数字从正式 Phase 9 report 解析并断言，不引入未校验手填结果。
+- CSV writer 固定 `lineterminator="\n"`，重新生成全部表格并复跑 targeted tests；连续两次生成 hash 一致，最终 diff check PASS。
+- Final freeze 不嵌入自身最终 commit SHA，避免 Git commit/hash 自引用；metadata 记录 pre-freeze commit 与全部 artifact hashes，最终 commit 在 Git 和最终汇报中外部绑定。
+
+### 10. 当前已知不足、冻结状态和下一步计划
+
+- Git 历史仍含 5 个超过 10 MB 的既有文件；按要求不做 `filter-repo`、BFG、force push 或历史重写，只保护未来 raw artifacts。
+- LLM 结论受 single model、stochasticity、single-attempt、provider failure、length truncation 和有限测试影响；Phase 7 n=50，Phase 8 R/F M=6，存在 multiple comparisons 与 same-case patch dependence。
+- Codeflaws 和竞赛类 C/C++ bugs 的代表性有限；FL metric 不等于 repair utility，reference-accepted stress input 不等于形式化合法输入。
+- `Validated Patch != Correct Patch`，`Strongly Validated Patch != Formally Correct Patch`。
+- CodeDoctor 核心研究方向和实验链路已经冻结；当前不存在毕业设计主线必须新增的第五个核心研究模块。下一步只应进行论文写作、图表排版、答辩材料和必要的非实验性勘误，不自动进入新 Phase。

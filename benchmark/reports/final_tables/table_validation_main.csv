@@ -1,0 +1,21 @@
+section,label,numerator,denominator,rate,existing_v2,strong,absolute_drop,relative_survival,note
+corpus,Formal patches,245,,,,,,,141 unique cases
+ladder,V1 Plausible,229,245,0.9346938775510204,,,,,repair-time validation
+ladder,V2 Existing Validated,218,245,0.889795918367347,,,,,hidden validation
+ladder,V3 Sanitizer-Clean,217,217,1.0,,,,,1 V2 patch had V3 N/A
+ladder,V4 Differential Survivor,149,201,0.7412935323383084,,,,,52 rejected; 17 V2 patches V4 N/A
+ladder,Strongly Validated,149,245,0.6081632653061224,,,,,V2 PASS and V3 PASS and V4 PASS
+sanitizer audit,ASan patch rejection,0,218,0.0,,,,,frozen Phase 9 report
+sanitizer audit,UBSan patch rejection,0,218,0.0,,,,,frozen Phase 9 report
+differential audit,Candidates,50911,,,,,,,generated stress inputs
+differential audit,Reference-accepted stress inputs,11983,50911,0.2353715307104555,,,,,13 cases had zero accepted tests
+differential audit,Output-mismatch patches,50,201,0.24875621890547264,,,,,1697 findings
+differential audit,Timeout patches,2,201,0.009950248756218905,,,,,
+differential audit,Runtime-error patches,0,201,0.0,,,,,
+differential audit,Additional rejection,52,217,0.23963133640552994,,,,,V2 patches with V3/V4 applicable
+arm audit,Phase 7 A,,50,,40,28,0.24,0.7,
+arm audit,Phase 7 B,,50,,39,28,0.21999999999999997,0.717948717948718,
+arm audit,Phase 7 C,,50,,46,35,0.22000000000000008,0.7608695652173914,
+arm audit,Phase 8 Initial,,100,,85,55,0.29999999999999993,0.6470588235294118,
+arm audit,Phase 8 F,,6,,4,1,0.5,0.25,small cohort M=6
+arm audit,Phase 8 R,,6,,4,2,0.3333333333333333,0.5,small cohort M=6

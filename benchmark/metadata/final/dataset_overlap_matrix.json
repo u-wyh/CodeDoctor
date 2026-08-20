@@ -1,0 +1,65 @@
+{
+  "datasets": [
+    {
+      "case_count": 50,
+      "dataset": "FL Pilot",
+      "manifest_path": "benchmark/datasets/codeflaws/metadata/pilot.jsonl",
+      "manifest_sha256": "e199170108f20165b81a81b9db6d3cd5521335b40325fbe6a05bd70522b32e31",
+      "random_seed": 20260815
+    },
+    {
+      "case_count": 300,
+      "dataset": "Independent FL Evaluation",
+      "manifest_path": "benchmark/datasets/codeflaws/metadata/fl_evaluation.jsonl",
+      "manifest_sha256": "f01ce64259cbb8eefd5631a2c2a38b97987b7b610721134b679329ab376d05fa",
+      "random_seed": 20260816
+    },
+    {
+      "case_count": 50,
+      "dataset": "Phase 7 Repair Pilot",
+      "manifest_path": "benchmark/datasets/codeflaws/metadata/repair_pilot.jsonl",
+      "manifest_sha256": "da9cb8d496a989a2ba752b66796ebade22e23f2da292cae48fd86bb1befc5324",
+      "random_seed": 20260817
+    },
+    {
+      "case_count": 100,
+      "dataset": "Phase 8 Repair Evaluation",
+      "manifest_path": "benchmark/datasets/codeflaws/metadata/phase8_repair_evaluation.jsonl",
+      "manifest_sha256": "ec7d9bcf9a736feb4832d6b16a5ed00a285847c078f2705679aba6b5eebfea61",
+      "random_seed": 20260820
+    }
+  ],
+  "matrix": [
+    {
+      "FL Pilot": 50,
+      "Independent FL Evaluation": 0,
+      "Phase 7 Repair Pilot": 0,
+      "Phase 8 Repair Evaluation": 0,
+      "dataset": "FL Pilot"
+    },
+    {
+      "FL Pilot": 0,
+      "Independent FL Evaluation": 300,
+      "Phase 7 Repair Pilot": 0,
+      "Phase 8 Repair Evaluation": 0,
+      "dataset": "Independent FL Evaluation"
+    },
+    {
+      "FL Pilot": 0,
+      "Independent FL Evaluation": 0,
+      "Phase 7 Repair Pilot": 50,
+      "Phase 8 Repair Evaluation": 0,
+      "dataset": "Phase 7 Repair Pilot"
+    },
+    {
+      "FL Pilot": 0,
+      "Independent FL Evaluation": 0,
+      "Phase 7 Repair Pilot": 0,
+      "Phase 8 Repair Evaluation": 100,
+      "dataset": "Phase 8 Repair Evaluation"
+    }
+  ],
+  "overall_manifest_hash": "07290fd9cb723e17e7c2ac02246c3cbe8bde45f2691e346be0790823536ae513",
+  "protocol_version": "final-dataset-overlap-v1",
+  "status": "passed"
+}

@@ -1,0 +1,8 @@
+panel,outcome,value
+end_to_end,S0,0.85
+end_to_end,SF,0.89
+end_to_end,SR,0.89
+paired,both success,3
+paired,R fail to F success,1
+paired,R success to F fail,1
+paired,both fail,1

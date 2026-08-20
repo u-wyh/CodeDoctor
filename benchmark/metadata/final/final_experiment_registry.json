@@ -1,0 +1,162 @@
+{
+  "entries": [
+    {
+      "artifact_path": "benchmark/results/fault_localization/evaluation.json",
+      "artifact_set_hash": "d97e9e1060d3a5e2ec72f2158bf7de084595946815fb9bb32e4c7d666a7cd349",
+      "case_count": 50,
+      "commit_sha": "f2a85a820079c9abef084d48133943e0e3b1c7a2",
+      "dataset": "FL Pilot",
+      "experiment_name": "Original Line-Level Ochiai Pilot",
+      "main_metrics": {
+        "average_rank_mrr": 0.21832115611965594,
+        "cases": 50,
+        "experiment": "Phase 4",
+        "method": "Original line Ochiai",
+        "mrr": 0.2601458424616319,
+        "pessimistic_mrr": 0.1384969372421606,
+        "top_1": 0.1,
+        "top_10": 0.62,
+        "top_3": 0.32,
+        "top_5": 0.46
+      },
+      "manifest_hash": "e199170108f20165b81a81b9db6d3cd5521335b40325fbe6a05bd70522b32e31",
+      "phase": 4,
+      "protocol_version": "line-sbfl-pilot-v1",
+      "random_seed": 20260815,
+      "report_path": "benchmark/reports/fault_localization_pilot_report.md",
+      "status": "formal_frozen"
+    },
+    {
+      "artifact_path": "benchmark/results/fault_localization/branch_evaluation.json",
+      "artifact_set_hash": "38a38602c8c4c8fbf81920062c8cc8435aec3b75cb3d545ab161525fb15f6a9c",
+      "case_count": 50,
+      "commit_sha": "768bd26e92de45c22d4652e31afc04ce8caa6632",
+      "dataset": "FL Pilot",
+      "experiment_name": "Branch-Aware FL-v1 Pilot",
+      "main_metrics": {
+        "average_rank_mrr": 0.34687468564796936,
+        "cases": 50,
+        "experiment": "Phase 5",
+        "method": "Branch-aware FL-v1",
+        "mrr": 0.3836713096844676,
+        "pessimistic_mrr": 0.27882357345424574,
+        "top_1": 0.22,
+        "top_10": 0.76,
+        "top_3": 0.42,
+        "top_5": 0.56
+      },
+      "manifest_hash": "e199170108f20165b81a81b9db6d3cd5521335b40325fbe6a05bd70522b32e31",
+      "phase": 5,
+      "protocol_version": "fl-v1",
+      "random_seed": 20260815,
+      "report_path": "benchmark/reports/fault_localization_branch_report.md",
+      "status": "formal_frozen"
+    },
+    {
+      "artifact_path": "benchmark/results/fault_localization_independent/evaluation.json",
+      "artifact_set_hash": "5fef7b3589af6756a32e11ee7d083c8ed6691a126ff62ebf86c9765f4c09c2f2",
+      "case_count": 300,
+      "commit_sha": "76b57e049a57fe691859c79685febc025daf6e61",
+      "dataset": "Independent FL Evaluation",
+      "experiment_name": "Independent Fault Localization Evaluation",
+      "main_metrics": {
+        "average_rank_mrr_difference": 0.09036543508849795,
+        "fl_v1_mrr": 0.34747608540918534,
+        "mrr_difference": 0.07021527184935997,
+        "original_mrr": 0.2772608135598254
+      },
+      "manifest_hash": "f01ce64259cbb8eefd5631a2c2a38b97987b7b610721134b679329ab376d05fa",
+      "phase": 6,
+      "protocol_version": "fl-v1",
+      "random_seed": 20260816,
+      "report_path": "benchmark/reports/fault_localization_independent_evaluation.md",
+      "status": "formal_frozen"
+    },
+    {
+      "artifact_path": "benchmark/results/repair/evidence_ablation.json",
+      "artifact_set_hash": "067710f9f3b71855cc4bf1db3dd0614cef89c1d4cec7e4f6e83c0372b7607f17",
+      "case_count": 50,
+      "commit_sha": "8c90a30c7ea1c47012eeb8a8e95c0b76565ed43e",
+      "dataset": "Phase 7 Repair Pilot",
+      "experiment_name": "LLM Repair Evidence Ablation",
+      "main_metrics": {
+        "A": 0.8,
+        "B": 0.78,
+        "C": 0.92
+      },
+      "manifest_hash": "da9cb8d496a989a2ba752b66796ebade22e23f2da292cae48fd86bb1befc5324",
+      "phase": 7,
+      "protocol_version": "repair-v2",
+      "random_seed": 20260817,
+      "report_path": "benchmark/reports/llm_repair_evidence_ablation.md",
+      "status": "formal_frozen"
+    },
+    {
+      "artifact_path": "benchmark/metadata/repair_phase8/stage1_manifest_v1.json",
+      "artifact_set_hash": "7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b",
+      "case_count": 100,
+      "commit_sha": "223baa6c2094f331d7cefdddc7a032db7714b257",
+      "dataset": "Phase 8 Repair Evaluation",
+      "experiment_name": "Execution Feedback Stage 1 Initial",
+      "main_metrics": {
+        "attempted": 100,
+        "eligible": 6,
+        "received": 100,
+        "repair_time_success": 85,
+        "validated": 85
+      },
+      "manifest_hash": "ec7d9bcf9a736feb4832d6b16a5ed00a285847c078f2705679aba6b5eebfea61",
+      "phase": 8,
+      "protocol_version": "phase8-stage1-manifest-v1",
+      "random_seed": 20260820,
+      "report_path": "benchmark/reports/execution_feedback_stage1.md",
+      "status": "formal_frozen"
+    },
+    {
+      "artifact_path": "benchmark/metadata/repair_phase8/stage2_result_manifest_v1.json",
+      "artifact_set_hash": "cf4f44f802913085ce70d7da344a3952c014295f712954b0de93d58ab2c96a04",
+      "case_count": 6,
+      "commit_sha": "b43dcca8bc1921ef7b55450439fb2c9b0920bea0",
+      "dataset": "Phase 8 Repair Evaluation eligible cohort",
+      "experiment_name": "Retry vs Execution Feedback Stage 2",
+      "main_metrics": {
+        "F_validated": 4,
+        "R_validated": 4,
+        "denominator": 6,
+        "difference": 0.0
+      },
+      "manifest_hash": "bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e",
+      "phase": 8,
+      "protocol_version": "phase8-stage2-result-manifest-v1",
+      "random_seed": 20260820,
+      "report_path": "benchmark/reports/execution_feedback_formal.md",
+      "status": "formal_frozen_small_cohort"
+    },
+    {
+      "artifact_path": "benchmark/metadata/validation/phase9_validation_results_v1.json",
+      "artifact_set_hash": "365902f86f92987d25d5ba9c8167a21b776c57b83ee7025a4ecd11a055eeffd9",
+      "case_count": 141,
+      "commit_sha": "378c8520ddbc0508f5b40fc14f605c7393b5366e",
+      "dataset": "Formal Phase 7/8 Patch Corpus",
+      "experiment_name": "Patch Validation Strength and Overfitting",
+      "main_metrics": {
+        "V1": 229,
+        "V2": 218,
+        "V4_rejections": 52,
+        "patch_count": 245,
+        "strongly_validated": 149
+      },
+      "manifest_hash": "48341fd5925b381124bb3cca3e93b3d1f59ff092dcc298edf933761ee34b5e38",
+      "phase": 9,
+      "protocol_version": "phase9-validation-results-v1",
+      "random_seed": 20260820,
+      "report_path": "benchmark/reports/patch_validation_overfitting.md",
+      "status": "formal_frozen"
+    }
+  ],
+  "experiment_count": 7,
+  "overall_manifest_hash": "e2f7728ffce144dda076fc991c5812246d5416c4f2af6ac196f203472f463fef",
+  "protocol_version": "final-experiment-registry-v1",
+  "source_commit_sha": "378c8520ddbc0508f5b40fc14f605c7393b5366e",
+  "status": "frozen"
+}
