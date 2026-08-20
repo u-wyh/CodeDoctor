@@ -30,7 +30,7 @@ CodeDoctor is an **LLM-based Automated Program Repair Framework** for C/C++ prog
 
 ## Fresh Clone 轻量复现
 
-以下命令只读取已冻结 metadata 和小型 fixtures，不重新运行 Phase 6-9 正式实验，也不会发起 LLM 调用：
+复现分为两级。**Metadata-only reproduction** 只读取 tracked metadata 和小型 fixtures，不重新运行 Phase 6-9 正式实验，也不会发起 LLM 调用：
 
 ```bash
 python3 -m unittest final_consolidation.tests.test_consolidation
@@ -46,7 +46,15 @@ docker build --tag codedoctor-cpp-sandbox --file sandbox/docker/Dockerfile sandb
 python3 -m sandbox.runner.main examples/sum/main.cpp examples/sum/input.txt
 ```
 
-完整原始 Codeflaws dataset、模型 raw responses 和大型运行 intermediates 默认不随 fresh clone 分发；正式结果通过 tracked manifests、hashes、reports 和 final tables 固定。不要把 formal experiment runner 当作轻量复现命令。
+**Artifact-assisted reproduction** 需要单独保存的 raw Codeflaws dataset、Phase 7/8 model artifacts 和 Phase 9 checkpoints。以下命令只重新计算并核对结果；它们不会生成或覆盖 frozen outputs：
+
+```bash
+python3 benchmark/scripts/generate_repair_ablation_report.py
+python3 benchmark/scripts/build_phase9_patch_corpus.py
+python3 benchmark/scripts/generate_phase9_report.py
+```
+
+外部包缺失时，命令会以 non-zero 退出并报告 `requires external artifact package`；hash 不匹配时同样拒绝继续。完整原始 dataset、model responses 和大型 intermediates 默认不随 fresh clone 分发，正式结果通过 tracked manifests、hashes、reports 和 final tables 固定。任何 reproduction command 都不会自动下载、生成或覆盖 frozen experiment artifacts。
 
 ## 构建沙箱镜像
 

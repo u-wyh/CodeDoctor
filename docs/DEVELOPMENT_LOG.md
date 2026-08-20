@@ -2994,3 +2994,100 @@ git diff --check
 - 完整现有 regression 仍隐式依赖 ignored local raw data/artifacts，且一个 Phase 9 路径在依赖缺失时不是 read-only/fail-closed。
 - 因此当前判断：`CodeDoctor repository is not yet fully ready for thesis submission as a self-contained engineering artifact.`
 - 下一步不是新 Phase 或新研究模块。只有在用户明确授权后，才应做窄范围 test-isolation/fail-closed maintenance：让 raw-dependent tests 显式 skip/fixture 化，并确保任何报告重建在 artifact 缺失或 hash 不匹配时拒绝覆盖 frozen outputs。
+
+## 2026-08-20 - Final Reproduction Hardening
+
+### 1. 日期和阶段
+
+- 日期：2026-08-20。
+- 阶段：Final Reproduction Hardening；不是新 Phase。
+- 起始 commit：`7b7bbb544f4c15dee5b55d8ce482682cc8d6b07d`。
+- 本轮 real LLM calls=`0`，API cost=`$0`；未读取 credential，未运行昂贵实验。
+
+### 2. 本次目标
+
+- 让 repair 和 Phase 9 reproduction 工具对缺失、不完整或 hash 不匹配的 frozen artifact fail closed。
+- 禁止 reproduction 路径自动生成、下载或覆盖 frozen outputs。
+- 在 artifact-complete 环境保持原有行为，并在 fresh clone 中明确区分 metadata-only 与 artifact-assisted reproduction。
+
+### 3. 实际完成内容
+
+- 新增通用 frozen artifact guard：检查文件存在性、SHA-256 和 artifact group 数量，并输出明确 missing artifact list。
+- Phase 7 repair reporting 改为只读验证：需要 150 个 formal raw artifacts，校验 artifact-set hash，在内存中重算并比对 tracked JSON/report，不再写回文件。
+- Phase 9 corpus 在读取前预检 Phase 7 150、Phase 8 Initial 100、Retry 6 和 Feedback 6 个 artifact；缺失时列出路径并退出。
+- Phase 9 reporting 预检 141 个 reference checkpoints 和 245 个 patch checkpoints，并校验 tracked corpus/result self hash。
+- 三个 reproduction scripts 都改为 recompute-and-compare verifier，不会重写 Phase 7/9 frozen results 或 reports。
+- 增加 missing artifact、hash mismatch、artifact restore 和 tracked-file immutability 测试；raw-free fresh clone 中需要外部 artifact package 的测试显式 skip。
+- README 与 final engineering audit 记录 metadata-only/artifact-assisted 两级复现模型和只读边界。
+
+### 4. 新增、修改和删除的文件
+
+- 新增：`benchmark/frozen_artifacts.py`。
+- 新增：`benchmark/tests/test_frozen_artifacts.py`。
+- 新增：`validation_phase9/tests/test_artifact_guards.py`。
+- 修改：`benchmark/scripts/build_phase9_patch_corpus.py`。
+- 修改：`benchmark/scripts/generate_phase9_report.py`。
+- 修改：`benchmark/scripts/generate_repair_ablation_report.py`。
+- 修改：`repair/reporting.py`、`repair/tests/test_reporting.py`、`repair/tests/test_runtime_evidence.py`。
+- 修改：`validation_phase9/corpus.py`、`validation_phase9/reporting.py`、`validation_phase9/tests/test_corpus.py`、`validation_phase9/tests/test_reporting.py`。
+- 修改：`README.md`、`docs/FINAL_ENGINEERING_AUDIT.md`、`docs/DEVELOPMENT_LOG.md`。
+- 删除：无。
+- 未修改 FL、repair prompt/protocol、validation ladder/rule、dataset partition、frozen metadata/hash/artifacts、reports numbers 或 final tables。
+
+### 5. 执行过的重要命令
+
+```text
+python3 -m unittest benchmark.tests.test_frozen_artifacts repair.tests.test_reporting repair.tests.test_runtime_evidence validation_phase9.tests.test_artifact_guards validation_phase9.tests.test_corpus validation_phase9.tests.test_reporting
+python3 benchmark/scripts/generate_repair_ablation_report.py
+python3 benchmark/scripts/build_phase9_patch_corpus.py
+python3 benchmark/scripts/generate_phase9_report.py
+python3 -m compileall -q benchmark repair validation_phase9
+python3 -c '<validate repair-v2 protocol hash>'
+git stash create 'final-reproduction-hardening-candidate'
+git update-ref refs/heads/codex/repro-hardening <candidate>
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- git clone --branch codex/repro-hardening /workspace/CodeDoctor <temporary clone>
+lxc exec codedoctor-docker-host -- bash -lc 'python3 -m unittest discover -s <suite>/tests -p "test*.py"'
+lxc exec codedoctor-docker-host -- bash -lc 'python3 benchmark/scripts/<verifier>.py'
+lxc stop codedoctor-docker-host
+git update-ref -d refs/heads/codex/repro-hardening
+git diff --check
+```
+
+### 6. 实际测试结果
+
+- Artifact guard targeted suites：`25/25 PASS`。
+- Artifact-complete LXD regression：sandbox `29/29`、benchmark `14/14`、fault localization `36/36`、repair `48/48`、Phase 8 `28/28`、Phase 9 `19/19`、final consolidation `7/7`，合计 `181/181 PASS`、`0 FAIL`、`0 SKIP`。
+- Phase 7 verifier：150 个 online artifacts 验证通过。
+- Phase 9 corpus verifier：245 patches / 141 cases 验证通过，corpus hash=`365902f86f92987d25d5ba9c8167a21b776c57b83ee7025a4ecd11a055eeffd9`。
+- Phase 9 report verifier：strong set 149 验证通过，result hash=`48341fd5925b381124bb3cca3e93b3d1f59ff092dcc298edf933761ee34b5e38`。
+- 三个 verifier 运行前后五个 tracked frozen output SHA-256 不变：`FROZEN_OUTPUTS_UNCHANGED PASS`。
+- Fresh-clone smoke：final metadata `7/7`、benchmark `3/3`、fake repair pipeline `1/1`、validation pipeline `5/5`、Docker sandbox sum smoke `success`，worktree clean。
+- Fresh-clone regression：sandbox `29/29`、benchmark `14/14`、fault localization `36/36`、Phase 8 `28/28`、final `7/7` 均 PASS；repair 中 1 项、Phase 9 中 2 项因需要 external artifact package 显式 SKIP，其余已执行测试全部 PASS。
+- Fresh clone 直接运行三个 artifact-assisted verifier 均 exit `1`，错误分别包含 required frozen artifact/missing artifact list，运行后 worktree clean。
+- `compileall`、`git diff --check`、secret scan 和 frozen-output diff audit 均 PASS。
+
+### 7. 遇到的问题
+
+- 最初尝试在 `repair/context.py` 中加入显式 artifact missing guard，目标测试立即报告 `repair-v2 implementation hash mismatch`；该文件属于 protocol-hashed 实现，不允许改动。
+- 原 Phase 7 report generation 同时负责重算和写文件，Phase 9 corpus/reporting 在 raw artifact 不完整时可以进入下游写路径。
+- Fresh clone 本来将 artifact 缺失表现为不透明 test error，没有区分可独立复现内容和必须外挂的 formal artifacts。
+
+### 8. 问题的解决方式
+
+- 立即撤销 `repair/context.py` 的尝试性变更，并验证该文件无 diff、protocol version 仍为 `repair-v2`。
+- 将 guard 放在非 protocol-hashed 的 reporting/corpus reproduction 边界，先校验 artifact 存在性、数量和 hash，再进入只读计算。
+- 将原有 generator 脚本收紧为 verifier：只在内存中重算并与 tracked artifact 比对，任何 missing/mismatch 都以明确错误和非零码结束。
+- 在临时 artifact 和 fresh clone 中验证 missing/hash/restore 三种路径，并用 Git status 与 frozen-output SHA 确认无写入。
+
+### 9. 当前已知不足
+
+- Git 不包含全部大型 raw artifacts 和 checkpoints；formal Phase 7/9 artifact-assisted reproduction 仍需外部 artifact package。
+- Fresh clone 可完成 metadata-only smoke/regression，但不声称可在无外部包时重算所有正式结果。
+- 本轮只加固 reproduction 边界，没有修改实验逻辑、数字或已冻结研究结论。
+
+### 10. 下一步计划
+
+- 提交 `fix: harden frozen artifact reproduction guards` 并推送 `origin/main`。
+- 论文提交时同步提供版本化 external artifact package 及其 hash manifest，使 artifact-assisted reproduction 可按 README 完成。
+- 本轮后停止，不进入 Phase 10，不新增研究模块。

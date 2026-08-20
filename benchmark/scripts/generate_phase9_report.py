@@ -1,4 +1,4 @@
-"""Generate the frozen Phase 9 result manifest and research report."""
+"""Verify the frozen Phase 9 result manifest and report without writing them."""
 
 import json
 import sys
@@ -12,19 +12,12 @@ from benchmark.config import (  # noqa: E402
     PHASE9_REPORT,
     PHASE9_RESULT_MANIFEST,
 )
+from benchmark.frozen_artifacts import FrozenArtifactError  # noqa: E402
 from validation_phase9.reporting import (  # noqa: E402
     build_result_manifest,
     deterministic_case_studies,
     percent,
 )
-
-
-def _write_json(path: Path, value: object) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
-
 
 def _audit_table(result: dict[str, object], phase: str) -> list[str]:
     rows = []
@@ -252,11 +245,24 @@ def render_report(result: dict[str, object], corpus: dict[str, object]) -> str:
 def main() -> int:
     result = build_result_manifest()
     corpus = json.loads(PHASE9_PATCH_CORPUS.read_text(encoding="utf-8"))
-    _write_json(PHASE9_RESULT_MANIFEST, result)
-    PHASE9_REPORT.parent.mkdir(parents=True, exist_ok=True)
-    PHASE9_REPORT.write_text(render_report(result, corpus), encoding="utf-8")
+    if not PHASE9_RESULT_MANIFEST.is_file() or not PHASE9_REPORT.is_file():
+        raise FrozenArtifactError(
+            "Required frozen artifact missing. Reproduction requires external "
+            "artifact package. Frozen outputs were not modified."
+        )
+    frozen_result = json.loads(PHASE9_RESULT_MANIFEST.read_text(encoding="utf-8"))
+    if result != frozen_result:
+        raise FrozenArtifactError(
+            "Frozen artifact hash mismatch: computed Phase 9 result does not match "
+            "the tracked manifest. Frozen outputs were not modified."
+        )
+    if render_report(result, corpus) != PHASE9_REPORT.read_text(encoding="utf-8"):
+        raise FrozenArtifactError(
+            "Frozen artifact hash mismatch: computed Phase 9 report does not match "
+            "the tracked report. Frozen outputs were not modified."
+        )
     print(
-        f"Phase 9 report: strong={result['metrics']['strongly_validated']} "
+        f"Phase 9 report verified: strong={result['metrics']['strongly_validated']} "
         f"result_hash={result['overall_manifest_hash']}"
     )
     return 0

@@ -1,13 +1,19 @@
 """Repair aggregation, paired statistics, and artifact leakage tests."""
 
+import tempfile
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 
+from benchmark.config import REPAIR_EVALUATION, REPAIR_REPORT
+from benchmark.frozen_artifacts import FrozenArtifactError
 from repair.reporting import (
     _artifact_integrity,
     _group_metrics,
     _is_formal_artifact,
     _paired_comparison,
     _usage_metrics,
+    build_repair_evaluation,
     validate_artifact_boundaries,
 )
 
@@ -39,6 +45,19 @@ def record(case_id: str, group: str, validated: bool) -> dict[str, object]:
 
 
 class ReportingTests(unittest.TestCase):
+    def test_missing_formal_artifacts_do_not_overwrite_frozen_outputs(self) -> None:
+        before_evaluation = REPAIR_EVALUATION.read_bytes()
+        before_report = REPAIR_REPORT.read_bytes()
+        with tempfile.TemporaryDirectory() as temporary, patch(
+            "repair.reporting.REPAIR_ARTIFACT_ROOT", Path(temporary)
+        ):
+            with self.assertRaisesRegex(
+                FrozenArtifactError, "Required frozen artifact missing"
+            ):
+                build_repair_evaluation()
+        self.assertEqual(before_evaluation, REPAIR_EVALUATION.read_bytes())
+        self.assertEqual(before_report, REPAIR_REPORT.read_bytes())
+
     def test_engineering_smoke_is_excluded_from_formal_metrics(self) -> None:
         smoke = {
             "experimental": True,

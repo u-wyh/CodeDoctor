@@ -2,7 +2,11 @@
 
 import unittest
 
-from validation_phase9.corpus import build_formal_patch_corpus, finalize_corpus
+from validation_phase9.corpus import (
+    build_formal_patch_corpus,
+    finalize_corpus,
+    formal_patch_sources_available,
+)
 
 
 def entry(patch_id: str, artifact: str, source_hash: str = "source") -> dict[str, object]:
@@ -18,6 +22,8 @@ def entry(patch_id: str, artifact: str, source_hash: str = "source") -> dict[str
 
 class CorpusTests(unittest.TestCase):
     def test_actual_corpus_contains_only_frozen_formal_artifacts(self) -> None:
+        if not formal_patch_sources_available():
+            self.skipTest("requires external artifact package")
         value = build_formal_patch_corpus()
         self.assertEqual((245, 141), (value["patch_count"], value["case_count"]))
         self.assertEqual(150, value["source_sets"]["attempted"]["phase7"])

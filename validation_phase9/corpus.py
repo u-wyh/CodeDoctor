@@ -11,7 +11,12 @@ from benchmark.config import (
     PROJECT_ROOT,
     REPAIR_ARTIFACT_ROOT,
 )
-from repair.reporting import build_repair_evaluation
+from benchmark.frozen_artifacts import (
+    FrozenArtifactError,
+    artifact_groups_available,
+    require_artifact_groups,
+)
+from repair.reporting import validate_frozen_repair_artifacts
 from repair_phase8.partition import canonical_hash
 from repair_phase8.protocol import validate_stage2_gate
 
@@ -28,6 +33,38 @@ PHASE8_STAGE2_ARTIFACT_SET_HASH = (
 PHASE8_STAGE2_RESULT_HASH = (
     "bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e"
 )
+
+
+def formal_patch_sources_available() -> bool:
+    return artifact_groups_available(
+        (
+            (
+                "Phase 7 formal repair artifacts",
+                REPAIR_ARTIFACT_ROOT / "formal_evidence_ablation",
+                "*/*/*.json",
+                150,
+            ),
+            ("Phase 8 Initial artifacts", PHASE8_ARTIFACT_ROOT / "initial", "*/*.json", 100),
+            ("Phase 8 Retry artifacts", PHASE8_ARTIFACT_ROOT / "retry_control", "*/*.json", 6),
+            ("Phase 8 Feedback artifacts", PHASE8_ARTIFACT_ROOT / "feedback", "*/*.json", 6),
+        )
+    )
+
+
+def require_formal_patch_sources() -> dict[str, list[Path]]:
+    return require_artifact_groups(
+        (
+            (
+                "Phase 7 formal repair artifacts",
+                REPAIR_ARTIFACT_ROOT / "formal_evidence_ablation",
+                "*/*/*.json",
+                150,
+            ),
+            ("Phase 8 Initial artifacts", PHASE8_ARTIFACT_ROOT / "initial", "*/*.json", 100),
+            ("Phase 8 Retry artifacts", PHASE8_ARTIFACT_ROOT / "retry_control", "*/*.json", 6),
+            ("Phase 8 Feedback artifacts", PHASE8_ARTIFACT_ROOT / "feedback", "*/*.json", 6),
+        )
+    )
 
 
 def sha256_file(path: Path) -> str:
@@ -103,9 +140,10 @@ def _entry(
 
 
 def build_formal_patch_corpus() -> dict[str, Any]:
-    phase7 = build_repair_evaluation()["experiment"]["artifact_integrity"]
+    require_formal_patch_sources()
+    _phase7_records, phase7 = validate_frozen_repair_artifacts()
     if phase7["artifact_set_hash"] != PHASE7_ARTIFACT_SET_HASH:
-        raise ValueError("Phase 7 formal artifact-set hash mismatch")
+        raise FrozenArtifactError("Frozen artifact hash mismatch: Phase 7 artifact set")
     stage2_gate = validate_stage2_gate()
     if stage2_gate["stage1"]["overall_manifest_hash"] != PHASE8_STAGE1_ARTIFACT_SET_HASH:
         raise ValueError("Phase 8 Stage 1 artifact-set hash mismatch")
@@ -165,7 +203,9 @@ def build_formal_patch_corpus() -> dict[str, Any]:
             attempted["phase8_stage2"] += 1
             frozen = stage2_by_identity.get((record["case_id"], arm))
             if frozen is None or frozen["artifact_sha256"] != sha256_file(path):
-                raise ValueError(f"Phase 8 Stage 2 raw artifact mismatch: {path}")
+                raise FrozenArtifactError(
+                    f"Frozen artifact hash mismatch: Phase 8 Stage 2 raw artifact: {path}"
+                )
             item = _entry(
                 artifact_path=path,
                 record=record,

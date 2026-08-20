@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 from benchmark.config import (
     CODEFLAWS_REPAIR_PILOT,
+    PROJECT_ROOT,
     REPAIR_PILOT_FL,
     RUNTIME_EVIDENCE_PROMPT_AUDIT,
 )
@@ -170,6 +171,14 @@ class RuntimeEvidenceTests(unittest.TestCase):
     def test_groups_render_only_registered_frozen_evidence(self) -> None:
         cases = list(load_manifest(CODEFLAWS_REPAIR_PILOT))
         case = cases[0]
+        required = [PROJECT_ROOT / case.buggy.source_path]
+        required.extend(
+            PROJECT_ROOT / str(path)
+            for test in case.tests.repair_tests
+            for path in (test.input_path, test.expected_output_path)
+        )
+        if not all(path.is_file() for path in required):
+            self.skipTest("requires external artifact package")
         frozen = load_frozen_runtime_evidence(cases)
         fl = load_fl_records(REPAIR_PILOT_FL)[case.case_id]
         prompts = {

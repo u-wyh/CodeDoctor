@@ -10,12 +10,15 @@ from repair_phase8.partition import canonical_hash
 from validation_phase9.reporting import (
     build_result_manifest,
     deterministic_case_studies,
+    phase9_checkpoints_available,
 )
 
 
 class ReportingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if not phase9_checkpoints_available():
+            raise unittest.SkipTest("requires external artifact package")
         cls.corpus = json.loads(PHASE9_PATCH_CORPUS.read_text(encoding="utf-8"))
         cls.differential = json.loads(
             PHASE9_DIFFERENTIAL_MANIFEST.read_text(encoding="utf-8")

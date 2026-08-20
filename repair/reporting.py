@@ -19,6 +19,10 @@ from benchmark.config import (
     REPAIR_REPORT,
     RUNTIME_EVIDENCE_PROMPT_AUDIT,
 )
+from benchmark.frozen_artifacts import (
+    FrozenArtifactError,
+    require_artifact_groups,
+)
 from fault_localization.statistics import exact_mcnemar, paired_bootstrap_difference
 
 
@@ -27,6 +31,9 @@ PAIRINGS = (("A", "B"), ("B", "C"), ("A", "C"))
 BOOTSTRAP_SAMPLES = 10_000
 BOOTSTRAP_SEED = 20260817
 LEAKAGE_CANARIES = ("REFERENCE_SECRET_TOKEN", "VALIDATION_SECRET_TOKEN")
+FROZEN_PHASE7_ARTIFACT_SET_HASH = (
+    "067710f9f3b71855cc4bf1db3dd0614cef89c1d4cec7e4f6e83c0372b7607f17"
+)
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -272,6 +279,50 @@ def _artifact_integrity(
     }
 
 
+def validate_frozen_repair_artifacts(
+    *,
+    records: list[dict[str, Any]] | None = None,
+    prompt_audit: dict[str, Any] | None = None,
+    formal_run: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    require_artifact_groups(
+        ((
+            "Phase 7 formal repair artifacts",
+            REPAIR_ARTIFACT_ROOT / "formal_evidence_ablation",
+            "*/*/*.json",
+            150,
+        ),)
+    )
+    values = records if records is not None else _artifact_records(REPAIR_ARTIFACT_ROOT)
+    online = [item for item in values if _is_formal_artifact(item)]
+    audit = prompt_audit or _read_json(RUNTIME_EVIDENCE_PROMPT_AUDIT)
+    run = formal_run or _read_json(REPAIR_FORMAL_RUN)
+    integrity = _artifact_integrity(online, audit)
+    if integrity["artifact_set_hash"] != FROZEN_PHASE7_ARTIFACT_SET_HASH:
+        raise FrozenArtifactError(
+            "Frozen artifact hash mismatch: Phase 7 formal artifact set; "
+            f"expected {FROZEN_PHASE7_ARTIFACT_SET_HASH}, "
+            f"got {integrity['artifact_set_hash']}. Frozen outputs were not modified."
+        )
+    if (
+        integrity["complete_case_group_pairs"] != 150
+        or integrity["unique_cache_keys"] != 150
+        or not integrity["attempt_one_only"]
+        or not integrity["formal_role_only"]
+        or not integrity["prompt_hashes_match_frozen_audit"]
+        or integrity["response_metadata_records"] != run["responses_received"]
+        or len(integrity["request_configurations"]) != 1
+        or integrity["response_models"] != ["deepseek-v4-flash"]
+        or len(integrity["system_fingerprints"]) != 1
+        or run["requests_attempted"] != 150
+    ):
+        raise FrozenArtifactError(
+            "Frozen Phase 7 artifact package is incomplete or inconsistent. "
+            "Frozen outputs were not modified."
+        )
+    return online, integrity
+
+
 def _paired_comparison(
     records_by_case: dict[str, dict[str, dict[str, Any]]], before: str, after: str
 ) -> dict[str, Any]:
@@ -306,10 +357,14 @@ def _paired_comparison(
 def build_repair_evaluation() -> dict[str, Any]:
     records = _artifact_records(REPAIR_ARTIFACT_ROOT)
     leakage_scan = validate_artifact_boundaries(records)
-    online = [item for item in records if _is_formal_artifact(item)]
     pricing = _read_json(DEEPSEEK_FORMAL_PRICING_SNAPSHOT)
     formal_run = _read_json(REPAIR_FORMAL_RUN)
     prompt_audit = _read_json(RUNTIME_EVIDENCE_PROMPT_AUDIT)
+    online, artifact_integrity = validate_frozen_repair_artifacts(
+        records=records,
+        prompt_audit=prompt_audit,
+        formal_run=formal_run,
+    )
     engineering_smoke = [
         item
         for item in records
@@ -349,21 +404,6 @@ def build_repair_evaluation() -> dict[str, Any]:
         for group in GROUPS
     }
     fake = [item for item in records if item.get("experimental") is False]
-    artifact_integrity = _artifact_integrity(online, prompt_audit)
-    if online and (
-        artifact_integrity["complete_case_group_pairs"] != 150
-        or artifact_integrity["unique_cache_keys"] != 150
-        or not artifact_integrity["attempt_one_only"]
-        or not artifact_integrity["formal_role_only"]
-        or not artifact_integrity["prompt_hashes_match_frozen_audit"]
-        or artifact_integrity["response_metadata_records"]
-        != formal_run["responses_received"]
-        or len(artifact_integrity["request_configurations"]) != 1
-        or artifact_integrity["response_models"] != ["deepseek-v4-flash"]
-        or len(artifact_integrity["system_fingerprints"]) != 1
-        or formal_run["requests_attempted"] != 150
-    ):
-        raise ValueError("formal repair artifact set is incomplete or inconsistent")
     evaluation = {
         "dataset": _read_json(CODEFLAWS_REPAIR_PILOT_SUMMARY),
         "experiment": {
@@ -473,10 +513,6 @@ def build_repair_evaluation() -> dict[str, Any]:
                 for group in GROUPS
             }
         evaluation["fl_relationship"]["coverage_diversity_median"] = diversity_median
-    REPAIR_EVALUATION.parent.mkdir(parents=True, exist_ok=True)
-    REPAIR_EVALUATION.write_text(
-        json.dumps(evaluation, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
     return evaluation
 
 
@@ -696,8 +732,26 @@ On this frozen 50-case run, Group B did not improve over A: 78% versus 80%, diff
 """
 
 
-def write_report() -> dict[str, Any]:
+def verify_frozen_report() -> dict[str, Any]:
     evaluation = build_repair_evaluation()
-    REPAIR_REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPAIR_REPORT.write_text(render_report(evaluation), encoding="utf-8")
+    if not REPAIR_EVALUATION.is_file() or not REPAIR_REPORT.is_file():
+        raise FrozenArtifactError(
+            "Required frozen artifact missing. Reproduction requires external "
+            "artifact package. Frozen outputs were not modified."
+        )
+    if evaluation != _read_json(REPAIR_EVALUATION):
+        raise FrozenArtifactError(
+            "Frozen artifact hash mismatch: computed Phase 7 evaluation does not "
+            "match the tracked result. Frozen outputs were not modified."
+        )
+    if render_report(evaluation) != REPAIR_REPORT.read_text(encoding="utf-8"):
+        raise FrozenArtifactError(
+            "Frozen artifact hash mismatch: computed Phase 7 report does not match "
+            "the tracked report. Frozen outputs were not modified."
+        )
     return evaluation
+
+
+def write_report() -> dict[str, Any]:
+    """Compatibility entry point: verify frozen outputs without writing them."""
+    return verify_frozen_report()

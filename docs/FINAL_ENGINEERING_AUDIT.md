@@ -1,7 +1,7 @@
 # Final Engineering Cleanup and Fresh Clone Reproduction Audit
 
 Date: 2026-08-20
-Frozen source commit: `a5a028b1feabf5ae950eabbfdf77d5604d56c9ac`
+Frozen experimental source commit: `a5a028b1feabf5ae950eabbfdf77d5604d56c9ac`
 Real LLM calls: `0`
 
 ## Scope
@@ -57,21 +57,37 @@ Fresh-clone smoke results:
 - Fake-provider repair pipeline smoke: `1/1 PASS`; real provider calls `0`.
 - Validation pipeline smoke: `5/5 PASS`.
 
-## Regression and Reproduction Blockers
+## Reproduction Hardening and Regression
 
-The complete current working copy, which retains ignored local raw data/artifacts, passed `177/177` tests with `0 FAIL` and `0 SKIP` in the LXD Docker host.
+Reproduction now has two explicit levels:
 
-The fresh clone did not pass every full-suite test:
+- Metadata-only reproduction uses tracked manifests, reports, tables, and small fixtures. It requires no LLM credential and no raw artifact package.
+- Artifact-assisted reproduction uses the separately retained raw Codeflaws data, Phase 7/8 model artifacts, and Phase 9 checkpoints. Phase 7/9 report and corpus commands recompute and compare in memory; they never write frozen outputs.
+
+The guard layer rejects missing files before aggregation, lists missing artifact groups, validates registered hashes, and reports that reproduction requires an external artifact package. Missing, hash-mismatch, and restored-artifact tests all preserve an independent frozen sentinel. Phase 9 missing-package integration tests also verify that tracked Phase 7 evaluation/report bytes are unchanged.
+
+Artifact-complete regression in the LXD Docker host:
 
 - `sandbox`: `29/29 PASS`.
-- `benchmark`: `12/12 PASS`.
+- `benchmark`: `14/14 PASS`.
 - `fault_localization`: `36/36 PASS`.
-- `repair`: 47 run, 1 error because a production runtime-evidence test reads an ignored raw Codeflaws input file.
+- `repair`: `48/48 PASS`.
 - `repair_phase8`: `28/28 PASS`.
-- `validation_phase9`: 14 run with 2 errors; corpus/reporting tests require ignored Phase 7/9 raw artifacts.
-- `final_consolidation`: setup error after the Phase 9 corpus path rewrote tracked `benchmark/results/repair/evidence_ablation.json` from an empty fresh-clone artifact store. The same final tests passed `7/7` before this preceding-suite pollution.
+- `validation_phase9`: `19/19 PASS`.
+- `final_consolidation`: `7/7 PASS`.
+- Total: `181/181 PASS`, `0 FAIL`, `0 SKIP`.
 
-These are test-isolation and external-artifact dependency defects, not metric discrepancies. Fixing them safely requires changes in repair/validation test or reporting behavior, which is outside the user-authorized maintenance file set and touches frozen experimental code paths. No automatic fix was made. The temporary clone/ref was deleted and the LXD host was stopped.
+Raw-free fresh-clone regression:
+
+- `sandbox`: `29/29 PASS`.
+- `benchmark`: `14/14 PASS`.
+- `fault_localization`: `36/36 PASS`.
+- `repair`: 48 run, `1 SKIP` (`requires external artifact package`).
+- `repair_phase8`: `28/28 PASS`.
+- `validation_phase9`: 15 run, `2 SKIP` (artifact-assisted corpus/reporting groups).
+- `final_consolidation`: `7/7 PASS`, including after every preceding suite.
+
+Every executed fresh-clone test passed, the clone remained clean, and direct Phase 7/9 verifier invocations without the package exited non-zero. Artifact-complete verifier runs reproduced the registered Phase 7/9 hashes and left all frozen output SHA-256 values unchanged.
 
 ## Code Quality
 
@@ -83,4 +99,4 @@ These are test-isolation and external-artifact dependency defects, not metric di
 
 ## Judgment
 
-The tracked final metadata, reports, tables, isolated smoke path, and current artifact-complete checkout are reproducible. However, a raw-data-free fresh clone cannot run the complete existing regression cleanly and one Phase 9 test path can dirty a frozen tracked result when artifacts are absent. Therefore the repository is **not yet fully ready for thesis submission as a self-contained engineering artifact**. Resolving this requires explicit authorization for a narrowly scoped test-isolation/fail-closed maintenance change in frozen-adjacent repair/validation code.
+The tracked final metadata, reports, tables, metadata-only smoke path, and artifact-assisted verification path are reproducible. Missing or corrupt external artifacts now fail closed without modifying tracked results, artifact-complete behavior is unchanged, and raw-free fresh-clone regression is green with explicit package-dependent skips. The repository is **ready for thesis submission**, with the documented qualification that full formal artifact verification requires the separately retained external artifact package.

@@ -17,6 +17,11 @@ from benchmark.config import (
     PROJECT_ROOT,
 )
 from benchmark.models import BenchmarkCase, load_manifest
+from benchmark.frozen_artifacts import (
+    FrozenArtifactError,
+    artifact_groups_available,
+    require_artifact_groups,
+)
 from repair_phase8.partition import canonical_hash
 
 from .corpus import load_patch_source
@@ -52,11 +57,66 @@ def _checkpoint_name(patch_id: str) -> str:
     return patch_id.replace("/", "__") + ".json"
 
 
+def phase9_checkpoints_available() -> bool:
+    if not PHASE9_PATCH_CORPUS.is_file():
+        return False
+    try:
+        corpus = _load(PHASE9_PATCH_CORPUS)
+    except (OSError, ValueError):
+        return False
+    return artifact_groups_available(
+        (
+            (
+                "Phase 9 reference checkpoints",
+                PHASE9_ARTIFACT_ROOT / "reference",
+                "*.json",
+                int(corpus.get("case_count", -1)),
+            ),
+            (
+                "Phase 9 patch checkpoints",
+                PHASE9_ARTIFACT_ROOT / "patch",
+                "*.json",
+                int(corpus.get("patch_count", -1)),
+            ),
+        )
+    )
+
+
+def _verify_hash_document(value: dict[str, Any], label: str) -> None:
+    claimed = value.get("overall_manifest_hash")
+    unsigned = {key: item for key, item in value.items() if key != "overall_manifest_hash"}
+    if claimed != canonical_hash(unsigned):
+        raise FrozenArtifactError(f"Frozen artifact hash mismatch: {label}")
+
+
 def load_phase9_records() -> tuple[
     dict[str, Any], dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]
 ]:
+    if not PHASE9_PATCH_CORPUS.is_file() or not PHASE9_DIFFERENTIAL_MANIFEST.is_file():
+        raise FrozenArtifactError(
+            "Required frozen artifact missing. Reproduction requires external "
+            "artifact package. Frozen outputs were not modified."
+        )
     corpus = _load(PHASE9_PATCH_CORPUS)
     differential = _load(PHASE9_DIFFERENTIAL_MANIFEST)
+    _verify_hash_document(corpus, "Phase 9 patch corpus")
+    _verify_hash_document(differential, "Phase 9 differential manifest")
+    require_artifact_groups(
+        (
+            (
+                "Phase 9 reference checkpoints",
+                PHASE9_ARTIFACT_ROOT / "reference",
+                "*.json",
+                corpus["case_count"],
+            ),
+            (
+                "Phase 9 patch checkpoints",
+                PHASE9_ARTIFACT_ROOT / "patch",
+                "*.json",
+                corpus["patch_count"],
+            ),
+        )
+    )
     references = [
         _load(PHASE9_ARTIFACT_ROOT / "reference" / f"{case_id}.json")
         for case_id in sorted({item["case_id"] for item in corpus["entries"]})
