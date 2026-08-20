@@ -141,7 +141,14 @@ PHASE8_RUNTIME_ROOT = PHASE8_METADATA_ROOT / "runtime_evidence_v1"
 PHASE8_RUNTIME_MANIFEST = (
     PHASE8_METADATA_ROOT / "runtime_evidence_manifest_v1.json"
 )
-PHASE8_PROMPT_AUDIT = PHASE8_METADATA_ROOT / "prompt_audit_v1.json"
+PHASE8_PROMPT_AUDIT_V1 = PHASE8_METADATA_ROOT / "prompt_audit_v1.json"
+PHASE8_PROMPT_AUDIT = PHASE8_METADATA_ROOT / "prompt_audit_v2.json"
+PHASE8_RENDER_PROTOCOL = (
+    PHASE8_METADATA_ROOT / "runtime_evidence_render_protocol_v2.json"
+)
+PHASE8_PAYLOAD_ATTRIBUTION = (
+    PHASE8_METADATA_ROOT / "payload_byte_attribution_v1.json"
+)
 PHASE8_STAGE1_MANIFEST = PHASE8_METADATA_ROOT / "stage1_manifest_v1.json"
 PHASE8_ELIGIBLE_COHORT = PHASE8_METADATA_ROOT / "eligible_cohort_v1.json"
 PHASE8_ARTIFACT_ROOT = BENCHMARK_ROOT / "artifacts" / "repair_phase8"

@@ -10,8 +10,11 @@ from benchmark.config import (
     PHASE8_ARTIFACT_ROOT,
     PHASE8_EVALUATION_SET,
     PHASE8_FL,
+    PHASE8_PAYLOAD_ATTRIBUTION,
     PHASE8_PROMPT_AUDIT,
     PHASE8_PROTOCOL,
+    PHASE8_RENDER_PROTOCOL,
+    PHASE8_RUNTIME_MANIFEST,
     PHASE8_STAGE1_MANIFEST,
     PHASE8_TEST_PARTITION,
 )
@@ -49,8 +52,13 @@ def validate_phase8_preflight() -> dict[str, Any]:
         raise ValueError("Phase 8 FL method version mismatch")
     runtime = load_phase8_runtime(cases)
     prompt_audit = json.loads(PHASE8_PROMPT_AUDIT.read_text(encoding="utf-8"))
+    attribution = json.loads(PHASE8_PAYLOAD_ATTRIBUTION.read_text(encoding="utf-8"))
+    render_protocol = json.loads(PHASE8_RENDER_PROTOCOL.read_text(encoding="utf-8"))
+    prompt_records = prompt_audit.get("prompt_records", [])
+    hard_gate = render_protocol.get("hard_serialized_payload_bytes")
     if (
-        prompt_audit.get("prompts_checked") != 100
+        prompt_audit.get("protocol_version") != "phase8-initial-prompt-audit-v2"
+        or prompt_audit.get("prompts_checked") != 100
         or not prompt_audit.get("hashes_identical_across_reloads")
         or prompt_audit.get("leakage_audit", {}).get("status") != "passed"
         or prompt_audit.get("operational_size_gate", {}).get("status") != "passed"
@@ -58,14 +66,47 @@ def validate_phase8_preflight() -> dict[str, Any]:
         != runtime.validation["manifest_hash"]
         or prompt_audit.get("partition_manifest_hash")
         != partition["overall_manifest_hash"]
+        or prompt_audit.get("render_protocol", {}).get("protocol_version")
+        != "phase8-runtime-evidence-render-v2"
+        or prompt_audit.get("render_protocol", {}).get("sha256")
+        != _sha256(PHASE8_RENDER_PROTOCOL)
+        or render_protocol.get("protocol_version")
+        != "phase8-runtime-evidence-render-v2"
+        or not prompt_audit.get("reproducibility", {}).get(
+            "random_order_reload_equal"
+        )
+        or len(prompt_audit.get("oversized_case_stress", [])) != 4
+        or not all(
+            item.get("hashes_identical_10_of_10")
+            for item in prompt_audit.get("oversized_case_stress", [])
+        )
+        or attribution.get("case_count") != 100
+        or attribution.get("oversized_case_count") != 4
+        or attribution.get("superseded_prompt_set_hash")
+        != prompt_audit.get("superseded_prompt_set_hash")
+        or len(prompt_records) != 100
+        or [item.get("case_id") for item in prompt_records]
+        != [case.case_id for case in cases]
+        or not isinstance(hard_gate, int)
+        or not all(
+            item.get("render_protocol_version")
+            == "phase8-runtime-evidence-render-v2"
+            and isinstance(item.get("raw_observation_hash"), str)
+            and isinstance(item.get("rendered_evidence_hash"), str)
+            and isinstance(item.get("oracle_render_hash"), str)
+            and item.get("request_utf8_bytes", hard_gate + 1) <= hard_gate
+            for item in prompt_records
+        )
     ):
         raise ValueError("Phase 8 prompt reproducibility/leakage/size gate failed")
     return {
         "cases": cases,
+        "attribution": attribution,
         "fl_records": {item["case_id"]: item for item in fl},
         "partition": partition,
         "prompt_audit": prompt_audit,
         "protocol": protocol,
+        "render_protocol": render_protocol,
         "runtime": runtime,
         "status": "passed",
     }
@@ -79,6 +120,7 @@ def build_stage1_manifests(
         raise ValueError("Stage 1 must contain one artifact for all 100 cases")
     entries = []
     eligible = []
+    runtime_manifest = json.loads(PHASE8_RUNTIME_MANIFEST.read_text(encoding="utf-8"))
     for order, case in enumerate(cases):
         item = by_case[case.case_id]
         if (
@@ -86,6 +128,16 @@ def build_stage1_manifests(
             or item.get("completed") is not True
             or item.get("protocol_version") != "phase8-v1"
             or item.get("model_parameters", {}).get("provider") != "deepseek"
+            or item.get("render_protocol_version")
+            != "phase8-runtime-evidence-render-v2"
+            or item.get("raw_runtime_manifest_hash")
+            != runtime_manifest.get("overall_manifest_hash")
+            or item.get("raw_runtime_observation_hash")
+            != item.get("prompt", {}).get("raw_observation_hash")
+            or item.get("rendered_evidence_hash")
+            != item.get("prompt", {}).get("rendered_evidence_hash")
+            or item.get("oracle_render_hash")
+            != item.get("prompt", {}).get("oracle_render_hash")
         ):
             raise ValueError(f"invalid formal Stage 1 artifact: {case.case_id}")
         entry = {
@@ -95,6 +147,12 @@ def build_stage1_manifests(
             "failure_evidence_hash": item.get("failure_evidence_hash"),
             "first_patch_hash": item.get("first_patch_hash"),
             "initial_prompt_hash": item["prompt"]["hash"],
+            "render_protocol_version": item["render_protocol_version"],
+            "rendered_evidence_hash": item["prompt"]["rendered_evidence_hash"],
+            "raw_runtime_observation_hash": item[
+                "raw_runtime_observation_hash"
+            ],
+            "oracle_render_hash": item["oracle_render_hash"],
             "order": order,
             "second_round_eligible": item.get("second_round_eligible", False),
         }
@@ -107,6 +165,7 @@ def build_stage1_manifests(
         "evaluation_set_sha256": _sha256(PHASE8_EVALUATION_SET),
         "protocol_sha256": _sha256(PHASE8_PROTOCOL),
         "protocol_version": "phase8-stage1-manifest-v1",
+        "render_protocol_sha256": _sha256(PHASE8_RENDER_PROTOCOL),
         "test_partition_sha256": _sha256(PHASE8_TEST_PARTITION),
     }
     stage1["overall_manifest_hash"] = canonical_hash(stage1)
@@ -156,6 +215,14 @@ def validate_stage2_gate() -> dict[str, Any]:
             != entry.get("failure_evidence_hash")
             or artifact.get("prompt", {}).get("hash")
             != entry.get("initial_prompt_hash")
+            or artifact.get("render_protocol_version")
+            != entry.get("render_protocol_version")
+            or artifact.get("prompt", {}).get("rendered_evidence_hash")
+            != entry.get("rendered_evidence_hash")
+            or artifact.get("raw_runtime_observation_hash")
+            != entry.get("raw_runtime_observation_hash")
+            or artifact.get("oracle_render_hash")
+            != entry.get("oracle_render_hash")
         ):
             raise ValueError(f"Stage 1 artifact binding mismatch for {case_id}")
     for entry in cohort["entries"]:

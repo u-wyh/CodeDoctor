@@ -5,15 +5,21 @@ import hashlib
 from repair.models import RepairContext
 
 from .models import Phase8Arm, Phase8Prompt
+from .evidence_rendering import (
+    RENDER_PROTOCOL_VERSION,
+    render_execution_evidence,
+    render_failed_feedback,
+    render_oracle_examples,
+)
 
 
 SYSTEM_PROMPT = (
     "You repair buggy C or C++ programs. Return only the complete repaired source "
     "code. Do not return an explanation."
 )
-INITIAL_VERSION = "phase8-initial-v1"
-RETRY_VERSION = "phase8-retry-control-v1"
-FEEDBACK_VERSION = "phase8-feedback-v1"
+INITIAL_VERSION = "phase8-initial-v2"
+RETRY_VERSION = "phase8-retry-control-v2"
+FEEDBACK_VERSION = "phase8-feedback-v2"
 SECOND_INSTRUCTION = """Your previous candidate patch did not complete the repair process.
 Review the original task and your previous patch carefully.
 Produce one revised complete source program."""
@@ -21,13 +27,6 @@ Produce one revised complete source program."""
 
 def _digest(version: str, system: str, user: str) -> str:
     return hashlib.sha256((version + "\0" + system + "\0" + user).encode()).hexdigest()
-
-
-def _example(item: object) -> str:
-    return (
-        f"### {item.test_id}\nInput:\n```text\n{item.input_text}\n```\n"
-        f"Expected output:\n```text\n{item.expected_output}\n```"
-    )
 
 
 def _fl(context: RepairContext) -> str:
@@ -51,20 +50,6 @@ def _fl(context: RepairContext) -> str:
     return "## CodeDoctor FL-v1 suspicious locations\n" + "\n".join(rows)
 
 
-def _buggy_runtime(context: RepairContext) -> str:
-    parts = ["## Frozen buggy runtime evidence"]
-    for item in context.execution_evidence:
-        parts.extend(
-            (
-                f"### {item.test_id}: {item.verdict}",
-                f"Actual stdout:\n```text\n{item.actual_stdout}\n```",
-                f"stderr:\n```text\n{item.stderr}\n```",
-                f"Exit code: {item.exit_code}; timed out: {str(item.timed_out).lower()}",
-            )
-        )
-    return "\n".join(parts)
-
-
 def render_initial_prompt(context: RepairContext, base_test_ids: set[str]) -> Phase8Prompt:
     if not context.task_examples or context.fl_status is None or not context.execution_evidence:
         raise ValueError("Phase 8 Initial requires oracle, FL-v1, and frozen runtime")
@@ -72,11 +57,19 @@ def render_initial_prompt(context: RepairContext, base_test_ids: set[str]) -> Ph
     feedback = [item for item in context.task_examples if item.test_id not in base_test_ids]
     if not feedback:
         raise ValueError("Phase 8 Initial requires at least one Feedback test")
-    base_oracle = (
-        chr(10).join(_example(item) for item in base)
-        if base
-        else "No original Base Repair Tests are available for this case."
+    base_oracle, _ = render_oracle_examples(base)
+    feedback_oracle, _ = render_oracle_examples(feedback)
+    if not base:
+        base_oracle = "No original Base Repair Tests are available for this case."
+    expected = {item.test_id: item.expected_output for item in context.task_examples}
+    runtime = render_execution_evidence(
+        context.execution_evidence,
+        expected,
+        heading="## Frozen buggy runtime evidence",
     )
+    oracle_render_hash = hashlib.sha256(
+        (base_oracle + "\0" + feedback_oracle).encode("utf-8")
+    ).hexdigest()
     user = f"""Repair the following buggy C/C++ program.
 
 Requirements:
@@ -95,42 +88,22 @@ Requirements:
 
 ## Feedback-test repair-time oracle
 These input/expected-output examples are public before the first repair attempt.
-{chr(10).join(_example(item) for item in feedback)}
+{feedback_oracle}
 
 {_fl(context)}
 
-{_buggy_runtime(context)}"""
+{runtime.text}"""
     return Phase8Prompt(
         INITIAL_VERSION,
         Phase8Arm.INITIAL,
         SYSTEM_PROMPT,
         user,
         _digest(INITIAL_VERSION, SYSTEM_PROMPT, user),
+        RENDER_PROTOCOL_VERSION,
+        runtime.raw_hash,
+        runtime.rendered_hash,
+        oracle_render_hash,
     )
-
-
-def _feedback_section(feedback: dict[str, object]) -> str:
-    compile_value = feedback.get("compile")
-    if compile_value is not None:
-        return (
-            "## Failed repair-time execution feedback\n"
-            f"Compiler exit status: {compile_value['exit_code']}\n"
-            f"Compiler stderr:\n```text\n{compile_value['stderr']}\n```"
-        )
-    parts = ["## Failed repair-time execution feedback"]
-    for item in feedback["failed_tests"]:
-        parts.extend(
-            (
-                f"### {item['test_id']}: FAIL",
-                f"Input:\n```text\n{item['input']}\n```",
-                f"Expected output:\n```text\n{item['expected_output']}\n```",
-                f"Actual output:\n```text\n{item['actual_stdout']}\n```",
-                f"stderr:\n```text\n{item['stderr']}\n```",
-                f"Exit code: {item['exit_code']}; timed out: "
-                f"{str(item['timed_out']).lower()}; verdict: {item['verdict']}",
-            )
-        )
-    return "\n".join(parts)
 
 
 def render_second_prompt(
@@ -153,12 +126,26 @@ def render_second_prompt(
         + SECOND_INSTRUCTION
     )
     version = RETRY_VERSION if arm is Phase8Arm.RETRY_CONTROL else FEEDBACK_VERSION
+    rendered_feedback = None
     if feedback is not None:
-        user += "\n\n" + _feedback_section(feedback)
+        rendered_feedback = render_failed_feedback(feedback)
+        user += "\n\n" + rendered_feedback.text
     return Phase8Prompt(
         version,
         arm,
         SYSTEM_PROMPT,
         user,
         _digest(version, SYSTEM_PROMPT, user),
+        RENDER_PROTOCOL_VERSION,
+        (
+            rendered_feedback.raw_hash
+            if rendered_feedback is not None
+            else initial.raw_observation_hash
+        ),
+        (
+            rendered_feedback.rendered_hash
+            if rendered_feedback is not None
+            else initial.rendered_evidence_hash
+        ),
+        initial.oracle_render_hash,
     )

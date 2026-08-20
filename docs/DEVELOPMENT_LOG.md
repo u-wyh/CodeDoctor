@@ -2399,3 +2399,100 @@ Codeflaws 不同 test pool 会复用 `p1` 等 id，初版按 id 分组会将 Fee
 - 先人工决定如何处理 4 个超大公共 oracle/runtime payload；任何方案必须保持 R/F 语义对称、Hidden 隔离和 frozen first-observation 可审计性，并在真实调用前更新 protocol/audit。
 - blocker 解决后重新执行离线 size/reproducibility/leakage gate；只有 `phase8_stage1_ready=true` 且用户显式批准 `--confirm-phase8-stage1` 时，才允许 100 个 Initial calls。
 - 提交前 `git diff --cached --check` 首次发现 5 个新 Python 文件 EOF 多余空行；已仅删除这些空行，并将本条作为本轮最后一次项目文件编辑记录。
+
+## 2026-08-20 - Phase 8: Bounded Execution Evidence Rendering
+
+### 1. 本次目标
+
+- 解决 4 个 Phase 8 Initial serialized payload 超过 400,000-byte hard gate 的唯一正式 blocker。
+- 不删除 case、不重抽 dataset、不修改 Base/Feedback/Hidden partition、不修改 FL-v1/DeepSeek 配置、不重跑 buggy program、不改 raw frozen snapshots。
+- 引入统一、确定性、可审计的 bounded evidence renderer，同时用于 Initial buggy runtime evidence 与未来 Stage 2 F first-patch feedback。
+- 重新冻结 100 个 Initial prompt hashes；真实 DeepSeek 调用保持 0，不运行 `--confirm-phase8-stage1`，不进入 Stage 2。
+
+### 2. Payload Byte Attribution
+
+- 新增 `benchmark/scripts/profile_phase8_payloads.py`，按 canonical UTF-8 对 100 个 superseded v1 provider payload 做 component-level byte attribution；所有 component bytes 与 serialization overhead 精确求和为 serialized total。
+- `404-B-bug-14578678-14578704`：30,774,820 bytes；Base oracle 5,075,563、Feedback oracle 9,589,378、runtime stdout 14,818,134、serialization overhead 1,287,347，其余 source/FL/runtime metadata/template 很小。
+- `626-A-bug-16228568-16228576`：29,468,503 bytes；主要为 runtime stdout 25,817,498 和 serialization overhead 3,646,106，公共 oracle 不超限。
+- `361-B-bug-5055774-5055807`：3,435,093 bytes；Feedback oracle 1,772,815、runtime stdout 1,657,989。
+- `285-A-bug-3882169-3882175`：1,400,995 bytes；Feedback oracle 748,305、runtime stdout 649,304。
+- 结论：3/4 oversized cases 同时存在超大 Common Oracle；最大 case 由 14,664,941-byte common oracle 与 14,818,134-byte runtime stdout 共同造成，不能只处理 runtime output。
+- Attribution 冻结到 `benchmark/metadata/repair_phase8/payload_byte_attribution_v1.json`；旧 prompt-set hash `dd4127d97c7a73b822330d0c1c6890873e3913170b48335c895cca59b1b49672` 保留并标记 superseded。
+
+### 3. Renderer 设计与实现
+
+- 新增 `phase8-runtime-evidence-render-v2` 和 `phase8-common-oracle-render-v2`，协议文件为 `benchmark/metadata/repair_phase8/runtime_evidence_render_protocol_v2.json`。核心实验协议仍为 `phase8-v1`，本次只做 real calls=0 时的 pre-experiment prompt-size safety correction。
+- 所有 execution tests 均保留 test id、verdict、exit code、timeout、stdout/stderr byte length 与 SHA-256；raw observations 继续完整保存在原 snapshots/artifacts。
+- PASS 且 actual stdout 与 expected output byte-exact 时，不重复 actual body，只写 `matches expected output exactly` 和 identity metadata。
+- clean-exit mismatch 记录 first differing byte、expected/actual length/hash，actual window 固定为 difference 前最多 1,024 bytes、后最多 3,072 bytes；不在 F 新增 expected window 或新规格。
+- abnormal stdout：`<=4096` 完整，否则 first/last 2,048 bytes；stderr：`<=8192` 完整，否则 first/last 4,096 bytes；compiler stderr：`<=16384` 完整，否则 first/last 8,192 bytes。均记录 omitted count、length、hash、truncated。
+- Common Oracle input/expected 字段：`<=4096` 完整，否则 first/last 2,048 bytes；Initial/R/F 使用同一 representation。
+- 所有 bytes 来自 `str.encode("utf-8")`；excerpt 在 multibyte boundary 使用固定 `errors="replace"` decode policy。
+- `repair_phase8/evidence_rendering.py` 是 Initial 与 F 的唯一 shared renderer；R 不渲染 first-patch execution feedback。
+- Phase 8 artifacts 新增 raw runtime manifest/observation hash、oracle render hash、render protocol version、rendered evidence hash；R 的 first-patch observation 字段保持 null，F 才记录该 hash。Stage 1/Stage 2 manifests 将逐项校验这些绑定。
+
+### 4. 新增和修改文件
+
+- 新增：`repair_phase8/evidence_rendering.py`、`repair_phase8/tests/test_evidence_rendering.py`、`benchmark/scripts/profile_phase8_payloads.py`。
+- 新增冻结审计：`payload_byte_attribution_v1.json`、`prompt_audit_v2.json`、`runtime_evidence_render_protocol_v2.json`。
+- 修改：`benchmark/config.py`、Phase 8 prompt audit/report/run scripts、`repair_phase8/models.py`、`prompting.py`、`pipeline.py`、`protocol.py` 及 pipeline/prompting tests。
+- 更新：`benchmark/reports/execution_feedback_pre_experiment.md`。
+- 删除文件：无；旧 `prompt_audit_v1.json` 未删除，raw runtime snapshots/manifest 未修改。
+
+### 5. 执行过的重要命令
+
+```text
+python3 benchmark/scripts/profile_phase8_payloads.py
+python3 -m unittest discover -s repair_phase8/tests -v
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_phase8_prompts.py
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_phase8_prompts.py && PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/audit_phase8_prompts.py
+python3 -c 'from repair_phase8.protocol import validate_phase8_preflight as v; print(v()["status"])'
+
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- bash -lc 'cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair_phase8/tests'
+
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_phase8_pre_experiment.py --fake-tests-passed --renderer-tests-passed --full-regression-passed
+python3 benchmark/scripts/run_phase8_experiment.py --stage1
+python3 -m compileall -q benchmark repair_phase8
+git diff --check
+git diff --exit-code HEAD -- benchmark/datasets/codeflaws/metadata/phase8_repair_evaluation.jsonl benchmark/metadata/repair_phase8/phase8_fl_v1.jsonl benchmark/metadata/repair_phase8/phase8_test_partition_v1.json benchmark/metadata/repair_phase8/runtime_evidence_manifest_v1.json benchmark/metadata/repair_phase8/runtime_evidence_v1 benchmark/metadata/repair_phase8/phase8_protocol_v1.json
+lxc stop codedoctor-docker-host
+```
+
+### 6. 实际测试与审计结果
+
+- Phase 8 专项：24/24 PASS。新增 10 类 synthetic huge-output scenarios：10 MB PASS stdout、10 MB mismatch stdout、10 MB stderr、runtime error huge stdout/stderr、compiler huge diagnostics、UTF-8 boundary、empty output、begin/end/length-only mismatch 全部通过。
+- Stage 2 F stress：10 MB stdout+stderr 使用同一 renderer，prompt-visible feedback 有界；F 新增段不重复 input/expected；R 无 execution feedback。
+- 完整 regression 最终结果：sandbox 29/29、benchmark 12/12、fault localization 36/36、repair 47/47、Phase 8 24/24，共 148/148 PASS。
+- 两个独立 Python processes 各自渲染 100 prompts，并在内部按 seed 20260820 做第三次 random-order render；100/100 hashes 一致。
+- 原 4 oversized cases 各自 render 10 次，全部 10/10 hash 一致。
+- Before -> after：626-A 29,468,503 -> 30,404；285-A 1,400,995 -> 27,515；404-B 30,774,820 -> 111,833；361-B 3,435,093 -> 45,971 bytes。
+- 100 prompts bytes：min 5,494；median 15,867.5；mean 19,566.89；p95 45,971；max 111,833；total 1,956,689。300,000 warning count=0，400,000 hard-gate failures=0。
+- 新 Initial prompt-set hash：`c4087dee0353c12fdbe1310ed314272f7436f2fc22560c9917da4dfc75a3f491`。
+- Leakage audit：100 raw snapshots、100 rendered prompts 和 100 serialized provider payloads PASS；reference、ground truth、Hidden validation ids、evaluation canary、credential、raw reasoning 均未发现。
+- Preflight：PASS；未授权 Stage 1 命令 exit 2；Stage 1/cohort manifests 不存在；formal Phase 8 artifacts=0。
+- Raw runtime manifest hash 保持 `943959cb626bb3f190e4a63a45a53c11fbab63781e8297907971f0f0a206f0a0`；partition hash 保持 `fb6239e5b37c81ba4464e00d5505bac9be9296e2fe6d1fc0a2e42573893fb9b7`。
+- Dataset、FL-v1、partition、raw runtime manifest/snapshots、core `phase8-v1` 均相对 HEAD 零 diff；无重新执行或重新冻结 raw observations。
+- Docker 无残留 sandbox/analysis 容器，LXD 最终 STOPPED。本轮真实 DeepSeek calls=0。
+
+### 7. Revised Token/Cost Estimate
+
+- 透明 heuristic：`ceil(serialized UTF-8 bytes / 4)`。
+- 100 Initial prompts estimated input tokens：min 1,374；median 3,967；mean 4,892.07；p95 11,493；max 27,959；total 489,207。
+- 使用 2026-08-19 官方价格快照、cache-miss input `$0.14/M`、output `$0.28/M`、Phase 7 148 responses 的 mean completion 5,265.7 tokens/call，Stage 1 粗估约 `$0.2159`。该值不含真实 Phase 8 usage，属于高不确定性 projection，不是账单。
+
+### 8. 遇到的问题与解决方式
+
+- 初始 blocker 看似是 runtime evidence，但 component attribution 证明 3 个 cases 的 public oracle 也超大；因此未做 runtime-only patch，而是统一引入 Common Oracle v2，保持 Initial/R/F 规格对称。
+- 不能删除 4 cases、提高 hard gate 或重新选择短 observation；通过 raw/rendered 分离保留完整 observation，并只约束 prompt-visible representation。
+- F mismatch 若重新展示中部 expected window，会在 bounded Common Oracle 下新增规格；最终只展示 actual window、first difference 和 expected identity metadata，避免 R/F task semantics 不对称。
+- code review 发现 R artifact 会把 Initial runtime hash误名为 first-patch observation；修正为该字段仅 F 非空，并补充测试。
+- 报告初版的最大 case oracle 合计使用早期逐-example口径，少计 19-byte join overhead；改为直接从冻结 attribution rows 计算 14,664,941 bytes。
+
+### 9. 当前 Readiness 与下一步
+
+- `phase8_stage1_ready=true`，`phase8_stage1_user_authorized=false`，当前 formal blocker=none。
+- DeepSeek provider/model/thinking/reasoning effort/max tokens/stream/temperature/retries 全部未变；本轮未重新 smoke、未调用真实 API。
+- 本轮在 pre-experiment safety correction 后停止，不执行 `--confirm-phase8-stage1`，不启动 Stage 1/Stage 2。
+- 下一步仅在用户显式批准后运行 100-call Stage 1；Stage 1 完成后仍必须暂停、冻结 eligible cohort，并等待独立 Stage 2 授权。

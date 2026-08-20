@@ -21,9 +21,13 @@ from .prompting import render_second_prompt
 Evaluator = Callable[[BenchmarkCase, str], PatchEvaluation]
 
 
-def _prompt_record(prompt: Phase8Prompt) -> dict[str, str]:
+def _prompt_record(prompt: Phase8Prompt) -> dict[str, object]:
     return {
         "hash": prompt.prompt_hash,
+        "oracle_render_hash": prompt.oracle_render_hash,
+        "raw_observation_hash": prompt.raw_observation_hash,
+        "render_protocol_version": prompt.render_protocol_version,
+        "rendered_evidence_hash": prompt.rendered_evidence_hash,
         "system": prompt.system,
         "template_version": prompt.template_version,
         "user": prompt.user,
@@ -82,6 +86,7 @@ def run_initial_attempt(
     store: Phase8ArtifactStore,
     partition_hash: str,
     *,
+    raw_runtime_manifest_hash: str | None = None,
     resume: bool = False,
 ) -> dict[str, Any]:
     key = phase8_cache_key(
@@ -100,6 +105,11 @@ def run_initial_attempt(
         "model_parameters": model.parameters.cache_view(),
         "prompt": _prompt_record(prompt),
         "protocol_version": "phase8-v1",
+        "oracle_render_hash": prompt.oracle_render_hash,
+        "raw_runtime_observation_hash": prompt.raw_observation_hash,
+        "raw_runtime_manifest_hash": raw_runtime_manifest_hash,
+        "render_protocol_version": prompt.render_protocol_version,
+        "rendered_evidence_hash": prompt.rendered_evidence_hash,
         "test_partition_hash": partition_hash,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
@@ -205,6 +215,14 @@ def run_second_attempt(
         "model_parameters": model.parameters.cache_view(),
         "prompt": _prompt_record(prompt),
         "protocol_version": "phase8-v1",
+        "raw_runtime_manifest_hash": initial_record.get("raw_runtime_manifest_hash"),
+        "raw_first_patch_observation_hash": (
+            prompt.raw_observation_hash if arm is Phase8Arm.FEEDBACK else None
+        ),
+        "render_protocol_version": prompt.render_protocol_version,
+        "rendered_evidence_hash": (
+            prompt.rendered_evidence_hash if arm is Phase8Arm.FEEDBACK else None
+        ),
         "second_round_arm": arm.value,
         "test_partition_hash": partition_hash,
         "timestamp": datetime.now(timezone.utc).isoformat(),

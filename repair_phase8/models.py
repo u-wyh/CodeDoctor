@@ -17,6 +17,10 @@ class Phase8Prompt:
     system: str
     user: str
     prompt_hash: str
+    render_protocol_version: str | None = None
+    raw_observation_hash: str | None = None
+    rendered_evidence_hash: str | None = None
+    oracle_render_hash: str | None = None
 
 
 @dataclass(frozen=True)

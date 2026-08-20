@@ -84,6 +84,17 @@ class PipelineTests(unittest.TestCase):
                         lambda _c, _s: result(feedback_id=feedback_id), store, "partition"
                     )
                     self.assertEqual(retry["first_patch_hash"], feedback["first_patch_hash"])
+                    self.assertEqual(
+                        "phase8-runtime-evidence-render-v2",
+                        feedback["render_protocol_version"],
+                    )
+                    self.assertEqual(
+                        feedback["prompt"]["rendered_evidence_hash"],
+                        feedback["rendered_evidence_hash"],
+                    )
+                    self.assertIsNotNone(feedback["raw_first_patch_observation_hash"])
+                    self.assertIsNone(retry["raw_first_patch_observation_hash"])
+                    self.assertIsNone(retry["rendered_evidence_hash"])
                     self.assertNotIn("Failed repair-time execution feedback", retry["prompt"]["user"])
                     self.assertIn("Failed repair-time execution feedback", feedback["prompt"]["user"])
 

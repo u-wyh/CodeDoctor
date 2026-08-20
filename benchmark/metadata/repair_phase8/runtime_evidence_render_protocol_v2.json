@@ -1,0 +1,40 @@
+{
+  "canonical_encoding": "UTF-8",
+  "change_scope": "pre-experiment prompt-size safety correction only",
+  "common_oracle": {
+    "full_field_bytes": 4096,
+    "prefix_bytes": 2048,
+    "suffix_bytes": 2048,
+    "version": "phase8-common-oracle-render-v2"
+  },
+  "compiler_stderr": {
+    "full_bytes": 16384,
+    "prefix_bytes": 8192,
+    "suffix_bytes": 8192
+  },
+  "execution_stdout": {
+    "abnormal_full_bytes": 4096,
+    "abnormal_prefix_bytes": 2048,
+    "abnormal_suffix_bytes": 2048,
+    "mismatch_context_after_bytes": 3072,
+    "mismatch_context_before_bytes": 1024,
+    "pass_exact_match": "omit duplicate body and retain identity metadata"
+  },
+  "hard_serialized_payload_bytes": 400000,
+  "immutable_core_experiment_protocol": "phase8-v1",
+  "multibyte_decode_errors": "replace",
+  "policy": "raw observations remain immutable; only prompt-visible rendering is bounded",
+  "prompt_versions": {
+    "feedback": "phase8-feedback-v2",
+    "initial": "phase8-initial-v2",
+    "retry_control": "phase8-retry-control-v2"
+  },
+  "protocol_version": "phase8-runtime-evidence-render-v2",
+  "real_phase8_calls_before_freeze": 0,
+  "stderr": {
+    "full_bytes": 8192,
+    "prefix_bytes": 4096,
+    "suffix_bytes": 4096
+  },
+  "warning_serialized_payload_bytes": 300000
+}

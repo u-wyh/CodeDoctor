@@ -130,6 +130,9 @@ def main() -> int:
                 evaluate_source,
                 store,
                 partition_hash,
+                raw_runtime_manifest_hash=preflight["runtime"].validation[
+                    "manifest_hash"
+                ],
                 resume=args.resume,
             )
             if isinstance(model, DeepSeekProvider):
