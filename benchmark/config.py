@@ -154,11 +154,15 @@ PHASE8_ELIGIBLE_COHORT = PHASE8_METADATA_ROOT / "eligible_cohort_v1.json"
 PHASE8_STAGE2_PROMPT_AUDIT = (
     PHASE8_METADATA_ROOT / "stage2_prompt_audit_v1.json"
 )
+PHASE8_STAGE2_RESULT_MANIFEST = (
+    PHASE8_METADATA_ROOT / "stage2_result_manifest_v1.json"
+)
 PHASE8_ARTIFACT_ROOT = BENCHMARK_ROOT / "artifacts" / "repair_phase8"
 PHASE8_PRE_EXPERIMENT_REPORT = (
     CODEFLAWS_REPORT_ROOT / "execution_feedback_pre_experiment.md"
 )
 PHASE8_STAGE1_REPORT = CODEFLAWS_REPORT_ROOT / "execution_feedback_stage1.md"
+PHASE8_FINAL_REPORT = CODEFLAWS_REPORT_ROOT / "execution_feedback_formal.md"
 
 PILOT_RANDOM_SEED = 20260815
 PILOT_TARGET_SIZE = 50

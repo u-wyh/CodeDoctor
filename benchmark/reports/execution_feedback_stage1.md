@@ -46,4 +46,4 @@ Eligible failure distribution: `{"base_and_feedback_test_failure": 2, "base_repa
 
 Expected real calls are `2M = 12`. Estimated cost is `$0.03607045`, using Stage 2 serialized-byte input estimates, cache-miss pricing, and the observed Stage 1 mean completion tokens. This is not a billing export.
 
-Stage 2 technical readiness is evaluated separately. Stage 2 user authorization remains false, and no Stage 2 real LLM call has been made.
+Stage 2 was subsequently authorized and completed on 2026-08-20. See `execution_feedback_formal.md` for the paired R/F results; Stage 1 artifacts and cohort remain unchanged.

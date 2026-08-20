@@ -2585,3 +2585,113 @@ lxc stop codedoctor-docker-host
 
 - 当前 `phase8_stage2_ready=true`、`phase8_stage2_user_authorized=false`、technical blocker=none。
 - 保持 Stage 2 real LLM calls=`0`；只有获得新的明确人工授权后，才可使用冻结 cohort、first patches、R/F hashes 和 arm order 执行恰好 `2M=12` 次调用。
+
+## 2026-08-20 - Phase 8 Stage 2 Formal Experiment
+
+### 1. 日期和阶段
+
+- 日期：2026-08-20。
+- 阶段：Phase 8 Stage 2 Formal Experiment，Controlled Execution Feedback Repair paired R/F evaluation。
+- 起始 commit：`223baa6c2094f331d7cefdddc7a032db7714b257`。
+
+### 2. 本次目标
+
+- 对冻结 eligible cohort `M=6` 的每个 Stage 1 first patch 各执行一次 Retry Control (R) 和一次 Execution Feedback (F)，共 12 个真实 DeepSeek calls。
+- 保持 R/F first patch、Initial context、FL-v1、test partition、Renderer v2、模型参数和 deterministic arm order 不变。
+- 执行 Base/Feedback/Hidden evaluation，计算 paired 2x2、validated difference、paired bootstrap 95% CI、exact McNemar 和 S0/SR/SF end-to-end rates。
+- 只提交小型 hash manifest、summary、报告和必要代码，不向 Git 新增大型 Stage 2 raw artifacts。
+
+### 3. 实际完成内容
+
+- 网络前重新验证 clean worktree、精确 HEAD、Stage 2 gate、Stage 1/cohort hashes、12 prompt candidates、reproducibility、leakage、payload gate、order balance 和 credential availability，全部 PASS。
+- 使用单一正式进程执行 `--stage2 --confirm-phase8-stage2`；12/12 calls 完成，received=12，provider failure=0，未使用 resume，未补调，未重跑 Stage 1。
+- 实际顺序保持冻结结果：F->R 4 cases、R->F 2 cases；每个 arm 仅一次请求，transport retries=0。
+- 生成 12 个本地 raw Stage 2 artifacts，并新增 `.gitignore` 规则阻止其进入 Git；逐文件 SHA-256、大小、prompt/response/first-patch hash、classification、usage 和 evaluation 摘要写入小型 result manifest。
+- 新增 paired statistics、artifact binding、leakage 和最终报告生成模块；生成 Phase 8 final formal report。
+- 更新 pre-experiment 和 Stage 1 报告中的历史状态，明确 Stage 2 已完成且 Phase 9 未启动。
+
+### 4. 新增、修改和删除文件
+
+- 新增：`repair_phase8/stage2_reporting.py`、`repair_phase8/tests/test_stage2_reporting.py`。
+- 新增：`benchmark/scripts/generate_phase8_final_report.py`。
+- 新增：`benchmark/metadata/repair_phase8/stage2_result_manifest_v1.json`。
+- 新增：`benchmark/reports/execution_feedback_formal.md`。
+- 修改：`.gitignore`、`benchmark/config.py`、`benchmark/reports/execution_feedback_pre_experiment.md`、`benchmark/reports/execution_feedback_stage1.md`。
+- 本地生成但不提交：`benchmark/artifacts/repair_phase8/retry_control/` 和 `feedback/` 下各 6 个 raw JSON，共 300,545,002 bytes。
+- 删除文件：无；未重写已有 Git 历史。
+
+### 5. 执行过的重要命令
+
+```text
+git status --porcelain
+git rev-parse HEAD
+PYTHONDONTWRITEBYTECODE=1 python3 -c 'from repair_phase8.protocol import validate_stage2_gate; ...'
+source ~/.config/codedoctor/secrets.env
+python3 -c 'import os; print("DeepSeek credential available" if os.getenv("DEEPSEEK_API_KEY") else "DeepSeek credential unavailable")'
+lxc start codedoctor-docker-host
+lxc exec codedoctor-docker-host -- systemctl start docker
+lxc exec codedoctor-docker-host -- docker image inspect codedoctor-cpp-sandbox --format '{{.Id}}'
+source ~/.config/codedoctor/secrets.env
+printf '<credential forwarded without output>' | lxc exec codedoctor-docker-host -- bash -lc '... python3 benchmark/scripts/run_phase8_experiment.py --stage2 --confirm-phase8-stage2'
+lxc exec codedoctor-docker-host -- bash -lc "ps -eo pid,etime,stat,cmd | grep -E '[r]un_phase8_experiment|[d]ocker run'"
+lxc exec codedoctor-docker-host -- bash -lc "ss -tinp | grep -A2 'pid=812' || true"
+PYTHONDONTWRITEBYTECODE=1 python3 benchmark/scripts/generate_phase8_final_report.py
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest repair_phase8.tests.test_stage2_reporting -v
+lxc exec codedoctor-docker-host -- bash -lc 'set -e; cd /workspace/CodeDoctor && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s sandbox/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s benchmark/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s fault_localization/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair/tests && PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s repair_phase8/tests'
+git check-ignore benchmark/artifacts/repair_phase8/retry_control/*/*.json
+git check-ignore benchmark/artifacts/repair_phase8/feedback/*/*.json
+git diff --exit-code HEAD -- <frozen Phase 8 Stage 1 and protocol inputs>
+git diff --check
+lxc stop codedoctor-docker-host
+```
+
+上述命令只记录 credential 的存在性和无值转发方式；没有读取、打印、保存或提交 API Key。
+
+### 6. 实际实验结果
+
+- Calls attempted/received/provider failed=`12/12/0`；finish reasons stop=`11`、length=`1`。
+- R validated=`4/6`；F validated=`4/6`。
+- Paired 2x2：both success=`3`、R fail/F success=`1`、R success/F fail=`1`、both fail=`1`。
+- F-R validated difference=`0/6 = 0.0 percentage points`。
+- Gross F rescue among R failures=`1/2 = 50%`，但存在一个相反方向的 R success/F fail。
+- Exact empirical paired bootstrap 46,656 resamples 的 95% CI=`[-0.5, 0.5]`。
+- Exact two-sided McNemar：discordant pairs=`2`，`p=1.0`。
+- End-to-end：S0=`85/100=85%`、SR=`89/100=89%`、SF=`89/100=89%`。
+- R classifications：validated_patch=`4`、repair_test_failed=`1`、plausible_patch=`1`。
+- F classifications：validated_patch=`4`、invalid_model_output=`1`、plausible_patch=`1`。
+- `315-A-bug-8649287-8687189` 为 R fail/F validated；`366-B-bug-5240575-5240582` 为 R validated/F length-truncated invalid output；`305-A-bug-13310851-13310872` 两个 arm 均 repair-time success 但 Hidden Validation fail。
+
+### 7. Token、成本和 artifact hashes
+
+- R tokens：prompt=`86103`、cache hit=`83840`、cache miss=`2263`、reasoning=`56669`、final answer=`1629`、completion=`58298`、total=`144401`；cost=`$0.01687501`。
+- F tokens：prompt=`100142`、cache hit=`84352`、cache miss=`15790`、reasoning=`58881`、final answer=`1381`、completion=`60262`、total=`160404`；cost=`$0.01932015`。
+- Total tokens：prompt=`186245`、cache hit=`168192`、cache miss=`18053`、reasoning=`115550`、final answer=`3010`、completion=`118560`、total=`304805`。
+- Stage 2 usage-based cost estimate=`$0.03619516`，使用冻结的 DeepSeek official pricing snapshot，不是账单导出。
+- Stage 2 artifact-set hash=`cf4f44f802913085ce70d7da344a3952c014295f712954b0de93d58ab2c96a04`。
+- Stage 2 result manifest hash=`bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e`。
+- Stage 1 artifact-set/cohort hashes保持 `7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b` / `e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5`。
+
+### 8. 实际测试与审计结果
+
+- Stage 2 result manifest 12 entries，overall hash 复算 PASS；12 个 local raw artifact hashes 已绑定。
+- Leakage audit PASS：reference source、Hidden Validation ids、evaluation canaries、credential、raw reasoning 均未进入 R/F prompt；R 无 feedback heading，F 保持 exact R prefix 并只增加 bounded feedback。
+- Frozen Stage 1 initial artifacts、manifest/cohort、Phase 8 protocol、partition、FL-v1、runtime evidence 和 Initial prompt audit 相对 HEAD 零 diff。
+- 12 个 raw Stage 2 artifacts 全部被 `.gitignore` 命中；计划提交的小型结果文件约 53 KB，不提交新的大型 raw artifacts。
+- 完整 regression：sandbox `29/29`、benchmark `12/12`、fault localization `36/36`、repair `47/47`、Phase 8 `28/28`，合计 `152/152 PASS`。
+- LXD 最终 STOPPED；未创建 Phase 9 文件或任务。
+
+### 9. 遇到的问题和解决方式
+
+- 正式进程前约 16 分钟没有逐 arm 输出；只读检查确认唯一 Python 进程处于 network poll，TCP 连接为 ESTABLISHED 且持续收包。未终止、未 resume、未启动第二进程；最终远端 PTY 一次性刷新 12 条已完成记录，正式进程 exit 0。
+- Stage 2 raw evaluation artifacts 达约 300 MB，两个最大文件约 150 MB，超过 GitHub 单文件限制；保留本地 raw 文件并提交逐文件 hash/size/summary manifest，避免新的大型可再生 artifacts 进入 Git。
+- 报告新增分-arm usage 后，synthetic report test fixture 缺少 `retry_control`/`feedback` 字段并报 `KeyError`；补齐测试夹具后 targeted tests 和 full regression 均 PASS。正式结果 manifest 不受该夹具问题影响。
+- Pipeline artifact 的 `attempt=2` 表示整体第二轮 repair round；为消除“每 arm 一次调用”歧义，summary manifest 明确记录 `repair_round=2` 与 `arm_attempt=1`。
+
+### 10. 当前已知不足和下一步计划
+
+- `M=6` 非常小，paired bootstrap CI 很宽；结果只能定位为 paired case-level evidence，不能推广为 execution feedback 的总体效果。
+- `Validated Patch != Formally Correct Patch`；validated 只表示通过已注册 Base/Feedback/Hidden tests。
+- 一个 F response length-truncated 且按冻结协议不补调；它真实计入 F failure。
+- Raw Stage 2 artifacts 仅保留在当前本地工作区并由 Git 忽略；Git 中以 SHA-256 manifest 保留完整性身份，但不携带约 300 MB 原始内容。
+- Phase 8 RQ 当前结论：在冻结 6-case cohort 中，R 和 F 都 validated 4/6；一个 F rescue 被一个 opposite-direction loss 抵消，没有观察到 aggregate validated advantage。
+- Phase 8 到此停止。不自动进入 Phase 9；后续工作必须由用户另行明确授权。

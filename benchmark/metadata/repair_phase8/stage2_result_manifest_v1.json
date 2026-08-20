@@ -1,0 +1,470 @@
+{
+  "artifact_set_hash": "cf4f44f802913085ce70d7da344a3952c014295f712954b0de93d58ab2c96a04",
+  "calls": {
+    "attempted": 12,
+    "provider_failures": 0,
+    "received": 12
+  },
+  "cohort_manifest_hash": "e1ec70b962cda0754c336896cd0975d2ef9794d410146c34223d50792797c9c5",
+  "end_to_end": {
+    "S0_initial_only": {
+      "rate": 0.85,
+      "validated": 85
+    },
+    "SF_initial_plus_feedback": {
+      "rate": 0.89,
+      "validated": 89
+    },
+    "SR_initial_plus_retry": {
+      "rate": 0.89,
+      "validated": 89
+    },
+    "denominator": 100
+  },
+  "entries": [
+    {
+      "arm": "feedback",
+      "arm_attempt": 1,
+      "artifact_bytes": 29510,
+      "artifact_sha256": "1dc9aaa7c24cfb0d8e4cff1f6b99205356a993ad41a07b1faa953308891e6603",
+      "case_id": "315-A-bug-8649287-8687189",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "f2b23539dc88032d798617069649f9cb5e947d87126ce5724e42251a60d901f8",
+      "hidden_validation_passed": true,
+      "order_index": 0,
+      "prompt_hash": "8f76269ff3f1c14407918c85f61ea3ec0c1943ff839ef6a0cc5ff431c0f5461c",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "661b6ece4d9d0c1bdd46d942ed42f86820394f0a1945281f823108a65b19b092",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 15202,
+        "final_answer_tokens": 140,
+        "prompt_cache_hit_tokens": 5120,
+        "prompt_cache_miss_tokens": 774,
+        "prompt_tokens": 5894,
+        "reasoning_tokens": 15062,
+        "total_tokens": 21096
+      },
+      "validated": true
+    },
+    {
+      "arm": "retry_control",
+      "arm_attempt": 1,
+      "artifact_bytes": 20880,
+      "artifact_sha256": "11feb518d6c1a80fa415635019d42fa088c6a22827a35f130a61d3d492962862",
+      "case_id": "315-A-bug-8649287-8687189",
+      "classification": "repair_test_failed",
+      "finish_reason": "stop",
+      "first_patch_hash": "f2b23539dc88032d798617069649f9cb5e947d87126ce5724e42251a60d901f8",
+      "hidden_validation_passed": false,
+      "order_index": 1,
+      "prompt_hash": "f371a28ec3cdfc7a2a2e48ad2fc6d1b49d0f6270d8f13146a16e0bcd48220cb0",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": false,
+      "response_hash": "7cd6e23a4b9e01149e6e9ea8fc139e5cf17d766cfc61df6015eb4a55487ba48b",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 10509,
+        "final_answer_tokens": 150,
+        "prompt_cache_hit_tokens": 5120,
+        "prompt_cache_miss_tokens": 213,
+        "prompt_tokens": 5333,
+        "reasoning_tokens": 10359,
+        "total_tokens": 15842
+      },
+      "validated": false
+    },
+    {
+      "arm": "retry_control",
+      "arm_attempt": 1,
+      "artifact_bytes": 39134,
+      "artifact_sha256": "ea57219e87a9161011ff27240047e7d1129b95563a5d69cb98e7118faf8920e8",
+      "case_id": "75-A-bug-15928172-15928345",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "791ce4f972410b07ce726e1b4bce794493bf70c3723a0bd77eb83b94802ba681",
+      "hidden_validation_passed": true,
+      "order_index": 0,
+      "prompt_hash": "5cf32098c84d49ac13b71422513de8489def630731a08d695a01bf3b51a322b4",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "cd3230a8eb7cac3e6103d3dd73f91a5495eaafae7ad62cabebf5a88eac96265f",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 5399,
+        "final_answer_tokens": 236,
+        "prompt_cache_hit_tokens": 6016,
+        "prompt_cache_miss_tokens": 380,
+        "prompt_tokens": 6396,
+        "reasoning_tokens": 5163,
+        "total_tokens": 11795
+      },
+      "validated": true
+    },
+    {
+      "arm": "feedback",
+      "arm_attempt": 1,
+      "artifact_bytes": 40221,
+      "artifact_sha256": "4ae89547ec9c7fcb3ef3c88f0898b838c59bfb17272c39e7a3e31cc5dbf91cc5",
+      "case_id": "75-A-bug-15928172-15928345",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "791ce4f972410b07ce726e1b4bce794493bf70c3723a0bd77eb83b94802ba681",
+      "hidden_validation_passed": true,
+      "order_index": 1,
+      "prompt_hash": "beab9250e6c2f75546eff2bf04d7257403cb1d8b4e6806621e14527d56cd0195",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "1259ae0b5a6c9ac43058ccad0b155af044075d025b669c9c3476b0cc11288261",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 11128,
+        "final_answer_tokens": 238,
+        "prompt_cache_hit_tokens": 6272,
+        "prompt_cache_miss_tokens": 396,
+        "prompt_tokens": 6668,
+        "reasoning_tokens": 10890,
+        "total_tokens": 17796
+      },
+      "validated": true
+    },
+    {
+      "arm": "feedback",
+      "arm_attempt": 1,
+      "artifact_bytes": 20546,
+      "artifact_sha256": "3af4386b6c3f09063fa9082a2cc38984d797908ed5f0bca8c771fa721f572ad2",
+      "case_id": "365-A-bug-17262691-17262721",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "94645cc1cd957c4d80f0a3594e1aa8db8d04cca7685938d56bc110017d04bf40",
+      "hidden_validation_passed": true,
+      "order_index": 0,
+      "prompt_hash": "f1f3fbae0b639c38906afd5eb2f97987e52382fff85334bd8462f9e93f23ec24",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "8ae3a3c6fbfa9559e3a3cf5024dffb0fc67b52a2860f083db1fb1503ab3c757e",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 1677,
+        "final_answer_tokens": 204,
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 1432,
+        "prompt_tokens": 4248,
+        "reasoning_tokens": 1473,
+        "total_tokens": 5925
+      },
+      "validated": true
+    },
+    {
+      "arm": "retry_control",
+      "arm_attempt": 1,
+      "artifact_bytes": 17667,
+      "artifact_sha256": "ebf91d6810d6fb10fa1a241def84bfa86835ee83c675513b7cdca60b6c30faca",
+      "case_id": "365-A-bug-17262691-17262721",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "94645cc1cd957c4d80f0a3594e1aa8db8d04cca7685938d56bc110017d04bf40",
+      "hidden_validation_passed": true,
+      "order_index": 1,
+      "prompt_hash": "1d6d7f5f43fb6ee773b813a96980ba8be0c9640fae289b6a95e44d2918aa29c1",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "6d462ae051305c815cf8db1cb6dd2f0a115f21fd2e9e0792750a7ad0ed10d663",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 8081,
+        "final_answer_tokens": 211,
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 351,
+        "prompt_tokens": 3167,
+        "reasoning_tokens": 7870,
+        "total_tokens": 11248
+      },
+      "validated": true
+    },
+    {
+      "arm": "retry_control",
+      "arm_attempt": 1,
+      "artifact_bytes": 150087391,
+      "artifact_sha256": "a4d8d45d6ba0e28b99e915705f51f3469fbc93aa546d63d76c5633141072291d",
+      "case_id": "404-B-bug-14578678-14578704",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "809aaa538b73076bc5646ff7103a9d1757205df2d6bcfa73f76234199db9dd7d",
+      "hidden_validation_passed": true,
+      "order_index": 0,
+      "prompt_hash": "c5f971321a81d3fba7ea346e585e7a6a54b6a0dd3abe546903f8d394517ae777",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "5b3fab035fb10d26cd981d1de6ef393799022b0fe547e2a497cf90b04e5f482b",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 9510,
+        "final_answer_tokens": 175,
+        "prompt_cache_hit_tokens": 50944,
+        "prompt_cache_miss_tokens": 341,
+        "prompt_tokens": 51285,
+        "reasoning_tokens": 9335,
+        "total_tokens": 60795
+      },
+      "validated": true
+    },
+    {
+      "arm": "feedback",
+      "arm_attempt": 1,
+      "artifact_bytes": 150111683,
+      "artifact_sha256": "49735969ad009101bd922bfd16941deee66f512bf26b80bb946c079ef13dd29f",
+      "case_id": "404-B-bug-14578678-14578704",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "809aaa538b73076bc5646ff7103a9d1757205df2d6bcfa73f76234199db9dd7d",
+      "hidden_validation_passed": true,
+      "order_index": 1,
+      "prompt_hash": "66c5e7d6e2ebd9a6b5c218d2b1a2933faee5d598f1547a6edc4a3d636d5d4479",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "05168eecd0d6ae3ddfec575704bea781d773a27c481c52c377687de602422fce",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 10434,
+        "final_answer_tokens": 181,
+        "prompt_cache_hit_tokens": 51200,
+        "prompt_cache_miss_tokens": 11655,
+        "prompt_tokens": 62855,
+        "reasoning_tokens": 10253,
+        "total_tokens": 73289
+      },
+      "validated": true
+    },
+    {
+      "arm": "feedback",
+      "arm_attempt": 1,
+      "artifact_bytes": 15155,
+      "artifact_sha256": "9d3b5c0b71a918c782d38efc5604427465054d0fd49536aeee9744aa47b820c7",
+      "case_id": "366-B-bug-5240575-5240582",
+      "classification": "invalid_model_output",
+      "finish_reason": "length",
+      "first_patch_hash": "62ca7e22dac902f8841eb575ba9fda2d03e9d9b3f829abeeb3ca7813ba9d1a20",
+      "hidden_validation_passed": false,
+      "order_index": 0,
+      "prompt_hash": "2cb6e0691b01bad7d01b67b01a31954dee63a80262433b7147d5a0865b4a5174",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": false,
+      "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 16384,
+        "final_answer_tokens": 0,
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 604,
+        "prompt_tokens": 4828,
+        "reasoning_tokens": 16384,
+        "total_tokens": 21212
+      },
+      "validated": false
+    },
+    {
+      "arm": "retry_control",
+      "arm_attempt": 1,
+      "artifact_bytes": 22435,
+      "artifact_sha256": "440c965ca2b86165b866699f32f3aabecc01b86c6e5d339eb8e8e56c399f76b7",
+      "case_id": "366-B-bug-5240575-5240582",
+      "classification": "validated_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "62ca7e22dac902f8841eb575ba9fda2d03e9d9b3f829abeeb3ca7813ba9d1a20",
+      "hidden_validation_passed": true,
+      "order_index": 1,
+      "prompt_hash": "7892859013dbd4b87891fff59d2e0132f738bd689a300d5aee1018dead58fdd4",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "45b6ab90254a3854ead3ea9a11eef05652f3e9f9e579682f92b401785f8e9132",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 16206,
+        "final_answer_tokens": 253,
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 325,
+        "prompt_tokens": 4549,
+        "reasoning_tokens": 15953,
+        "total_tokens": 20755
+      },
+      "validated": true
+    },
+    {
+      "arm": "feedback",
+      "arm_attempt": 1,
+      "artifact_bytes": 70636,
+      "artifact_sha256": "f02f820f9c8e9d3ec3906a969e45241508d9bc90b82eb586c29c13f457317514",
+      "case_id": "305-A-bug-13310851-13310872",
+      "classification": "plausible_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "bfa2f69f68a233fd844fd93068c6e9e26987d8dd6b8fb7a2b7b66380392f3561",
+      "hidden_validation_passed": false,
+      "order_index": 0,
+      "prompt_hash": "a5c70f1dc5b75b96b6dea26f673f65c824edbe14557e0640ad8d14efcc267b92",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "bb34c5c6f8a81e947448d190e035c3cdb5111df86e3f17eae58152778a005ce9",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 5437,
+        "final_answer_tokens": 618,
+        "prompt_cache_hit_tokens": 14720,
+        "prompt_cache_miss_tokens": 929,
+        "prompt_tokens": 15649,
+        "reasoning_tokens": 4819,
+        "total_tokens": 21086
+      },
+      "validated": false
+    },
+    {
+      "arm": "retry_control",
+      "arm_attempt": 1,
+      "artifact_bytes": 69744,
+      "artifact_sha256": "328bb9790b98cee813efd016cafd5b5ce0deb8421a1d5ba32d6a8a5b4d1e504a",
+      "case_id": "305-A-bug-13310851-13310872",
+      "classification": "plausible_patch",
+      "finish_reason": "stop",
+      "first_patch_hash": "bfa2f69f68a233fd844fd93068c6e9e26987d8dd6b8fb7a2b7b66380392f3561",
+      "hidden_validation_passed": false,
+      "order_index": 1,
+      "prompt_hash": "01096e22ca2df3ba8f248e60f3623c7c0cc0241cc578b38e3f05cd7be18cdf34",
+      "provider_received": true,
+      "repair_round": 2,
+      "repair_time_success": true,
+      "response_hash": "2313dbcac570bfdc70a1dd63036cd6717efb2ab81a24d7df87f4a9c11e2c2d41",
+      "response_model": "deepseek-v4-flash",
+      "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+      "usage": {
+        "completion_tokens": 8593,
+        "final_answer_tokens": 604,
+        "prompt_cache_hit_tokens": 14720,
+        "prompt_cache_miss_tokens": 653,
+        "prompt_tokens": 15373,
+        "reasoning_tokens": 7989,
+        "total_tokens": 23966
+      },
+      "validated": false
+    }
+  ],
+  "failure_modes": {
+    "feedback": {
+      "invalid_model_output": 1,
+      "plausible_patch": 1,
+      "validated_patch": 4
+    },
+    "retry_control": {
+      "plausible_patch": 1,
+      "repair_test_failed": 1,
+      "validated_patch": 4
+    }
+  },
+  "leakage_audit": {
+    "credential_absent": "passed",
+    "evaluation_canaries_absent": "passed",
+    "f_only_bounded_execution_feedback": "passed",
+    "hidden_validation_absent": "passed",
+    "raw_reasoning_absent": "passed",
+    "reference_source_absent": "passed",
+    "status": "passed"
+  },
+  "overall_manifest_hash": "bdc07d0be135edfc51e9c16c48c6163cead0cee6762654a30e0b76a483e4f95e",
+  "paired": {
+    "bootstrap_95_ci": {
+      "lower": -0.5,
+      "method": "exact enumeration of empirical paired bootstrap resamples",
+      "resamples": 46656,
+      "upper": 0.5
+    },
+    "both_fail": 1,
+    "both_success": 3,
+    "feedback_minus_retry": 0.0,
+    "feedback_validated": 4,
+    "gross_feedback_rescue_rate_among_retry_failures": 0.5,
+    "mcnemar_exact": {
+      "discordant_pairs": 2,
+      "p_value_two_sided": 1.0
+    },
+    "pair_count": 6,
+    "retry_fail_feedback_success": 1,
+    "retry_success_feedback_fail": 1,
+    "retry_validated": 4
+  },
+  "pricing": {
+    "currency": "USD",
+    "model": "deepseek-v4-flash",
+    "official_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "price_unit_tokens": 1000000,
+    "prices": {
+      "input_cache_hit": 0.0028,
+      "input_cache_miss": 0.14,
+      "output": 0.28
+    },
+    "verified_at": "2026-08-19T16:37:39Z"
+  },
+  "prompt_audit_hash": "a0254c9e1f73e16d67049da3c62052eec7032322407199945a99d9bbb381c39c",
+  "protocol_version": "phase8-stage2-result-manifest-v1",
+  "stage1_manifest_hash": "7336d3312e737ea39bab8144e88e82b45f0eff056ddee5ef363aa36289f4070b",
+  "usage_and_cost": {
+    "feedback": {
+      "cost_usd": 0.01932015,
+      "tokens": {
+        "completion_tokens": 60262,
+        "final_answer_tokens": 1381,
+        "prompt_cache_hit_tokens": 84352,
+        "prompt_cache_miss_tokens": 15790,
+        "prompt_tokens": 100142,
+        "reasoning_tokens": 58881,
+        "total_tokens": 160404
+      }
+    },
+    "retry_control": {
+      "cost_usd": 0.01687501,
+      "tokens": {
+        "completion_tokens": 58298,
+        "final_answer_tokens": 1629,
+        "prompt_cache_hit_tokens": 83840,
+        "prompt_cache_miss_tokens": 2263,
+        "prompt_tokens": 86103,
+        "reasoning_tokens": 56669,
+        "total_tokens": 144401
+      }
+    },
+    "total": {
+      "cost_usd": 0.03619516,
+      "tokens": {
+        "completion_tokens": 118560,
+        "final_answer_tokens": 3010,
+        "prompt_cache_hit_tokens": 168192,
+        "prompt_cache_miss_tokens": 18053,
+        "prompt_tokens": 186245,
+        "reasoning_tokens": 115550,
+        "total_tokens": 304805
+      }
+    }
+  }
+}

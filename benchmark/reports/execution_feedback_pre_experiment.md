@@ -65,4 +65,4 @@ The transparent input heuristic is `ceil(serialized UTF-8 bytes / 4)`: min=1,374
 ## 11. Readiness
 Phase 8 Stage 1 was authorized and completed on 2026-08-20. All 100 frozen Initial calls completed without resume or provider failure; the eligible cohort contains 6 cases. The formal results and actual usage are recorded in `execution_feedback_stage1.md`.
 
-Stage 2 prompt candidates have been generated and audited offline. Stage 2 remains separately gated and unauthorized; no R/F real LLM call has started.
+Stage 2 was subsequently authorized and completed on 2026-08-20 with 12/12 frozen R/F calls. The paired results are recorded in `execution_feedback_formal.md`; no Phase 9 work has started.
